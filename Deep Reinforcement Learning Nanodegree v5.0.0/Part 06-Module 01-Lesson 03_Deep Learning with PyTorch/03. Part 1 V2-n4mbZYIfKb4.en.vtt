@@ -1,0 +1,391 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.605
+Hello everyone and welcome to this lesson on deep learning with PyTorch.
+
+00:00:04.605 --> 00:00:08.910
+So, here I've built a bunch of Jupyter Notebooks that will lead you
+
+00:00:08.910 --> 00:00:14.160
+through actually writing the code to implement deep learning networks and Python.
+
+00:00:14.160 --> 00:00:17.400
+So, here we're using the PyTorch framework which
+
+00:00:17.400 --> 00:00:22.035
+is somewhat newer than TensorFlow and Keras.
+
+00:00:22.035 --> 00:00:27.435
+It's being developed by the Facebook AI research team, and completely open-source.
+
+00:00:27.435 --> 00:00:33.030
+And the reason that we've chosen PyTorch over TensorFlow and Keras is that
+
+00:00:33.030 --> 00:00:38.735
+it's actually more coherent with Python itself like in the way you program in Python,
+
+00:00:38.735 --> 00:00:42.455
+but also with the concepts of deep learning.
+
+00:00:42.455 --> 00:00:45.510
+So you'll see as you work through these notebooks,
+
+00:00:45.510 --> 00:00:48.945
+that the concepts that you've learned about deep learning
+
+00:00:48.945 --> 00:00:53.114
+like backpropagation are actually very natural in PyTorch,
+
+00:00:53.114 --> 00:00:55.860
+whereas with TensorFlow and Keras,
+
+00:00:55.860 --> 00:01:00.540
+you tend to have to write your code in a weird way that doesn't
+
+00:01:00.540 --> 00:01:05.460
+actually match the conceptual mapping of deep learning.
+
+00:01:05.460 --> 00:01:08.250
+You can also buy these notebooks in the classroom,
+
+00:01:08.250 --> 00:01:09.990
+in a workspace below the videos.
+
+00:01:09.990 --> 00:01:12.060
+And you can download the notebooks from
+
+00:01:12.060 --> 00:01:14.925
+GitHub if you'd like to work on them on your own computer.
+
+00:01:14.925 --> 00:01:17.775
+Before we get into the actual code itself,
+
+00:01:17.775 --> 00:01:20.310
+there's one thing you need to understand, tensors.
+
+00:01:20.310 --> 00:01:25.710
+So, tensors are basically a generalization of vectors and matrices.
+
+00:01:25.710 --> 00:01:29.835
+So, for instance, a vector is a 1-dimensional tensor.
+
+00:01:29.835 --> 00:01:33.285
+So, basically, you just have this kind of line of values.
+
+00:01:33.285 --> 00:01:36.180
+A matrix is a 2-dimensional tensor,
+
+00:01:36.180 --> 00:01:38.400
+where you have this rectangle.
+
+00:01:38.400 --> 00:01:40.350
+So you have rows, and you have columns.
+
+00:01:40.350 --> 00:01:44.190
+So, basically, it's these numbers that are arrayed in
+
+00:01:44.190 --> 00:01:48.495
+a 2-dimensional space because we have like an x-coordinate and we have a y-coordinate.
+
+00:01:48.495 --> 00:01:52.170
+And then something like a color image is a 3-dimensional tensor.
+
+00:01:52.170 --> 00:01:54.420
+So, if you remember about color images,
+
+00:01:54.420 --> 00:01:55.480
+like for every pixel,
+
+00:01:55.480 --> 00:01:58.075
+you can denote it with an x and a y,
+
+00:01:58.075 --> 00:01:59.740
+but it also has a red,
+
+00:01:59.740 --> 00:02:01.310
+green, and a blue component.
+
+00:02:01.310 --> 00:02:06.330
+And so, these tensors are kind of main data structure that you'll be using in PyTorch.
+
+00:02:06.330 --> 00:02:09.555
+They helps a lot if you're able to kind of visualize them
+
+00:02:09.555 --> 00:02:12.880
+in your mind as you're working with them because you'll be doing a lot of things,
+
+00:02:12.880 --> 00:02:16.525
+where you're looking at shapes and linear algebra operations on them.
+
+00:02:16.525 --> 00:02:19.560
+So, it is just good to understand what these are and then
+
+00:02:19.560 --> 00:02:23.040
+how they're actually kind of flowing through your network.
+
+00:02:23.040 --> 00:02:27.945
+So, now we can actually start looking at how you use PyTorch to build neural networks.
+
+00:02:27.945 --> 00:02:32.375
+First though, I want you to understand how you actually work with tensors in PyTorch.
+
+00:02:32.375 --> 00:02:37.185
+I was saying tensors are the basic data structure in PyTorch.
+
+00:02:37.185 --> 00:02:39.630
+So, to build your neural networks,
+
+00:02:39.630 --> 00:02:42.135
+a lot of times you're going to be working with these tensors.
+
+00:02:42.135 --> 00:02:45.860
+And so, it's a good idea to actually understand how they work,
+
+00:02:45.860 --> 00:02:48.660
+and your gain is conceptual understanding of them.
+
+00:02:48.660 --> 00:02:49.995
+So, first things first,
+
+00:02:49.995 --> 00:02:52.380
+going to import Numpy and PyTorch.
+
+00:02:52.380 --> 00:02:57.045
+So, import torch to use your PyTorch modules.
+
+00:02:57.045 --> 00:03:01.625
+So, first off, I'm just going to create a random tensor.
+
+00:03:01.625 --> 00:03:04.695
+And we see, we just had these random numbers, and is 3 by 2.
+
+00:03:04.695 --> 00:03:11.055
+And then we can print other one, the same size.
+
+00:03:11.055 --> 00:03:14.305
+So, to get the size of a tensor, you just do x.size.
+
+00:03:14.305 --> 00:03:20.055
+And so, this will give us a 3 by 2 as a size.
+
+00:03:20.055 --> 00:03:23.805
+And this will create a array of
+
+00:03:23.805 --> 00:03:28.620
+a 2-dimensional tensor of all ones with the same size as x.
+
+00:03:28.620 --> 00:03:30.930
+Then we can add these together.
+
+00:03:30.930 --> 00:03:35.925
+And this is pretty much what you should be used to using Numpy.
+
+00:03:35.925 --> 00:03:39.465
+So, in a lot of ways, using PyTorch is very similar to Numpy,
+
+00:03:39.465 --> 00:03:42.000
+which makes the learning curve very nice,
+
+00:03:42.000 --> 00:03:43.800
+because if you have experienced Numpy,
+
+00:03:43.800 --> 00:03:47.505
+then using PyTorch becomes very natural.
+
+00:03:47.505 --> 00:03:53.175
+So, for instance, you can index your tensors,
+
+00:03:53.175 --> 00:03:55.320
+so get out the first row,
+
+00:03:55.320 --> 00:03:58.275
+and you can use slices.
+
+00:03:58.275 --> 00:04:02.325
+So, if you want all the rows for the second column, it will do that.
+
+00:04:02.325 --> 00:04:07.035
+You see now tensors in PyTorch have two forms of methods.
+
+00:04:07.035 --> 00:04:13.155
+So, one form creates a new tensor. So, z.add.
+
+00:04:13.155 --> 00:04:18.105
+So this just adds the number 1 to our tensor z.
+
+00:04:18.105 --> 00:04:21.290
+This gives us this. And what this does is it creates a new tensor.
+
+00:04:21.290 --> 00:04:25.875
+So, basically, a copy of z and then add one to it.
+
+00:04:25.875 --> 00:04:28.800
+And just to check, okay. So this is the old tensor,
+
+00:04:28.800 --> 00:04:30.905
+and this is the new tensor that was made.
+
+00:04:30.905 --> 00:04:37.515
+However, pretty much all the methods on these tensors also have an in-place version.
+
+00:04:37.515 --> 00:04:42.045
+So, what that means is that if we add one again,
+
+00:04:42.045 --> 00:04:44.020
+then it looks like we get a new tensor,
+
+00:04:44.020 --> 00:04:46.870
+but it's actually changed our tensor.
+
+00:04:46.870 --> 00:04:49.760
+So, what it means in-place is it changes
+
+00:04:49.760 --> 00:04:54.200
+the values in the memory like for the memory of this tensor.
+
+00:04:54.200 --> 00:04:58.140
+So, without an underscore, it creates a new tensor.
+
+00:04:58.140 --> 00:04:59.825
+And with its underscore,
+
+00:04:59.825 --> 00:05:01.695
+it does the operation in-place.
+
+00:05:01.695 --> 00:05:03.435
+And so, you keep the same tensor.
+
+00:05:03.435 --> 00:05:06.950
+It just changes the values in memory that a tensor is pointing to.
+
+00:05:06.950 --> 00:05:10.550
+So, something you'll be doing really often with PyTorch is looking at
+
+00:05:10.550 --> 00:05:14.500
+the size and shape of your tensors and then reshaping your tensors.
+
+00:05:14.500 --> 00:05:19.160
+So, again, to just check out the size or the shape of one of your tensors,
+
+00:05:19.160 --> 00:05:23.200
+you just do.size, and this tells you that it's a 3 by 2 tensor.
+
+00:05:23.200 --> 00:05:28.490
+And say, we want to resize it to make it 2 by 3.
+
+00:05:28.490 --> 00:05:32.730
+So, it's still z.resize_(2,3).
+
+00:05:32.730 --> 00:05:34.550
+So you'll notice that we have an underscore here,
+
+00:05:34.550 --> 00:05:35.870
+which means that this method,
+
+00:05:35.870 --> 00:05:38.000
+this reshaping is done in place.
+
+00:05:38.000 --> 00:05:39.355
+So if you look at z again,
+
+00:05:39.355 --> 00:05:41.480
+then it is now a 2 by 3 matrix,
+
+00:05:41.480 --> 00:05:44.065
+when originally it was a 3 by 2 matrix.
+
+00:05:44.065 --> 00:05:48.110
+Finally, one of my favorite features of PyTorch is that it's really
+
+00:05:48.110 --> 00:05:51.770
+easy to convert from a Numpy array into a Torch tensor.
+
+00:05:51.770 --> 00:05:53.070
+So this makes it really,
+
+00:05:53.070 --> 00:05:54.600
+really nice when you're working with data,
+
+00:05:54.600 --> 00:05:55.620
+because most of the time,
+
+00:05:55.620 --> 00:05:59.210
+you're preprocessing, and things like that are going to be done in Numpy.
+
+00:05:59.210 --> 00:06:02.770
+And then you'll build your network at a PyTorch.
+
+00:06:02.770 --> 00:06:07.155
+And then you'll put that back in a Numpy to do like the rest of your analysis are,
+
+00:06:07.155 --> 00:06:08.670
+or creating figures, or
+
+00:06:08.670 --> 00:06:12.495
+whatever kind of connected up to the rest of your program with Numpy.
+
+00:06:12.495 --> 00:06:19.065
+So, first, I'm just going to create a random array with Numpy.
+
+00:06:19.065 --> 00:06:21.960
+Random 4 by 3 array looks like that.
+
+00:06:21.960 --> 00:06:26.400
+And so, to change this array into a Torch tensor,
+
+00:06:26.400 --> 00:06:30.030
+you say from_numpy and you pass the array.
+
+00:06:30.030 --> 00:06:33.555
+And that gives us a Torch tensor with the same values.
+
+00:06:33.555 --> 00:06:37.560
+And then, if we want to take a PyTorch tensor,
+
+00:06:37.560 --> 00:06:40.240
+and we want to change it to a Numpy array,
+
+00:06:40.240 --> 00:06:44.860
+you say b, which gives a tensor,.numpy.
+
+00:06:44.860 --> 00:06:50.465
+So, the Numpy method will return you a Numpy array.
+
+00:06:50.465 --> 00:06:56.200
+So, one thing to know, when you take a Numpy array and you change it to a tensor,
+
+00:06:56.200 --> 00:06:59.495
+the Numpy array and the tensor, they share memory.
+
+00:06:59.495 --> 00:07:03.550
+So what this means is that if you change values for your tensor in-place,
+
+00:07:03.550 --> 00:07:06.370
+it's also going to change the values of your Numpy array.
+
+00:07:06.370 --> 00:07:12.260
+So, for instance, if we multiply in-place by two, we get that.
+
+00:07:12.260 --> 00:07:15.580
+And then if we look back at our Numpy array, it's also changed.
+
+00:07:15.580 --> 00:07:19.390
+So, just something to be aware of as you're using this,
+
+00:07:19.390 --> 00:07:23.520
+that if you are linking your Torch tensors and your Numpy arrays,
+
+00:07:23.520 --> 00:07:25.285
+that they're going to be sharing the same memory.
+
+00:07:25.285 --> 00:07:27.945
+So, just something to look out for,
+
+00:07:27.945 --> 00:07:30.210
+so you don't cause yourself bugs.
+
+00:07:30.210 --> 00:07:32.400
+I'll see you next video. Cheers.
+

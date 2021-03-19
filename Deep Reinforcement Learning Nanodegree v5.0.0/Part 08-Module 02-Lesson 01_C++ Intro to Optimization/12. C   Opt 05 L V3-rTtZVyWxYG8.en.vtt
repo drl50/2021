@@ -1,0 +1,82 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.320
+At this point, you have seen how inefficient code can cause your program to slow
+
+00:00:04.320 --> 00:00:09.269
+down by performing unnecessary CPU operations and memory accesses.
+
+00:00:09.269 --> 00:00:12.570
+Next, we will discuss the practicalities of optimizing your code.
+
+00:00:12.570 --> 00:00:16.515
+Code optimization is a big topic that involves analyzing algorithms,
+
+00:00:16.515 --> 00:00:19.320
+understanding how a computer executes instructions,
+
+00:00:19.320 --> 00:00:20.550
+and learning the nuances of
+
+00:00:20.550 --> 00:00:24.155
+both the programming language and the compiler you were using.
+
+00:00:24.155 --> 00:00:28.620
+Code efficiency also depends on the compiler and the hardware you're utilizing.
+
+00:00:28.620 --> 00:00:31.200
+Many compilers will try to optimize code for you,
+
+00:00:31.199 --> 00:00:34.644
+and different compilers might optimize in different ways.
+
+00:00:34.645 --> 00:00:38.615
+Code that works well in one case might not work efficiently in another application.
+
+00:00:38.615 --> 00:00:41.355
+And once CPU architectures instruction set,
+
+00:00:41.354 --> 00:00:46.515
+might have instructions to perform an operation very efficiently while another may not.
+
+00:00:46.515 --> 00:00:50.445
+Therefore, you cannot rely only on instinct when optimizing code.
+
+00:00:50.445 --> 00:00:54.209
+You need to test your code and find places that put high demand on your CPU.
+
+00:00:54.209 --> 00:00:56.265
+Whether that be related to time,
+
+00:00:56.265 --> 00:00:58.439
+memory usage, or power consumption.
+
+00:00:58.439 --> 00:01:02.309
+And then any changes you make to your code need to be tested to
+
+00:01:02.310 --> 00:01:06.780
+make sure everything actually runs more efficiently as you expected it to.
+
+00:01:06.780 --> 00:01:11.174
+Next, you will get a chance to optimize the C++ histogram filter.
+
+00:01:11.174 --> 00:01:13.799
+You might remember from the introductory C++ lessons,
+
+00:01:13.799 --> 00:01:15.634
+when Andy showed Elisia his code.
+
+00:01:15.635 --> 00:01:19.955
+Andy had translated his Python histogram filter code into C++.
+
+00:01:19.954 --> 00:01:22.894
+Elisia had brought up that his code had a few inefficiencies.
+
+00:01:22.894 --> 00:01:25.140
+We're providing you with the inefficient code and
+
+00:01:25.140 --> 00:01:28.000
+your task is to make it run as fast as you can.
+

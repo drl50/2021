@@ -1,0 +1,115 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.955
+Hi, I'm Anthony, the product lead here at Udacity for robotics.
+
+00:00:03.955 --> 00:00:06.486
+You've already learned a lot of syntax in C++,
+
+00:00:06.485 --> 00:00:08.939
+including how to write functions and classes.
+
+00:00:08.939 --> 00:00:11.879
+Now you should feel confident that anything you could write in Python,
+
+00:00:11.880 --> 00:00:14.025
+you could also write in C++.
+
+00:00:14.025 --> 00:00:19.289
+But let's take a step back and talk about why are you learning C++ in the first place.
+
+00:00:19.289 --> 00:00:24.210
+It basically comes down to the fact that certain C++ programs run faster.
+
+00:00:24.210 --> 00:00:25.740
+Autonomous vehicles need to make
+
+00:00:25.739 --> 00:00:29.899
+quick decisions to successfully operate in a dynamic environment.
+
+00:00:29.899 --> 00:00:35.129
+Slicing off fractions of this millisecond from your programs might not seem like a lot,
+
+00:00:35.130 --> 00:00:38.500
+and maybe it isn't for just one occurrence of an instruction.
+
+00:00:38.500 --> 00:00:41.189
+But self-driving cars execute billions or
+
+00:00:41.189 --> 00:00:43.964
+trillions of instructions in a small amount of time.
+
+00:00:43.965 --> 00:00:46.900
+So those milliseconds add up very quickly.
+
+00:00:46.899 --> 00:00:50.250
+Efficient code is very important if you want your car performing
+
+00:00:50.250 --> 00:00:54.269
+an action when you're expected to and not seconds later.
+
+00:00:54.270 --> 00:00:57.950
+But how do you get your programs to run faster when using C++?
+
+00:00:57.950 --> 00:01:00.190
+Well, once you have a program that runs correctly,
+
+00:01:00.189 --> 00:01:03.254
+you go through a process called code optimization.
+
+00:01:03.255 --> 00:01:07.200
+Code optimization generally allows your program to use less memory,
+
+00:01:07.200 --> 00:01:10.230
+increase power efficiency, or execute faster.
+
+00:01:10.230 --> 00:01:15.255
+For this lesson, we are going to primarily focus on getting C++ code to execute faster.
+
+00:01:15.254 --> 00:01:17.515
+For almost every line of code you write,
+
+00:01:17.515 --> 00:01:22.253
+the computer will execute a corresponding instruction like writing to or from memory,
+
+00:01:22.253 --> 00:01:24.364
+or running a mathematical calculation.
+
+00:01:24.364 --> 00:01:27.524
+Even something simple like assigning an integer to a variable
+
+00:01:27.525 --> 00:01:32.010
+requires a computer to execute a set of instructions and write to memory.
+
+00:01:32.010 --> 00:01:36.130
+Usually there are multiple ways to write a program and achieve the same results.
+
+00:01:36.129 --> 00:01:40.679
+And if you find a solution that requires fewer instructions for the computer to execute,
+
+00:01:40.680 --> 00:01:44.250
+well then quite simply your code will run faster.
+
+00:01:44.250 --> 00:01:46.555
+We have split this lesson into two parts.
+
+00:01:46.555 --> 00:01:49.680
+First you will get an overview of what is happening inside
+
+00:01:49.680 --> 00:01:53.655
+the computer when you compile and run a C++ program.
+
+00:01:53.655 --> 00:01:58.564
+This will give you some insight into what causes your program to slow down.
+
+00:01:58.564 --> 00:02:03.454
+Then you will take what you've learned and use it to optimize C++ code.
+
+00:02:03.454 --> 00:02:05.129
+When you complete this section,
+
+00:02:05.129 --> 00:02:11.000
+you will walk away with the ability as you would say to empathize with the computer.
+

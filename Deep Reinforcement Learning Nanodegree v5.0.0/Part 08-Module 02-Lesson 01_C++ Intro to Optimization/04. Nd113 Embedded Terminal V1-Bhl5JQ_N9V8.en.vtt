@@ -1,0 +1,379 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.705
+Hi. My name is Andrew Pastor,
+
+00:00:03.705 --> 00:00:09.900
+and I am a Content Developer for the Intro to Self-Driving Car Nanodegree.
+
+00:00:09.900 --> 00:00:14.340
+In this lesson, C++ Intro to Optimization,
+
+00:00:14.340 --> 00:00:16.260
+and the following lesson,
+
+00:00:16.260 --> 00:00:20.040
+C++ Optimization Practice, you'll
+
+00:00:20.040 --> 00:00:24.525
+be using a feature of the classroom that you haven't seen yet.
+
+00:00:24.525 --> 00:00:27.960
+When you go to the next part of the lesson,
+
+00:00:27.960 --> 00:00:32.610
+an embedded command line tool will load that looks like this.
+
+00:00:32.610 --> 00:00:35.295
+Usually, when you use a computer,
+
+00:00:35.295 --> 00:00:40.725
+you're using your mouse in a graphical user interface to move files around,
+
+00:00:40.725 --> 00:00:45.000
+open files, create new files, and open programs.
+
+00:00:45.000 --> 00:00:48.765
+But there's another way that you can use your computer,
+
+00:00:48.765 --> 00:00:54.345
+and this is with the keyboard and entering commands directly to the computer.
+
+00:00:54.345 --> 00:00:57.855
+So, this is essentially what we've set up for you in the classroom.
+
+00:00:57.855 --> 00:00:59.295
+When you open this,
+
+00:00:59.295 --> 00:01:03.435
+this section of the classroom is actually connecting to
+
+00:01:03.435 --> 00:01:09.335
+a remote computer that contains files and allows you to run your C++ programs.
+
+00:01:09.335 --> 00:01:15.310
+So, I wanted to give you an overview of what all of this is and how it works.
+
+00:01:15.310 --> 00:01:18.490
+On a Mac or on a Linux machine,
+
+00:01:18.490 --> 00:01:21.685
+there's a program called the Terminal that
+
+00:01:21.685 --> 00:01:25.330
+allows you to do the same types of things that we're going to do here,
+
+00:01:25.330 --> 00:01:29.845
+and the equivalent in Windows is called the Console Window.
+
+00:01:29.845 --> 00:01:33.010
+So, when you go to the next part of the lesson,
+
+00:01:33.010 --> 00:01:37.015
+Demo Machine Code, this is going to open.
+
+00:01:37.015 --> 00:01:40.570
+And you'll see there are three big sections
+
+00:01:40.570 --> 00:01:44.440
+plus a menu down here and then this menu up here.
+
+00:01:44.440 --> 00:01:47.290
+The menu up here is just to be able to navigate
+
+00:01:47.290 --> 00:01:50.755
+the classroom which you should already be familiar with.
+
+00:01:50.755 --> 00:01:56.740
+This part here is showing you all of the files that are on this remote computer.
+
+00:01:56.740 --> 00:02:02.005
+So, you can see that because we're in the demo machine code part of the lesson,
+
+00:02:02.005 --> 00:02:05.710
+we've automatically set it up that it goes to the folder,
+
+00:02:05.710 --> 00:02:09.205
+demo_machine_code, and has these two files in it,
+
+00:02:09.205 --> 00:02:11.305
+which are opening automatically for you.
+
+00:02:11.305 --> 00:02:15.310
+But you can actually navigate through this with your mouse and see workspace,
+
+00:02:15.310 --> 00:02:17.470
+and see all the demos in this lesson.
+
+00:02:17.470 --> 00:02:23.385
+If you double-click on a file or on a folder,
+
+00:02:23.385 --> 00:02:25.935
+it'll open and you can see the files there.
+
+00:02:25.935 --> 00:02:29.160
+If you go to the "Back" button,
+
+00:02:29.160 --> 00:02:32.010
+it'll take you to where you were before,
+
+00:02:32.010 --> 00:02:37.200
+and you can just navigate it like anything you're probably used to on your computer.
+
+00:02:37.200 --> 00:02:40.380
+If you right-click, you'll see some options like,
+
+00:02:40.380 --> 00:02:43.500
+"Open," "Move," which is to move a file to
+
+00:02:43.500 --> 00:02:47.145
+a different folder "Rename," "Copy," "Download," "Delete."
+
+00:02:47.145 --> 00:02:52.236
+And then, this "Plus" button is if you want to add a file,
+
+00:02:52.236 --> 00:02:56.820
+add a folder, or upload something from your desktop that you were doing.
+
+00:02:56.820 --> 00:02:59.490
+Notice here, it says, "All changes saved."
+
+00:02:59.490 --> 00:03:02.325
+So, everything you're doing here it just gets saved automatically.
+
+00:03:02.325 --> 00:03:05.820
+Anything you type in this part will get saved automatically,
+
+00:03:05.820 --> 00:03:09.120
+and so you don't have to worry about saving things.
+
+00:03:09.120 --> 00:03:12.045
+This part right here is a text editor.
+
+00:03:12.045 --> 00:03:16.590
+So, you can see this instructions.md file is really a text file that
+
+00:03:16.590 --> 00:03:21.780
+explains what the demo is and then here you have machine code.cpp,
+
+00:03:21.780 --> 00:03:24.195
+which is a C++ file.
+
+00:03:24.195 --> 00:03:27.540
+You can actually close these files,
+
+00:03:27.540 --> 00:03:30.510
+open these files by double-clicking over here,
+
+00:03:30.510 --> 00:03:33.820
+it works kind of like your regular computer.
+
+00:03:33.820 --> 00:03:39.925
+So, then, the next part is this big chunk down here where it says,
+
+00:03:39.925 --> 00:03:42.085
+"New Terminal, No Open Terminals."
+
+00:03:42.085 --> 00:03:45.160
+So, this is where you're actually going to be able
+
+00:03:45.160 --> 00:03:48.505
+to write commands directly to this remote computer.
+
+00:03:48.505 --> 00:03:52.495
+So, if I click on "New Terminal" here or on this "Plus" sign,
+
+00:03:52.495 --> 00:03:55.180
+it's going to open this New Window.
+
+00:03:55.180 --> 00:03:57.475
+So, here it says, home/workspace.
+
+00:03:57.475 --> 00:04:03.100
+So, that tells me that I'm actually here in the workspace folder.
+
+00:04:03.100 --> 00:04:05.905
+As you click on this part versus this part,
+
+00:04:05.905 --> 00:04:07.765
+they're actually not connected.
+
+00:04:07.765 --> 00:04:13.450
+So, if you want to navigate different folders in the terminal,
+
+00:04:13.450 --> 00:04:15.865
+you have to actually put commands in to do that.
+
+00:04:15.865 --> 00:04:20.020
+The instructions actually talk about and give you the commands that you're going to need.
+
+00:04:20.020 --> 00:04:21.910
+So, don't worry too much about that.
+
+00:04:21.910 --> 00:04:30.415
+So, I'm going to go through an example of how you can use this to run your C++ code.
+
+00:04:30.415 --> 00:04:33.355
+Every time this opens for you in the classroom,
+
+00:04:33.355 --> 00:04:36.940
+you're going to see this instruction file,
+
+00:04:36.940 --> 00:04:41.950
+and it's going to tell you exactly what you need to type in down here and in what order.
+
+00:04:41.950 --> 00:04:49.030
+You can either just go here and copy these commands,
+
+00:04:49.030 --> 00:04:50.500
+and copy and paste them,
+
+00:04:50.500 --> 00:04:53.140
+and they'll just show up and then you hit "Return" and they'll run,
+
+00:04:53.140 --> 00:04:56.515
+or alternatively, you can type them out.
+
+00:04:56.515 --> 00:05:00.850
+So, without worrying too much about what all of these commands do,
+
+00:05:00.850 --> 00:05:05.425
+type this in, I'm saying, CD, change directory.
+
+00:05:05.425 --> 00:05:08.080
+So now, you can see that in the terminal,
+
+00:05:08.080 --> 00:05:12.025
+I've changed folders and I'm inside this demo_machine_code folder.
+
+00:05:12.025 --> 00:05:15.565
+And then, this next code here,
+
+00:05:15.565 --> 00:05:18.655
+it is going to compile my C++.
+
+00:05:18.655 --> 00:05:23.770
+Okay, and then, you can see over here, this.o file appeared,
+
+00:05:23.770 --> 00:05:29.140
+and then it says in the instructions to type this out,
+
+00:05:29.140 --> 00:05:31.045
+and this is the results of the demo.
+
+00:05:31.045 --> 00:05:34.060
+And if you read through the ReadMe file or this instructions file,
+
+00:05:34.060 --> 00:05:36.595
+you'll understand what all this is doing.
+
+00:05:36.595 --> 00:05:41.650
+The other part I wanted to mention is this menu down here.
+
+00:05:41.650 --> 00:05:46.795
+So, if this freezes for some reason and it just isn't running right,
+
+00:05:46.795 --> 00:05:49.960
+you can always hit "Refresh Workspace" down here.
+
+00:05:49.960 --> 00:05:51.865
+It's just going to reconnect.
+
+00:05:51.865 --> 00:05:57.745
+Your work will be the same everything is saved but it just let's you start over again.
+
+00:05:57.745 --> 00:06:01.060
+If you want to reset everything and get
+
+00:06:01.060 --> 00:06:04.480
+back to the original code that we provided for you,
+
+00:06:04.480 --> 00:06:09.160
+you'll have to click on "Reset Data," which opens this Window here,
+
+00:06:09.160 --> 00:06:10.750
+and it says "Resetting data will wipe
+
+00:06:10.750 --> 00:06:12.760
+all of your work to restore the project to the original
+
+00:06:12.760 --> 00:06:17.105
+state" and then you type in "Reset Data" and click.
+
+00:06:17.105 --> 00:06:21.590
+I really suggest that you do not reset the data unless you
+
+00:06:21.590 --> 00:06:25.700
+have saved all of your work externally and downloaded it because,
+
+00:06:25.700 --> 00:06:28.670
+for example, if you just want to reset
+
+00:06:28.670 --> 00:06:33.320
+these files and you hit "Reset Data," it's going to reset everything,
+
+00:06:33.320 --> 00:06:35.315
+and you're going to lose all of your work.
+
+00:06:35.315 --> 00:06:37.940
+So, make sure that if you need to
+
+00:06:37.940 --> 00:06:40.970
+reset the data that you have right-clicked on everything and you've
+
+00:06:40.970 --> 00:06:44.330
+downloaded all your code to the desktop or to wherever
+
+00:06:44.330 --> 00:06:48.700
+so that you can then upload it again after you've restarted things.
+
+00:06:48.700 --> 00:06:52.260
+Again, every single one of these lessons,
+
+00:06:52.260 --> 00:06:54.990
+like Demo Binary over here,
+
+00:06:54.990 --> 00:06:59.250
+it opens the files for you and gives you instructions and tells you what to do,
+
+00:06:59.250 --> 00:07:04.350
+and if you want to see the code that is related to all of this,
+
+00:07:04.350 --> 00:07:10.868
+you just click here "Demo Binary" and you've got the instructions file and main.cpp.
+
+00:07:10.868 --> 00:07:16.020
+So again, what you'll always be doing is you'll be opening this up,
+
+00:07:16.020 --> 00:07:17.760
+you'll be reading the instructions,
+
+00:07:17.760 --> 00:07:19.761
+you'll open a new terminal,
+
+00:07:19.761 --> 00:07:23.010
+you'll type these commands one at a time,
+
+00:07:23.010 --> 00:07:25.515
+hit "Enter" and everything will run.
+
+00:07:25.515 --> 00:07:29.130
+I am going to provide a link about what all of
+
+00:07:29.130 --> 00:07:34.065
+these commands are and what you can do but it's not something that you need right now.
+
+00:07:34.065 --> 00:07:38.640
+But if you want to study it more and see how you can use
+
+00:07:38.640 --> 00:07:44.505
+the terminal not only in the classroom but using it for yourself on your computer,
+
+00:07:44.505 --> 00:07:47.895
+it's something that is really helpful,
+
+00:07:47.895 --> 00:07:54.560
+and it's something that a lot of software engineers need to be able to do. So, thanks.
+

@@ -1,0 +1,690 @@
+WEBVTT
+Kind: captions
+Language: pt-BR
+
+00:00:00.000 --> 00:00:01.516
+Oi!
+
+00:00:01.549 --> 00:00:02.755
+Neste vídeo,
+
+00:00:02.788 --> 00:00:05.231
+vou mostrar como usar
+transferência de aprendizado
+
+00:00:05.264 --> 00:00:08.386
+para treinar uma rede
+que possa classificar corretamente
+
+00:00:08.419 --> 00:00:11.028
+aquelas imagens
+de gatos e cachorros.
+
+00:00:11.061 --> 00:00:13.323
+Vamos usar
+uma rede pré-treinada
+
+00:00:13.356 --> 00:00:17.066
+para detectar e extrair
+recursos das imagens.
+
+00:00:17.099 --> 00:00:20.060
+Isso é muito bom para resolver
+problemas complicados
+
+00:00:20.093 --> 00:00:22.734
+em visão computacional
+e outras áreas.
+
+00:00:22.767 --> 00:00:25.541
+Especificamente,
+essas redes foram treinadas
+
+00:00:25.574 --> 00:00:28.264
+no conjunto de dados ImageNet,
+um conjunto de dados gigante
+
+00:00:28.297 --> 00:00:30.247
+com mais de um milhão
+de imagens rotuladas
+
+00:00:30.280 --> 00:00:32.161
+e mil categorias diferentes.
+
+00:00:32.194 --> 00:00:35.772
+Essas redes usam uma arquitetura
+chamada de "camadas convolucionais",
+
+00:00:35.805 --> 00:00:40.663
+que exploram padrões
+e estruturas que vemos em imagens
+
+00:00:40.696 --> 00:00:42.940
+e aprendem a partir disso.
+
+00:00:42.973 --> 00:00:46.533
+Essas redes têm dezenas,
+ou até centenas,
+
+00:00:46.566 --> 00:00:48.659
+de diferentes camadas
+convolucionais.
+
+00:00:48.692 --> 00:00:52.766
+Elas são extremamente profundas,
+comparadas ao que vimos até agora.
+
+00:00:52.799 --> 00:00:55.250
+Esta combinação
+de um conjunto de dados enorme
+
+00:00:55.283 --> 00:01:00.839
+com uma rede neural enorme é
+conhecida como aprendizado profundo.
+
+00:01:00.872 --> 00:01:02.194
+O que é legal é que,
+
+00:01:02.227 --> 00:01:04.664
+uma vez que essas redes
+foram treinadas em ImageNet,
+
+00:01:04.697 --> 00:01:06.610
+os modelos funcionam
+maravilhosamente bem
+
+00:01:06.643 --> 00:01:09.500
+como detectores de recursos
+de imagens que não estão nele.
+
+00:01:09.533 --> 00:01:11.534
+Você pode, por exemplo,
+
+00:01:11.567 --> 00:01:14.940
+aplicar essas redes nas imagens
+de gatos e cachorros,
+
+00:01:14.973 --> 00:01:17.487
+e extrair recursos.
+
+00:01:17.520 --> 00:01:19.654
+E então você usa
+os recursos como inputs
+
+00:01:19.687 --> 00:01:21.060
+em um novo classificador,
+
+00:01:21.093 --> 00:01:24.285
+que você pode treinar
+para classificar com acurácia
+
+00:01:24.318 --> 00:01:26.090
+suas fotos de gatos
+e cachorros.
+
+00:01:26.123 --> 00:01:28.062
+Você pode baixar
+essas redes pré-treinadas
+
+00:01:28.095 --> 00:01:30.312
+usando torchvision.models.
+
+00:01:30.345 --> 00:01:33.888
+Vamos incluir isso
+nas nossas importações.
+
+00:01:33.921 --> 00:01:36.179
+Fora isso, é praticamente
+o que você já viu antes.
+
+00:01:36.212 --> 00:01:38.071
+Agora temos nossos modelos.
+
+00:01:38.564 --> 00:01:43.134
+A maioria dos modelos de torchvision
+e outros frameworks
+
+00:01:43.167 --> 00:01:45.111
+de aprendizado profundo,
+como o Keras, 
+
+00:01:45.144 --> 00:01:49.758
+exige que as imagens
+sejam 224x224.
+
+00:01:49.791 --> 00:01:52.374
+Esse é o tamanho das imagens
+
+00:01:52.407 --> 00:01:54.794
+que as redes devem treinar
+originalmente.
+
+00:01:55.209 --> 00:01:58.406
+Você vai precisar também
+medir a normalização usada
+
+00:01:58.439 --> 00:02:00.428
+quando os modelos
+foram treinados.
+
+00:02:00.461 --> 00:02:03.375
+Estes canais de cor foram
+normalizados separadamente,
+
+00:02:03.408 --> 00:02:04.845
+vermelho, verde e azul.
+
+00:02:04.878 --> 00:02:08.058
+E a média para cada um dos canais
+está listada aqui,
+
+00:02:08.091 --> 00:02:11.011
+assim como os desvios padrão.
+
+00:02:11.044 --> 00:02:16.031
+Vou deixar você definir
+as transformações treinadas.
+
+00:02:16.064 --> 00:02:18.834
+Portanto, a transformação
+dos dados de treinamento
+
+00:02:18.867 --> 00:02:22.495
+e a transformação
+dos dados de teste e de validação.
+
+00:02:22.528 --> 00:02:25.560
+Você constrói suas transformações
+como mostrei antes.
+
+00:02:25.593 --> 00:02:31.829
+E saiba que você tem que fazer
+as imagens 224x224,
+
+00:02:31.862 --> 00:02:34.267
+normalizá-las
+com as mesmas médias
+
+00:02:34.300 --> 00:02:37.021
+e desvios padrão.
+
+00:02:37.054 --> 00:02:42.920
+E você quer usar aumento de dados
+nas imagens de treinamento.
+
+00:02:42.953 --> 00:02:44.967
+Como exemplo
+de transferência de aprendizado,
+
+00:02:45.000 --> 00:02:47.830
+vou mostrar como fazer isso
+com um modelo chamado "DenseNet".
+
+00:02:47.863 --> 00:02:50.189
+Podemos carregar
+o modelo assim.
+
+00:02:50.222 --> 00:02:55.645
+Então model = models.densenet.
+
+00:02:55.678 --> 00:02:57.053
+Há algumas opções,
+
+00:02:57.086 --> 00:03:01.390
+e o número que vem depois diz
+quantas camadas existem na rede.
+
+00:03:01.423 --> 00:03:04.570
+Em geral, mais camadas significam
+uma acurácia melhor.
+
+00:03:04.603 --> 00:03:06.270
+Vamos usar essa 121.
+
+00:03:06.303 --> 00:03:09.612
+Não precisamos
+de uma super acurácia agora.
+
+00:03:09.645 --> 00:03:13.576
+Dizemos que pretrained=True,
+e isso vai baixar o modelo
+
+00:03:13.609 --> 00:03:16.050
+para seu computador,
+caso você não tenha.
+
+00:03:16.609 --> 00:03:18.880
+Podemos dar uma olhada
+na arquitetura.
+
+00:03:19.610 --> 00:03:22.361
+Aqui vemos
+que a arquitetura DenseNet
+
+00:03:22.394 --> 00:03:26.687
+tem uma parte chamada "features"
+com todas as camadas convolucionais.
+
+00:03:27.389 --> 00:03:30.796
+Rolamos bastante para baixo,
+pois é uma rede profunda.
+
+00:03:30.829 --> 00:03:36.210
+No final, vemos uma parte
+chamada "classifier",
+
+00:03:36.433 --> 00:03:42.401
+que é uma transformação linear
+com os recursos da parte features
+
+00:03:42.434 --> 00:03:46.965
+e que passa
+para 1.000 unidades de output.
+
+00:03:47.648 --> 00:03:50.531
+Na transferência de aprendizado,
+a parte de recursos,
+
+00:03:50.564 --> 00:03:53.499
+como essas camadas aqui,
+aqui em cima,
+
+00:03:53.532 --> 00:03:57.167
+funcionam muito bem
+como outros conjuntos de dados.
+
+00:03:57.200 --> 00:04:00.352
+No entanto, este classificador
+tem 1.000 outputs.
+
+00:04:00.385 --> 00:04:06.038
+Isso foi treinado especificamente
+para o conjunto de dados ImageNet.
+
+00:04:06.071 --> 00:04:09.987
+Esta parte,
+vamos querer substituir
+
+00:04:10.020 --> 00:04:14.744
+por um novo classificador
+feito para nosso conjunto de dados.
+
+00:04:14.777 --> 00:04:18.257
+Vamos treinar este classificador
+no nosso conjunto de dados
+
+00:04:18.290 --> 00:04:23.933
+e usar os recursos que aparecem
+como input deste classificador.
+
+00:04:23.966 --> 00:04:27.541
+A primeira coisa
+que queremos fazer é congelar
+
+00:04:27.574 --> 00:04:33.498
+os parâmetros na seção
+de recursos de DenseNet.
+
+00:04:33.531 --> 00:04:36.114
+Não queremos treinar
+
+00:04:36.147 --> 00:04:40.049
+ou calcular os gradientes
+dessa parte
+
+00:04:40.082 --> 00:04:41.938
+porque queremos
+que ela fique estática
+
+00:04:41.971 --> 00:04:43.767
+e que seja usada
+como detector de recursos.
+
+00:04:43.800 --> 00:04:47.320
+Você só precisa escrever
+for param in model.parameters.
+
+00:04:47.353 --> 00:04:50.810
+Isso vai passar
+por todos os parâmetros do modelo.
+
+00:04:50.843 --> 00:04:56.784
+E então dizemos
+param.requires_grad = False.
+
+00:04:57.417 --> 00:04:58.834
+Isso vai desabilitar
+os gradientes,
+
+00:04:58.867 --> 00:05:01.686
+como calcular gradientes
+de outros parâmetros do modelo,
+
+00:05:01.719 --> 00:05:05.655
+e não vamos treiná-los
+nos passos de treinamento.
+
+00:05:06.232 --> 00:05:09.890
+Vamos definir
+nosso classificador.
+
+00:05:09.923 --> 00:05:12.979
+Isso é parecido
+com o que construímos antes,
+
+00:05:13.012 --> 00:05:15.846
+quando construímos um classificador
+como modelo sequencial.
+
+00:05:15.879 --> 00:05:17.966
+Estou apenas usando
+um OrderedDict
+
+00:05:17.999 --> 00:05:21.454
+para obter as primeiras
+transformações lineares em um ReLU,
+
+00:05:21.487 --> 00:05:24.125
+em outra transformação linear
+do nosso output.
+
+00:05:24.158 --> 00:05:27.332
+Temos dois outputs,
+um para gato e outro para cachorro.
+
+00:05:27.365 --> 00:05:32.266
+Os recursos de input
+deste classificador vêm daqui.
+
+00:05:32.299 --> 00:05:36.769
+Podemos ver que esse classificador
+tem recursos de input 1.024.
+
+00:05:36.802 --> 00:05:40.074
+Isso significa que,
+na seção de recursos dessa rede,
+
+00:05:40.107 --> 00:05:44.650
+o output tem 1.024 valores.
+
+00:05:44.683 --> 00:05:47.948
+Queremos usar isso
+como o input do classificador
+
+00:05:47.981 --> 00:05:51.134
+e temos 1.024 valores
+aqui também.
+
+00:05:51.167 --> 00:05:53.005
+Em geral, você precisa
+
+00:05:53.038 --> 00:05:56.784
+que o tamanho do output
+da parte de recursos
+
+00:05:56.817 --> 00:05:59.901
+corresponda ao input
+do seu classificador.
+
+00:05:59.934 --> 00:06:02.271
+Agora que temos
+nosso classificador definido,
+
+00:06:02.304 --> 00:06:07.490
+precisamos apenas substituir
+o classificador DenseNet
+
+00:06:07.523 --> 00:06:09.994
+pelo nosso classificador.
+
+00:06:10.907 --> 00:06:14.348
+Agora esta rede está pronta
+para ser treinada.
+
+00:06:14.892 --> 00:06:19.522
+O problema, no entanto, é que agora
+estamos uma rede realmente profunda.
+
+00:06:19.555 --> 00:06:24.033
+Como eu disse antes,
+DenseNet tem 121 camadas diferentes.
+
+00:06:24.066 --> 00:06:27.987
+Se você tentar treinar isso
+em uma CPU como fizemos antes,
+
+00:06:28.020 --> 00:06:30.039
+isso levará muito tempo.
+
+00:06:30.072 --> 00:06:33.994
+Em vez disso, vamos usar a GPU
+para fazer os cálculos.
+
+00:06:34.027 --> 00:06:37.297
+Ao usar a GPU, a velocidade
+aumentará umas 100 vezes,
+
+00:06:37.330 --> 00:06:40.499
+500 vezes, é bem louco.
+
+00:06:40.532 --> 00:06:43.196
+PyTorch, assim como praticamente
+os outros frameworks,
+
+00:06:43.229 --> 00:06:51.077
+usa uma biblioteca chamada "CUDA"
+para rodar as redes em uma GPU.
+
+00:06:51.110 --> 00:06:53.819
+Se quiser saber mais sobre a CUDA,
+está tudo aqui.
+
+00:06:53.852 --> 00:06:58.979
+CUDA é uma biblioteca de software
+que roda em GPUs NVIDIA GPUs
+
+00:06:59.012 --> 00:07:01.460
+e usa essas GPUs
+
+00:07:01.493 --> 00:07:05.821
+para fazer cálculos
+de álgebra linear de forma eficiente.
+
+00:07:05.854 --> 00:07:09.439
+Lembre-se de que muito disso
+e as redes de aprendizado profundo
+
+00:07:09.472 --> 00:07:12.918
+são basicamente multiplicações
+de matrizes de álgebra linear
+
+00:07:12.951 --> 00:07:14.341
+e coisas do tipo.
+
+00:07:14.374 --> 00:07:18.855
+Esses cálculos podem ser feitos
+de forma bem rápida usando a CUDA.
+
+00:07:18.888 --> 00:07:22.574
+A ideia com PyTorch é mover
+os parâmetros do nosso modelo
+
+00:07:22.607 --> 00:07:24.687
+e outros tensores para a GPU
+
+00:07:24.720 --> 00:07:28.642
+usando algo como
+model.to('cuda').
+
+00:07:28.675 --> 00:07:31.844
+E podemos movê-los de volta
+da GPU para a CPU
+
+00:07:31.877 --> 00:07:35.041
+com model.to('cpu').
+
+00:07:35.074 --> 00:07:38.383
+Vou demonstrar
+como isso é rápido
+
+00:07:38.416 --> 00:07:42.272
+em comparação
+a quanto tempo leva
+
+00:07:42.305 --> 00:07:44.895
+para fazer um passo adiante
+e atrás com e sem uma GPU.
+
+00:07:44.928 --> 00:07:47.660
+Aqui temos um passo
+de treinamento bem normal,
+
+00:07:47.693 --> 00:07:51.427
+apenas para encontrar meu critério
+e meu otimizador.
+
+00:07:51.460 --> 00:07:55.028
+Mas lembre-se de que não quero
+treinar a parte de recursos,
+
+00:07:55.061 --> 00:07:56.926
+quero apenas treinar a parte
+do classificador.
+
+00:07:56.959 --> 00:08:01.595
+No otimizador,
+passo model.classifier.parameters.
+
+00:08:01.628 --> 00:08:05.908
+Aqui faço um loop
+usando os dispositivos CPU e CUDA.
+
+00:08:05.941 --> 00:08:09.004
+E, para obter o modelo
+para qualquer dispositivo,
+
+00:08:09.037 --> 00:08:13.332
+dizemos model.to(device).
+
+00:08:13.365 --> 00:08:15.002
+E, como sempre,
+
+00:08:15.035 --> 00:08:18.469
+pegamos as imagens e rótulos
+do carregador de treinamento.
+
+00:08:18.502 --> 00:08:20.910
+E, para usar o CUDA, a GPU,
+
+00:08:20.943 --> 00:08:24.010
+precisamos movê-los
+para o CUDA,
+
+00:08:24.043 --> 00:08:26.841
+ou seja lá onde for.
+
+00:08:26.874 --> 00:08:30.747
+Então inputs.to(device)...
+
+00:08:31.068 --> 00:08:34.069
+labels.to(device).
+
+00:08:35.000 --> 00:08:37.853
+Quando o dispositivo é CPU,
+eles serão movidos para a CPU.
+
+00:08:37.886 --> 00:08:41.060
+Quando o dispositivo for o CUDA,
+eles serão movidos para a GPU.
+
+00:08:41.933 --> 00:08:44.363
+Isso é basicamente
+o que você precisa
+
+00:08:44.396 --> 00:08:49.417
+para mudar o código da sua rede,
+para rodar em uma GPU.
+
+00:08:49.450 --> 00:08:55.601
+Podemos ver, comparando
+o código na CPU e na GPU,
+
+00:08:55.634 --> 00:08:57.862
+que economizamos muito tempo.
+
+00:08:57.895 --> 00:09:01.863
+Para um lote,
+levamos mais de 5 segundos na CPU,
+
+00:09:01.896 --> 00:09:04.501
+versus 9 milissegundos.
+
+00:09:04.534 --> 00:09:07.022
+É um avanço enorme.
+
+00:09:07.055 --> 00:09:09.807
+Podemos escrever um código
+agnóstico de dispositivo,
+
+00:09:09.840 --> 00:09:11.528
+que vai usar o CUDA
+automaticamente,
+
+00:09:11.561 --> 00:09:13.538
+se estiver disponível
+na sua máquina.
+
+00:09:13.571 --> 00:09:15.237
+Você só precisa escrever
+
+00:09:15.270 --> 00:09:19.011
+torch.device ("cuda:0"
+se CUDA estiver disponível,
+
+00:09:19.044 --> 00:09:20.981
+ou então usar a CPU),
+
+00:09:21.014 --> 00:09:24.045
+e esta será a variável
+de dispositivo.
+
+00:09:24.078 --> 00:09:27.695
+Sempre que você tiver
+um tensor ou modelo,
+
+00:09:27.728 --> 00:09:32.427
+você dirá tensor.to(device)
+ou model.to(device).
+
+00:09:32.460 --> 00:09:35.485
+Se já estiver na CPU,
+então continuará na CPU.
+
+00:09:35.518 --> 00:09:37.395
+Se estiver pronto na GPU,
+vai ficar lá,
+
+00:09:37.428 --> 00:09:40.220
+mas, se não estiver,
+será movido para o mais apropriado.
+
+00:09:40.593 --> 00:09:44.041
+A partir de agora, vou deixar você
+terminar de treinar o modelo,
+
+00:09:44.074 --> 00:09:46.439
+e será tudo exatamente igual,
+
+00:09:46.472 --> 00:09:49.737
+só que você vai apenas
+treinar o classificador,
+
+00:09:49.770 --> 00:09:52.844
+que você definiu assim
+
+00:09:52.877 --> 00:09:55.722
+e só vai usar a GPU agora.
+
+00:09:55.755 --> 00:09:57.173
+Certo, boa sorte.
+

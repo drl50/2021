@@ -1,0 +1,310 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.064
+In this video and notebook,
+
+00:00:02.064 --> 00:00:05.060
+I'll be showing you how to save and load models.
+
+00:00:05.059 --> 00:00:06.899
+Like I said previously,
+
+00:00:06.900 --> 00:00:10.919
+you typically don't want to have to train a new model every time you want to use it.
+
+00:00:10.919 --> 00:00:13.289
+So instead, you'll train it once and then save it,
+
+00:00:13.289 --> 00:00:15.319
+and then if you need to use it for inference later,
+
+00:00:15.320 --> 00:00:17.089
+you can load it up and do that.
+
+00:00:17.089 --> 00:00:21.399
+So, we can start in import our normal things.
+
+00:00:21.399 --> 00:00:24.369
+So on menu, import fc_model.
+
+00:00:24.370 --> 00:00:28.429
+So, this is basically the file that I
+
+00:00:28.429 --> 00:00:33.289
+took the network that I built in part five and I just moved it into this file,
+
+00:00:33.289 --> 00:00:36.914
+so that I can easily load it in and train it, and all of that.
+
+00:00:36.914 --> 00:00:38.490
+So, let's going to load that in.
+
+00:00:38.490 --> 00:00:41.070
+We're using unloading the data,
+
+00:00:41.070 --> 00:00:44.820
+and again, we're using Fashion MNIST.
+
+00:00:44.820 --> 00:00:47.070
+Then you can see,
+
+00:00:47.070 --> 00:00:49.835
+what looks like nice little images.
+
+00:00:49.835 --> 00:00:54.079
+So, it goes talking about, I create this file called fc_model,
+
+00:00:54.079 --> 00:00:56.089
+and the network is in there.
+
+00:00:56.090 --> 00:00:58.635
+So, I just created our model, create our network,
+
+00:00:58.634 --> 00:01:00.329
+so I'm using again,
+
+00:01:00.329 --> 00:01:03.460
+784 inputs,10 outputs, 512,
+
+00:01:03.460 --> 00:01:08.204
+256 and 128 units for three different hidden layers,
+
+00:01:08.204 --> 00:01:13.444
+and then using the NLLLoss and our Adam optimizer.
+
+00:01:13.444 --> 00:01:15.639
+Then we can just generally,
+
+00:01:15.640 --> 00:01:18.844
+with the network trained it is time to save it.
+
+00:01:18.844 --> 00:01:23.129
+The parameters of our model are actually stored in an attribute called state dict.
+
+00:01:23.129 --> 00:01:27.704
+So, let's go and look at our model really quick, print model,
+
+00:01:27.704 --> 00:01:34.340
+sort of the model looks like, and then we can also look at the model.state_dict.
+
+00:01:35.349 --> 00:01:38.219
+So, this is a dictionary,
+
+00:01:38.219 --> 00:01:41.284
+so I'm just going to go ahead and print out the keys.
+
+00:01:41.284 --> 00:01:44.479
+So, then we can see for each of our hidden layers,
+
+00:01:44.480 --> 00:01:48.185
+we can go in there and get our weights and our biases and the output.
+
+00:01:48.185 --> 00:01:55.200
+So basically, it stores the weights and the biases and everything in the state_dict.
+
+00:01:55.200 --> 00:01:58.579
+So, this is the thing that we're actually going to want to save.
+
+00:01:58.579 --> 00:02:04.079
+So to do that, is to torch.save and then we want to save our state_dict.
+
+00:02:04.079 --> 00:02:08.025
+Save it to called checkpoint.pth.
+
+00:02:08.025 --> 00:02:10.760
+So, now that is saved to disk.
+
+00:02:10.759 --> 00:02:14.914
+We can load this in, so called state_dict again,
+
+00:02:14.914 --> 00:02:23.664
+torch.load, checkpoint, and just to see that it's the same thing, yeah.
+
+00:02:23.664 --> 00:02:26.534
+So, print out the keys again and it's the same.
+
+00:02:26.534 --> 00:02:29.449
+So, we can save these state_dict,
+
+00:02:29.449 --> 00:02:33.194
+to a checkpoint and then we can load it back in with torch.load.
+
+00:02:33.194 --> 00:02:34.859
+Now, we have the state_dict,
+
+00:02:34.860 --> 00:02:36.720
+but it's not attached to a model yet.
+
+00:02:36.719 --> 00:02:44.944
+So, we actually need to go for a model and say load state_dict and so,
+
+00:02:44.944 --> 00:02:48.629
+this actually loads the state dictionary.
+
+00:02:48.800 --> 00:02:51.755
+So, that's our model, cool.
+
+00:02:51.754 --> 00:02:54.424
+So, it seems really straightforward,
+
+00:02:54.425 --> 00:02:57.435
+you just save the state_dict, load it back in,
+
+00:02:57.435 --> 00:03:00.569
+load it into your model with load state_dict but,
+
+00:03:00.569 --> 00:03:05.780
+check out what happens if my model has a different architecture.
+
+00:03:05.780 --> 00:03:08.199
+So, I'm going to create a new model,
+
+00:03:08.199 --> 00:03:12.734
+784,10 but this time I'm going to use 400,
+
+00:03:12.735 --> 00:03:17.370
+200, and 100 for my hidden layers.
+
+00:03:17.370 --> 00:03:21.039
+So now, we've already loaded the state_dict so now,
+
+00:03:21.039 --> 00:03:22.304
+let's see how this new model,
+
+00:03:22.305 --> 00:03:27.860
+so see what happens when we do load the state dictionary.
+
+00:03:27.860 --> 00:03:30.860
+So, we get this error.
+
+00:03:30.860 --> 00:03:34.795
+So, what it says while copying the parameter,
+
+00:03:34.794 --> 00:03:36.729
+use dimensions or model or this,
+
+00:03:36.729 --> 00:03:39.069
+used dimensions in the checkpoint are this.
+
+00:03:39.069 --> 00:03:41.659
+So basically, what this is telling us is that,
+
+00:03:41.659 --> 00:03:47.329
+the dimensions of our network are different than the dimensions in the checkpoint.
+
+00:03:47.330 --> 00:03:48.650
+What this means is that,
+
+00:03:48.650 --> 00:03:51.530
+if you create a checkpoint from the state dictionary,
+
+00:03:51.530 --> 00:03:55.270
+it has to match up with exactly the same architecture when you load it back in.
+
+00:03:55.270 --> 00:04:00.630
+That means, we need to save the network architecture along side of the state_dict,
+
+00:04:00.629 --> 00:04:03.034
+so that when we load in the state dictionary,
+
+00:04:03.034 --> 00:04:07.219
+then we load in the architecture of the network,
+
+00:04:07.219 --> 00:04:09.324
+the parameters of that network.
+
+00:04:09.324 --> 00:04:13.264
+So, we can create a dictionary and just call this checkpoint,
+
+00:04:13.264 --> 00:04:19.459
+and my input size 784,
+
+00:04:19.459 --> 00:04:25.164
+I'll put size 10, in layers.
+
+00:04:25.165 --> 00:04:29.125
+So here, I'm using a list comprehension to get
+
+00:04:29.125 --> 00:04:34.459
+the actual sizes of each of our hidden layers.
+
+00:04:34.459 --> 00:04:38.939
+So, for each in model.hidden layers.
+
+00:04:38.939 --> 00:04:43.685
+Then finally, we can save the state dictionary.
+
+00:04:43.685 --> 00:04:47.050
+So, we have this checkpoint that is basically
+
+00:04:47.050 --> 00:04:50.569
+just a dictionary that has our architecture parameters,
+
+00:04:50.569 --> 00:04:53.250
+our hyperparameters for like how we actually build the network,
+
+00:04:53.250 --> 00:04:56.319
+as well as the state dictionary that contains
+
+00:04:56.319 --> 00:04:59.779
+all of our parameters or weights and biases and things like that.
+
+00:04:59.779 --> 00:05:01.679
+So, we can save our checkpoint,
+
+00:05:01.680 --> 00:05:07.715
+it will save it to again, our checkpoint file.
+
+00:05:07.714 --> 00:05:11.459
+Nice. So now, using this checkpoint,
+
+00:05:11.459 --> 00:05:13.964
+we can rebuild our network.
+
+00:05:13.964 --> 00:05:17.589
+So, I usually like to build a small function,
+
+00:05:17.589 --> 00:05:19.659
+just called like load checkpoint.
+
+00:05:19.660 --> 00:05:21.790
+Which takes a file path.
+
+00:05:21.790 --> 00:05:24.430
+So now, we can load our checkpoint,
+
+00:05:24.430 --> 00:05:26.855
+and build our model.
+
+00:05:26.855 --> 00:05:31.390
+So, this will build a model for us and now,
+
+00:05:31.389 --> 00:05:36.629
+we can load in state dictionary into this model,
+
+00:05:36.629 --> 00:05:39.064
+and return our model.
+
+00:05:39.064 --> 00:05:43.975
+There we go. So, we see that we can now save
+
+00:05:43.975 --> 00:05:47.360
+our model itself like the number of
+
+00:05:47.360 --> 00:05:51.230
+units and the state dictionary and then load all the backup,
+
+00:05:51.230 --> 00:05:54.740
+recreate our model and load in the appropriate state_dict.
+
+00:05:54.740 --> 00:05:57.910
+All right, so in the next video,
+
+00:05:57.910 --> 00:06:02.840
+I'll be showing you how to load in image data to use
+
+00:06:02.839 --> 00:06:09.669
+an image classifier or pretty much any application that requires images. Cheers!
+

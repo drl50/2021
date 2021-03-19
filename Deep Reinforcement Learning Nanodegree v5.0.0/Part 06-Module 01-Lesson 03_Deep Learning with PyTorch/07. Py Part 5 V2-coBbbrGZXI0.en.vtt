@@ -1,0 +1,637 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.430
+Hello, welcome back. So in this video and notebook,
+
+00:00:03.430 --> 00:00:06.480
+I'm going to be talking about inference and validation.
+
+00:00:06.480 --> 00:00:09.000
+So, inference means when we have
+
+00:00:09.000 --> 00:00:12.349
+a tree network and we're using our network to make predictions.
+
+00:00:12.349 --> 00:00:15.539
+So neural networks have this issue where they have
+
+00:00:15.539 --> 00:00:18.269
+a tendency to perform too well on the training data,
+
+00:00:18.269 --> 00:00:21.439
+and they aren't able to generalize to other data.
+
+00:00:21.440 --> 00:00:23.835
+So for instance, if you traded on a bunch of
+
+00:00:23.835 --> 00:00:27.269
+images and then you give it an image that it hasn't seen before,
+
+00:00:27.269 --> 00:00:30.704
+it would do a really poor job at predicting what's in that image.
+
+00:00:30.704 --> 00:00:36.109
+So neural networks learn from the training data too much and they're bad at generalizing,
+
+00:00:36.109 --> 00:00:37.755
+this is called overfitting.
+
+00:00:37.755 --> 00:00:40.460
+So the test for overfitting while training,
+
+00:00:40.460 --> 00:00:46.535
+we perform inference with our network on a test set or our validation set.
+
+00:00:46.534 --> 00:00:49.629
+So this is the set of data that looks like the training data,
+
+00:00:49.630 --> 00:00:51.285
+but it's not in the training set,
+
+00:00:51.284 --> 00:00:54.379
+so basically the neural network hasn't seen this data before.
+
+00:00:54.380 --> 00:00:57.830
+So that way when we're testing on this validation set,
+
+00:00:57.829 --> 00:01:03.829
+we can see how well the network is able to generalize to data it hasn't seen before.
+
+00:01:03.829 --> 00:01:11.929
+To get started, I'm going to import our packages like PyTorch towards vision like normal.
+
+00:01:11.930 --> 00:01:16.160
+Here again, I am loading the fashion hymnist dataset.
+
+00:01:16.159 --> 00:01:18.944
+You'll notice here that I'm delegating the test data,
+
+00:01:18.944 --> 00:01:23.168
+so this is the data that we're going be using for validation.
+
+00:01:23.168 --> 00:01:25.700
+So we have this data, the training data,
+
+00:01:25.700 --> 00:01:28.120
+that we're going to get from the train set and train loader,
+
+00:01:28.120 --> 00:01:31.105
+and we have our test validation data from test loader.
+
+00:01:31.105 --> 00:01:35.320
+So here, I built a network that it's a bit more advanced than what I've shown you so
+
+00:01:35.319 --> 00:01:40.024
+far because I wanted to have an arbitrary number of hidden layers.
+
+00:01:40.025 --> 00:01:43.130
+So basically, I wanted to be able to pass in a list like this,
+
+00:01:43.129 --> 00:01:44.949
+and then it will automatically build
+
+00:01:44.950 --> 00:01:48.810
+three hidden layers with this number of units in each of those layers.
+
+00:01:48.810 --> 00:01:54.850
+So to do this I used nn.ModuleList, and basically,
+
+00:01:54.849 --> 00:01:58.329
+the idea is that it works like a normal list, where you can add things to it and extend it
+
+00:01:58.329 --> 00:02:04.724
+and so on, but the model is able to PyTorch models,
+
+00:02:04.724 --> 00:02:07.969
+able to track the modules that you're adding to this module list.
+
+00:02:07.969 --> 00:02:09.905
+Because otherwise if you just use a normal list,
+
+00:02:09.905 --> 00:02:12.439
+then PyTorch wouldn't be able to track that,
+
+00:02:12.439 --> 00:02:17.425
+and you wouldn't see those modules and operations ending up in your model.
+
+00:02:17.425 --> 00:02:19.800
+I'm not going get too much into how this works,
+
+00:02:19.800 --> 00:02:21.505
+because I wrote it out here,
+
+00:02:21.504 --> 00:02:24.689
+so feel free to read all this at your leisure.
+
+00:02:24.689 --> 00:02:31.954
+The major things that you should note in this new network is that I've added dropout.
+
+00:02:31.955 --> 00:02:33.775
+So we remember from before,
+
+00:02:33.775 --> 00:02:36.950
+drop out randomly deletes some of
+
+00:02:36.949 --> 00:02:41.639
+these connections between the layers as the network is training.
+
+00:02:41.639 --> 00:02:45.019
+So what this does is it forces units in the network
+
+00:02:45.020 --> 00:02:49.490
+to learn various features from the input data,
+
+00:02:49.490 --> 00:02:52.659
+and what this does is it helps the network generalize.
+
+00:02:52.659 --> 00:02:56.764
+To use dropout, basically you just create this operation,
+
+00:02:56.764 --> 00:02:58.469
+this module like you normally would,
+
+00:02:58.469 --> 00:03:02.995
+and give it a probability of dropping in units.
+
+00:03:02.995 --> 00:03:10.200
+We can add drop out and the forward pass like we would with other modules and operations,
+
+00:03:10.199 --> 00:03:12.759
+so just self-taught dropout and pass in a tensor.
+
+00:03:12.759 --> 00:03:16.084
+The second thing to notice here is that I'm actually
+
+00:03:16.085 --> 00:03:19.965
+returning the log softmax from the forward pass.
+
+00:03:19.965 --> 00:03:24.429
+I'm doing this because remember that softmax returns a probability distribution.
+
+00:03:24.429 --> 00:03:26.860
+So the problem with this is that a lot of times you're going to get
+
+00:03:26.860 --> 00:03:30.320
+values that are really close to zero or really close to one.
+
+00:03:30.319 --> 00:03:36.474
+Due to the imprecision of representing numbers as floating points,
+
+00:03:36.474 --> 00:03:40.659
+then this can lead to instabilities in calculations
+
+00:03:40.659 --> 00:03:45.280
+and overall can build up a lot of inaccuracies.
+
+00:03:45.280 --> 00:03:49.205
+So the way to solve this is actually take the log of the softmax,
+
+00:03:49.205 --> 00:03:52.630
+and this moves as numbers like away from zero and away from one
+
+00:03:52.629 --> 00:03:56.870
+into normal like negative numbers, like negative four.
+
+00:03:56.870 --> 00:04:02.300
+So this helps keep computation stable, helps with precision,
+
+00:04:02.300 --> 00:04:08.930
+and in general, it's just a lot easier to work in the log-space of probability functions.
+
+00:04:08.930 --> 00:04:11.510
+Here, I'm creating the model like normal,
+
+00:04:11.509 --> 00:04:15.094
+so 784 units like input units, 10 outputs,
+
+00:04:15.094 --> 00:04:16.459
+I'm using two hidden layers,
+
+00:04:16.459 --> 00:04:19.314
+one of the 516 units and one with 256 units,
+
+00:04:19.314 --> 00:04:22.964
+I'm setting my dropout probability to 0.5.
+
+00:04:22.964 --> 00:04:27.629
+So since I'm using the log softmax as my output,
+
+00:04:27.629 --> 00:04:30.904
+I need to use the negative log-likelihood loss,
+
+00:04:30.904 --> 00:04:33.304
+so I'm just using this here, there's my criterion.
+
+00:04:33.305 --> 00:04:37.220
+It works basically the same as the cross entropy loss you saw before,
+
+00:04:37.220 --> 00:04:43.920
+except that it expects the log softmax as the input.
+
+00:04:43.920 --> 00:04:46.610
+As I'm also using the Adam optimizer,
+
+00:04:46.610 --> 00:04:48.319
+and so like I mentioned before,
+
+00:04:48.319 --> 00:04:53.269
+this is a variation on stochastic gradient descent that uses momentum and
+
+00:04:53.269 --> 00:04:55.699
+it ends up training your networks faster
+
+00:04:55.699 --> 00:04:58.800
+than with just normal stochastic gradient descent.
+
+00:04:58.800 --> 00:05:03.185
+Now, I'm going to show you how to write this validation code.
+
+00:05:03.185 --> 00:05:05.115
+So the idea with validation code,
+
+00:05:05.115 --> 00:05:08.780
+with the validation pass is that we want to take
+
+00:05:08.779 --> 00:05:14.104
+our data from the test dataset and run it through our network,
+
+00:05:14.105 --> 00:05:17.405
+measure the loss on the test data,
+
+00:05:17.404 --> 00:05:19.189
+but also the accuracy.
+
+00:05:19.189 --> 00:05:23.594
+So, how well is our network actually doing on data it hasn't seen before?
+
+00:05:23.595 --> 00:05:29.835
+So it's normal, it's going to start off by grabbing some images in our labels.
+
+00:05:29.834 --> 00:05:31.904
+This time we're getting from the test loader,
+
+00:05:31.904 --> 00:05:34.994
+so the train loaders, these are our test images.
+
+00:05:34.995 --> 00:05:37.084
+So we shape our images,
+
+00:05:37.084 --> 00:05:41.364
+and then pass our images through the network.
+
+00:05:41.365 --> 00:05:44.754
+So again, these images are coming from
+
+00:05:44.754 --> 00:05:48.305
+our test set and we're going to get the output for our test set,
+
+00:05:48.305 --> 00:05:56.545
+and we can update so we can record our test loss criterion.
+
+00:05:56.545 --> 00:06:00.640
+So we're not interested in doing backpropagation with this loss,
+
+00:06:00.639 --> 00:06:03.875
+we really just want to measure the loss on the test dataset.
+
+00:06:03.875 --> 00:06:05.990
+So that is measuring the loss,
+
+00:06:05.990 --> 00:06:07.730
+but now I also want to measure the accuracy,
+
+00:06:07.730 --> 00:06:13.980
+like how well our network is predicting the correct label for the test dataset.
+
+00:06:13.980 --> 00:06:19.610
+So here like normal, I'm going to calculate our probabilities.
+
+00:06:19.610 --> 00:06:22.220
+So, torch.exponential.
+
+00:06:22.220 --> 00:06:24.935
+So again, our output is log softmax,
+
+00:06:24.935 --> 00:06:27.550
+so the inverse of the log is exponential and so this is
+
+00:06:27.550 --> 00:06:30.970
+going to give us back our softmax distribution.
+
+00:06:30.970 --> 00:06:33.685
+So what should this work so far, cool.
+
+00:06:33.685 --> 00:06:37.415
+Those are probabilities and you just kind of check him out, cool.
+
+00:06:37.415 --> 00:06:41.500
+They have, so 64 by 10.
+
+00:06:41.500 --> 00:06:46.009
+I want to see how well our network is predicting the correct label.
+
+00:06:46.009 --> 00:06:50.079
+So, I need to compare the correct label with what the network is predicting.
+
+00:06:50.079 --> 00:06:52.824
+To get what the network is predicting I need to take
+
+00:06:52.824 --> 00:06:56.620
+the highest probability from our softmax output.
+
+00:06:56.620 --> 00:07:00.175
+So this is ps.max,
+
+00:07:00.175 --> 00:07:04.560
+I want to take the first dimension, so across here,10.
+
+00:07:04.560 --> 00:07:09.110
+So what this actually does is it gives me two different tensors.
+
+00:07:09.110 --> 00:07:12.720
+So the first tensor are the actual probabilities,
+
+00:07:12.720 --> 00:07:16.570
+and the actual highest probabilities within
+
+00:07:16.569 --> 00:07:22.209
+the second tensor is the index of the highest probability.
+
+00:07:22.209 --> 00:07:24.239
+So this index is the interesting thing,
+
+00:07:24.240 --> 00:07:26.829
+because this one is actually telling us
+
+00:07:26.829 --> 00:07:31.039
+which class has the highest probability in the softmax output.
+
+00:07:31.040 --> 00:07:33.700
+So since the second tensor,
+
+00:07:33.699 --> 00:07:36.439
+this guy here is telling us the predicted classes,
+
+00:07:36.439 --> 00:07:39.355
+I'm going to do one so that'll give us a predicted classes,
+
+00:07:39.355 --> 00:07:43.879
+and then we need to compare this with our true labels,
+
+00:07:43.879 --> 00:07:47.040
+and I'm going to call this equality.
+
+00:07:47.500 --> 00:07:50.425
+We'll see what this looks like.
+
+00:07:50.425 --> 00:07:53.620
+Equality. So, here we get
+
+00:07:53.620 --> 00:07:58.420
+this other tensor where ones are when we make the correct prediction,
+
+00:07:58.420 --> 00:08:00.860
+zeros where you make the incorrect prediction.
+
+00:08:00.860 --> 00:08:04.150
+Now to measure the accuracy, so again,
+
+00:08:04.149 --> 00:08:07.269
+the accuracy is basically just how many times did it get
+
+00:08:07.269 --> 00:08:11.709
+the prediction correct out of all the predictions it made.
+
+00:08:11.709 --> 00:08:13.680
+So since these are all ones and zeros,
+
+00:08:13.680 --> 00:08:17.139
+we basically just need to add up all the correct ones,
+
+00:08:17.139 --> 00:08:18.964
+so all these ones,
+
+00:08:18.964 --> 00:08:21.909
+and then divide by the total number of predictions.
+
+00:08:21.910 --> 00:08:23.515
+So since these are all ones,
+
+00:08:23.514 --> 00:08:26.425
+the really simple way to do this is just to take the mean.
+
+00:08:26.425 --> 00:08:28.819
+So equality.mean.
+
+00:08:29.600 --> 00:08:33.100
+So a lot of times you're going to run
+
+00:08:33.100 --> 00:08:37.904
+it into problems with the type of tensor that you have,
+
+00:08:37.904 --> 00:08:39.629
+so this is an example.
+
+00:08:39.629 --> 00:08:44.419
+So the tensor equality has the type torch.bitetensor,
+
+00:08:44.419 --> 00:08:48.074
+and this is saying mean is not implemented for this type of tensor,
+
+00:08:48.075 --> 00:08:51.145
+and so, this is our problem right here, equality.mean.
+
+00:08:51.144 --> 00:08:54.095
+So we actually needed to convert this to a float tensor
+
+00:08:54.095 --> 00:08:57.415
+which does have this mean function.
+
+00:08:57.414 --> 00:09:07.149
+So to do that, we do equality.type and give it a different data type, so float tensor.
+
+00:09:07.149 --> 00:09:11.629
+So what this does is it converts the equality tensor which is a byte tensor
+
+00:09:11.629 --> 00:09:16.544
+into a float tensor and then we can get the mean from that. Now, we have our accuracy.
+
+00:09:16.544 --> 00:09:20.629
+So we're going to want to run this validation pass,
+
+00:09:20.629 --> 00:09:22.544
+there's a bunch of times,
+
+00:09:22.544 --> 00:09:26.115
+and we also need to go all the way through our test loader.
+
+00:09:26.115 --> 00:09:31.565
+So, what I'd like to do is wrap this thing up and it's own function.
+
+00:09:31.565 --> 00:09:34.050
+So it looks something like this.
+
+00:09:34.049 --> 00:09:37.394
+We do define validation function,
+
+00:09:37.394 --> 00:09:39.845
+passing a model or data,
+
+00:09:39.845 --> 00:09:43.149
+test loader and a criterion,
+
+00:09:43.149 --> 00:09:47.340
+and a thing where we can sum up our accuracy,
+
+00:09:47.340 --> 00:09:53.884
+and now we're going to loop through the images and labels in our data.
+
+00:09:53.884 --> 00:09:58.014
+So basically, we're looping through all the batches in our test loader,
+
+00:09:58.014 --> 00:10:01.970
+calculating the test loss and accuracy,
+
+00:10:01.970 --> 00:10:07.970
+sum them all up and we can return these.
+
+00:10:08.129 --> 00:10:10.924
+Now that we have this as a function,
+
+00:10:10.924 --> 00:10:16.615
+we can put this into our normal training loop and measured validation as we're training.
+
+00:10:16.615 --> 00:10:21.414
+So then, every certain number of steps which we've set by print_ every,
+
+00:10:21.414 --> 00:10:23.079
+we're going to do our validation.
+
+00:10:23.080 --> 00:10:26.700
+So, what I'm going to do here is say torch.no_grad.
+
+00:10:26.700 --> 00:10:32.270
+So, this basically turns off all gradients for all of our tensors.
+
+00:10:32.269 --> 00:10:33.620
+We want to do is because when we're doing
+
+00:10:33.620 --> 00:10:36.014
+validation we don't really care about the gradients, and so,
+
+00:10:36.014 --> 00:10:40.875
+it's just going to speed up the computation that we're doing in our validation.
+
+00:10:40.875 --> 00:10:48.120
+So, we're going to get our test loss in our accuracy from our validation function.
+
+00:10:48.120 --> 00:10:51.480
+It's also important to know that now that we have
+
+00:10:51.480 --> 00:10:55.605
+dropout we don't want dropout on while we're doing validation.
+
+00:10:55.605 --> 00:11:00.870
+So if it is on it's going to make the performance of our network look worse,
+
+00:11:00.870 --> 00:11:04.095
+because if you're doing inference after your training you're going to have dropout off.
+
+00:11:04.095 --> 00:11:07.075
+So, we want to make sure that a dropout is off while we're doing validation.
+
+00:11:07.075 --> 00:11:12.060
+Then we can do that is by putting the model and evaluation mode.
+
+00:11:12.059 --> 00:11:16.699
+So, we do that with model.eval.
+
+00:11:17.259 --> 00:11:21.394
+Then we want to turn drop out back on,
+
+00:11:21.394 --> 00:11:24.269
+so we do that with model model.train.
+
+00:11:24.269 --> 00:11:32.840
+So to put our network in our model into a mode where it can do inference and validation,
+
+00:11:32.840 --> 00:11:34.120
+we want to use model.eval,
+
+00:11:34.120 --> 00:11:37.075
+if we want it to be training then we say model.train.
+
+00:11:37.075 --> 00:11:43.815
+Just for a good measure was also set model to training up here, just in case.
+
+00:11:43.815 --> 00:11:47.675
+Now, we can check out what this looks like.
+
+00:11:47.674 --> 00:11:51.509
+So now, we can see we get our test laws printed out,
+
+00:11:51.509 --> 00:11:52.894
+as well as, our accuracy.
+
+00:11:52.894 --> 00:11:55.439
+So accuracy starts fairly low,
+
+00:11:55.440 --> 00:12:01.195
+0.7 and then over time when guys are training it gets higher.
+
+00:12:01.195 --> 00:12:03.160
+With the network trained,
+
+00:12:03.159 --> 00:12:05.899
+then we can use this for inference.
+
+00:12:05.899 --> 00:12:08.629
+So again, making actual predictions.
+
+00:12:08.629 --> 00:12:11.179
+So pretty much everything is the same as before,
+
+00:12:11.179 --> 00:12:15.454
+we need to remember to put our model in evaluation mode to turn off drop out,
+
+00:12:15.455 --> 00:12:19.430
+and we want to use with torch.no_ grad to turn off
+
+00:12:19.429 --> 00:12:24.229
+our gradients and then we can actually do a forward pass and get our probability.
+
+00:12:24.230 --> 00:12:27.500
+So, we'll get log softmax from here,
+
+00:12:27.500 --> 00:12:31.070
+take the exponential get softmax and then we
+
+00:12:31.070 --> 00:12:36.425
+can get our probability distribution and actually see what we have.
+
+00:12:36.424 --> 00:12:42.245
+So, in the next part we're going to look at how to save and load models.
+
+00:12:42.245 --> 00:12:44.480
+It doesn't make sense to basically
+
+00:12:44.480 --> 00:12:47.060
+train a completely new model everytime you need one, and so,
+
+00:12:47.059 --> 00:12:49.379
+typically what you'll do is you'll train your model,
+
+00:12:49.379 --> 00:12:51.980
+save it to a checkpoint which is typically
+
+00:12:51.980 --> 00:12:55.009
+what a train model is called when you save it at checkpoint.
+
+00:12:55.009 --> 00:12:58.580
+But you save to a checkpoint and then later you can load it up to either do
+
+00:12:58.580 --> 00:13:02.600
+inference or keep training. See you in the next video.
+

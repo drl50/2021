@@ -1,0 +1,232 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.149
+From a high level perspective,
+
+00:00:02.149 --> 00:00:06.980
+you've been able to see that limiting CPU instructions can make your code run faster.
+
+00:00:06.980 --> 00:00:09.890
+As humans, we think about interacting with a computer in
+
+00:00:09.890 --> 00:00:13.839
+terms of a programming language like C++.
+
+00:00:13.839 --> 00:00:17.489
+However, computers only understand instructions in binary.
+
+00:00:17.489 --> 00:00:23.125
+So everything you write will be seen by the computer as a series of zeros and ones.
+
+00:00:23.125 --> 00:00:25.079
+Let's dive a little deeper into how the computer
+
+00:00:25.079 --> 00:00:28.169
+uses binary to store information in memory.
+
+00:00:28.170 --> 00:00:32.219
+Understanding how your C++ program stores information can help you
+
+00:00:32.219 --> 00:00:37.420
+avoid unnecessary access to memory which will waste valuable CPU cycles.
+
+00:00:37.420 --> 00:00:40.170
+Let's think about how you could represent a variable in binary.
+
+00:00:40.170 --> 00:00:42.719
+Binary relies on powers of two to describe
+
+00:00:42.719 --> 00:00:46.125
+a value with the least significant digit usually on the right.
+
+00:00:46.125 --> 00:00:48.979
+For each position in the binary representation,
+
+00:00:48.979 --> 00:00:52.739
+you take the binary value of one or zero and multiply it by
+
+00:00:52.740 --> 00:00:57.635
+the power of two associated with that position and using zero-based numbering.
+
+00:00:57.634 --> 00:01:01.369
+Finally, you add the results together to get the decimal value.
+
+00:01:01.369 --> 00:01:03.989
+Now let's go through a few examples by looking at
+
+00:01:03.990 --> 00:01:07.530
+the binary representation of the numbers one through five.
+
+00:01:07.530 --> 00:01:10.835
+The decimal number zero is also zero in binary.
+
+00:01:10.834 --> 00:01:17.599
+To figure this out, you take zero times two_to_the_power_of_zero which equals zero.
+
+00:01:17.599 --> 00:01:20.699
+The decimal number one is one in binary.
+
+00:01:20.700 --> 00:01:25.680
+You can see this because one times two_to_the_power_of_zero equals one.
+
+00:01:25.680 --> 00:01:29.700
+One, zero in binary equals the decimal number two.
+
+00:01:29.700 --> 00:01:32.939
+Now you're going to need it two to the first power as well.
+
+00:01:32.939 --> 00:01:36.075
+This is because one times two to the first power
+
+00:01:36.075 --> 00:01:40.075
+plus one times two to_the_zeroth_power equals two.
+
+00:01:40.075 --> 00:01:41.909
+Following the same rules, one,
+
+00:01:41.909 --> 00:01:45.265
+one in binary is three in decimal.
+
+00:01:45.265 --> 00:01:47.070
+This is because one times
+
+00:01:47.069 --> 00:01:52.619
+two_to_the_first_power plus one times two_to_the_zeroth_power equals three.
+
+00:01:52.620 --> 00:01:56.460
+One, zero, zero in binary is four in decimal.
+
+00:01:56.459 --> 00:02:00.029
+One times two_to_the_second_power plus zero times
+
+00:02:00.030 --> 00:02:05.820
+two_to_the_first_power plus zero times two_to_the_zeroth_power equals four.
+
+00:02:05.819 --> 00:02:10.139
+And finally, one, zero, one is five in decimal.
+
+00:02:10.139 --> 00:02:11.714
+Following the same process,
+
+00:02:11.715 --> 00:02:16.259
+you would calculate one times two_to_the_power_of_two plus zero times
+
+00:02:16.259 --> 00:02:22.804
+two_to_the_power_of_one plus one times two_to_the_power_of_zero which equals five.
+
+00:02:22.805 --> 00:02:25.775
+You can represent any decimal digit using binary.
+
+00:02:25.775 --> 00:02:28.680
+For example, the number 25 would be one,
+
+00:02:28.680 --> 00:02:31.355
+one, zero, zero, one.
+
+00:02:31.354 --> 00:02:34.844
+And here, you can see how to calculate this to get that result.
+
+00:02:34.844 --> 00:02:38.995
+The computer represents all variables in binary, not just integers.
+
+00:02:38.995 --> 00:02:43.289
+This means, even characters and floating point numbers are represented in binary.
+
+00:02:43.289 --> 00:02:47.759
+But your computer can't store an arbitrary amount of zeros and ones at a time.
+
+00:02:47.759 --> 00:02:50.519
+Instead, memory is stored in collections of
+
+00:02:50.520 --> 00:02:55.020
+eight binary digits where each digit is called a bit.
+
+00:02:55.020 --> 00:02:59.040
+You can think of your computer's memory in terms of these eight-bit slots,
+
+00:02:59.039 --> 00:03:02.294
+and each eight-bit slot is called one byte.
+
+00:03:02.294 --> 00:03:08.369
+In C++, the smallest variable would be an eight-bit or one-byte character.
+
+00:03:08.370 --> 00:03:13.500
+A 16-bit integer has two bytes and a 32-bit integer uses four bytes.
+
+00:03:13.500 --> 00:03:15.824
+A float also uses four bytes.
+
+00:03:15.824 --> 00:03:18.629
+In C++, your variables will always
+
+00:03:18.629 --> 00:03:21.935
+use the amount of memory specified by the variable type.
+
+00:03:21.935 --> 00:03:28.094
+For example, the number 3,378 only needs 12 bits.
+
+00:03:28.094 --> 00:03:30.932
+But represented as a 16-bit integer,
+
+00:03:30.932 --> 00:03:34.379
+it will need two bytes with extra zeros padded to the left.
+
+00:03:34.379 --> 00:03:36.629
+And as a 32-bit integer,
+
+00:03:36.629 --> 00:03:38.909
+it will have much more zero padding which
+
+00:03:38.909 --> 00:03:41.954
+basically means the most significant bits will be zero.
+
+00:03:41.955 --> 00:03:44.895
+In C++, you can declare a 16,
+
+00:03:44.895 --> 00:03:48.240
+32, or even a 64-bit integer.
+
+00:03:48.240 --> 00:03:50.617
+All this means is that the integer is using two,
+
+00:03:50.617 --> 00:03:53.169
+four, or eight bytes of memory.
+
+00:03:53.169 --> 00:03:58.079
+You can start to appreciate how the number of bits available becomes a constraint.
+
+00:03:58.080 --> 00:04:00.565
+If an integer can only use 32 bits,
+
+00:04:00.564 --> 00:04:04.550
+then the maximum value would have all bits equal to one.
+
+00:04:04.550 --> 00:04:06.010
+The decimal equivalent is
+
+00:04:06.009 --> 00:04:14.799
+4,294,967,295 and that number
+
+00:04:14.800 --> 00:04:18.115
+is the maximum value that a 32-bit integer can store,
+
+00:04:18.115 --> 00:04:21.415
+and is even less if you're using signed numbers.
+
+00:04:21.415 --> 00:04:25.330
+Now that you have an understanding of how to represent variables in binary,
+
+00:04:25.329 --> 00:04:29.734
+you'll learn what C++ does to store and extract this information.
+
+00:04:29.735 --> 00:04:32.290
+Remember that part of optimizing your code involves
+
+00:04:32.290 --> 00:04:36.230
+limiting the number of times your program reads and writes to memory.
+
+00:04:36.230 --> 00:04:40.870
+You'll need some insight into when and why these read and write operations happen.
+

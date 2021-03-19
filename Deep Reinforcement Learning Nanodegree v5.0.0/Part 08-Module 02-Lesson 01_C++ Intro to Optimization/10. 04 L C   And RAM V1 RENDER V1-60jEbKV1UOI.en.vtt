@@ -1,0 +1,142 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.674
+Let's go into some detail about how C++ uses RAM.
+
+00:00:03.674 --> 00:00:07.290
+You can think of RAM as a set of slots where you can store information.
+
+00:00:07.290 --> 00:00:09.359
+When your program executes data,
+
+00:00:09.359 --> 00:00:11.369
+it is usually stored in RAM.
+
+00:00:11.369 --> 00:00:14.519
+This data can be overridden and in fact when you turn your computer off,
+
+00:00:14.519 --> 00:00:17.460
+data in RAM is erased because RAM is volatile,
+
+00:00:17.460 --> 00:00:20.880
+hence RAM is used for temporary storage.
+
+00:00:20.879 --> 00:00:24.015
+Take a simple example like declaring a character variable,
+
+00:00:24.015 --> 00:00:26.515
+when the x variable gets declared,
+
+00:00:26.515 --> 00:00:30.330
+your program will go into the computer's RAM and reserve space.
+
+00:00:30.329 --> 00:00:32.979
+How much space will depend on the variable's type.
+
+00:00:32.979 --> 00:00:36.689
+In the case of a character variable one byte gets reserved.
+
+00:00:36.689 --> 00:00:39.015
+Then when the x variable gets defined,
+
+00:00:39.015 --> 00:00:42.060
+the binary value for the character gets stored in RAM.
+
+00:00:42.060 --> 00:00:48.215
+In C++, the smallest unit of memory that your program can keep track of, is one byte.
+
+00:00:48.215 --> 00:00:51.960
+So what happens if your program defines another character variable.
+
+00:00:51.960 --> 00:00:55.355
+The compiler will then assign this character to the next available byte.
+
+00:00:55.354 --> 00:00:57.344
+And what about an integer variable,
+
+00:00:57.344 --> 00:01:00.594
+well a 32 bit integer would take up four bytes of memory.
+
+00:01:00.594 --> 00:01:04.079
+So an integer variable would take up four spaces in RAM,
+
+00:01:04.079 --> 00:01:06.659
+the compiler and computer architecture will determine
+
+00:01:06.659 --> 00:01:11.049
+exactly how much space each variable needs in order to optimize the program.
+
+00:01:11.049 --> 00:01:14.959
+In general, the next variable gets placed above the previous variable.
+
+00:01:14.959 --> 00:01:20.214
+Each byte also has an address so that the program knows where to find the variable.
+
+00:01:20.215 --> 00:01:25.875
+This entire area where C++ places variable values has a special name called the stack.
+
+00:01:25.875 --> 00:01:31.290
+C++ uses the stack to efficiently manage reading and writing to memory for you.
+
+00:01:31.290 --> 00:01:34.785
+When a function terminates and variables fall out of scope,
+
+00:01:34.784 --> 00:01:40.254
+the compiler freeze up or deallocates these memory locations working backwards.
+
+00:01:40.254 --> 00:01:44.039
+Besides the stack, the compiler offers other parts of memory for
+
+00:01:44.040 --> 00:01:46.380
+different tasks like storing the text of
+
+00:01:46.379 --> 00:01:49.769
+your code and reserving space for global variables.
+
+00:01:49.769 --> 00:01:52.950
+C++ also provides an area of memory called the heap,
+
+00:01:52.950 --> 00:01:56.700
+where you can manually control when a variable gets removed from memory.
+
+00:01:56.700 --> 00:01:59.935
+But how is all of this related to code optimization?
+
+00:01:59.935 --> 00:02:05.719
+Reading from and writing to memory take time and thus can make your program slower.
+
+00:02:05.719 --> 00:02:08.949
+If you declare and define a variable that you don't actually need,
+
+00:02:08.949 --> 00:02:10.974
+your program can slow down.
+
+00:02:10.974 --> 00:02:13.044
+If you copy a variable unnecessarily,
+
+00:02:13.044 --> 00:02:14.859
+your program can also slow down.
+
+00:02:14.860 --> 00:02:18.170
+The stack also tends to be more efficient than the heap,
+
+00:02:18.169 --> 00:02:22.914
+so how you declare your variables can end up affecting your program's performance.
+
+00:02:22.914 --> 00:02:26.454
+Hence, the more you understand the consequences of each line of code,
+
+00:02:26.455 --> 00:02:28.455
+the better you can optimize.
+
+00:02:28.455 --> 00:02:31.875
+That's what we mean when we talk about empathizing with the computer.
+
+00:02:31.875 --> 00:02:34.150
+Understanding the limitations of your hardware,
+
+00:02:34.150 --> 00:02:36.610
+help to make better coding decisions.
+

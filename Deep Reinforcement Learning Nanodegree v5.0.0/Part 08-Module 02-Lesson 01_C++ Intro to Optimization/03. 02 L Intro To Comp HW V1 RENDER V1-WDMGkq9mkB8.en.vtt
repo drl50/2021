@@ -1,0 +1,199 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.349
+Optimization is all about eliminating instructions that are not needed,
+
+00:00:04.349 --> 00:00:07.084
+while still getting the result you expect from your program.
+
+00:00:07.084 --> 00:00:10.893
+The fewer times that a program has to access memory and perform calculations,
+
+00:00:10.893 --> 00:00:12.705
+the more efficient your program will be.
+
+00:00:12.705 --> 00:00:15.220
+Optimization isn't just about shoving your code through
+
+00:00:15.220 --> 00:00:18.070
+some black box until its performance increases,
+
+00:00:18.070 --> 00:00:21.085
+it's about knowing how a computer works and executes your code,
+
+00:00:21.085 --> 00:00:23.495
+and using that knowledge to your advantage.
+
+00:00:23.495 --> 00:00:25.975
+Besides a storage medium like your hard drive,
+
+00:00:25.975 --> 00:00:30.230
+a computer basically has two parts that are relevant to running your programs.
+
+00:00:30.230 --> 00:00:32.049
+The CPU and RAM.
+
+00:00:32.049 --> 00:00:35.282
+The CPU or central processing unit,
+
+00:00:35.283 --> 00:00:37.329
+has a section called the control unit,
+
+00:00:37.329 --> 00:00:39.960
+which carries out the instructions contained in your code.
+
+00:00:39.960 --> 00:00:43.349
+Another section known as the arithmetic logic unit,
+
+00:00:43.348 --> 00:00:46.029
+calculates mathematical and logical expressions.
+
+00:00:46.030 --> 00:00:49.060
+RAM or random access memory,
+
+00:00:49.060 --> 00:00:52.000
+is what your program uses to store your variables and
+
+00:00:52.000 --> 00:00:55.530
+instructions to support the execution of your program.
+
+00:00:55.530 --> 00:00:58.090
+It is a storage medium like your hard drive,
+
+00:00:58.090 --> 00:01:02.140
+but it has much faster read and write times and is volatile.
+
+00:01:02.140 --> 00:01:04.704
+Which means that when you turn your computer off,
+
+00:01:04.704 --> 00:01:06.670
+all the data disappears.
+
+00:01:06.670 --> 00:01:10.724
+Imagine if your hard drive did that every time you turned your computer off.
+
+00:01:10.724 --> 00:01:14.109
+In essence, the control unit in the CPU will read
+
+00:01:14.109 --> 00:01:18.234
+the next instruction in your code and execute it by writing data to ram,
+
+00:01:18.234 --> 00:01:19.870
+reading data from RAM,
+
+00:01:19.870 --> 00:01:23.925
+or have the arithmetic or logic unit perform a calculation.
+
+00:01:23.924 --> 00:01:27.679
+Unlike Python, when you finish writing a program in C++,
+
+00:01:27.680 --> 00:01:31.120
+it needs to be compiled before you can execute it.
+
+00:01:31.120 --> 00:01:34.160
+The compiler rewrites your code into a set of
+
+00:01:34.159 --> 00:01:38.079
+instructions that the CPU can understand called machine code,
+
+00:01:38.079 --> 00:01:41.370
+which is basically the language of the CPU.
+
+00:01:41.370 --> 00:01:43.810
+So a compiler is basically acting as
+
+00:01:43.810 --> 00:01:47.112
+a translator between how you understand and write code,
+
+00:01:47.112 --> 00:01:50.114
+and how the CPU understands and reads code.
+
+00:01:50.114 --> 00:01:54.974
+For example, you might write the line int x equals five,
+
+00:01:54.974 --> 00:01:58.924
+the compiler would turn this line of code into something like this.
+
+00:01:58.924 --> 00:02:02.539
+And the CPU would understand that to mean store the value of
+
+00:02:02.540 --> 00:02:05.750
+five to a specific location in RAM that
+
+00:02:05.750 --> 00:02:09.800
+can be accessed with an address tied to the variable x.
+
+00:02:09.800 --> 00:02:14.180
+Another instruction would be able to retrieve the value of X by sending
+
+00:02:14.180 --> 00:02:20.314
+an instruction to the CPU that would query the value stored at the address tied to X.
+
+00:02:20.314 --> 00:02:24.949
+And another instruction could take the value stored at the address for X,
+
+00:02:24.949 --> 00:02:29.655
+incremented by 10, and then update the new value in memory.
+
+00:02:29.655 --> 00:02:31.985
+All of these instructions take time to execute.
+
+00:02:31.985 --> 00:02:35.510
+And some operations like Trigonometric functions and branches
+
+00:02:35.509 --> 00:02:39.319
+of an IF statement are known to be particularly inefficient.
+
+00:02:39.319 --> 00:02:42.049
+Let's take a series of IF statements.
+
+00:02:42.050 --> 00:02:46.600
+Here we have an assignment of the variable y based on the value of x.
+
+00:02:46.599 --> 00:02:52.500
+This code is inefficient because it causes the CPU to compare the value of x twice.
+
+00:02:52.500 --> 00:02:54.960
+However, if the first condition is false,
+
+00:02:54.960 --> 00:02:57.974
+the second condition is automatically true.
+
+00:02:57.974 --> 00:03:00.569
+Therefore an optimization would be to rewrite
+
+00:03:00.569 --> 00:03:05.159
+the IF statements with an IF else statement like the following.
+
+00:03:05.159 --> 00:03:08.585
+This version of the code only needs to do one comparison.
+
+00:03:08.585 --> 00:03:12.570
+You might be thinking that such a small change won't make much of a difference in speed,
+
+00:03:12.569 --> 00:03:15.784
+and with a single occurrence like this, it probably won't.
+
+00:03:15.784 --> 00:03:18.650
+But imagine if these statements were inside a four loop
+
+00:03:18.650 --> 00:03:21.754
+that ran thousands or millions of times.
+
+00:03:21.754 --> 00:03:25.414
+Small inefficiencies definitely start to add up.
+
+00:03:25.414 --> 00:03:28.759
+Understanding how the computer operates helps you
+
+00:03:28.759 --> 00:03:32.750
+determine which calculations might be slowing your program down.
+
+00:03:32.750 --> 00:03:35.944
+The more insight you have into what was happening inside the computer,
+
+00:03:35.944 --> 00:03:40.069
+the more successful you'll be at increasing the efficiency of your programs.
+

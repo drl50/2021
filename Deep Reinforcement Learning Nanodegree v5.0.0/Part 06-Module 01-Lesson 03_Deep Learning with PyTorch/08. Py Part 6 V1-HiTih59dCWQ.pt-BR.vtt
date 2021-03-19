@@ -1,0 +1,441 @@
+WEBVTT
+Kind: captions
+Language: pt-BR
+
+00:00:00.267 --> 00:00:02.138
+Neste vídeo e notebook,
+
+00:00:02.171 --> 00:00:05.131
+vou mostrar como salvar
+e carregar modelos.
+
+00:00:05.164 --> 00:00:07.321
+Como eu disse anteriormente,
+
+00:00:07.354 --> 00:00:09.741
+você não precisa treinar
+um modelo novo
+
+00:00:09.774 --> 00:00:11.287
+toda vez que quiser usar um.
+
+00:00:11.320 --> 00:00:13.778
+Em vez disso,
+você o treina uma vez e o salva
+
+00:00:13.811 --> 00:00:17.506
+e, se quiser usar para inferência
+mais tarde, é só carregá-lo.
+
+00:00:18.278 --> 00:00:21.487
+Podemos começar importando
+o de sempre.
+
+00:00:21.730 --> 00:00:24.308
+A única coisa nova é
+import fc_model.
+
+00:00:24.341 --> 00:00:27.259
+É basicamente o arquivo
+
+00:00:27.292 --> 00:00:31.580
+de onde eu peguei a rede
+que construí na parte 5
+
+00:00:31.613 --> 00:00:33.461
+e movi para este arquivo
+
+00:00:33.494 --> 00:00:37.084
+para facilmente carregar
+e treiná-lo e tudo mais.
+
+00:00:37.117 --> 00:00:38.635
+Vamos carregar isso.
+
+00:00:38.668 --> 00:00:41.059
+Estamos carregando os dados.
+
+00:00:41.092 --> 00:00:45.087
+E, novamente, estamos usando
+FashionMNIST.
+
+00:00:45.120 --> 00:00:50.199
+E você pode ver
+essas belas imagens.
+
+00:00:50.232 --> 00:00:54.261
+Como eu estava falando,
+criei o arquivo fc_model,
+
+00:00:54.294 --> 00:00:56.387
+e a rede está lá dentro.
+
+00:00:56.420 --> 00:00:58.866
+Acabei de criar
+o modelo, a rede
+
+00:00:58.899 --> 00:01:02.733
+e vou usar de novo
+784 inputs, 10 outputs,
+
+00:01:02.766 --> 00:01:05.776
+512, 256 e 128 unidades
+
+00:01:05.809 --> 00:01:08.540
+para três camadas ocultas
+diferentes,
+
+00:01:08.573 --> 00:01:13.585
+o NLLLoss e o otimizador Adam.
+
+00:01:13.618 --> 00:01:15.828
+E podemos treinar tudo.
+
+00:01:15.861 --> 00:01:18.846
+Com a rede treinada,
+está na hora de salvar.
+
+00:01:18.879 --> 00:01:21.108
+Os parâmetros para os modelos
+estão armazenados
+
+00:01:21.141 --> 00:01:23.133
+em um atributo chamado
+"state_dict".
+
+00:01:23.166 --> 00:01:27.901
+Vamos dar uma olhada rápida
+no modelo, print(model)...
+
+00:01:27.934 --> 00:01:29.611
+O modelo é
+mais ou menos assim.
+
+00:01:29.644 --> 00:01:32.643
+Podemos também dar uma olhada
+
+00:01:32.676 --> 00:01:36.149
+em model.state_dict.
+
+00:01:36.182 --> 00:01:38.119
+É um dicionário.
+
+00:01:38.152 --> 00:01:40.966
+Vou seguir e fazer um print
+das chaves.
+
+00:01:40.999 --> 00:01:44.343
+Então,
+para cada camada oculta,
+
+00:01:44.376 --> 00:01:48.173
+podemos obter os pesos,
+os vieses e o output.
+
+00:01:48.206 --> 00:01:51.406
+Ele basicamente
+armazena os pesos,
+
+00:01:51.439 --> 00:01:55.270
+os vieses etc. no state_dict.
+
+00:01:55.303 --> 00:01:58.749
+É isso o que a gente
+quer salvar.
+
+00:01:58.782 --> 00:02:01.440
+Para isso, usamos torch.save
+
+00:02:01.473 --> 00:02:04.233
+e salvamos o state_dict.
+
+00:02:04.266 --> 00:02:07.904
+Salvamos com o nome
+checkpoint.pth.
+
+00:02:08.369 --> 00:02:10.873
+Agora está salvo no disco.
+
+00:02:10.906 --> 00:02:14.938
+Podemos carregar isso,
+chamar o state_dict de novo...
+
+00:02:14.971 --> 00:02:17.185
+torch.load...
+
+00:02:18.252 --> 00:02:19.734
+checkpoint...
+
+00:02:20.517 --> 00:02:22.952
+Verificar se o mesmo...
+
+00:02:22.985 --> 00:02:24.274
+É.
+
+00:02:24.307 --> 00:02:27.105
+Fazemos um print das chaves de novo,
+e é a mesma coisa.
+
+00:02:27.138 --> 00:02:30.323
+Podemos salvar o state_dict
+em um checkpoint
+
+00:02:30.356 --> 00:02:33.429
+e carregá-lo de novo
+com torch.load.
+
+00:02:33.462 --> 00:02:34.608
+Agora temos o state_dict,
+
+00:02:34.641 --> 00:02:36.600
+mas ele não está anexado
+a um modelo ainda.
+
+00:02:36.633 --> 00:02:39.219
+Então precisamos escrever
+
+00:02:39.252 --> 00:02:43.993
+model.load_state_dict,
+
+00:02:44.026 --> 00:02:48.090
+e isso carrega
+o dicionário de estado.
+
+00:02:49.539 --> 00:02:51.726
+Esse é o nosso modelo.
+Legal.
+
+00:02:51.759 --> 00:02:54.341
+Parece bem direto.
+
+00:02:54.374 --> 00:02:57.262
+Você salva o state_dict,
+carrega-o novamente,
+
+00:02:57.295 --> 00:02:59.754
+carrega-o no modelo
+com load_state_dict,
+
+00:02:59.787 --> 00:03:02.029
+mas veja só o que acontece
+
+00:03:02.062 --> 00:03:05.717
+quando o modelo tem
+uma arquitetura diferente.
+
+00:03:05.750 --> 00:03:08.525
+Então vou criar
+um novo modelo,
+
+00:03:08.558 --> 00:03:10.528
+784, 10...
+
+00:03:10.561 --> 00:03:14.178
+mas, desta vez, vou usar
+400, 200 e 100
+
+00:03:14.211 --> 00:03:17.455
+para minhas camadas ocultas.
+
+00:03:17.488 --> 00:03:20.386
+Já carregamos o state_dict,
+
+00:03:20.419 --> 00:03:22.202
+temos um novo modelo,
+
+00:03:22.235 --> 00:03:24.381
+agora vamos ver o que acontece
+
+00:03:24.414 --> 00:03:27.925
+quando carregamos
+o dicionário de estado.
+
+00:03:27.958 --> 00:03:31.117
+Temos esse erro.
+
+00:03:31.150 --> 00:03:34.948
+Ele diz para,
+ao copiar o parâmetro,
+
+00:03:34.981 --> 00:03:36.930
+usar dimensões,
+um modelo ou isso,
+
+00:03:36.963 --> 00:03:39.387
+cujas dimensões
+no checkpoint são essas.
+
+00:03:39.420 --> 00:03:41.544
+Basicamente, isso nos diz
+
+00:03:41.577 --> 00:03:44.768
+que as dimensões
+da nossa rede são diferentes
+
+00:03:44.801 --> 00:03:47.475
+das dimensões do checkpoint.
+
+00:03:47.508 --> 00:03:48.600
+Isso significa
+
+00:03:48.633 --> 00:03:51.371
+que, criando um checkpoint
+a partir do dicionário de estado,
+
+00:03:51.404 --> 00:03:53.581
+ele precisa corresponder
+à mesma arquitetura
+
+00:03:53.614 --> 00:03:55.484
+ao carregá-lo de novo.
+
+00:03:55.517 --> 00:03:58.414
+Isso significa que precisamos
+salvar a arquitetura de rede
+
+00:03:58.447 --> 00:04:00.448
+com state_dict,
+
+00:04:00.481 --> 00:04:02.863
+assim, quando carregamos
+o dicionário de estado,
+
+00:04:02.896 --> 00:04:07.147
+carregamos
+a arquitetura da rede,
+
+00:04:07.180 --> 00:04:09.275
+os parâmetros da rede.
+
+00:04:09.892 --> 00:04:13.196
+Podemos criar um dicionário
+e vamos chamá-lo de "checkpoint"...
+
+00:04:13.777 --> 00:04:18.142
+O input_size é 784,
+
+00:04:19.176 --> 00:04:22.501
+output_size é 10,
+
+00:04:23.619 --> 00:04:25.446
+hidden_layers...
+
+00:04:25.479 --> 00:04:28.545
+Aqui estou usando
+uma compreensão de lista
+
+00:04:28.578 --> 00:04:34.488
+para obter o tamanho
+de cada camada oculta,
+
+00:04:34.521 --> 00:04:38.771
+for each in
+model.hidden_layers.
+
+00:04:38.804 --> 00:04:43.107
+E, finalmente, podemos salvar
+o dicionário de estado.
+
+00:04:44.500 --> 00:04:47.823
+Temos um checkpoint,
+que é basicamente um dicionário
+
+00:04:47.856 --> 00:04:50.350
+com os parâmetros
+de arquitetura,
+
+00:04:50.383 --> 00:04:53.119
+os hiperparâmetros
+para construirmos a rede,
+
+00:04:53.152 --> 00:04:55.522
+assim como
+o dicionário de estado
+
+00:04:55.555 --> 00:04:59.817
+com todos os parâmetros,
+pesos, vieses e coisas assim.
+
+00:04:59.850 --> 00:05:01.821
+Podemos salvar o checkpoint
+
+00:05:01.854 --> 00:05:07.463
+e vamos salvá-lo novamente
+no arquivo checkpoint.
+
+00:05:08.050 --> 00:05:09.159
+Legal.
+
+00:05:09.192 --> 00:05:11.914
+E agora, usando o checkpoint,
+
+00:05:11.947 --> 00:05:14.252
+podemos reconstruir a rede.
+
+00:05:14.285 --> 00:05:17.492
+Normalmente, eu gosto de construir
+uma pequena função,
+
+00:05:17.525 --> 00:05:19.942
+chamo load_checkpoint,
+
+00:05:19.975 --> 00:05:21.925
+que tem um filepath.
+
+00:05:21.958 --> 00:05:24.674
+Agora podemos carregar
+o checkpoint
+
+00:05:24.707 --> 00:05:26.645
+e construir nosso modelo.
+
+00:05:26.678 --> 00:05:30.259
+Isso vai construir
+um modelo para nós,
+
+00:05:30.292 --> 00:05:36.199
+e agora podemos carregar
+o dicionário de estado no modelo.
+
+00:05:37.051 --> 00:05:38.691
+E retornar nosso modelo.
+
+00:05:39.588 --> 00:05:40.692
+Aí está.
+
+00:05:40.725 --> 00:05:46.304
+Podemos agora salvar
+nosso modelo,
+
+00:05:46.337 --> 00:05:49.787
+como o número de unidades
+e o dicionário de estados,
+
+00:05:49.820 --> 00:05:51.173
+e carregar todo o backup,
+
+00:05:51.206 --> 00:05:55.046
+recriar nosso modelo
+e carregar o state_dict apropriado.
+
+00:05:55.745 --> 00:05:56.862
+Certo.
+
+00:05:56.895 --> 00:05:58.614
+No próximo vídeo,
+
+00:05:58.647 --> 00:06:02.164
+vou mostrar como carregar
+dados de imagem
+
+00:06:02.197 --> 00:06:04.017
+para usar
+em um classificador de imagem
+
+00:06:04.050 --> 00:06:08.110
+ou em qualquer aplicativo
+que precise de imagens.
+
+00:06:08.532 --> 00:06:09.632
+Viva!
+

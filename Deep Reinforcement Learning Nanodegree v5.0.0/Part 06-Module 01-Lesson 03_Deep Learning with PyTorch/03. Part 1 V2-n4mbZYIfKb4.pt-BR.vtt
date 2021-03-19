@@ -1,0 +1,503 @@
+WEBVTT
+Kind: captions
+Language: pt-BR
+
+00:00:00.283 --> 00:00:02.516
+Olá, bem-vindo a esta lição
+
+00:00:02.550 --> 00:00:04.780
+em que aprenderemos
+sobre o PyTorch.
+
+00:00:04.814 --> 00:00:07.763
+Eu configurei alguns
+Jupyter Notebooks
+
+00:00:07.797 --> 00:00:11.491
+para ajudar você a escrever
+o código para implementar
+
+00:00:11.525 --> 00:00:14.373
+redes de aprendizado profundo
+e Python.
+
+00:00:14.407 --> 00:00:17.056
+Estamos usando o framework
+do PyTorch,
+
+00:00:17.090 --> 00:00:21.971
+que é um pouco mais novo
+que o TensorFlow e o Keras,
+
+00:00:22.005 --> 00:00:25.723
+sendo desenvolvido pela equipe
+de AI do Facebook
+
+00:00:25.757 --> 00:00:27.723
+e é completamente
+código aberto.
+
+00:00:27.757 --> 00:00:32.140
+O motivo para termos escolhido
+PyTorch a esses outros dois
+
+00:00:32.174 --> 00:00:35.315
+é por ser mais coerente
+
+00:00:35.349 --> 00:00:38.692
+com a forma
+como se programa em Python
+
+00:00:38.726 --> 00:00:42.419
+e com os conceitos
+do aprendizado profundo.
+
+00:00:42.453 --> 00:00:45.395
+Você vai ver
+nesses Notebooks
+
+00:00:45.429 --> 00:00:49.019
+que os conceitos que aprendeu
+sobre aprendizado profundo,
+
+00:00:49.053 --> 00:00:53.099
+como retropropagação,
+são muito naturais no PyTorch,
+
+00:00:53.133 --> 00:00:56.011
+enquanto que no TensorFlow
+e no Keras,
+
+00:00:56.045 --> 00:00:59.987
+você tende a ter que escrever
+o código de um jeito estranho
+
+00:01:00.021 --> 00:01:03.627
+que não equivale
+ao mapeamento conceitual
+
+00:01:03.661 --> 00:01:05.788
+do aprendizado profundo.
+
+00:01:05.822 --> 00:01:08.166
+Você também pode encontrar
+esses Notebooks
+
+00:01:08.200 --> 00:01:10.279
+nos campos abaixo dos vídeos
+
+00:01:10.313 --> 00:01:14.695
+e baixá-los do GitHub, se quiser
+tê-los no próprio computador.
+
+00:01:15.045 --> 00:01:17.862
+Antes de começarmos
+a falar de códigos,
+
+00:01:17.896 --> 00:01:20.439
+você precisa entender uma coisa:
+tensores.
+
+00:01:20.473 --> 00:01:23.551
+Tensores são basicamente
+uma generalização
+
+00:01:23.585 --> 00:01:25.967
+de vetores e matrizes.
+
+00:01:26.001 --> 00:01:29.856
+Por exemplo: um vetor
+é um tensor unidimensional.
+
+00:01:29.890 --> 00:01:33.446
+Você tem só uma linha
+de valores.
+
+00:01:33.480 --> 00:01:36.240
+A matriz é
+um tensor bidimensional,
+
+00:01:36.274 --> 00:01:40.368
+em que se tem um retângulo
+com fileiras e colunas.
+
+00:01:40.402 --> 00:01:45.901
+São números organizados
+em espaços bidimensionais,
+
+00:01:45.935 --> 00:01:48.686
+porque temos uma coordenada X
+e uma Y.
+
+00:01:48.720 --> 00:01:52.503
+E uma imagem colorida, por exemplo,
+é um tensor tridimensional.
+
+00:01:52.537 --> 00:01:55.991
+Caso não se lembre,
+cada pixel de imagem colorida
+
+00:01:56.025 --> 00:01:58.177
+pode ser denotado com X e Y,
+
+00:01:58.211 --> 00:02:01.663
+mas também têm componentes
+vermelho, verde e azul, RGB.
+
+00:02:01.697 --> 00:02:04.655
+Os tensores são a principal
+estrutura de dados
+
+00:02:04.689 --> 00:02:06.720
+que se usará no PyTorch.
+
+00:02:06.754 --> 00:02:11.296
+É muito útil poder visualizá-los
+mentalmente enquanto se trabalha,
+
+00:02:11.330 --> 00:02:16.551
+porque você terá que olhar formatos
+e operações lineares de álgebra,
+
+00:02:16.585 --> 00:02:19.239
+portanto é bom entender
+o que são
+
+00:02:19.273 --> 00:02:22.864
+e como passam pela sua rede.
+
+00:02:22.898 --> 00:02:26.519
+Agora podemos começar a ver
+como usar o PyTorch
+
+00:02:26.553 --> 00:02:28.111
+para construir redes neurais,
+
+00:02:28.145 --> 00:02:30.216
+mas primeiro
+quero que entenda
+
+00:02:30.250 --> 00:02:32.440
+como trabalhar
+com tensores no PyTorch.
+
+00:02:32.474 --> 00:02:33.807
+Como eu disse,
+
+00:02:33.841 --> 00:02:37.239
+tensores são a estrutura básica
+de dados do PyTorch,
+
+00:02:37.273 --> 00:02:42.128
+então, para criar uma rede,
+é preciso trabalhar com eles,
+
+00:02:42.162 --> 00:02:45.927
+então é uma boa ideia
+entender como funcionam
+
+00:02:45.961 --> 00:02:48.791
+e entender o conceito deles.
+
+00:02:48.825 --> 00:02:52.399
+Primeiro vou importar Numpy
+e PyTorch.
+
+00:02:52.433 --> 00:02:56.960
+Digite torch para importar
+os módulos de PyTorch.
+
+00:02:56.994 --> 00:03:01.622
+Vou criar um tensor aleatório.
+
+00:03:01.656 --> 00:03:04.775
+Como vemos, temos
+números aleatórios de 3 por 2.
+
+00:03:04.809 --> 00:03:09.435
+Então vou criar mais um
+
+00:03:09.740 --> 00:03:11.163
+com o mesmo tamanho.
+
+00:03:11.197 --> 00:03:15.193
+Para ver o tamanho do tensor,
+digite x.size.
+
+00:03:15.227 --> 00:03:19.835
+Assim terá 3 por 2
+como tamanho,
+
+00:03:21.005 --> 00:03:26.665
+criando vários tensores
+bidimensionais de 1
+
+00:03:26.699 --> 00:03:28.651
+com o mesmo tamanho de X.
+
+00:03:28.685 --> 00:03:31.042
+Então podemos somar os dois.
+
+00:03:31.076 --> 00:03:35.970
+Você deve estar acostumado
+a isto se usa o Numpy.
+
+00:03:36.004 --> 00:03:39.642
+De muitas formas, o PyTorch
+é muito similar ao Numpy,
+
+00:03:39.676 --> 00:03:42.138
+o que facilita muito
+o aprendizado.
+
+00:03:42.172 --> 00:03:44.288
+Se você tem experiência
+com o Numpy,
+
+00:03:44.322 --> 00:03:47.535
+usar o PyTorch
+se torna natural.
+
+00:03:47.569 --> 00:03:53.065
+Por exemplo, você pode
+indexar os tensores
+
+00:03:53.719 --> 00:03:55.592
+para partir
+da primeira fileira
+
+00:03:55.626 --> 00:03:58.223
+e usar divisões.
+
+00:03:58.688 --> 00:04:02.479
+Se quiser todas as fileiras
+da 2ª coluna, é possível.
+
+00:04:02.513 --> 00:04:07.064
+Tensores no PyTorch
+tem duas formas de métodos.
+
+00:04:07.098 --> 00:04:11.991
+Uma forma cria
+um novo tensor.
+
+00:04:12.025 --> 00:04:15.648
+z.add adiciona
+o número 1
+
+00:04:15.682 --> 00:04:18.215
+ao nosso tensor Z,
+
+00:04:18.249 --> 00:04:21.368
+o que cria um novo tensor.
+
+00:04:21.402 --> 00:04:25.823
+É basicamente uma cópia de Z
+mais 1.
+
+00:04:25.857 --> 00:04:27.232
+Vamos verificar.
+
+00:04:27.266 --> 00:04:31.015
+O de cima é o tensor anterior,
+e o de baixo, o novo.
+
+00:04:31.049 --> 00:04:35.359
+No entanto, praticamente todos
+os métodos nesses tensores
+
+00:04:35.393 --> 00:04:37.704
+também têm uma versão local.
+
+00:04:37.738 --> 00:04:42.033
+Ou seja,
+se adicionarmos 1 de novo,
+
+00:04:42.067 --> 00:04:47.040
+parece que temos um novo tensor,
+mas, na verdade, mudou o anterior.
+
+00:04:47.074 --> 00:04:50.432
+Isso significa
+que mudou o valor
+
+00:04:50.466 --> 00:04:53.983
+e a memória desse tensor.
+
+00:04:54.472 --> 00:04:58.254
+Sem o underscore,
+cria um novo tensor.
+
+00:04:58.288 --> 00:05:01.727
+Com o underscore,
+faz a operação localmente,
+
+00:05:01.761 --> 00:05:03.582
+ou seja,
+o tensor continua o mesmo,
+
+00:05:03.616 --> 00:05:07.095
+só mudam o valor
+e a memória dele.
+
+00:05:07.129 --> 00:05:10.119
+Algo que se faz
+com muita frequência no PyTorch
+
+00:05:10.153 --> 00:05:12.295
+é ver o formato e o tamanho
+dos tensores
+
+00:05:12.329 --> 00:05:14.728
+e depois mudar isso.
+
+00:05:14.762 --> 00:05:20.273
+Para ver o tamanho ou a forma,
+é só digitar ".size".
+
+00:05:20.307 --> 00:05:23.297
+Aqui diz que o tamanho
+é 3 por 2.
+
+00:05:23.331 --> 00:05:28.409
+Se quiser redimensioná-lo
+para 2 por 3,
+
+00:05:28.841 --> 00:05:32.826
+digite z.resize_(2,3).
+
+00:05:32.860 --> 00:05:35.985
+Como tem o underscore,
+esse redimensionamento
+
+00:05:36.019 --> 00:05:38.066
+é feito localmente.
+
+00:05:38.100 --> 00:05:41.594
+Se analisar Z de novo,
+agora é uma matriz de 2 por 3,
+
+00:05:41.628 --> 00:05:44.042
+enquanto originalmente
+era de 3 por 2.
+
+00:05:44.394 --> 00:05:47.305
+Um dos meus recursos favoritos
+do PyTorch
+
+00:05:47.339 --> 00:05:50.395
+é que é muito fácil converter
+de um arranjo do Numpy
+
+00:05:50.429 --> 00:05:52.073
+para um tensor torch.
+
+00:05:52.107 --> 00:05:54.978
+Isso é ótimo
+quando se trabalha com dados,
+
+00:05:55.012 --> 00:05:57.658
+porque o pré-processamento
+e essas coisas
+
+00:05:57.692 --> 00:05:59.432
+vão ser feitos no Numpy.
+
+00:05:59.466 --> 00:06:02.682
+Assim você construirá
+a rede no PyTorch
+
+00:06:02.716 --> 00:06:07.057
+e poderá usar o Numpy
+para fazer o resto da análise,
+
+00:06:07.091 --> 00:06:09.225
+criar figuras ou o que quer
+
+00:06:09.259 --> 00:06:12.778
+que esteja conectado
+ao resto do programa pelo Numpy.
+
+00:06:12.812 --> 00:06:17.771
+Primeiro vou criar
+um arranjo aleatório
+
+00:06:17.805 --> 00:06:21.970
+com o Numpy de 4 por 3.
+Fica assim.
+
+00:06:22.004 --> 00:06:26.802
+Para mudar o arranjo
+para um tensor torch, digite
+
+00:06:26.836 --> 00:06:30.162
+from_numpy e está feito.
+
+00:06:30.196 --> 00:06:33.466
+Ele dá um tensor torch
+com os mesmos valores.
+
+00:06:33.866 --> 00:06:37.674
+Se quisermos pegar
+um tensor PyTorch
+
+00:06:37.708 --> 00:06:40.337
+e transformá-lo
+num arranjo do Numpy,
+
+00:06:40.371 --> 00:06:44.746
+digite b, que é o tensor,
+.numpy.
+
+00:06:45.114 --> 00:06:50.762
+O método Numpy vai devolver
+um arranjo do Numpy.
+
+00:06:50.796 --> 00:06:52.545
+Uma coisa importante é que,
+
+00:06:52.579 --> 00:06:54.482
+quando você pega
+um arranjo do Numpy
+
+00:06:54.516 --> 00:06:56.057
+e o transforma em um tensor,
+
+00:06:56.091 --> 00:06:59.682
+o arranjo e o tensor
+dividem memória.
+
+00:06:59.716 --> 00:07:03.641
+Ou seja, se mudar os valores
+do tensor localmente,
+
+00:07:03.675 --> 00:07:06.578
+também vai mudar os valores
+do arranjo de Numpy.
+
+00:07:06.612 --> 00:07:11.114
+Por exemplo, se multiplicarmos
+localmente por dois,
+
+00:07:11.148 --> 00:07:16.186
+o resultado é este, e o arranjo
+do Numpy também muda.
+
+00:07:16.220 --> 00:07:19.330
+Fique ciente disto
+enquanto o usa.
+
+00:07:19.364 --> 00:07:23.530
+Se ligar os tensores torch
+e os arranjos do Numpy,
+
+00:07:23.564 --> 00:07:25.426
+eles compartilharão memória.
+
+00:07:25.460 --> 00:07:30.026
+Tenha cuidado com isso
+para não causar bugs.
+
+00:07:30.060 --> 00:07:31.933
+Até o próximo vídeo.
+

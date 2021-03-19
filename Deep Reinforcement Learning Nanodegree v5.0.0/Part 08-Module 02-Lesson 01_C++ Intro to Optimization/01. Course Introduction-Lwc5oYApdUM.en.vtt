@@ -1,0 +1,49 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:01.879
+So, it's me again, Sebastian.
+
+00:00:01.879 --> 00:00:03.825
+Hey, congratulations.
+
+00:00:03.825 --> 00:00:05.455
+You just completed something quite amazing,
+
+00:00:05.455 --> 00:00:10.003
+you translated something from Python to C++ and it sounds tedious.
+
+00:00:10.003 --> 00:00:14.134
+But I hope you learned from some of the basics how programming languages work.
+
+00:00:14.134 --> 00:00:15.875
+And how different programming languages work,
+
+00:00:15.875 --> 00:00:17.234
+because they are different.
+
+00:00:17.234 --> 00:00:20.800
+Both are the main industry standard and both are very important.
+
+00:00:20.800 --> 00:00:22.690
+Next, we're going to dive into something that
+
+00:00:22.690 --> 00:00:25.510
+I had to do a lot of when I was growing up as a programmer,
+
+00:00:25.510 --> 00:00:28.420
+looking at lower level language functions in
+
+00:00:28.420 --> 00:00:32.590
+C++ things like pointers and memory allocation.
+
+00:00:32.590 --> 00:00:37.200
+Those might sound very cryptic and alienating in the beginning but they're essential to
+
+00:00:37.200 --> 00:00:39.550
+writing efficient and effective software in
+
+00:00:39.549 --> 00:00:43.000
+C++ and you need to know them. So let's dive in.
+
