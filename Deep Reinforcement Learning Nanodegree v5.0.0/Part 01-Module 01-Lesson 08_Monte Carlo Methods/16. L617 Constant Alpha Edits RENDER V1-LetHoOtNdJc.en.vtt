@@ -1,0 +1,46 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.720
+To understand how to set the value of alpha,
+
+00:00:02.720 --> 00:00:05.185
+we'll look closely at the update equation.
+
+00:00:05.184 --> 00:00:09.844
+Note that alpha must be set to a number between zero and one.
+
+00:00:09.845 --> 00:00:12.015
+When alpha is set to one,
+
+00:00:12.015 --> 00:00:15.160
+the new estimate is just the most recent return
+
+00:00:15.160 --> 00:00:18.949
+where we completely ignore and replace the value in the queue table.
+
+00:00:18.949 --> 00:00:21.875
+If we were to set alpha to zero,
+
+00:00:21.875 --> 00:00:26.730
+we would completely ignore the return and keep the old estimate unchanged.
+
+00:00:26.730 --> 00:00:31.734
+This is not something that we'd ever want to do because then our agent would never learn.
+
+00:00:31.734 --> 00:00:36.469
+But it will prove useful to set alpha to a small number that's close to zero.
+
+00:00:36.469 --> 00:00:39.375
+In general the smaller alpha is,
+
+00:00:39.375 --> 00:00:42.219
+the less we trust the most recent return when performing
+
+00:00:42.219 --> 00:00:47.004
+an update and the more we rely on our existing estimate in the queue table.
+
+00:00:47.005 --> 00:00:51.990
+You'll soon get a chance to experiment with setting this value of alpha yourself.
+

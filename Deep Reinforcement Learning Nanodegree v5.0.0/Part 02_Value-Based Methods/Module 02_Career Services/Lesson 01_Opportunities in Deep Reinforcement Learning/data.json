@@ -1,0 +1,189 @@
+{
+  "data": {
+    "lesson": {
+      "id": 729621,
+      "key": "dbb06f05-ae97-444f-8c9c-d224eea012df",
+      "title": "Opportunities in Deep Reinforcement Learning",
+      "semantic_type": "Lesson",
+      "is_public": true,
+      "version": "1.0.0",
+      "locale": "en-us",
+      "summary": "Learn about common career opportunities in deep reinforcement learning, and get tips on how to stay active in the community.",
+      "lesson_type": "Classroom",
+      "display_workspace_project_only": false,
+      "resources": {
+        "files": [
+          {
+            "name": "Videos Zip File",
+            "uri": "https://zips.udacity-data.com/dbb06f05-ae97-444f-8c9c-d224eea012df/729621/1545252177256/Opportunities+in+Deep+Reinforcement+Learning+Videos.zip"
+          },
+          {
+            "name": "Transcripts Zip File",
+            "uri": "https://zips.udacity-data.com/dbb06f05-ae97-444f-8c9c-d224eea012df/729621/1545252175025/Opportunities+in+Deep+Reinforcement+Learning+Subtitles.zip"
+          }
+        ],
+        "google_plus_link": null,
+        "career_resource_center_link": null,
+        "coaching_appointments_link": null,
+        "office_hours_link": null,
+        "aws_provisioning_link": null
+      },
+      "project": null,
+      "lab": null,
+      "concepts": [
+        {
+          "id": 729624,
+          "key": "852dae7b-bb6c-418b-8ff4-451cfd36bd8d",
+          "title": "Opportunities in DRL",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "852dae7b-bb6c-418b-8ff4-451cfd36bd8d",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 729627,
+              "key": "0b0f283f-1918-4c68-a934-f40d9be99b72",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# 4 Questions About Deep Reinforcement Learning Jobs\n## 1. How can I find a job in deep reinforcement learning?\nAs deep reinforcement learning is a cutting edge field, breaking through into this field may be challenging. Much of the field is still in theory and research, and not yet at application. However, because deep reinforcement learning builds upon your existing deep learning skills and machine learning skills (including Python and statistics expertise), you are a better candidate for those roles with those skills.\n\nThink about how you can take a job as a computer vision engineer or machine learning engineer, and help lead your team and company and applying or exploring end-to-end training of reinforcement learning models.\n\nTo find a job that touches on this field, you must stay on top of new learnings, absorb information quickly, and be open and comfortable with a fast-changing field. \n\nWe recommend a 3-part strategy to finding opportunities in deep reinforcement learning.\n1. **Stay updated on thought leadership.** In addition the Nanodegree program, consider watching online courses from MIT or UC Berkeley, and other top research schools, as professors will teach their latest research.\nPro Tip: Find reading material by exploring the syllabus and resources pages of these online courses. For example, lectures and readings can be found on UC Berkeley's Deep Reinforcement [course page](http://rail.eecs.berkeley.edu/deeprlcourse/).\n2. **Keep building on your deep learning, machine learning, and reinforcement learning skills.** As deep reinforcement learning is not yet practiced aside from some research projects, you are more likely to find jobs in similar fields. When the industry has grown and there are more jobs looking for deep reinforcement learning skills, you will be a prime candidate since you have expertise elsewhere.\n3. **Read a recent paper and write about your interpretation.** Employers often want to see that students are up-to-date with the latest research. So, if you’ve read a recent paper and thought critically about how it can be explained in plain language or implemented in code, then you can demonstrate your understanding by writing about it! Communication skills are valuable in this growing field; writing understandable blog posts and showing your work as you learn about deep reinforcement learning will make you more visible to employers and the deep learning community at large.\n\n## 2. Do I need a PhD to get a job in deep reinforcement learning?\nAs most jobs asking specifically for deep reinforcement learning skills are research-focused roles, many employers request a PhD. Since the field is still theoretical and experimental, many opportunities with deep reinforcement learning are within PhD research programs.\n\nWe urge you to consider pursuing deep learning and machine learning-related roles, and use your deep reinforcement learning knowledge and skills as proof of your ability to learn, stay on top of upcoming research, and potential for growth at the company.\n\nBelow is a selection of skills that build up to deep reinforcement learning skills:\n\n* Building and training neural networks\n* Model evaluation and validation\n* Convolutional neural networks\n* Transfer learning\n* Natural language processing\n* Data augmentation\n* Model deployment and serving\n* Running experiments to develop and improve core algorithms\n* Writing scripts in Python to process data (expert knowledge in Python)\n* Overall knowledge of statistical and machine learning approaches and problems\n\nThe above is by no means an exhaustive list. Continue your job research by reading job postings for the following:\n* Machine Learning Engineer\n* Deep Learning Engineer\n* Machine Learning Researcher, Deep learning\n* Applied Research Scientist\n* Software Engineer, Machine Learning\n* Data Scientist\n\n## 3. Which companies are looking for job candidates with deep reinforcement learning skills?\n\nCompanies looking specifically for people with deep reinforcement learning skills are likely **big corporations with their own research arm**. Research and experiments into this field are expensive and require a lot of people. Companies like Facebook, LG and HP have the desire to innovate and the resources to do so.\n\nFor example, [Autodesk](https://www.autodesk.com/careers) is hiring for a \"Research Scientist - Machine Learning, Reinforcement Learning\" to build \"the next generation of Autodesk products for architecture, engineering, and construction (AEC) industry.\" Read the job responsibilities and requested qualifications below:\n\n> Responsibilities\n> * Develop the next generation of Autodesk applications for AEC industry using novel deep RL algorithms\n> * Perform applied research in related areas including machine learning, deep learning, NLP, data-driven simulation, and optimization\n> * Collaborate with a team of user experience designers, engineers, research scientists, and interns\n> * Contribute to writing research papers\n> Minimum Qualifications\n> * MS or PhD in computer science, computer engineering, or any other relevant disciplines with a background in machine learning and deep reinforcement learning\n> * Hands-on experience on machine learning and deep reinforcement learning, specialized in data-driven machine learning, predictive models, and NLP\n> * Proficient in Python and deep learning frameworks including Tensorflow and/or Pytorch\n> * Experience in quick prototyping and scientific research methods\n> * Strong math and programming skills\n> Preferred Qualifications\n> * Knowledge of architectural design\n> * Knowledge of civil/structural engineering\n> * Knowledge of construction management\n> * Knowledge of existing AEC workflows\n\nThere is a small, but growing number of **startups** such as [Osaro](https://www.osaro.com/careers/) that provide AI services, with Osaro providing deep reinforcement learning services. Note, however, that they do not have a job posting for a \"deep reinforcement learning scientist\", but rather deep learning engineers, software engineers, and roboticists. Osaro is actively recognizing that there are very few, if any, job candidates with experience in deep reinforcement learning. Rather, they seek people with a core set of skills to help drive innovation:\n\n> * Solid analytical capabilities\n> * Broad machine learning and statistical modeling skills\n> * Strong programming experience\n\n## 4. What should I do next?\nYou must stay on top of how the industry is changing. At the time of writing this lesson, LinkedIn showed 138 job postings that specifically refer to \"deep reinforcement learning\". However, there are 1,300+ \"reinforcement learning\" jobs and 67,500+ \"machine learning\" jobs. \n\nWe recommend performing a [job search](https://career-resource-center.udacity.com/job-boards) to see what's out there.\n\nWe'll help you get started. We searched for \"deep learning\" jobs worldwide on LinkedIn. Click the button below to see the search results. Change your search terms and apply filters. Once you have an idea of which jobs or companies you may be interested in, read about the companies or find personal blogs by people working in those roles. You can even reach out to people for [informational interviews](https://career-resource-center.udacity.com/networking/informational-interviews).\n\n<center><a href=\"https://www.linkedin.com/jobs/search/?keywords=deep%20learning&location=Worldwide&locationId=OTHERS.worldwide\" target=\"_blank\"><button style=\"box-sizing: border-box; border-radius: 4px; background: #02B3E4; border: none; height: 44px; padding: 0 25px; color: white; cursor: pointer; font-family: Open Sans,sans-serif; display: inline-block; border: none; font-size: 12px; letter-spacing: 1px; font-weight: 600; text-transform: uppercase;\">Go to LinkedIn Search</button></a></center><br>\n\nAfter you spend some time looking at various jobs available to you, come back to the Classroom to continue.\n",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 694204,
+          "key": "66e62122-a6ae-4351-9887-0178fe2b3e6c",
+          "title": "Meet the Careers Team",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "66e62122-a6ae-4351-9887-0178fe2b3e6c",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 797405,
+              "key": "973f15bd-3078-4587-b1fc-4f55e31fd03d",
+              "title": "Meet the Careers Team",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "cuKecPpZ7PM",
+                "china_cdn_id": "cuKecPpZ7PM.mp4"
+              }
+            },
+            {
+              "id": 694206,
+              "key": "a4107ec7-a079-443c-a007-742f0696915f",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Whatever your career goals are - whether it's finding a new job or learning more about an industry - Udacity is here to help you. You'll find in your Nanodegree program:\n\n* The **Udacity Career Portal**, a customized career track where you can see your step-by-step progress and get one-on-one feedback from experts along the way.\n* A **Professional Profile** to showcase your new skills, background, and career goals.\n* Career-focused projects to get **personalized feedback on your LinkedIn and GitHub profiles**. Increase your online presence and attract the attention of recruiters and collaborators, or just meet people with similar interests and grow your network.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 728571,
+              "key": "c9dc5aa7-e801-496e-bdc1-a7235b00b27a",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Career Service: No Resubmission Required\n\nIn this Nanodegree program, you can get personalized feedback on your LinkedIn and GitHub profiles. **Unlike other Nanodegree projects, you submit to a Career Service once to get feedback and do not need to meet specifications to continue on in your program.** \n\nThe value of Career Service reviews is not in meeting specifications on subjective rubric items, but in getting honest, personalized guidance from a Career Mentor. Learning from this guidance is what will guide you on the path to truly improving your job search materials. \n\n We highly encourage you to take advantage of this guidance. Most Alumni who report jobs and other opportunities (such as collaboration) attribute their success to networking.\n\n\n\n",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 440370,
+          "key": "6c7f9ba9-b49e-4915-ae23-050bacff6326",
+          "title": "Access Your Career Portal",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "6c7f9ba9-b49e-4915-ae23-050bacff6326",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 440384,
+              "key": "d9034285-f932-4a33-bd00-a3193c80b7c8",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# The Career Portal: Your Path to Getting Hired\nIn your **Career Portal**, you'll find a personalized job search guide that includes 1:1 reviews of your resume, LinkedIn profile, and more.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 440383,
+              "key": "a4856ff4-9db2-4d35-a1a3-81c70543916d",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2017/October/59f3a027_get-hired-with-the-udacity-career-portal/get-hired-with-the-udacity-career-portal.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/a4856ff4-9db2-4d35-a1a3-81c70543916d",
+              "caption": "",
+              "alt": "Career Portal",
+              "width": 1040,
+              "height": 640,
+              "instructor_notes": null
+            },
+            {
+              "id": 440381,
+              "key": "82ae1cf8-98d5-4906-9c20-845948d480a0",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## How Do I Get To My Career Portal?\nTo access the Career Portal, look for the briefcase icon in your left-hand sidebar when you're logged into your [Udacity classroom](https://classroom.udacity.com/me).",
+              "instructor_notes": ""
+            },
+            {
+              "id": 440373,
+              "key": "d43325be-ae2a-4637-9890-ffa00eb71360",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2017/October/59f39c10_screen-shot-2017-10-27-at-1.49.58-pm/screen-shot-2017-10-27-at-1.49.58-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/d43325be-ae2a-4637-9890-ffa00eb71360",
+              "caption": "",
+              "alt": "Udacity classroom left-hand sidebar",
+              "width": 203,
+              "height": 281,
+              "instructor_notes": null
+            },
+            {
+              "id": 440382,
+              "key": "d60fb33c-f423-4647-95ea-5d3fe1d9d50d",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "### Unable to find your Career Portal?\nNot seeing the Career Portal icon? Write into [career-support@udacity.com](mailto:career-support@udacity.com) for help getting access.",
+              "instructor_notes": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "_deprecated": [
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    }
+  ]
+}

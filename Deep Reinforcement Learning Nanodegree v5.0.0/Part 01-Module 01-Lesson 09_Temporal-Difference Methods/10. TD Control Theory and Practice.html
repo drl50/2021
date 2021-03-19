@@ -1,0 +1,412 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   TD Control: Theory and Practice
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Temporal-Difference Methods
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. Introduction.html">
+       01. Introduction
+      </a>
+     </li>
+     <li class="">
+      <a href="02. Review MC Control Methods.html">
+       02. Review: MC Control Methods
+      </a>
+     </li>
+     <li class="">
+      <a href="03. Quiz MC Control Methods.html">
+       03. Quiz: MC Control Methods
+      </a>
+     </li>
+     <li class="">
+      <a href="04. TD Control Sarsa.html">
+       04. TD Control: Sarsa
+      </a>
+     </li>
+     <li class="">
+      <a href="05. Quiz Sarsa.html">
+       05. Quiz: Sarsa
+      </a>
+     </li>
+     <li class="">
+      <a href="06. TD Control Q-Learning.html">
+       06. TD Control: Q-Learning
+      </a>
+     </li>
+     <li class="">
+      <a href="07. Quiz Q-Learning.html">
+       07. Quiz: Q-Learning
+      </a>
+     </li>
+     <li class="">
+      <a href="08. TD Control Expected Sarsa.html">
+       08. TD Control: Expected Sarsa
+      </a>
+     </li>
+     <li class="">
+      <a href="09. Quiz Expected Sarsa.html">
+       09. Quiz: Expected Sarsa
+      </a>
+     </li>
+     <li class="">
+      <a href="10. TD Control Theory and Practice.html">
+       10. TD Control: Theory and Practice
+      </a>
+     </li>
+     <li class="">
+      <a href="11. OpenAI Gym CliffWalkingEnv.html">
+       11. OpenAI Gym: CliffWalkingEnv
+      </a>
+     </li>
+     <li class="">
+      <a href="12. Workspace - Introduction.html">
+       12. Workspace - Introduction
+      </a>
+     </li>
+     <li class="">
+      <a href="13. Coding Exercise.html">
+       13. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="14. Workspace.html">
+       14. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="15. Analyzing Performance.html">
+       15. Analyzing Performance
+      </a>
+     </li>
+     <li class="">
+      <a href="16. Quiz Check Your Understanding.html">
+       16. Quiz: Check Your Understanding
+      </a>
+     </li>
+     <li class="">
+      <a href="17. Summary.html">
+       17. Summary
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          10. TD Control: Theory and Practice
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="Exploration-Exploitation Dilemma ([Source]( http://slides.com/ericmoura/deck-2/embed))" class="img img-fluid" src="img/exploration-vs.-exploitation.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            Exploration-Exploitation Dilemma (
+            <a href="http://slides.com/ericmoura/deck-2/embed" rel="noopener noreferrer" target="_blank">
+             Source
+            </a>
+            )
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="td-control-theory-and-practice">
+          TD Control: Theory and Practice
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-greedy-in-the-limit-with-infinite-exploration-glie">
+          ## Greedy in the Limit with Infinite Exploration (GLIE)
+         </h2>
+         <p>
+          The
+          <strong>
+           Greedy in the Limit with Infinite Exploration (GLIE)
+          </strong>
+          conditions were introduced in the previous lesson, when we learned about MC control.  There are many ways to satisfy the GLIE conditions, all of which involve gradually decaying the value of
+          <span class="mathquill ud-math">
+           \epsilon
+          </span>
+          when constructing
+          <span class="mathquill ud-math">
+           \epsilon
+          </span>
+          -greedy policies.
+         </p>
+         <p>
+          In particular, let
+          <span class="mathquill ud-math">
+           \epsilon_i
+          </span>
+          correspond to the
+          <span class="mathquill ud-math">
+           i
+          </span>
+          -th time step.  Then, to satisfy the GLIE conditions, we need only set
+          <span class="mathquill ud-math">
+           \epsilon_i
+          </span>
+          such that:
+         </p>
+         <ul>
+          <li>
+           <span class="mathquill ud-math">
+            \epsilon_i &gt; 0
+           </span>
+           for all time steps
+           <span class="mathquill ud-math">
+            i
+           </span>
+           , and
+          </li>
+          <li>
+           <span class="mathquill ud-math">
+            \epsilon_i
+           </span>
+           decays to zero in the limit as the time step
+           <span class="mathquill ud-math">
+            i
+           </span>
+           approaches infinity (that is,
+           <span class="mathquill ud-math">
+            \lim_{i\to\infty} \epsilon_i = 0
+           </span>
+           ),
+          </li>
+         </ul>
+         <h2 id="-in-theory">
+          ## In Theory
+         </h2>
+         <p>
+          All of the TD control algorithms we have examined (Sarsa, Sarsamax, Expected Sarsa) are
+          <strong>
+           guaranteed to converge
+          </strong>
+          to the optimal action-value function
+          <span class="mathquill ud-math">
+           q_*
+          </span>
+          , as long as the step-size parameter
+          <span class="mathquill ud-math">
+           \alpha
+          </span>
+          is sufficiently small, and the GLIE conditions are met.
+         </p>
+         <p>
+          Once we have a good estimate for
+          <span class="mathquill ud-math">
+           q_
+           <em>
+           </em>
+          </span>
+          , a corresponding optimal policy
+          <span class="mathquill ud-math">
+           \pi_
+          </span>
+          can then be quickly obtained by setting
+          <span class="mathquill ud-math">
+           \pi_
+           <em>
+            (s) = \arg\max_{a\in\mathcal{A}(s)} q_
+           </em>
+           (s, a)
+          </span>
+          for all
+          <span class="mathquill ud-math">
+           s\in\mathcal{S}
+          </span>
+          .
+         </p>
+         <h2 id="-in-practice">
+          ## In Practice
+         </h2>
+         <p>
+          In practice, it is common to completely ignore the GLIE conditions and still recover an optimal policy.  (
+          <em>
+           You will see an example of this in the solution notebook.
+          </em>
+          )
+         </p>
+         <h2 id="-optimism">
+          ## Optimism
+         </h2>
+         <p>
+          You have learned that for any TD control method, you must begin by initializing the values in the Q-table.  It has been shown that
+          <a href="http://papers.nips.cc/paper/1944-convergence-of-optimistic-and-incremental-q-learning.pdf" rel="noopener noreferrer" target="_blank">
+           initializing the estimates to large values
+          </a>
+          can improve performance.  For instance, if all of the possible rewards that can be received by the agent are negative, then initializing every estimate in the Q-table to zeros is a good technique.  In this case, we refer to the initialized Q-table as
+          <strong>
+           optimistic
+          </strong>
+          , since the action-value estimates are guaranteed to be larger than the true action values.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="11. OpenAI Gym CliffWalkingEnv.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('10. TD Control: Theory and Practice')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

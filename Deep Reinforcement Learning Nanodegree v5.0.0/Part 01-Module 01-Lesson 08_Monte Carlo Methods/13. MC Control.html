@@ -1,0 +1,480 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   MC Control
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Monte Carlo Methods
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. Review.html">
+       01. Review
+      </a>
+     </li>
+     <li class="">
+      <a href="02. Gridworld Example.html">
+       02. Gridworld Example
+      </a>
+     </li>
+     <li class="">
+      <a href="03. Monte Carlo Methods.html">
+       03. Monte Carlo Methods
+      </a>
+     </li>
+     <li class="">
+      <a href="04. MC Prediction - Part 1.html">
+       04. MC Prediction - Part 1
+      </a>
+     </li>
+     <li class="">
+      <a href="05. MC Prediction - Part 2.html">
+       05. MC Prediction - Part 2
+      </a>
+     </li>
+     <li class="">
+      <a href="06. MC Prediction - Part 3.html">
+       06. MC Prediction - Part 3
+      </a>
+     </li>
+     <li class="">
+      <a href="07. OpenAI Gym BlackJackEnv.html">
+       07. OpenAI Gym: BlackJackEnv
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Workspace - Introduction.html">
+       08. Workspace - Introduction
+      </a>
+     </li>
+     <li class="">
+      <a href="09. Coding Exercise.html">
+       09. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Workspace.html">
+       10. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="11. Greedy Policies.html">
+       11. Greedy Policies
+      </a>
+     </li>
+     <li class="">
+      <a href="12. Epsilon-Greedy Policies.html">
+       12. Epsilon-Greedy Policies
+      </a>
+     </li>
+     <li class="">
+      <a href="13. MC Control.html">
+       13. MC Control
+      </a>
+     </li>
+     <li class="">
+      <a href="14. Exploration vs. Exploitation.html">
+       14. Exploration vs. Exploitation
+      </a>
+     </li>
+     <li class="">
+      <a href="15. Incremental Mean.html">
+       15. Incremental Mean
+      </a>
+     </li>
+     <li class="">
+      <a href="16. Constant-alpha.html">
+       16. Constant-alpha
+      </a>
+     </li>
+     <li class="">
+      <a href="17. Coding Exercise.html">
+       17. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="18. Workspace.html">
+       18. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="19. Summary.html">
+       19. Summary
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          13. MC Control
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="mc-control">
+          MC Control
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          So far, you have learned how the agent can take a policy
+          <span class="mathquill ud-math">
+           \pi
+          </span>
+          , use it to interact with the environment for many episodes, and then use the results to estimate the action-value function
+          <span class="mathquill ud-math">
+           q_\pi
+          </span>
+          with a Q-table.
+         </p>
+         <p>
+          Then, once the Q-table closely approximates the action-value function
+          <span class="mathquill ud-math">
+           q_\pi
+          </span>
+          , the agent can construct the policy
+          <span class="mathquill ud-math">
+           \pi'
+          </span>
+          that is
+          <span class="mathquill ud-math">
+           \epsilon
+          </span>
+          -greedy with respect to the Q-table, which will yield a policy that is better than the original policy
+          <span class="mathquill ud-math">
+           \pi
+          </span>
+          .
+         </p>
+         <p>
+          Furthermore, if the agent alternates between these two steps, with:
+         </p>
+         <ul>
+          <li>
+           <strong>
+            Step 1
+           </strong>
+           : using the policy
+           <span class="mathquill ud-math">
+            \pi
+           </span>
+           to construct the Q-table, and
+          </li>
+          <li>
+           <strong>
+            Step 2
+           </strong>
+           : improving the policy by changing it to be
+           <span class="mathquill ud-math">
+            \epsilon
+           </span>
+           -greedy with respect to the Q-table (
+           <span class="mathquill ud-math">
+            \pi' \leftarrow \epsilon\text{-greedy}(Q)
+           </span>
+           ,
+           <span class="mathquill ud-math">
+            \pi \leftarrow  \pi'
+           </span>
+           ),
+          </li>
+         </ul>
+         <p>
+          we will eventually obtain the optimal policy
+          <span class="mathquill ud-math">
+           \pi_*
+          </span>
+          .
+         </p>
+         <p>
+          Since this algorithm is a solution for the
+          <strong>
+           control problem
+          </strong>
+          (defined below), we call it a
+          <strong>
+           Monte Carlo control method
+          </strong>
+          .
+         </p>
+         <blockquote>
+          <p>
+           <strong>
+            Control Problem
+           </strong>
+           : Estimate the optimal policy.
+          </p>
+         </blockquote>
+         <p>
+          It is common to refer to
+          <strong>
+           Step 1
+          </strong>
+          as
+          <strong>
+           policy evaluation
+          </strong>
+          , since it is used to determine the action-
+          <strong>
+           value
+          </strong>
+          function of the policy.  Likewise, since
+          <strong>
+           Step 2
+          </strong>
+          is used to
+          <strong>
+           improve
+          </strong>
+          the policy, we also refer to it as a
+          <strong>
+           policy improvement
+          </strong>
+          step.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="MC Control" class="img img-fluid" src="img/screen-shot-2018-05-05-at-1.20.10-pm.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            MC Control
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          So, using this new terminology, we can summarize what we've learned to say that our
+          <strong>
+           Monte Carlo control method
+          </strong>
+          alternates between
+          <strong>
+           policy evaluation
+          </strong>
+          and
+          <strong>
+           policy improvement
+          </strong>
+          steps to recover the optimal policy
+          <span class="mathquill ud-math">
+           \pi_*
+          </span>
+          .
+         </p>
+         <h2 id="-the-road-ahead">
+          ## The Road Ahead
+         </h2>
+         <p>
+          You now have a working algorithm for Monte Carlo control!  So, what's to come?
+         </p>
+         <ul>
+          <li>
+           In the next concept (
+           <strong>
+            Exploration vs. Exploitation
+           </strong>
+           ), you will learn more about how to set the value of
+           <span class="mathquill ud-math">
+            \epsilon
+           </span>
+           when constructing
+           <span class="mathquill ud-math">
+            \epsilon
+           </span>
+           -greedy policies in the policy improvement step.
+          </li>
+          <li>
+           Then, you will learn about two improvements that you can make to the policy evaluation step in your control algorithm.
+           <ul>
+            <li>
+             In the
+             <strong>
+              Incremental Mean
+             </strong>
+             concept, you will learn how to update the policy after every episode (instead of waiting to update the policy until after the values of the Q-table have fully converged from many episodes).
+            </li>
+            <li>
+             In the
+             <strong>
+              Constant-alpha
+             </strong>
+             concept, you will learn how to train the agent to leverage its most recent experience more effectively.
+            </li>
+           </ul>
+          </li>
+         </ul>
+         <p>
+          Finally, to conclude the lesson, you will write your own algorithm for Monte Carlo control to solve OpenAI Gym's Blackjack environment, to put your new knowledge to practice!
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="14. Exploration vs. Exploitation.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('13. MC Control')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

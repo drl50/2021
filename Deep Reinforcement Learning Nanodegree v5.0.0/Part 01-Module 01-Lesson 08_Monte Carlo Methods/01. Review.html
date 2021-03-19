@@ -1,0 +1,395 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Review
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Monte Carlo Methods
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. Review.html">
+       01. Review
+      </a>
+     </li>
+     <li class="">
+      <a href="02. Gridworld Example.html">
+       02. Gridworld Example
+      </a>
+     </li>
+     <li class="">
+      <a href="03. Monte Carlo Methods.html">
+       03. Monte Carlo Methods
+      </a>
+     </li>
+     <li class="">
+      <a href="04. MC Prediction - Part 1.html">
+       04. MC Prediction - Part 1
+      </a>
+     </li>
+     <li class="">
+      <a href="05. MC Prediction - Part 2.html">
+       05. MC Prediction - Part 2
+      </a>
+     </li>
+     <li class="">
+      <a href="06. MC Prediction - Part 3.html">
+       06. MC Prediction - Part 3
+      </a>
+     </li>
+     <li class="">
+      <a href="07. OpenAI Gym BlackJackEnv.html">
+       07. OpenAI Gym: BlackJackEnv
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Workspace - Introduction.html">
+       08. Workspace - Introduction
+      </a>
+     </li>
+     <li class="">
+      <a href="09. Coding Exercise.html">
+       09. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Workspace.html">
+       10. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="11. Greedy Policies.html">
+       11. Greedy Policies
+      </a>
+     </li>
+     <li class="">
+      <a href="12. Epsilon-Greedy Policies.html">
+       12. Epsilon-Greedy Policies
+      </a>
+     </li>
+     <li class="">
+      <a href="13. MC Control.html">
+       13. MC Control
+      </a>
+     </li>
+     <li class="">
+      <a href="14. Exploration vs. Exploitation.html">
+       14. Exploration vs. Exploitation
+      </a>
+     </li>
+     <li class="">
+      <a href="15. Incremental Mean.html">
+       15. Incremental Mean
+      </a>
+     </li>
+     <li class="">
+      <a href="16. Constant-alpha.html">
+       16. Constant-alpha
+      </a>
+     </li>
+     <li class="">
+      <a href="17. Coding Exercise.html">
+       17. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="18. Workspace.html">
+       18. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="19. Summary.html">
+       19. Summary
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          01. Review
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="review">
+          Review
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+         <p>
+          L601 Intro RENDER V2
+         </p>
+        </h3>
+        <video controls="">
+         <source src="01. L601 Intro RENDER V2-3H5x0lstvmo.mp4" type="video/mp4"/>
+         <track default="true" kind="subtitles" label="en" src="01. L601 Intro RENDER V2-3H5x0lstvmo.en.vtt" srclang="en"/>
+        </video>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-review-your-notes">
+          ## Review Your Notes
+         </h2>
+         <p>
+          In the lesson
+          <strong>
+           The RL Framework: The Problem
+          </strong>
+          , you learned how to take a real-world problem and specify it in the language of reinforcement learning.  In order to rigorously define a reinforcement learning task, we generally use a
+          <strong>
+           Markov Decision Process (MDP)
+          </strong>
+          to model the environment.  The MDP specifies the rules that the environment uses to respond to the agent's actions, including how much reward to give to the agent in response to its behavior.  The agent's goal is to learn how to play by the rules of the environment, in order to maximize reward.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="Agent-Environment Interaction" class="img img-fluid" src="img/screen-shot-2017-09-20-at-12.02.06-pm.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            Agent-Environment Interaction
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          Next, in the lesson
+          <strong>
+           The RL Framework: The Solution
+          </strong>
+          , you learned how to specify a solution to the reinforcement learning problem.  In particular, the
+          <strong>
+           optimal policy
+          </strong>
+          <span class="mathquill ud-math">
+           \pi_
+           <em>
+           </em>
+          </span>
+          specifies - for each environment state - how the agent should select an action towards its goal of maximizing reward.  You learned that the agent could structure its search for an optimal policy by first estimating the
+          <strong>
+           optimal action-value function
+          </strong>
+          <span class="mathquill ud-math">
+           q_
+          </span>
+          ; then, once
+          <span class="mathquill ud-math">
+           q_
+           <em>
+           </em>
+          </span>
+          is known,
+          <span class="mathquill ud-math">
+           \pi_
+          </span>
+          is quickly obtained.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="Value Function" class="img img-fluid" src="img/screen-shot-2017-09-25-at-11.35.38-am.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            Value Function
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          Before continuing with this lesson, please take the time to review your notes, to ensure that the terminology from the previous two lessons is familiar to you.  In particular, you should peruse the summary page at the end of the lesson
+          <strong>
+           The RL Framework: The Problem
+          </strong>
+          , and the page at the end of
+          <strong>
+           The RL Framework: The Solution
+          </strong>
+          to ensure that the listed concepts are familiar.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="02. Gridworld Example.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('01. Review')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

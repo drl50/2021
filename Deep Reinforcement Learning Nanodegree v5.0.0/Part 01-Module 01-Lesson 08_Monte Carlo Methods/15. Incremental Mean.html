@@ -1,0 +1,468 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Incremental Mean
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Monte Carlo Methods
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. Review.html">
+       01. Review
+      </a>
+     </li>
+     <li class="">
+      <a href="02. Gridworld Example.html">
+       02. Gridworld Example
+      </a>
+     </li>
+     <li class="">
+      <a href="03. Monte Carlo Methods.html">
+       03. Monte Carlo Methods
+      </a>
+     </li>
+     <li class="">
+      <a href="04. MC Prediction - Part 1.html">
+       04. MC Prediction - Part 1
+      </a>
+     </li>
+     <li class="">
+      <a href="05. MC Prediction - Part 2.html">
+       05. MC Prediction - Part 2
+      </a>
+     </li>
+     <li class="">
+      <a href="06. MC Prediction - Part 3.html">
+       06. MC Prediction - Part 3
+      </a>
+     </li>
+     <li class="">
+      <a href="07. OpenAI Gym BlackJackEnv.html">
+       07. OpenAI Gym: BlackJackEnv
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Workspace - Introduction.html">
+       08. Workspace - Introduction
+      </a>
+     </li>
+     <li class="">
+      <a href="09. Coding Exercise.html">
+       09. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Workspace.html">
+       10. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="11. Greedy Policies.html">
+       11. Greedy Policies
+      </a>
+     </li>
+     <li class="">
+      <a href="12. Epsilon-Greedy Policies.html">
+       12. Epsilon-Greedy Policies
+      </a>
+     </li>
+     <li class="">
+      <a href="13. MC Control.html">
+       13. MC Control
+      </a>
+     </li>
+     <li class="">
+      <a href="14. Exploration vs. Exploitation.html">
+       14. Exploration vs. Exploitation
+      </a>
+     </li>
+     <li class="">
+      <a href="15. Incremental Mean.html">
+       15. Incremental Mean
+      </a>
+     </li>
+     <li class="">
+      <a href="16. Constant-alpha.html">
+       16. Constant-alpha
+      </a>
+     </li>
+     <li class="">
+      <a href="17. Coding Exercise.html">
+       17. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="18. Workspace.html">
+       18. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="19. Summary.html">
+       19. Summary
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          15. Incremental Mean
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="incremental-mean">
+          Incremental Mean
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          In our current algorithm for Monte Carlo control, we collect a large number of episodes to build the Q-table (as an estimate for the action-value function corresponding to the agent's current policy).  Then, after the values in the Q-table have converged, we use the table to come up with an improved policy.
+         </p>
+         <p>
+          Maybe it would be more efficient to update the Q-table
+          <strong>
+           <em>
+            after every episode
+           </em>
+          </strong>
+          .  Then, the updated Q-table could be used to improve the policy.  That new policy could then be used to generate the next episode, and so on.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="MC Control with Incremental Mean" class="img img-fluid" src="img/screen-shot-2018-05-10-at-6.10.16-pm.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            MC Control with Incremental Mean
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          So,
+          <em>
+           how might we modify our code to accomplish this
+          </em>
+          ?  Watch the video below to see!
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+         <p>
+          L615 Incremental Mean RENDER V4
+         </p>
+        </h3>
+        <video controls="">
+         <source src="15. L615 Incremental Mean RENDER V4-h-8MB7V1LiE.mp4" type="video/mp4"/>
+         <track default="true" kind="subtitles" label="en" src="15. L615 Incremental Mean RENDER V4-h-8MB7V1LiE.en.vtt" srclang="en"/>
+        </video>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          In this case, even though we're updating the policy before the values in the Q-table accurately approximate the action-value function, this lower-quality estimate nevertheless still has enough information to help us propose successively better policies. If you're curious to learn more, you can read section 5.6 of
+          <a href="https://s3-us-west-1.amazonaws.com/udacity-dlnfd/suttonbookdraft2018jan1.pdf" rel="noopener noreferrer" target="_blank">
+           the textbook
+          </a>
+          .
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-pseudocode">
+          ## Pseudocode
+         </h2>
+         <p>
+          The pseudocode can be found below.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="" class="img img-fluid" src="img/screen-shot-2018-05-04-at-3.14.47-pm.png"/>
+          <figcaption class="figure-caption">
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          There are two relevant tables:
+         </p>
+         <ul>
+          <li>
+           <span class="mathquill ud-math">
+            Q
+           </span>
+           - Q-table, with a row for each state and a column for each action.  The entry corresponding to state
+           <span class="mathquill ud-math">
+            s
+           </span>
+           and action
+           <span class="mathquill ud-math">
+            a
+           </span>
+           is denoted
+           <span class="mathquill ud-math">
+            Q(s,a)
+           </span>
+           .
+          </li>
+          <li>
+           <span class="mathquill ud-math">
+            N
+           </span>
+           - table that keeps track of the number of first visits we have made to each state-action pair.
+          </li>
+         </ul>
+         <p>
+          The number of episodes the agent collects is equal to
+          <span class="mathquill ud-math">
+           num_episodes
+          </span>
+          .
+         </p>
+         <p>
+          The algorithm proceeds by looping over the following steps:
+         </p>
+         <ul>
+          <li>
+           <strong>
+            Step 1
+           </strong>
+           : The policy
+           <span class="mathquill ud-math">
+            \pi
+           </span>
+           is improved to be
+           <span class="mathquill ud-math">
+            \epsilon
+           </span>
+           -greedy with respect to
+           <span class="mathquill ud-math">
+            Q
+           </span>
+           , and the agent uses
+           <span class="mathquill ud-math">
+            \pi
+           </span>
+           to collect an episode.
+          </li>
+          <li>
+           <strong>
+            Step 2
+           </strong>
+           :
+           <span class="mathquill ud-math">
+            N
+           </span>
+           is updated to count the total number of first visits to each state action pair.
+          </li>
+          <li>
+           <strong>
+            Step 3
+           </strong>
+           : The estimates in
+           <span class="mathquill ud-math">
+            Q
+           </span>
+           are updated to take into account the most recent information.
+          </li>
+         </ul>
+         <p>
+          In this way, the agent is able to improve the policy after every episode!
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="16. Constant-alpha.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('15. Incremental Mean')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

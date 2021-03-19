@@ -1,0 +1,112 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.399
+So far, you've learned how an agent can take
+
+00:00:02.399 --> 00:00:05.339
+a policy like the equal probable random policy,
+
+00:00:05.339 --> 00:00:07.859
+use that to interact with the environment,
+
+00:00:07.859 --> 00:00:11.570
+and then use that experience to populate the corresponding Q-table,
+
+00:00:11.570 --> 00:00:15.699
+and this Q-table is an estimate of that policies action value function.
+
+00:00:15.699 --> 00:00:20.230
+So, now the question is how can we use this in our search for an optimal policy?
+
+00:00:20.230 --> 00:00:23.339
+Well, we've already seen that to get a better policy,
+
+00:00:23.339 --> 00:00:27.269
+that's not necessarily and actually probably not the optimal one,
+
+00:00:27.269 --> 00:00:31.675
+we need only select for each state the action that maximizes the Q-table.
+
+00:00:31.675 --> 00:00:34.100
+Let's call that new policy Pi-prime.
+
+00:00:34.100 --> 00:00:39.090
+So, consider this, what if we replaced our old policy with this new policy,
+
+00:00:39.090 --> 00:00:41.610
+then estimated its value function,
+
+00:00:41.609 --> 00:00:45.619
+and then use that new value function to get a better policy,
+
+00:00:45.619 --> 00:00:50.750
+and then continued alternating between these two steps over and over until we got
+
+00:00:50.750 --> 00:00:53.418
+successively better and better policies
+
+00:00:53.418 --> 00:00:56.814
+in the hope that we converge to the optimal policy?
+
+00:00:56.814 --> 00:00:59.409
+It turns out that unfortunately,
+
+00:00:59.409 --> 00:01:01.519
+this won't work as it stands now,
+
+00:01:01.520 --> 00:01:04.525
+but we have almost all the tools to make this work.
+
+00:01:04.525 --> 00:01:07.205
+There's really just one thing that we have to fix.
+
+00:01:07.204 --> 00:01:08.420
+To discuss this fix,
+
+00:01:08.420 --> 00:01:11.030
+we have to introduce a bit of terminology.
+
+00:01:11.030 --> 00:01:14.329
+When we take a Q-table and use the action that
+
+00:01:14.329 --> 00:01:17.359
+maximizes each row to come up with the policy,
+
+00:01:17.359 --> 00:01:22.305
+we say that we are constructing the policy that's greedy with respect to the Q-table,
+
+00:01:22.305 --> 00:01:26.370
+and that has some special notation that you can see on the bottom of this slide.
+
+00:01:26.370 --> 00:01:28.579
+We'll plug this in to the loop we started
+
+00:01:28.579 --> 00:01:33.064
+with where the only thing that's changed is the notation is a bit fancier.
+
+00:01:33.064 --> 00:01:35.504
+We still begin with a starting policy,
+
+00:01:35.504 --> 00:01:37.789
+estimated value function, then get
+
+00:01:37.790 --> 00:01:40.940
+a new policy that's greedy with respect to the value function.
+
+00:01:40.939 --> 00:01:44.189
+So, then we have a new policy and so on.
+
+00:01:44.189 --> 00:01:49.569
+Again, this proposed algorithm is so close to giving us the optimal policy,
+
+00:01:49.569 --> 00:01:51.869
+as long as we run it for long enough.
+
+00:01:51.870 --> 00:01:58.150
+But to fix it, we'll need to slightly modify the step or reconstruct the greedy policy.
+
+00:01:58.150 --> 00:02:01.300
+We'll discuss this in the next video.
+

@@ -1,0 +1,301 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.410
+So, at this point you're about to implement or you just implemented
+
+00:00:04.410 --> 00:00:10.179
+your first R method that can help an agent recover the optimal policy for an environment.
+
+00:00:10.179 --> 00:00:14.429
+You should be proud of all of your hard work and it's about to pay off.
+
+00:00:14.429 --> 00:00:19.375
+Specifically, we'll implement Constant-Alpha MC Control,
+
+00:00:19.375 --> 00:00:23.000
+we'll also make sure that the values of Epsilon that we use when
+
+00:00:23.000 --> 00:00:27.375
+constructing the Epsilon greedy policy satisfy the GLIE conditions.
+
+00:00:27.375 --> 00:00:31.429
+This will ensure that we'll converge to the optimal policy.
+
+00:00:31.500 --> 00:00:36.759
+Also, remember in the black jack example that first visit and every visit,
+
+00:00:36.759 --> 00:00:38.159
+Monte Carlo Control will yield
+
+00:00:38.159 --> 00:00:41.764
+identical results so you can feel free to implement either.
+
+00:00:41.765 --> 00:00:45.600
+We've implemented every visit Monte Carlo Control,
+
+00:00:45.600 --> 00:00:47.990
+so just keep that in mind when you're looking at the solution.
+
+00:00:47.990 --> 00:00:50.630
+So, we've opened the pseudocode next to
+
+00:00:50.630 --> 00:00:54.325
+the solution notebook so that we can see how the implementation lines up.
+
+00:00:54.325 --> 00:00:56.795
+The first thing that we do in the pseudocode is
+
+00:00:56.795 --> 00:01:00.594
+initialize all of the values in the Q table to zero.
+
+00:01:00.594 --> 00:01:04.525
+That's also the first thing that we do here in the solution notebook.
+
+00:01:04.525 --> 00:01:09.140
+So, Q is initialized to an empty dictionary of arrays where we also
+
+00:01:09.140 --> 00:01:14.064
+need to parse in the total number of actions that are in the environment.
+
+00:01:14.064 --> 00:01:15.804
+So we keep track of that with
+
+00:01:15.805 --> 00:01:21.565
+the variable nA that'll come in useful actually throughout this implementation.
+
+00:01:21.564 --> 00:01:23.859
+So after initializing the Q table,
+
+00:01:23.859 --> 00:01:28.909
+we loop over episodes and then with each episode we set the value of Epsilon,
+
+00:01:28.909 --> 00:01:33.500
+construct the corresponding Epsilon greedy policy with respect to
+
+00:01:33.500 --> 00:01:37.099
+the most recent estimate of the Q table and
+
+00:01:37.099 --> 00:01:41.155
+then generate an episode using that Epsilon greedy policy.
+
+00:01:41.155 --> 00:01:45.549
+We've also done the same thing in the code here where we loop over episodes,
+
+00:01:45.549 --> 00:01:49.219
+this is just a monitor that helps us keep
+
+00:01:49.219 --> 00:01:53.239
+track of how many episodes we've completed out of the total,
+
+00:01:53.239 --> 00:01:57.319
+but in any event for each episode we update the value of
+
+00:01:57.319 --> 00:02:02.689
+Epsilon and then generate an episode by following the Epsilon greedy policy.
+
+00:02:02.689 --> 00:02:05.155
+So these two steps with constructing
+
+00:02:05.155 --> 00:02:08.449
+the Epsilon greedy policy and generating an episode are
+
+00:02:08.449 --> 00:02:14.259
+wrapped up in this generate_episode_from_Q function that we've implemented above.
+
+00:02:14.259 --> 00:02:18.199
+So before we look at this generate_episode_from_Q function,
+
+00:02:18.199 --> 00:02:21.769
+let's look a bit closer at how we set the value of Epsilon.
+
+00:02:21.770 --> 00:02:24.590
+So, before entering this loop over episodes,
+
+00:02:24.590 --> 00:02:28.995
+we start off the value of Epsilon at some initialized value Epsilon start.
+
+00:02:28.995 --> 00:02:32.640
+So, we see here that that value is currently set to one.
+
+00:02:32.639 --> 00:02:36.289
+But then for each episode we slightly decay the value of
+
+00:02:36.289 --> 00:02:40.489
+Epsilon by multiplying it by this value Epsilon decay.
+
+00:02:40.490 --> 00:02:42.775
+So that value is nearly one,
+
+00:02:42.775 --> 00:02:44.740
+so it just decays a bit,
+
+00:02:44.740 --> 00:02:49.780
+but we don't want Epsilon to get too small because we want to constantly
+
+00:02:49.780 --> 00:02:55.460
+ensure at least some small amount of exploration throughout the process.
+
+00:02:55.460 --> 00:02:58.640
+So, we won't let the value of Epsilon go below
+
+00:02:58.639 --> 00:03:02.979
+this value Epsilon min which is set to 0.05.
+
+00:03:02.979 --> 00:03:06.844
+Then after this value of Epsilon is updated
+
+00:03:06.844 --> 00:03:10.639
+it's sent to this generate_episode_from_Q function,
+
+00:03:10.639 --> 00:03:13.604
+you can scroll up to see how that works.
+
+00:03:13.604 --> 00:03:17.324
+So, you'll notice that the function takes the environment,
+
+00:03:17.324 --> 00:03:19.909
+the most recent estimate of the Q table,
+
+00:03:19.909 --> 00:03:24.879
+the value of Epsilon and the total number of actions available to the agent as input.
+
+00:03:24.879 --> 00:03:30.805
+As output, it returns an episode which is just a sequence of state action reward tuples.
+
+00:03:30.805 --> 00:03:35.700
+So, along the way the agent will use the Epsilon greedy policy to select actions.
+
+00:03:35.699 --> 00:03:41.289
+So, we've implemented that using the random.choice method from NumPy.
+
+00:03:41.289 --> 00:03:46.069
+So, that takes us input the set of possible actions and we
+
+00:03:46.069 --> 00:03:50.884
+also have to feed it the probabilities corresponding to the Epsilon greedy policy.
+
+00:03:50.884 --> 00:03:57.530
+So specifically, when selecting an action from a state we need to get the probabilities,
+
+00:03:57.530 --> 00:03:59.930
+the action probabilities corresponding to
+
+00:03:59.930 --> 00:04:03.120
+Epsilon greedy action selection from that state.
+
+00:04:03.120 --> 00:04:07.189
+That's implemented in this get_probs function which takes as
+
+00:04:07.189 --> 00:04:11.659
+input along with Epsilon and the number of actions available to the agent,
+
+00:04:11.659 --> 00:04:14.674
+the row in the Q table corresponding
+
+00:04:14.675 --> 00:04:18.850
+to the state that the agent has to select the action from.
+
+00:04:18.850 --> 00:04:22.340
+So you can take a look at that get_probs function here.
+
+00:04:22.339 --> 00:04:24.829
+So, once we have that episode,
+
+00:04:24.829 --> 00:04:26.560
+we'll go back to the pseudocode,
+
+00:04:26.560 --> 00:04:30.470
+once we have that episode we just look at
+
+00:04:30.470 --> 00:04:33.230
+each state action pair that appears in
+
+00:04:33.230 --> 00:04:36.025
+the episode for our first visit Monte Carlo Control,
+
+00:04:36.024 --> 00:04:39.439
+if it's a first visit then we apply this update equation.
+
+00:04:39.439 --> 00:04:45.129
+Remember in the solution we actually implemented every visit Monte Carlo Control,
+
+00:04:45.129 --> 00:04:47.569
+and so we apply this update equation
+
+00:04:47.569 --> 00:04:51.365
+for every state action pair that appears in the episode.
+
+00:04:51.365 --> 00:04:58.165
+So, in the code we've implemented this update equation in the update_Q function here,
+
+00:04:58.165 --> 00:05:01.975
+and so to see how it ties into the Monte Carlo Control
+
+00:05:01.975 --> 00:05:06.310
+function you'll notice that after generating an episode we
+
+00:05:06.310 --> 00:05:10.060
+parse the last estimate of the Q table into
+
+00:05:10.060 --> 00:05:15.035
+this update_Q function which gives us a new value for the Q table.
+
+00:05:15.035 --> 00:05:19.535
+Until as long as you run this algorithm for enough episodes,
+
+00:05:19.535 --> 00:05:27.195
+it's guaranteed that this Q table will correspond to the optimal action value function.
+
+00:05:27.194 --> 00:05:30.935
+Then to get a corresponding optimal policy,
+
+00:05:30.935 --> 00:05:34.550
+all we need to do is for each state just pick
+
+00:05:34.550 --> 00:05:39.625
+the action that maximizes the row corresponding to that state.
+
+00:05:39.625 --> 00:05:41.750
+So, that's what we've done here.
+
+00:05:41.750 --> 00:05:44.819
+So, we'll run this code cells.
+
+00:05:47.040 --> 00:05:51.305
+So we're running the Monte Carlo Controlled method for
+
+00:05:51.305 --> 00:05:57.685
+500,000 episodes and with the value of Alpha set to 0.02.
+
+00:05:57.685 --> 00:06:02.365
+So, once that finishes running, you'll have plotted,
+
+00:06:02.365 --> 00:06:05.389
+you can run the next code cell to plot
+
+00:06:05.389 --> 00:06:09.944
+the corresponding estimated optimal state value function.
+
+00:06:09.944 --> 00:06:16.110
+Remember there are two plots corresponding to whether we do or don't have a usable ace,
+
+00:06:16.110 --> 00:06:21.319
+and if you run the next code cell then you'll have the estimated optimal policy.
+
+00:06:21.319 --> 00:06:26.735
+You can compare that to the true optimal policy that's pulled from the textbook.
+
+00:06:26.735 --> 00:06:30.290
+So, you'll notice here that they don't exactly line up,
+
+00:06:30.290 --> 00:06:36.230
+but if you want you can go ahead and run the algorithm for longer,
+
+00:06:36.230 --> 00:06:40.069
+play around with tweaking the value of Alpha and how Epsilon is allowed to
+
+00:06:40.069 --> 00:06:44.569
+decay an algorithm to see how close you can get to that optimal policy.
+

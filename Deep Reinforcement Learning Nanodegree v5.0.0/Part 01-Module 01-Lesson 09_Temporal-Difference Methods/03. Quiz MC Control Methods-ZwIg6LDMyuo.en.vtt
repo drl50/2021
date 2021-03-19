@@ -1,0 +1,100 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.009
+In this lesson, we'll draft
+
+00:00:02.009 --> 00:00:06.209
+several new algorithms to solve the reinforcement learning problem.
+
+00:00:06.209 --> 00:00:08.029
+We'll begin by reviewing how
+
+00:00:08.029 --> 00:00:11.669
+Monte Carlo Control works using our small grid world example.
+
+00:00:11.669 --> 00:00:14.504
+Remember that we keep track of a Q-table,
+
+00:00:14.505 --> 00:00:18.975
+it contains for each state action pair the return that we expect to get.
+
+00:00:18.975 --> 00:00:22.595
+To update the Q-table we sample a complete episode.
+
+00:00:22.594 --> 00:00:26.849
+For instance, this episode contains information that we can use to update
+
+00:00:26.850 --> 00:00:31.260
+the values of three separate state action pairs in the table.
+
+00:00:31.260 --> 00:00:35.880
+But for now, let's focus our attention on the first state action pair.
+
+00:00:35.880 --> 00:00:40.984
+Remember that this is the equation that we can use to update the Q-table.
+
+00:00:40.984 --> 00:00:44.960
+Capital G is just the return that was collected by the agent,
+
+00:00:44.960 --> 00:00:48.674
+and alpha is some small positive number that you set.
+
+00:00:48.674 --> 00:00:52.754
+In this case, the current value in the Q-table is six.
+
+00:00:52.755 --> 00:00:55.890
+In other words, before we collected the episode,
+
+00:00:55.890 --> 00:01:01.649
+we would expect that choosing action right in state one would yield a return of six.
+
+00:01:01.649 --> 00:01:04.174
+But then, after collecting the episode,
+
+00:01:04.174 --> 00:01:07.159
+we see that we instead got a return of eight.
+
+00:01:07.159 --> 00:01:10.609
+So, then what Monte Carlo Control does is it updates
+
+00:01:10.609 --> 00:01:14.795
+the Q-table to push this value of six a little bit closer to eight.
+
+00:01:14.795 --> 00:01:18.230
+You can think of this equation as comparing the return that we
+
+00:01:18.230 --> 00:01:21.780
+expected to the return that we actually experienced.
+
+00:01:21.780 --> 00:01:24.435
+Then, if those numbers don't agree,
+
+00:01:24.435 --> 00:01:27.350
+we change the Q-table just a little so that
+
+00:01:27.349 --> 00:01:31.069
+our expectations line up better with the reality.
+
+00:01:31.069 --> 00:01:35.004
+The new value on the table will be something between six and eight.
+
+00:01:35.004 --> 00:01:36.795
+For smaller values of Alpha,
+
+00:01:36.795 --> 00:01:38.155
+it's closer to six,
+
+00:01:38.155 --> 00:01:41.620
+and larger values of Alpha will push us closer to eight.
+
+00:01:41.620 --> 00:01:44.390
+But now, to make sure we're on the same page,
+
+00:01:44.390 --> 00:01:48.510
+you'll plug in numbers to calculate this update in the quiz question below.
+
+00:01:48.510 --> 00:01:52.210
+Then, we'll be ready to introduce some new algorithms.
+

@@ -1,0 +1,145 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.879
+Say the agent interacts with the environment for four episodes,
+
+00:00:03.879 --> 00:00:06.299
+then say we focus on one state-action pair in
+
+00:00:06.299 --> 00:00:09.184
+particular which was visited in each episode,
+
+00:00:09.185 --> 00:00:13.755
+and we can record the return obtained by visiting that pair for each episode.
+
+00:00:13.755 --> 00:00:15.170
+So in episode one,
+
+00:00:15.169 --> 00:00:16.675
+after the pair was visited,
+
+00:00:16.675 --> 00:00:18.990
+the agent got a return of two.
+
+00:00:18.989 --> 00:00:21.629
+In episode two after the same pair was visited,
+
+00:00:21.629 --> 00:00:24.224
+the agent got a return of eight and so on.
+
+00:00:24.225 --> 00:00:26.070
+Until what we currently do is getting
+
+00:00:26.070 --> 00:00:30.524
+an estimated action value only after all of the episodes have finished.
+
+00:00:30.524 --> 00:00:33.369
+But what you are going to learn in this video,
+
+00:00:33.369 --> 00:00:35.070
+is how to efficiently,
+
+00:00:35.070 --> 00:00:38.445
+estimate the action values after each episode.
+
+00:00:38.445 --> 00:00:42.030
+So let's clear the estimated values and we'll build them gradually.
+
+00:00:42.030 --> 00:00:46.579
+Now the action value corresponding to the first episode is pretty simple.
+
+00:00:46.579 --> 00:00:49.679
+It's just the return that was obtained which is two.
+
+00:00:49.679 --> 00:00:51.329
+Next the action value for
+
+00:00:51.329 --> 00:00:56.269
+the second episode is just the average of two and eight or five.
+
+00:00:56.270 --> 00:01:00.450
+Then the average of 2,8 and 11 is seven,
+
+00:01:00.450 --> 00:01:04.855
+and the average of 2,8,11 and 3 is six.
+
+00:01:04.855 --> 00:01:06.290
+So how can we populate
+
+00:01:06.290 --> 00:01:09.725
+these estimated action values in a computational way efficient way?
+
+00:01:09.724 --> 00:01:13.899
+Well, there's a really useful formula that I've pasted at the bottom of this slide.
+
+00:01:13.900 --> 00:01:17.635
+If you're interested in examining this equation in more detail,
+
+00:01:17.635 --> 00:01:21.015
+then please check up the optional instructor notes below the video.
+
+00:01:21.015 --> 00:01:22.825
+But the way this equation works,
+
+00:01:22.825 --> 00:01:27.484
+is it calculates the estimated action value from the previous estimate,
+
+00:01:27.484 --> 00:01:29.745
+and the most recently sampled return.
+
+00:01:29.745 --> 00:01:34.615
+We'd also have to keep track of the number of times we've visited the state-action pair.
+
+00:01:34.614 --> 00:01:37.469
+So in this case, we can plug in the values,
+
+00:01:37.469 --> 00:01:39.439
+and when we simplify all of that,
+
+00:01:39.439 --> 00:01:43.120
+we get five, an updated estimate for the action values.
+
+00:01:43.120 --> 00:01:45.439
+Moving on to the next episode,
+
+00:01:45.439 --> 00:01:50.569
+we can get the next estimated action value by just plugging in all of the values,
+
+00:01:50.569 --> 00:01:53.064
+and when we simplify, we get seven,
+
+00:01:53.064 --> 00:01:58.894
+and we can recover the original estimate from just plugging in the values to get six.
+
+00:01:58.894 --> 00:02:01.194
+So, using this small example,
+
+00:02:01.194 --> 00:02:03.894
+we've seen that after each episode,
+
+00:02:03.894 --> 00:02:07.174
+we can calculate a new action value estimate,
+
+00:02:07.174 --> 00:02:09.550
+from the old action value estimate,
+
+00:02:09.550 --> 00:02:11.875
+the most recently sampled return,
+
+00:02:11.875 --> 00:02:15.585
+and the total number of visits to the state-action pair.
+
+00:02:15.585 --> 00:02:19.290
+As we've discussed and as you'll see in the pseudo-code below,
+
+00:02:19.289 --> 00:02:21.900
+performing the updates after each episode,
+
+00:02:21.900 --> 00:02:26.420
+will allow us to use the Q-table to update the policy after each episode,
+
+00:02:26.419 --> 00:02:29.209
+which will make our algorithm much more efficient.
+

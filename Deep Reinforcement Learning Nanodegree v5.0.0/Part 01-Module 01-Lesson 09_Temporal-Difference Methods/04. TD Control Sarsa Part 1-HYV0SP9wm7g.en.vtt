@@ -1,0 +1,121 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.540
+In this video, we'll discuss an algorithm that doesn't need us to
+
+00:00:03.540 --> 00:00:07.464
+complete an entire episode before updating the Q-Table.
+
+00:00:07.464 --> 00:00:12.429
+Instead, we'll update the Q-Table at the same time as the episode is unfolding.
+
+00:00:12.429 --> 00:00:14.640
+In particular, we'll only need
+
+00:00:14.640 --> 00:00:20.600
+this very small time window of information to do an update, and so here's the idea.
+
+00:00:20.600 --> 00:00:24.410
+The current estimate for the value of selecting action right
+
+00:00:24.410 --> 00:00:28.600
+and state one is pulled from the Q-Table, it's just six.
+
+00:00:28.600 --> 00:00:31.230
+So, what about the alternative estimate?
+
+00:00:31.230 --> 00:00:33.695
+Well, in the Monte Carlo case,
+
+00:00:33.695 --> 00:00:36.524
+we waited until the end of the episode,
+
+00:00:36.524 --> 00:00:40.655
+and added up all the rewards that we got along the way.
+
+00:00:40.655 --> 00:00:43.929
+But if we're working with just the small time window,
+
+00:00:43.929 --> 00:00:47.539
+we don't have access to what happens at those later time steps.
+
+00:00:47.539 --> 00:00:52.494
+So, how might we form an alternative estimate with this limited information?
+
+00:00:52.494 --> 00:00:54.674
+Well, here's the idea.
+
+00:00:54.674 --> 00:00:57.329
+After we got the reward of negative one,
+
+00:00:57.329 --> 00:01:01.280
+we ended up in state two and selected action right.
+
+00:01:01.280 --> 00:01:04.680
+Our Q-Table actually already has
+
+00:01:04.680 --> 00:01:08.490
+an estimate for the return that's likely to follow from that point onward.
+
+00:01:08.489 --> 00:01:13.504
+It's just the estimated action value for state two and action right.
+
+00:01:13.504 --> 00:01:18.000
+So, our alternative estimate can just be negative
+
+00:01:18.000 --> 00:01:23.525
+one plus eight which is the value of the next state action pair.
+
+00:01:23.525 --> 00:01:27.745
+If you need to pause the video and think about what we've just done,
+
+00:01:27.745 --> 00:01:29.640
+please, take your time here.
+
+00:01:29.640 --> 00:01:32.750
+Then, just like in the Monte Carlo case,
+
+00:01:32.750 --> 00:01:36.060
+we can use this alternative estimate to update the Q-Table
+
+00:01:36.060 --> 00:01:40.049
+by just moving this value of six a little bit closer to seven.
+
+00:01:40.049 --> 00:01:44.049
+So, let's say that we move this value to 6.2.
+
+00:01:44.049 --> 00:01:47.379
+Then, at the next time step,
+
+00:01:47.379 --> 00:01:52.459
+we repeat the same process where we update the entry in the Q-Table
+
+00:01:52.459 --> 00:01:57.694
+for state two and action right by just using the alternative estimate.
+
+00:01:57.694 --> 00:02:01.524
+The alternative estimate is just the reward we received
+
+00:02:01.525 --> 00:02:06.770
+plus the currently estimated value of the next state action pair.
+
+00:02:06.769 --> 00:02:08.560
+So, in this case,
+
+00:02:08.560 --> 00:02:11.180
+we'll move the value of eight a little bit closer to
+
+00:02:11.180 --> 00:02:15.140
+nine which will yield a new value like 8.2.
+
+00:02:15.139 --> 00:02:18.589
+This video illustrates the main idea behind
+
+00:02:18.590 --> 00:02:21.920
+the first method we'll use for temporal difference control,
+
+00:02:21.919 --> 00:02:24.599
+and we'll soon dive into the details.
+

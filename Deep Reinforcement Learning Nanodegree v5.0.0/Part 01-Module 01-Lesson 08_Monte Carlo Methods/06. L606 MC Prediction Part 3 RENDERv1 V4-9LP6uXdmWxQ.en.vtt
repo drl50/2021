@@ -1,0 +1,94 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:01.889
+Before you read the pseudo code,
+
+00:00:01.889 --> 00:00:04.235
+there's a special case we have to discuss.
+
+00:00:04.235 --> 00:00:06.415
+What if, in the same episode,
+
+00:00:06.415 --> 00:00:09.890
+we select the same action from a state multiple times?
+
+00:00:09.890 --> 00:00:12.330
+For instance, say that at time step two,
+
+00:00:12.330 --> 00:00:14.810
+we select action down from state three,
+
+00:00:14.810 --> 00:00:18.370
+and, say we do the same thing at time step 99.
+
+00:00:18.370 --> 00:00:20.519
+I mean, if we count from the first time,
+
+00:00:20.519 --> 00:00:23.019
+then we get a return of negative 87,
+
+00:00:23.019 --> 00:00:24.914
+and if we count from the last time,
+
+00:00:24.914 --> 00:00:26.919
+then we get a return of 10.
+
+00:00:26.920 --> 00:00:32.435
+When this happens, we have two options and that gives us two different algorithms.
+
+00:00:32.435 --> 00:00:34.705
+We can as a first option,
+
+00:00:34.704 --> 00:00:37.719
+take the average of both time steps on making the table.
+
+00:00:37.719 --> 00:00:41.935
+So in this case, we would get a value of negative 38.5.
+
+00:00:41.935 --> 00:00:44.719
+Another option that will work well is to
+
+00:00:44.719 --> 00:00:47.960
+just use the first time we tried out the state action combination.
+
+00:00:47.960 --> 00:00:51.929
+So in this case, we would get a value of negative 87.
+
+00:00:51.929 --> 00:00:56.259
+We refer to the first option as in every-visit Monte-Carlo method,
+
+00:00:56.259 --> 00:01:00.454
+and we refer to the second option as a first-visit Monte-Carlo method.
+
+00:01:00.454 --> 00:01:02.530
+To understand where these names come from,
+
+00:01:02.530 --> 00:01:05.114
+we'll have to introduce some new terminology.
+
+00:01:05.114 --> 00:01:07.189
+We define every occurrence of
+
+00:01:07.189 --> 00:01:11.109
+a state-action pair in an episode as a visit to that state-action pair.
+
+00:01:11.109 --> 00:01:14.314
+Every-visit Monte-Carlo prediction, averages
+
+00:01:14.314 --> 00:01:17.704
+the return following every visit to a state-action pair.
+
+00:01:17.704 --> 00:01:20.429
+First-visit Monte-Carlo prediction, considers
+
+00:01:20.430 --> 00:01:25.100
+only first-visits to the state-action pair and averages those returns.
+
+00:01:25.099 --> 00:01:27.854
+These algorithms do yield different behavior,
+
+00:01:27.855 --> 00:01:31.030
+and you can read more about those differences below.
+

@@ -1,0 +1,133 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.379
+To illustrate the algorithms we'll discuss in this lesson,
+
+00:00:03.379 --> 00:00:07.139
+it'll help to work with a small example of a reinforcement learning task.
+
+00:00:07.139 --> 00:00:11.535
+So, say we have an agent in a world with only four possible states,
+
+00:00:11.535 --> 00:00:13.890
+here, marked by stone,
+
+00:00:13.890 --> 00:00:16.719
+brick, wood, or a grass.
+
+00:00:16.719 --> 00:00:18.854
+Say that at the beginning of an episode,
+
+00:00:18.855 --> 00:00:24.045
+the agent always starts in state one and its goal is to reach state four,
+
+00:00:24.045 --> 00:00:25.685
+which is a terminal state.
+
+00:00:25.684 --> 00:00:27.734
+But that seems a bit too easy.
+
+00:00:27.734 --> 00:00:29.550
+So, to add a bit of difficulty,
+
+00:00:29.550 --> 00:00:33.310
+we'll add a big wall separating state one from state four.
+
+00:00:33.310 --> 00:00:34.765
+At each time step,
+
+00:00:34.765 --> 00:00:36.299
+the agent can move up,
+
+00:00:36.299 --> 00:00:38.464
+down, left, or right.
+
+00:00:38.465 --> 00:00:42.325
+Let's say those actions mostly do what they're supposed to do.
+
+00:00:42.325 --> 00:00:46.609
+So, if the agent is in state one and selects action up,
+
+00:00:46.609 --> 00:00:50.450
+it's highly likely that it moves up and ends up in state two.
+
+00:00:50.450 --> 00:00:53.025
+But let's say the world is really slippery,
+
+00:00:53.024 --> 00:00:56.250
+maybe the ground is covered in ice or bananas for instance.
+
+00:00:56.250 --> 00:00:58.759
+So, it's also possible that the agent tries to go
+
+00:00:58.759 --> 00:01:02.224
+up but ends up slamming into a wall instead.
+
+00:01:02.225 --> 00:01:05.620
+So, in this case, let's say that in general,
+
+00:01:05.620 --> 00:01:10.560
+if the agent decides to move in some direction, up for instance,
+
+00:01:10.560 --> 00:01:14.329
+it moves in that direction with 70 percent probability,
+
+00:01:14.329 --> 00:01:19.364
+but ends up moving in one of the other directions with 10 percent probability each.
+
+00:01:19.364 --> 00:01:23.159
+If an agent runs into a wall at the next time step,
+
+00:01:23.159 --> 00:01:27.344
+it just ends up in the same state where it started. So let's see.
+
+00:01:27.344 --> 00:01:29.875
+We have four states, four actions.
+
+00:01:29.875 --> 00:01:33.019
+We know how the environment decides the next state until
+
+00:01:33.019 --> 00:01:36.500
+we've almost completely specified how the environment should work,
+
+00:01:36.500 --> 00:01:39.390
+but we still need to talk about how the agent receives reward.
+
+00:01:39.390 --> 00:01:44.989
+So, let's say that the agent gets a reward of negative one for most transitions.
+
+00:01:44.989 --> 00:01:46.795
+But if it lands in the terminal state,
+
+00:01:46.795 --> 00:01:48.489
+it gets a reward of 10.
+
+00:01:48.489 --> 00:01:51.140
+Then this ensures that the goal of the agent will be to
+
+00:01:51.140 --> 00:01:54.010
+get to that terminal state as quickly as possible.
+
+00:01:54.010 --> 00:01:57.935
+For simplicity, let's say that the discount rate is one.
+
+00:01:57.935 --> 00:02:00.625
+So, in other words, we won't discount.
+
+00:02:00.625 --> 00:02:03.305
+Now, the task is completely defined.
+
+00:02:03.305 --> 00:02:06.200
+Soon, we'll take some first steps towards developing
+
+00:02:06.200 --> 00:02:10.555
+an algorithm that can determine the optimal policy for the small example.
+
+00:02:10.555 --> 00:02:13.610
+Then, later, you'll be able to apply what you learn to
+
+00:02:13.610 --> 00:02:18.670
+much larger problems that look more like what you'd encounter in a real-world setting.
+

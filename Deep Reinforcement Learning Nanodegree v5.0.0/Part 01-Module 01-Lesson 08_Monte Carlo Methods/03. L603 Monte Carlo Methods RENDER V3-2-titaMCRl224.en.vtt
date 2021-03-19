@@ -1,0 +1,268 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.000
+So, we're working with a small grid world example,
+
+00:00:03.000 --> 00:00:05.519
+with an agent who would like to make it all the way to
+
+00:00:05.519 --> 00:00:08.839
+the state and the bottom right corner as quickly as possible.
+
+00:00:08.839 --> 00:00:13.589
+So, how should the agent begin if it initially knows nothing about the environment?
+
+00:00:13.589 --> 00:00:17.370
+Well, probably, the most sensible thing for the agent to do at the beginning when it
+
+00:00:17.370 --> 00:00:21.484
+doesn't know anything is just to behave randomly and see what happens.
+
+00:00:21.484 --> 00:00:24.744
+So, let's say, when the agent encounters a new state,
+
+00:00:24.745 --> 00:00:26.725
+it just selects to go up down,
+
+00:00:26.725 --> 00:00:29.225
+left or right with equal probability.
+
+00:00:29.225 --> 00:00:31.940
+When the agent randomly selects an action in
+
+00:00:31.940 --> 00:00:35.689
+this way where each action has an equal chance of being selected,
+
+00:00:35.689 --> 00:00:39.629
+we say that it's following the equiprobable random policy.
+
+00:00:39.630 --> 00:00:42.605
+So, for instance, at the start of the first episode,
+
+00:00:42.604 --> 00:00:44.829
+say the agent is in state one.
+
+00:00:44.829 --> 00:00:49.390
+Then, to select an action that spins the wheel which tells it to pick action up.
+
+00:00:49.390 --> 00:00:51.490
+Now, remember the world is slippery,
+
+00:00:51.490 --> 00:00:54.875
+so the agent may not actually move where it intends.
+
+00:00:54.875 --> 00:00:58.570
+But in this case, say the agent does move up, as a result,
+
+00:00:58.570 --> 00:01:02.575
+it receives a reward of negative one and ends up in state two.
+
+00:01:02.575 --> 00:01:06.980
+Then, say it follows the same process with randomly selecting an action.
+
+00:01:06.980 --> 00:01:09.510
+This time it selects action left.
+
+00:01:09.510 --> 00:01:11.435
+Again, the world is slippery,
+
+00:01:11.435 --> 00:01:15.180
+and let's say when the agent executes action left, and instead,
+
+00:01:15.180 --> 00:01:20.075
+slides up and hits the wall which bounces to right back into state two,
+
+00:01:20.075 --> 00:01:22.875
+and it receives a reward of negative one.
+
+00:01:22.875 --> 00:01:25.849
+Say, the agent continues this process with
+
+00:01:25.849 --> 00:01:28.989
+randomly selecting an action until the end of the episode,
+
+00:01:28.989 --> 00:01:32.064
+and say that the full episode is shown here.
+
+00:01:32.064 --> 00:01:38.239
+Then, say the agent follows the same process one more time to collect a second episode.
+
+00:01:38.239 --> 00:01:42.449
+Certainly, there must be some valuable information in here.
+
+00:01:42.450 --> 00:01:46.040
+How can the agent consolidate this experience in a way that
+
+00:01:46.040 --> 00:01:49.700
+allows it to improve upon its currently very random strategy?
+
+00:01:49.700 --> 00:01:53.674
+I mean certainly, the agent can do much better than it's doing now.
+
+00:01:53.674 --> 00:01:55.849
+So, how do we accomplish that?
+
+00:01:55.849 --> 00:01:58.144
+We'll remember what we're searching for.
+
+00:01:58.144 --> 00:02:00.104
+That's the optimal policy.
+
+00:02:00.105 --> 00:02:03.380
+It tells us for each state which action or
+
+00:02:03.379 --> 00:02:07.074
+actions are most useful towards the goal of maximizing return,
+
+00:02:07.075 --> 00:02:11.680
+or getting as much cumulative reward as we can over all time steps.
+
+00:02:11.680 --> 00:02:14.265
+If the question really is that simple,
+
+00:02:14.264 --> 00:02:16.949
+from each state which action is best?
+
+00:02:16.949 --> 00:02:20.419
+Maybe, it makes sense to just pick the action that got
+
+00:02:20.419 --> 00:02:24.004
+the most reward in these episodes that we've collected so far.
+
+00:02:24.004 --> 00:02:26.859
+For instance, we see that in both of these episodes,
+
+00:02:26.860 --> 00:02:29.025
+the agent began in state one.
+
+00:02:29.025 --> 00:02:31.094
+When it's selected action up,
+
+00:02:31.094 --> 00:02:33.969
+it ended up with a final score of seven
+
+00:02:33.969 --> 00:02:38.514
+obtained by just summing up all the rewards it received over the episode.
+
+00:02:38.514 --> 00:02:40.664
+When it selected action right,
+
+00:02:40.664 --> 00:02:43.284
+it ended up with a final score of six.
+
+00:02:43.284 --> 00:02:46.974
+Maybe, the agent can use this as an indication that
+
+00:02:46.974 --> 00:02:51.134
+action up might be better than action right when it's in state one.
+
+00:02:51.134 --> 00:02:55.060
+This is a useful first step for thinking about how we might be able
+
+00:02:55.060 --> 00:02:59.009
+to estimate the optimal policy from interacting with the environment.
+
+00:02:59.009 --> 00:03:00.449
+In the upcoming videos,
+
+00:03:00.449 --> 00:03:03.519
+you'll learn more about how to formalize this idea to
+
+00:03:03.520 --> 00:03:07.650
+turn it into an algorithm that can reliably obtained the optimal policy.
+
+00:03:07.650 --> 00:03:11.194
+For now, I should mention that two episodes,
+
+00:03:11.194 --> 00:03:13.245
+or even 10 or 20,
+
+00:03:13.245 --> 00:03:18.340
+is definitely not enough to truly have a strong understanding of the environment.
+
+00:03:18.340 --> 00:03:21.110
+Of course, this is partially because the agent
+
+00:03:21.110 --> 00:03:23.870
+hasn't tried out each action from each state.
+
+00:03:23.870 --> 00:03:27.955
+For Instance, the agent has tried going up from state one,
+
+00:03:27.955 --> 00:03:30.455
+and it has also tried going right.
+
+00:03:30.455 --> 00:03:34.950
+But it doesn't know what would happen if it instead decides to go down or left.
+
+00:03:34.949 --> 00:03:38.839
+We also have to remember that the dynamics are set up so that the agent
+
+00:03:38.840 --> 00:03:43.284
+only moves with 70 percent probability in the direction that it intends.
+
+00:03:43.284 --> 00:03:48.169
+What if by chance we got really unlucky and the agent always
+
+00:03:48.169 --> 00:03:54.184
+experienced the highly unlikely event that it always moved in the wrong direction.
+
+00:03:54.185 --> 00:03:57.409
+Well, then, it would be pretty bad if the agent inferred
+
+00:03:57.409 --> 00:04:02.099
+the best actions based on data that's unlikely to repeat in the future.
+
+00:04:02.099 --> 00:04:04.900
+Of course, there's a quick solution for this.
+
+00:04:04.900 --> 00:04:08.015
+That just involves collecting many more episodes.
+
+00:04:08.014 --> 00:04:11.839
+If you collect hundreds or thousands of episodes for instance,
+
+00:04:11.840 --> 00:04:15.715
+you should be able to form relatively better-informed decisions.
+
+00:04:15.715 --> 00:04:21.110
+In fact, this is a fundamental idea behind Monte Carlo methods in general.
+
+00:04:21.110 --> 00:04:25.960
+Even though the underlying problem involves a great degree of randomness,
+
+00:04:25.959 --> 00:04:29.234
+we can infer useful information that we can trust,
+
+00:04:29.235 --> 00:04:31.819
+just by collecting a lot of samples.
+
+00:04:31.819 --> 00:04:35.430
+For now, for the purposes of the small example,
+
+00:04:35.430 --> 00:04:38.970
+we'll assume that two or three episodes is enough.
+
+00:04:38.970 --> 00:04:40.920
+But in real-world situations,
+
+00:04:40.920 --> 00:04:44.330
+you'll have to interact with the environment for many more episodes.
+
+00:04:44.329 --> 00:04:45.990
+For the next couple of concepts,
+
+00:04:45.990 --> 00:04:48.040
+we will think deeply about what exactly
+
+00:04:48.040 --> 00:04:50.560
+we should do with these episodes that we've collected?
+
+00:04:50.560 --> 00:04:53.110
+What kind of information should we extract from them?
+
+00:04:53.110 --> 00:04:56.680
+How can it help us in our search for an optimal policy?
+

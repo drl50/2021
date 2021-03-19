@@ -1,0 +1,82 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.714
+We began this lesson by reviewing Monte Carlo Control.
+
+00:00:03.714 --> 00:00:06.779
+Remember this was the corresponding update equation.
+
+00:00:06.780 --> 00:00:09.839
+In order to use it, we sample a complete episode.
+
+00:00:09.839 --> 00:00:13.164
+Then, we look up the current estimate and the Q table,
+
+00:00:13.164 --> 00:00:15.569
+and compare it to the return that we actually
+
+00:00:15.570 --> 00:00:19.094
+experienced after visiting the state action pair.
+
+00:00:19.094 --> 00:00:23.369
+We use that new return to make our Q table a little more accurate.
+
+00:00:23.370 --> 00:00:26.429
+But then, you learned how to change
+
+00:00:26.429 --> 00:00:30.710
+the update equation to only use a very small time window of information.
+
+00:00:30.710 --> 00:00:33.825
+Instead of using the return as an alternative estimate
+
+00:00:33.825 --> 00:00:36.570
+for updating the Q table we use the sum
+
+00:00:36.570 --> 00:00:42.020
+of the immediate reward and the discounted value of the next state action pair.
+
+00:00:42.020 --> 00:00:45.650
+In the small grid world example we assumed Gamma was equal
+
+00:00:45.649 --> 00:00:50.199
+to one but this need not be the case for a general MDP.
+
+00:00:50.200 --> 00:00:53.420
+This will yield a new control method that we can
+
+00:00:53.420 --> 00:00:56.825
+use for both continuing and episodic tasks.
+
+00:00:56.825 --> 00:00:59.460
+With the exception of this new update step,
+
+00:00:59.460 --> 00:01:02.549
+it's identical to what we did in the Monte Carlo case.
+
+00:01:02.549 --> 00:01:08.914
+In particular, we'll use the Epsilon greedy policy to select actions at every time step.
+
+00:01:08.915 --> 00:01:12.440
+The only real difference is that we update the Q table at
+
+00:01:12.439 --> 00:01:16.355
+every time step instead of waiting until the end of the episode,
+
+00:01:16.355 --> 00:01:19.880
+and as long as we specify appropriate values for Epsilon
+
+00:01:19.879 --> 00:01:24.099
+the algorithm is guaranteed to converge to the optimal policy.
+
+00:01:24.099 --> 00:01:30.664
+The name of this algorithm is Sarsa zero also known as Sarsa for short the name
+
+00:01:30.665 --> 00:01:37.225
+comes from the fact that each action value update uses a state action reward,
+
+00:01:37.224 --> 00:01:40.669
+next state, next action, tuple of interaction.
+
