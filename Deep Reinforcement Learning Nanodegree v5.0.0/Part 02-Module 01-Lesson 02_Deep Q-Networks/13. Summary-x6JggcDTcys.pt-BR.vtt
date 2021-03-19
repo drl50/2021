@@ -1,0 +1,75 @@
+WEBVTT
+Kind: captions
+Language: pt-BR
+
+00:00:00.375 --> 00:00:03.258
+Espero que você tenha tido uma boa
+ideia do Q-Learning Profundo,
+
+00:00:03.288 --> 00:00:06.129
+de como ele combina o melhor
+da aprendizagem por reforço
+
+00:00:06.159 --> 00:00:08.649
+com os avanços recentes
+em aprendizagem profunda.
+
+00:00:08.679 --> 00:00:11.729
+Também espero que você
+tenha percebido como isso abre
+
+00:00:11.759 --> 00:00:15.018
+um mundo de possibilidades
+para você experimentar.
+
+00:00:15.048 --> 00:00:17.450
+Diferentes arquiteturas neurais,
+funções de valores,
+
+00:00:17.480 --> 00:00:21.074
+algoritmos de aprendizagem,
+sem falar na grande variedade
+
+00:00:21.104 --> 00:00:23.202
+de ambientes que você
+pode explorar.
+
+00:00:23.232 --> 00:00:25.069
+Antes de você seguir
+em frente e estudar
+
+00:00:25.099 --> 00:00:26.978
+outras abordagens
+de aprendizagem por reforço,
+
+00:00:27.008 --> 00:00:29.170
+eu aconselho que você tente
+implementar agentes
+
+00:00:29.200 --> 00:00:31.690
+para diferentes problemas,
+especialmente em plataformas
+
+00:00:31.720 --> 00:00:33.746
+como OpenAI Gym.
+
+00:00:33.776 --> 00:00:37.129
+Veja em quais o Q-Learning Profundo
+pode ser usado de forma confiável,
+
+00:00:37.159 --> 00:00:39.545
+e em quais ele
+encontra desafios.
+
+00:00:39.575 --> 00:00:43.201
+Isso vai ajudar você a ter
+um melhor entendimento do algoritmo,
+
+00:00:43.231 --> 00:00:45.698
+e a motivar a necessidade
+de usar outras abordagens,
+
+00:00:45.728 --> 00:00:48.794
+como gradientes de política
+e métodos Actor-Critic.
+

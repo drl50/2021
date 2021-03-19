@@ -1,0 +1,314 @@
+WEBVTT
+Kind: captions
+Language: pt-BR
+
+00:00:04.007 --> 00:00:08.403
+Em 2015, a DeepMind foi
+revolucionária ao criar um agente
+
+00:00:08.436 --> 00:00:11.578
+que aprendeu a jogar videogames
+melhor do que os seres humanos.
+
+00:00:11.611 --> 00:00:14.115
+Claro, deve ser fácil
+escrever um programa
+
+00:00:14.148 --> 00:00:15.964
+que joga Pong perfeitamente,
+
+00:00:15.997 --> 00:00:18.560
+caso você tenha acesso
+ao estado subjacente do jogo,
+
+00:00:18.593 --> 00:00:21.068
+à posição da bola,
+das paletas etc.
+
+00:00:21.101 --> 00:00:24.421
+Mas esse agente só tinha acesso
+aos dados brutos de pixels -
+
+00:00:24.454 --> 00:00:26.830
+tudo o que um jogador humano
+podia ver na tela -
+
+00:00:26.863 --> 00:00:30.100
+e ele aprendeu a jogar
+vários jogos diferentes de Atari,
+
+00:00:30.133 --> 00:00:31.937
+todos eles do zero.
+
+00:00:31.970 --> 00:00:35.026
+Eles chamaram esse agente
+de rede-Q profunda.
+
+00:00:35.059 --> 00:00:37.720
+Vamos ver como ela funciona.
+
+00:00:38.532 --> 00:00:39.634
+Fazendo jus ao nome,
+
+00:00:39.667 --> 00:00:42.798
+no coração do agente
+há uma rede neural profunda
+
+00:00:42.831 --> 00:00:45.633
+que age
+como um aproximador de função.
+
+00:00:45.666 --> 00:00:48.577
+Você passa imagens
+do seu videogame favorito,
+
+00:00:48.610 --> 00:00:50.115
+uma tela de cada vez,
+
+00:00:50.148 --> 00:00:52.814
+e a rede produz um vetor
+dos valores das ações,
+
+00:00:52.847 --> 00:00:56.428
+em que o valor máximo indica
+a ação a ser tomada.
+
+00:00:56.461 --> 00:00:58.127
+Como um sinal de reforço,
+
+00:00:58.160 --> 00:01:00.550
+ela é alimentada com a mudança
+na pontuação do jogo
+
+00:01:00.583 --> 00:01:02.149
+em cada instante de tempo.
+
+00:01:02.182 --> 00:01:06.489
+No início, quando a rede neural é
+inicializada com valores aleatórios,
+
+00:01:06.522 --> 00:01:09.225
+as ações tomadas estão
+muito espalhadas.
+
+00:01:09.258 --> 00:01:11.733
+O desempenho é muito ruim,
+como já esperaríamos,
+
+00:01:11.766 --> 00:01:16.173
+mas depois a rede começa a associar
+situações e sequências do jogo
+
+00:01:16.206 --> 00:01:20.627
+com as ações certas
+e aprende a jogar bem o jogo.
+
+00:01:20.660 --> 00:01:23.519
+Considere o quanto é complexo
+o espaço de entradas.
+
+00:01:23.552 --> 00:01:29.081
+A resolução dos jogos de Atari é
+de 210 por 160 pixels,
+
+00:01:29.114 --> 00:01:33.409
+e há 128 cores possíveis
+para cada pixel.
+
+00:01:33.986 --> 00:01:37.169
+Tecnicamente,
+é um espaço de estados discreto,
+
+00:01:37.202 --> 00:01:39.757
+mas muito grande
+para processar.
+
+00:01:40.365 --> 00:01:41.964
+Para reduzir
+essa complexidade,
+
+00:01:41.997 --> 00:01:45.690
+a equipe da DeepMind decidiu fazer
+um pequeno processamento:
+
+00:01:45.723 --> 00:01:47.630
+converter os quadros
+para tons de cinza
+
+00:01:47.663 --> 00:01:52.242
+e diminuí-los para um quadrado
+de 84 por 84 pixels.
+
+00:01:52.275 --> 00:01:54.166
+As imagens quadradas
+permitiram usar
+
+00:01:54.199 --> 00:01:58.190
+operações de redes neurais
+mais otimizadas nos GPUs.
+
+00:01:58.223 --> 00:02:01.485
+Para dar ao agente o acesso
+a uma sequência de quadros,
+
+00:02:01.518 --> 00:02:03.783
+eles empilharam
+quatro quadros,
+
+00:02:03.816 --> 00:02:09.272
+resultando num espaço de estados
+de 84 por 84 por 4 pixels.
+
+00:02:09.305 --> 00:02:12.460
+Deve haver outras abordagens
+para lidar com dados sequenciais,
+
+00:02:12.493 --> 00:02:16.277
+mas essa foi uma abordagem simples
+que pareceu funcionar muito bem.
+
+00:02:16.310 --> 00:02:17.454
+Quanto à saída,
+
+00:02:17.487 --> 00:02:20.406
+diferentemente do que acontece
+na aprendizagem por reforço,
+
+00:02:20.439 --> 00:02:23.259
+em que só é produzido
+um valor Q de cada vez,
+
+00:02:23.292 --> 00:02:26.657
+a rede-Q profunda é projetada
+para produzir um valor Q
+
+00:02:26.690 --> 00:02:30.393
+para cada ação possível
+em um único passe adiante.
+
+00:02:30.426 --> 00:02:33.336
+Sem isso, teríamos que executar
+a rede individualmente
+
+00:02:33.369 --> 00:02:35.018
+para cada ação.
+
+00:02:35.051 --> 00:02:38.667
+Em vez disso, agora podemos usar
+esse vetor para tomar uma ação,
+
+00:02:38.700 --> 00:02:42.843
+estocasticamente ou escolhendo
+a ação de valor máximo.
+
+00:02:42.876 --> 00:02:44.543
+Legal, não é?
+
+00:02:45.755 --> 00:02:48.831
+Essas transformações inovadoras
+de entrada e saída
+
+00:02:48.864 --> 00:02:53.545
+suportam uma simples e poderosa
+arquitetura de rede neural.
+
+00:02:53.578 --> 00:02:57.179
+As imagens de tela são processadas
+por camadas convolucionais.
+
+00:02:57.212 --> 00:03:00.977
+Assim o sistema pode explorar
+relações espaciais
+
+00:03:01.010 --> 00:03:03.980
+e o espaço
+de regras espaciais.
+
+00:03:04.013 --> 00:03:06.422
+Além disso, como quatro quadros
+estão empilhados
+
+00:03:06.455 --> 00:03:08.024
+e são fornecidos
+como entrada,
+
+00:03:08.057 --> 00:03:11.764
+essas camadas convolucionais também
+extraem propriedades temporais
+
+00:03:11.797 --> 00:03:13.860
+ao longo desses quadros.
+
+00:03:13.893 --> 00:03:18.064
+O agente DQN original usou
+três camadas convolucionais
+
+00:03:18.097 --> 00:03:21.707
+com ativação ReLU,
+ou unidade linear retificada.
+
+00:03:21.740 --> 00:03:24.563
+Depois usou uma camada oculta
+totalmente conectada
+
+00:03:24.596 --> 00:03:26.027
+com ativação ReLU
+
+00:03:26.060 --> 00:03:28.836
+e uma camada de saída linear
+totalmente conectada
+
+00:03:28.869 --> 00:03:31.999
+que produziu o vetor
+dos valores das ações.
+
+00:03:32.032 --> 00:03:36.161
+Essa mesma arquitetura foi usada
+em todos os jogos de Atari testados,
+
+00:03:36.194 --> 00:03:41.057
+mas cada jogo foi aprendido do zero
+com uma rede reinicializada.
+
+00:03:42.260 --> 00:03:45.004
+Treinar uma rede como essa
+requer muitos dados,
+
+00:03:45.037 --> 00:03:49.441
+mas nem assim é certo que vamos
+convergir para a função valor ótima.
+
+00:03:49.474 --> 00:03:53.832
+Há situações em que os pesos da rede
+podem oscilar ou divergir
+
+00:03:53.865 --> 00:03:57.398
+por causa da alta correlação
+entre ações e estados.
+
+00:03:57.431 --> 00:04:01.428
+Isso pode resultar em uma política
+muito instável e ineficaz.
+
+00:04:01.461 --> 00:04:03.340
+Para superar esses desafios,
+
+00:04:03.373 --> 00:04:05.685
+os pesquisadores desenvolveram
+várias técnicas
+
+00:04:05.718 --> 00:04:09.041
+que alteram ligeiramente
+a base do algoritmo de Q-learning.
+
+00:04:09.074 --> 00:04:11.350
+Veremos as duas técnicas
+
+00:04:11.383 --> 00:04:14.808
+que eu considero as contribuições
+mais importantes do trabalho deles:
+
+00:04:14.841 --> 00:04:18.179
+a repetição de experiências
+e a correção de alvos Q.
+

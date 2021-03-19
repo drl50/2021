@@ -1,0 +1,581 @@
+WEBVTT
+Kind: captions
+Language: pt-BR
+
+00:00:00.441 --> 00:00:02.572
+A ideia
+do Experience Replay
+
+00:00:02.607 --> 00:00:05.051
+e sua aplicação no treinamento
+de redes neurais
+
+00:00:05.086 --> 00:00:07.667
+para aprendizagem por reforço
+não é nova.
+
+00:00:08.913 --> 00:00:11.915
+Ela foi originalmente proposta
+para fazer um uso mais eficiente
+
+00:00:11.950 --> 00:00:14.019
+de experiências observáveis.
+
+00:00:14.460 --> 00:00:17.156
+Considere o algoritmo Q-Learning
+online básico,
+
+00:00:17.191 --> 00:00:19.003
+em que interagimos
+com o ambiente,
+
+00:00:19.038 --> 00:00:20.746
+e em cada instante de tempo,
+
+00:00:20.781 --> 00:00:24.499
+obtemos um estado tupla
+estado, ação, recompensa, próximo.
+
+00:00:24.534 --> 00:00:27.372
+Aprenda com ele
+e depois descarte-o,
+
+00:00:27.407 --> 00:00:30.804
+avançando para a próxima tupla
+no instante de tempo seguinte.
+
+00:00:31.196 --> 00:00:33.020
+Isso parece um pouco
+perda de tempo.
+
+00:00:33.055 --> 00:00:36.499
+Talvez aprendêssemos mais
+com essas tuplas experientes
+
+00:00:36.534 --> 00:00:38.492
+se nós as armazenássemos
+em algum lugar.
+
+00:00:38.527 --> 00:00:41.468
+Além disso, alguns desses estados
+raramente passam por aqui
+
+00:00:41.503 --> 00:00:44.108
+e algumas ações
+podem ser muito custosas.
+
+00:00:44.143 --> 00:00:47.827
+Então, seria bom
+recordar tais experiências.
+
+00:00:47.862 --> 00:00:51.403
+É exatamente isso que
+um buffer replay nos permite fazer.
+
+00:00:51.438 --> 00:00:54.492
+Armazenamos cada tupla experiente
+nesse buffer
+
+00:00:54.527 --> 00:00:56.851
+conforme interagimos
+com o ambiente,
+
+00:00:56.886 --> 00:00:59.740
+e fazemos uma amostra
+de uma pequena quantidade de tuplas
+
+00:00:59.760 --> 00:01:01.387
+para podermos aprender.
+
+00:01:01.422 --> 00:01:05.035
+O resultado é que conseguimos
+aprender com tuplas individuais
+
+00:01:05.070 --> 00:01:07.811
+múltiplas vezes,
+recordar ocorrências raras
+
+00:01:07.846 --> 00:01:11.299
+e, no geral, fazer melhor uso
+da nossa experiência.
+
+00:01:11.651 --> 00:01:13.316
+Mas há
+outro problema crítico
+
+00:01:13.351 --> 00:01:15.763
+com o qual Experience Replay
+pode nos ajudar,
+
+00:01:15.798 --> 00:01:18.778
+e é disso que a Q-Learning Profunda
+tira vantagem.
+
+00:01:18.813 --> 00:01:21.419
+Se você pensar
+nas experiências obtidas,
+
+00:01:21.454 --> 00:01:24.187
+vai perceber
+que cada ação AT
+
+00:01:24.222 --> 00:01:26.948
+afeta o próximo estado ST
+de alguma forma,
+
+00:01:26.983 --> 00:01:29.882
+o que significa que uma sequência
+de tuplas experientes
+
+00:01:29.917 --> 00:01:32.090
+podem estar altamente
+correlacionadas.
+
+00:01:32.125 --> 00:01:34.267
+Uma abordagem Q-Learning
+Naïve que aprenda
+
+00:01:34.302 --> 00:01:37.259
+a partir de cada uma dessas
+experiências em ordem sequencial
+
+00:01:37.294 --> 00:01:41.451
+corre o risco de oscilar
+com os efeitos dessa correlação.
+
+00:01:41.486 --> 00:01:45.700
+Com Experience Replay podemos fazer
+uma amostra aleatória desse buffer.
+
+00:01:45.735 --> 00:01:47.995
+Ela não precisa estar
+na mesma sequência,
+
+00:01:48.030 --> 00:01:50.067
+já que armazenamos
+as tuplas.
+
+00:01:50.544 --> 00:01:53.480
+Isso ajuda a quebrar a correlação
+e, no fim das contas,
+
+00:01:53.514 --> 00:01:55.771
+previne que valores
+de ação oscilem
+
+00:01:55.806 --> 00:01:58.163
+ou divirjam
+catastroficamente.
+
+00:01:58.564 --> 00:02:01.370
+Agora, isso pode ser
+um pouco difícil de entender,
+
+00:02:01.405 --> 00:02:03.523
+então vamos ver um exemplo.
+
+00:02:05.034 --> 00:02:06.624
+Eu estou aprendendo
+a jogar tênis,
+
+00:02:06.659 --> 00:02:09.323
+e gosto de praticar
+jogando contra a parede.
+
+00:02:09.624 --> 00:02:13.068
+Eu tenho mais confiança no meu golpe
+de forehand do que de backhand,
+
+00:02:13.103 --> 00:02:15.586
+e eu consigo golpear a bola
+bem reta.
+
+00:02:15.621 --> 00:02:19.435
+Então, a bola fica voltando através
+da mesma área, à minha direita,
+
+00:02:19.470 --> 00:02:22.019
+e eu fico golpeando
+de forehand.
+
+00:02:22.054 --> 00:02:26.699
+Se eu fosse um agente Q-learning
+online, aprendendo enquanto jogo,
+
+00:02:26.734 --> 00:02:28.802
+talvez eu compreendesse
+algo assim.
+
+00:02:28.837 --> 00:02:30.826
+Quando a bola chega
+à minha direita,
+
+00:02:30.861 --> 00:02:32.898
+eu devo golpear de forehand.
+
+00:02:32.933 --> 00:02:36.131
+Um pouco incerto no início,
+mas cada vez com mais confiança
+
+00:02:36.166 --> 00:02:38.523
+conforme eu for golpeando
+repetidamente a bola.
+
+00:02:38.558 --> 00:02:41.583
+Ótimo. Estou aprendendo bem
+a golpear de forehand,
+
+00:02:41.618 --> 00:02:45.010
+mas não estou explorando
+o resto do espaço de estado.
+
+00:02:45.045 --> 00:02:49.091
+Isso pode ser abordado
+usando uma política epsilon-greedy,
+
+00:02:49.126 --> 00:02:51.715
+que atue aleatoriamente
+com uma pequena probabilidade.
+
+00:02:51.750 --> 00:02:54.867
+Então, eu testo diferentes
+combinações de estados e ações
+
+00:02:54.902 --> 00:02:57.946
+e às vezes cometo erros,
+mas, eventualmente,
+
+00:02:57.981 --> 00:03:00.890
+descubro a melhor
+política geral:
+
+00:03:00.925 --> 00:03:03.971
+usar o golpe de forehand quando
+a bola vier pela minha direita,
+
+00:03:04.006 --> 00:03:06.883
+e o golpe de backhand,
+quando ela vier pela minha esquerda.
+
+00:03:06.918 --> 00:03:09.963
+Perfeito. Essa estratégia
+de aprendizagem parece funcionar bem
+
+00:03:09.998 --> 00:03:11.235
+com uma tabela Q,
+
+00:03:11.270 --> 00:03:14.411
+onde consideramos esse espaço
+de estado altamente simplificado,
+
+00:03:14.446 --> 00:03:16.891
+com apenas
+dois estados discretos.
+
+00:03:17.258 --> 00:03:20.147
+Mas quando consideramos
+um espaço de estado contínuo,
+
+00:03:20.182 --> 00:03:22.010
+as coisas podem desandar.
+
+00:03:22.045 --> 00:03:23.619
+Vamos ver como.
+
+00:03:23.654 --> 00:03:26.313
+Primeiro, a bola pode vir
+de qualquer lugar
+
+00:03:26.348 --> 00:03:28.922
+entre a extrema esquerda
+e a extrema direita.
+
+00:03:28.957 --> 00:03:31.046
+Se eu tentar discretizar
+esse alcance
+
+00:03:31.081 --> 00:03:34.642
+em pequenos recipientes,
+eu teria possibilidades demais.
+
+00:03:34.677 --> 00:03:37.859
+E se eu acabar aprendendo
+uma política com buracos?
+
+00:03:37.894 --> 00:03:40.171
+Com estados ou situações
+que eu posso não ter explorado
+
+00:03:40.206 --> 00:03:41.938
+durante a prática?
+
+00:03:41.973 --> 00:03:45.442
+E m vez disso, faz mais sentido
+usar um aproximador de função,
+
+00:03:45.477 --> 00:03:48.202
+como uma combinação linear
+de Kernels RBF,
+
+00:03:48.237 --> 00:03:51.299
+ou uma rede Q que pode generalizar
+minha aprendizagem
+
+00:03:51.334 --> 00:03:53.274
+através do espaço.
+
+00:03:53.309 --> 00:03:56.162
+Agora, sempre que a bola
+vier pela minha direita,
+
+00:03:56.197 --> 00:03:58.442
+e eu executar um golpe
+de forehand bem sucedido,
+
+00:03:58.477 --> 00:04:00.962
+a minha função de valor
+muda ligeiramente.
+
+00:04:00.997 --> 00:04:05.018
+Ela se torna mais positiva
+perto da região de onde a bola veio,
+
+00:04:05.053 --> 00:04:07.915
+mas também aumenta o valor
+do golpe de forehand
+
+00:04:07.950 --> 00:04:10.633
+no geral através
+do espaço de estado.
+
+00:04:10.668 --> 00:04:13.922
+O efeito é menos ampliado
+longe dessa mesma área,
+
+00:04:13.957 --> 00:04:16.362
+mas, com o tempo,
+ele pode aumentar.
+
+00:04:16.397 --> 00:04:20.251
+E isso é exatamente o que acontece
+quando tento aprender enquanto jogo,
+
+00:04:20.286 --> 00:04:23.250
+processando cada tupla experiente
+em ordem.
+
+00:04:23.285 --> 00:04:26.450
+Por exemplo, se o meu golpe
+de forehand é bastante reto,
+
+00:04:26.485 --> 00:04:29.610
+é provável que a bola retorne
+para mim próxima do mesmo ponto.
+
+00:04:29.645 --> 00:04:32.874
+Isso produz um estado
+muito similar ao anterior,
+
+00:04:32.909 --> 00:04:34.810
+então eu uso o meu forehand
+de novo,
+
+00:04:34.845 --> 00:04:37.537
+e, se ele for bem sucedido,
+reforça a minha crença
+
+00:04:37.572 --> 00:04:39.529
+de que usar o forehand
+é uma boa escolha.
+
+00:04:39.564 --> 00:04:42.089
+Eu posso facilmente
+ficar preso nesse ciclo.
+
+00:04:42.426 --> 00:04:46.746
+Por fim, se eu não vir muitos
+exemplos da bola vindo pela esquerda
+
+00:04:46.781 --> 00:04:49.450
+durante algum tempo,
+o valor do golpe de forehand
+
+00:04:49.485 --> 00:04:51.410
+pode se tornar maior
+do que o de backhand
+
+00:04:51.445 --> 00:04:54.065
+através de todo
+o espaço de estado.
+
+00:04:54.100 --> 00:04:56.386
+A minha política seria, então,
+escolher o forehand
+
+00:04:56.421 --> 00:04:59.090
+independente de onde
+a bola estiver vindo.
+
+00:04:59.125 --> 00:05:00.482
+Que desastre.
+
+00:05:00.517 --> 00:05:02.898
+Certo,
+como consertamos isso?
+
+00:05:02.933 --> 00:05:07.034
+A primeira coisa que devo fazer é
+parar de aprender enquanto pratico.
+
+00:05:07.069 --> 00:05:10.369
+É melhor gastar esse tempo
+testando diferentes golpes,
+
+00:05:10.404 --> 00:05:14.442
+jogando aleatoriamente e, assim,
+explorar o espaço de estado.
+
+00:05:14.477 --> 00:05:17.674
+Depois, é importante
+lembrar das minhas interações.
+
+00:05:17.709 --> 00:05:21.162
+Quais golpes funcionaram
+em quais situações etc.
+
+00:05:21.197 --> 00:05:24.329
+Quando eu fizer uma pausa
+ou estiver em casa descansando,
+
+00:05:24.364 --> 00:05:27.162
+será uma boa hora
+para recordar essas experiências
+
+00:05:27.197 --> 00:05:29.001
+e aprender a partir delas.
+
+00:05:29.036 --> 00:05:31.178
+A maior vantagem
+é que, agora,
+
+00:05:31.213 --> 00:05:34.155
+eu tenho um conjunto de exemplos
+mais compreensível.
+
+00:05:34.190 --> 00:05:36.065
+Às vezes a bola veio
+pela minha direita,
+
+00:05:36.100 --> 00:05:37.826
+às vezes,
+veio pela minha esquerda.
+
+00:05:37.861 --> 00:05:40.450
+Alguns golpes foram de forehand,
+alguns, de backhand.
+
+00:05:40.485 --> 00:05:43.970
+Eu posso generalizar padrões
+através desses exemplos,
+
+00:05:44.005 --> 00:05:46.746
+recordando eles
+na ordem que eu preferir.
+
+00:05:46.781 --> 00:05:51.209
+Isso evita que eu fique fixado
+em uma região do espaço de estado,
+
+00:05:51.244 --> 00:05:54.642
+ou fique reforçando
+cada vez mais a mesma ação.
+
+00:05:54.677 --> 00:05:56.338
+Depois de uma rodada
+de aprendizagem,
+
+00:05:56.373 --> 00:05:59.426
+eu posso voltar a jogar com a minha
+função de valor atualizada.
+
+00:05:59.461 --> 00:06:01.762
+Repito: colete um monte
+de experiências
+
+00:06:01.797 --> 00:06:04.353
+e aprenda a partir delas
+em conjunto.
+
+00:06:04.388 --> 00:06:07.601
+Dessa forma, Experience Replay
+pode nos ajudar a aprender
+
+00:06:07.636 --> 00:06:10.578
+uma política mais robusta,
+uma que não seja afetada
+
+00:06:10.613 --> 00:06:14.010
+pela correlação inerente
+presente na sequência
+
+00:06:14.045 --> 00:06:16.794
+de tuplas experientes
+observadas.
+
+00:06:17.426 --> 00:06:19.780
+Parando para pensar,
+essa abordagem basicamente
+
+00:06:19.813 --> 00:06:21.841
+monta uma base de dados
+de amostras
+
+00:06:21.876 --> 00:06:24.193
+e aprende um mapeamento
+a partir delas.
+
+00:06:24.228 --> 00:06:27.145
+Nesse sentido, Experience Replay
+nos ajuda a reduzir
+
+00:06:27.180 --> 00:06:29.178
+o problema de aprendizagem
+por reforço,
+
+00:06:29.213 --> 00:06:31.730
+ou ao menos a porção
+do valor de aprendizagem dele,
+
+00:06:31.765 --> 00:06:34.409
+a um cenário de aprendizagem
+supervisionada.
+
+00:06:34.444 --> 00:06:35.689
+Isso é inteligente.
+
+00:06:35.724 --> 00:06:38.657
+Assim, podemos aplicar outros
+modelos, técnicas de aprendizagem
+
+00:06:38.692 --> 00:06:40.257
+e melhores práticas
+desenvolvidas
+
+00:06:40.292 --> 00:06:42.209
+na literatura de aprendizagem
+supervisionada
+
+00:06:42.236 --> 00:06:44.271
+à aprendizagem por reforço.
+
+00:06:44.578 --> 00:06:47.176
+Nós podemos até mesmo
+elaborar sobre essa ideia,
+
+00:06:47.211 --> 00:06:51.025
+por exemplo, priorizando
+tuplas experientes raras
+
+00:06:51.060 --> 00:06:52.705
+ou mais importantes.
+

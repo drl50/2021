@@ -1,0 +1,269 @@
+WEBVTT
+Kind: captions
+Language: pt-BR
+
+00:00:00.334 --> 00:00:04.014
+Estamos prontos para ver
+o algoritmo Q-Learning profundo
+
+00:00:04.049 --> 00:00:06.069
+e para implementá-lo
+sozinhos.
+
+00:00:06.429 --> 00:00:10.510
+Dois processos principais estão
+entrelaçados a esse algoritmo.
+
+00:00:10.545 --> 00:00:12.998
+Um é onde fazemos
+uma amostragem do ambiente,
+
+00:00:13.033 --> 00:00:16.483
+desempenhando ações e armazenando
+as tuplas experientes observadas
+
+00:00:16.509 --> 00:00:18.397
+em uma memória de replay.
+
+00:00:18.432 --> 00:00:21.157
+O outro é quando selecionamos
+uma pequena quantidade de tuplas
+
+00:00:21.192 --> 00:00:24.822
+dessa memória aleatoriamente
+e aprendemos a partir dela
+
+00:00:24.857 --> 00:00:27.710
+usando um passo atualizado
+gradiente descendente.
+
+00:00:27.745 --> 00:00:31.470
+Esses dois processos não dependem
+diretamente um do outro,
+
+00:00:31.505 --> 00:00:33.973
+então você pode executar múltiplos
+passos de amostragem
+
+00:00:34.008 --> 00:00:37.142
+e apenas um de aprendizagem,
+ou múltiplos passos de aprendizagem
+
+00:00:37.177 --> 00:00:39.198
+com diferentes quantidades
+aleatórias.
+
+00:00:39.233 --> 00:00:43.054
+O resto do algoritmo é projetado
+para suportar esses passos.
+
+00:00:43.089 --> 00:00:47.478
+No início, você deve inicializar
+uma memória de replay vazia D.
+
+00:00:47.513 --> 00:00:49.197
+Note que a memória é finita,
+
+00:00:49.232 --> 00:00:52.325
+então você pode querer usar
+algo como um Q circular,
+
+00:00:52.360 --> 00:00:56.525
+que retenha as N tuplas experientes
+mais recentes.
+
+00:00:56.560 --> 00:00:59.366
+Depois, você também deve
+inicializar os parâmetros
+
+00:00:59.401 --> 00:01:01.510
+ou pesos da sua rede neural.
+
+00:01:01.545 --> 00:01:04.125
+Há melhores práticas
+que você pode usar,
+
+00:01:04.160 --> 00:01:06.278
+por exemplo, fazer uma amostragem
+aleatória dos pesos
+
+00:01:06.313 --> 00:01:09.117
+a partir de uma distribuição normal
+com a variação igual
+
+00:01:09.152 --> 00:01:12.877
+a 2 vezes o número de inputs
+para cada neurônio.
+
+00:01:12.912 --> 00:01:15.533
+Esses métodos de inicialização
+costumam estar disponíveis
+
+00:01:15.568 --> 00:01:17.389
+em bibliotecas de aprendizagem
+profunda modernas,
+
+00:01:17.424 --> 00:01:19.934
+como Keras e TensorFlow,
+então você não vai precisar
+
+00:01:19.969 --> 00:01:21.893
+implementá-los sozinho.
+
+00:01:21.928 --> 00:01:24.606
+Para usar a técnica
+de alvos Q fixos,
+
+00:01:24.641 --> 00:01:27.629
+você precisa de um segundo conjunto
+de parâmetros w-,
+
+00:01:27.664 --> 00:01:30.245
+que você pode inicializar
+para w.
+
+00:01:30.280 --> 00:01:33.413
+Agora, lembre-se
+de que esse algoritmo específico
+
+00:01:33.448 --> 00:01:35.821
+foi projetado para funcionar
+com vídeo games.
+
+00:01:35.856 --> 00:01:38.894
+Então, para cada episódio
+e para cada passo tempo t
+
+00:01:38.929 --> 00:01:42.325
+dentro desse episódio, você vai
+observar uma tela de imagem bruta,
+
+00:01:42.360 --> 00:01:46.069
+ou frame de input xt, que você
+deve converter para níveis de cinza,
+
+00:01:46.104 --> 00:01:48.397
+cortar em formato
+de quadrado etc.
+
+00:01:48.432 --> 00:01:51.405
+Além disso, para capturar
+relações temporais,
+
+00:01:51.440 --> 00:01:53.413
+você pode empilhar
+alguns frames de input
+
+00:01:53.448 --> 00:01:55.310
+para construir
+cada vetor de estado.
+
+00:01:55.345 --> 00:01:57.493
+Vamos denotar essa operação
+de pré-processamento
+
+00:01:57.528 --> 00:02:00.437
+e de empilhamento
+pela função pi,
+
+00:02:00.472 --> 00:02:02.309
+que recebe uma sequência
+de frames
+
+00:02:02.344 --> 00:02:05.429
+e produz uma representação
+combinatória.
+
+00:02:05.464 --> 00:02:08.389
+Note que se quisermos empilhar,
+digamos, 4 frames,
+
+00:02:08.424 --> 00:02:12.118
+teremos que fazer algo especial para
+os primeiros 3 instantes de tempo.
+
+00:02:12.153 --> 00:02:15.029
+Por exemplo, podemos tratar
+esses frames faltantes como vazios,
+
+00:02:15.064 --> 00:02:17.637
+ou apenas usar cópias
+do primeiro frame.
+
+00:02:17.969 --> 00:02:21.094
+Ou podemos pular a armazenagem
+de tuplas experientes
+
+00:02:21.129 --> 00:02:23.685
+até obtermos
+uma sequência completa.
+
+00:02:23.720 --> 00:02:25.485
+Na prática,
+você não consegue
+
+00:02:25.520 --> 00:02:27.526
+executar o passo de aprendizagem
+imediatamente.
+
+00:02:27.561 --> 00:02:30.949
+Você precisa esperar até ter
+um número suficiente de tuplas
+
+00:02:30.984 --> 00:02:32.109
+na memória.
+
+00:02:32.144 --> 00:02:35.509
+Note que não limpamos a memória
+depois de cada episódio.
+
+00:02:35.544 --> 00:02:38.870
+Isso permite recordar e construir
+conjuntos de experiências
+
+00:02:38.905 --> 00:02:40.877
+através dos episódios.
+
+00:02:40.912 --> 00:02:43.165
+Há várias outras técnicas
+e otimizações
+
+00:02:43.200 --> 00:02:45.548
+que são usadas no artigo
+sobre Q-Learning Profundo,
+
+00:02:45.583 --> 00:02:47.829
+como clipping de recompensas
+e de erros,
+
+00:02:47.864 --> 00:02:51.101
+armazenamento de ações passadas
+como parte do vetor de estado,
+
+00:02:51.136 --> 00:02:52.781
+lidar com estados terminais,
+
+00:02:52.816 --> 00:02:55.309
+cavar epsilon
+ao longo do tempo etc.
+
+00:02:55.478 --> 00:02:57.261
+Eu aconselho
+que você leia o artigo,
+
+00:02:57.296 --> 00:02:59.052
+especialmente a parte
+sobre métodos,
+
+00:02:59.087 --> 00:03:02.125
+antes de tentar implementar
+o algoritmo sozinho.
+
+00:03:02.160 --> 00:03:05.253
+Note que você talvez tenha
+que escolher quais técnicas aplicar
+
+00:03:05.288 --> 00:03:08.293
+e adaptá-las para diferentes
+tipos de ambientes.
+

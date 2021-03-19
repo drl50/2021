@@ -1,0 +1,97 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.380 --> 00:00:04.310
+Reinforcement Learning is a branch of Machine Learning,
+
+00:00:04.309 --> 00:00:09.589
+where an agent outputs an action and the environment returns an observation or,
+
+00:00:09.589 --> 00:00:12.254
+the state of the system and a reward.
+
+00:00:12.255 --> 00:00:16.464
+The goal of an agent is to best determine the best action to take.
+
+00:00:16.464 --> 00:00:19.664
+Usually, RL is described in terms of this agent
+
+00:00:19.664 --> 00:00:22.829
+interacting with the previously unknown environment,
+
+00:00:22.829 --> 00:00:26.834
+trying to maximize the overall or total reward.
+
+00:00:26.835 --> 00:00:29.365
+Now then, what is Deep RL?
+
+00:00:29.364 --> 00:00:30.489
+Well, in some sense,
+
+00:00:30.489 --> 00:00:34.109
+it is using nonlinear function approximators to calculate
+
+00:00:34.109 --> 00:00:38.875
+the value actions based directly on observation from the environment.
+
+00:00:38.875 --> 00:00:42.045
+We represented it as a Deep Neural Network.
+
+00:00:42.045 --> 00:00:43.820
+We then use Deep Learning to find
+
+00:00:43.820 --> 00:00:47.484
+the optimal parameters for these function approximators.
+
+00:00:47.484 --> 00:00:52.754
+You have already worked with some Deep Learning Neural Networks for classification,
+
+00:00:52.755 --> 00:00:55.760
+detection, and semantic segmentation.
+
+00:00:55.759 --> 00:00:58.934
+However, these Deep Learning Applications
+
+00:00:58.935 --> 00:01:01.740
+use label training data for supervised learning.
+
+00:01:01.740 --> 00:01:04.900
+The inference engine then produces the best guess label,
+
+00:01:04.900 --> 00:01:07.480
+not an action, as the output.
+
+00:01:07.480 --> 00:01:13.064
+When an oral agent handles the entire end-to-end pipeline, it's called pixels-to-action,
+
+00:01:13.064 --> 00:01:18.049
+referring to the networks ability to take raw sensor data and choose the action,
+
+00:01:18.049 --> 00:01:21.185
+it thinks will best maximize its reward.
+
+00:01:21.185 --> 00:01:25.429
+Over time, oral agents have a uncanny knack for developing
+
+00:01:25.429 --> 00:01:29.000
+intuitive human-like behaviors like learning
+
+00:01:29.000 --> 00:01:32.959
+to walk or peeking behind corners when they're unsure.
+
+00:01:32.959 --> 00:01:37.939
+They naturally incorporate elements of exploration and knowledge gathering,
+
+00:01:37.939 --> 00:01:43.254
+which makes them good for imitating behaviors and performing path planning.
+
+00:01:43.254 --> 00:01:49.039
+Robots operating in unstructured environments tend to greatly benefit from oral agents.
+
+00:01:49.040 --> 00:01:51.965
+Which gives them a way to make sense of the environment,
+
+00:01:51.965 --> 00:01:55.070
+which can be hard to model in advance.
+

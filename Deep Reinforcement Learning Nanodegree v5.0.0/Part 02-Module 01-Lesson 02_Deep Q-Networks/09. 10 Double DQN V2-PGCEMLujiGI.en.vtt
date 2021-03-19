@@ -1,0 +1,151 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:03.529 --> 00:00:06.585
+The first problem we're going to address,
+
+00:00:06.585 --> 00:00:10.759
+is the overestimation of action values that Q-learning is prone to.
+
+00:00:10.759 --> 00:00:15.269
+Let's look back at the update rule for Q-learning with function approximation,
+
+00:00:15.269 --> 00:00:17.820
+and focus on the TD target.
+
+00:00:17.820 --> 00:00:20.839
+Here the max operation is necessary to find
+
+00:00:20.839 --> 00:00:24.414
+the best possible value we could get from the next state.
+
+00:00:24.414 --> 00:00:26.184
+To understand this better,
+
+00:00:26.184 --> 00:00:27.859
+let's rewrite the target,
+
+00:00:27.859 --> 00:00:30.199
+and expand the max operation.
+
+00:00:30.199 --> 00:00:32.835
+It is just a more efficient way of saying,
+
+00:00:32.835 --> 00:00:36.770
+that we want to obtain the Q-value for the state S',
+
+00:00:36.770 --> 00:00:39.380
+and the action that results in
+
+00:00:39.380 --> 00:00:43.605
+the maximum Q-value among all possible actions from that state.
+
+00:00:43.604 --> 00:00:45.594
+When we write it this way,
+
+00:00:45.594 --> 00:00:49.909
+we can see that it's possible for the arg max operation to make a mistake,
+
+00:00:49.909 --> 00:00:51.859
+especially in the early stages.
+
+00:00:51.859 --> 00:00:55.164
+Why? Because the Q-values are still evolving,
+
+00:00:55.164 --> 00:00:59.979
+and we may not have gathered enough information to figure out the best action.
+
+00:00:59.979 --> 00:01:05.239
+The accuracy of our Q-values depends a lot on what actions have been tried,
+
+00:01:05.239 --> 00:01:07.789
+and what neighboring states have been explored.
+
+00:01:07.790 --> 00:01:12.850
+In fact, it has been shown that this results in an overestimation of Q-values,
+
+00:01:12.849 --> 00:01:17.554
+since we always pick the maximum among a set of noisy numbers.
+
+00:01:17.555 --> 00:01:21.745
+So, maybe we shouldn't blindly trust these values.
+
+00:01:21.745 --> 00:01:25.500
+What can we do to make our estimation more robust?
+
+00:01:25.500 --> 00:01:31.234
+One idea that has been shown to work very well in practice is called Double Q-Learning,
+
+00:01:31.234 --> 00:01:35.959
+where we select the best action using one set of parameters w,
+
+00:01:35.959 --> 00:01:40.069
+but evaluate it using a different set of parameters w'.
+
+00:01:40.069 --> 00:01:41.959
+It's basically like having
+
+00:01:41.959 --> 00:01:46.405
+two separate function approximators that must agree on the best action.
+
+00:01:46.405 --> 00:01:50.534
+If w picks an action that is not the best according to w',
+
+00:01:50.534 --> 00:01:53.594
+then the Q-value returned is not that high.
+
+00:01:53.594 --> 00:01:57.439
+In the long run, this prevents the algorithm from propagating
+
+00:01:57.439 --> 00:02:01.370
+incidental high rewards that may have been obtained by chance,
+
+00:02:01.370 --> 00:02:04.025
+and don't reflect long-term returns.
+
+00:02:04.025 --> 00:02:05.930
+Now you may be thinking,
+
+00:02:05.930 --> 00:02:09.125
+where do we get the second set of parameters from?
+
+00:02:09.125 --> 00:02:12.844
+In the original formulation of Double Q-Learning,
+
+00:02:12.844 --> 00:02:15.830
+you would basically maintain two value functions,
+
+00:02:15.830 --> 00:02:18.110
+and randomly choose one of them to update at
+
+00:02:18.110 --> 00:02:21.945
+each step using the other only for evaluating actions.
+
+00:02:21.944 --> 00:02:25.349
+But when using DQNs with fixed Q targets,
+
+00:02:25.349 --> 00:02:28.264
+we already have an alternate set of parameters.
+
+00:02:28.264 --> 00:02:30.069
+Remember w-minus?
+
+00:02:30.069 --> 00:02:34.254
+It turns out that since w-minus is kept frozen for a while,
+
+00:02:34.254 --> 00:02:39.250
+it is different enough from w that it can be reused for this purpose.
+
+00:02:39.250 --> 00:02:44.175
+And that's it, this simple modification keeps Q-values in check,
+
+00:02:44.175 --> 00:02:49.564
+preventing them from exploding in early stages of learning or fluctuating later on.
+
+00:02:49.564 --> 00:02:52.729
+The resulting policies have also been shown to perform
+
+00:02:52.729 --> 00:02:56.829
+significantly better than vanilla DQNs.
+

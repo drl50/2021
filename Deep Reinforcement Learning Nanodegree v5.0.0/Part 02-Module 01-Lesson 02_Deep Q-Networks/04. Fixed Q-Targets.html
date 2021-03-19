@@ -1,0 +1,403 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Fixed Q-Targets
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Deep Q-Networks
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. From RL to Deep RL.html">
+       01. From RL to Deep RL
+      </a>
+     </li>
+     <li class="">
+      <a href="02. Deep Q-Networks.html">
+       02. Deep Q-Networks
+      </a>
+     </li>
+     <li class="">
+      <a href="03. Experience Replay.html">
+       03. Experience Replay
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Fixed Q-Targets.html">
+       04. Fixed Q-Targets
+      </a>
+     </li>
+     <li class="">
+      <a href="05. Deep Q-Learning Algorithm.html">
+       05. Deep Q-Learning Algorithm
+      </a>
+     </li>
+     <li class="">
+      <a href="06. Coding Exercise.html">
+       06. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="07. Workspace.html">
+       07. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Deep Q-Learning Improvements.html">
+       08. Deep Q-Learning Improvements
+      </a>
+     </li>
+     <li class="">
+      <a href="09. Double DQN.html">
+       09. Double DQN
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Prioritized Experience Replay.html">
+       10. Prioritized Experience Replay
+      </a>
+     </li>
+     <li class="">
+      <a href="11. Dueling DQN.html">
+       11. Dueling DQN
+      </a>
+     </li>
+     <li class="">
+      <a href="12. Rainbow.html">
+       12. Rainbow
+      </a>
+     </li>
+     <li class="">
+      <a href="13. Summary.html">
+       13. Summary
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          04. Fixed Q-Targets
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="fixed-q-targets">
+          Fixed Q-Targets
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+         <p>
+          Fixed Q-Targets
+         </p>
+        </h3>
+        <video controls="">
+         <source src="04. Fixed Q-Targets-SWpyiEezfp4.mp4" type="video/mp4"/>
+         <track default="true" kind="subtitles" label="en" src="04. Fixed Q-Targets-SWpyiEezfp4.en.vtt" srclang="en"/>
+         <track default="false" kind="subtitles" label="BR" src="04. Fixed Q-Targets-SWpyiEezfp4.pt-BR.vtt" srclang="BR"/>
+         <track default="false" kind="subtitles" label="CN" src="04. Fixed Q-Targets-SWpyiEezfp4.zh-CN.vtt" srclang="CN"/>
+        </video>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-summary">
+          ## Summary
+         </h2>
+         <p>
+          In Q-Learning, we
+          <strong>
+           <em>
+            update a guess with a guess
+           </em>
+          </strong>
+          , and this can potentially lead to harmful correlations.  To avoid this, we can update the parameters
+          <span class="mathquill ud-math">
+           w
+          </span>
+          in the network
+          <span class="mathquill ud-math">
+           \hat{q}
+          </span>
+          to better approximate the action value corresponding to state
+          <span class="mathquill ud-math">
+           S
+          </span>
+          and action
+          <span class="mathquill ud-math">
+           A
+          </span>
+          with the following update rule:
+         </p>
+         <div class="mathquill">
+          \Delta w = \alpha \cdot \overbrace{( \underbrace{R + \gamma \max_a\hat{q}(S', a, w^-)}_{\rm {TD~target}} - \underbrace{\hat{q}(S, A, w)}_{\rm {old~value}})}^{\rm {TD~error}} \nabla_w\hat{q}(S, A, w)
+         </div>
+         <p>
+          where
+          <span class="mathquill ud-math">
+           w^-
+          </span>
+          are the weights of a separate target network that are not changed during the learning step, and (
+          <span class="mathquill ud-math">
+           S
+          </span>
+          ,
+          <span class="mathquill ud-math">
+           A
+          </span>
+          ,
+          <span class="mathquill ud-math">
+           R
+          </span>
+          ,
+          <span class="mathquill ud-math">
+           S'
+          </span>
+          ) is an experience tuple.
+         </p>
+         <p>
+          <strong>
+           Note
+          </strong>
+          : Ever wondered how the example in the video would look in real life? See:
+          <a href="https://www.youtube.com/watch?v=-PVFBGN_zoM" rel="noopener noreferrer" target="_blank">
+           Carrot Stick Riding
+          </a>
+          .
+         </p>
+         <h2 id="-quiz">
+          ## Quiz
+         </h2>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <form>
+          <fieldset>
+           <legend>
+            <p>
+             Which of the following are true?  Select all that apply.
+            </p>
+           </legend>
+          </fieldset>
+          <div>
+           <input id="a1527297466242" name="631336" type="checkbox" value="a1527297466242"/>
+           <label for="a1527297466242">
+            <p>
+             The Deep Q-Learning algorithm uses two separate networks with identical architectures.
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1527297535473" name="631336" type="checkbox" value="a1527297535473"/>
+           <label for="a1527297535473">
+            <p>
+             The Deep Q-Learning algorithm uses two separate networks with different architectures.
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1527297640119" name="631336" type="checkbox" value="a1527297640119"/>
+           <label for="a1527297640119">
+            <p>
+             Every time we update the primary Q-Network, we immediately update the target Q-Network weights, so that they match after each learning step.
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1527297732285" name="631336" type="checkbox" value="a1527297732285"/>
+           <label for="a1527297732285">
+            <p>
+             The target Q-Network's weights are updated less often (or more slowly) than the primary Q-Network.
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1527297951276" name="631336" type="checkbox" value="a1527297951276"/>
+           <label for="a1527297951276">
+            <p>
+             Without fixed Q-targets, we would encounter a harmful form of correlation, whereby we shift the parameters of the network based on a constantly moving target.
+            </p>
+           </label>
+          </div>
+         </form>
+         <details>
+          <summary>
+           <strong>
+            SOLUTION:
+           </strong>
+          </summary>
+          <ul>
+           <li>
+            The Deep Q-Learning algorithm uses two separate networks with identical architectures.
+           </li>
+           <li>
+            The target Q-Network's weights are updated less often (or more slowly) than the primary Q-Network.
+           </li>
+           <li>
+            Without fixed Q-targets, we would encounter a harmful form of correlation, whereby we shift the parameters of the network based on a constantly moving target.
+           </li>
+          </ul>
+         </details>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="05. Deep Q-Learning Algorithm.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('04. Fixed Q-Targets')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

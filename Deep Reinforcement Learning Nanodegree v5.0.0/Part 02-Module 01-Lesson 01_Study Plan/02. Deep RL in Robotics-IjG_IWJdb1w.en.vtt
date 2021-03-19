@@ -1,0 +1,91 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.275
+In 2015, Google's DeepMind AlphaGo made
+
+00:00:04.275 --> 00:00:08.530
+big news in the AI world using deep reinforcement learning.
+
+00:00:08.529 --> 00:00:14.199
+AlphaGo beat a human professional in the very complex game of Go.
+
+00:00:14.199 --> 00:00:16.820
+We've seen computers win against before those.
+
+00:00:16.820 --> 00:00:19.480
+So, what was so special this time?
+
+00:00:19.480 --> 00:00:25.890
+During the game, AlphaGo used original moves that it had come up with on its own.
+
+00:00:25.890 --> 00:00:30.435
+Moves that taught the world new knowledge about an ancient game.
+
+00:00:30.434 --> 00:00:36.449
+That's because AlphaGo optimized its own moves based on the goal of winning rather than
+
+00:00:36.450 --> 00:00:39.285
+say looking at possible moves and
+
+00:00:39.284 --> 00:00:43.409
+choosing a likely response based on a library of examples.
+
+00:00:43.409 --> 00:00:46.879
+In robotics, deep reinforcement learning can also
+
+00:00:46.880 --> 00:00:50.465
+be used to find the optimal solution to a problem.
+
+00:00:50.465 --> 00:00:53.060
+The Japanese company Fenix,
+
+00:00:53.060 --> 00:00:57.755
+uses deep RL to reprogram robots to perform new tasks.
+
+00:00:57.755 --> 00:01:02.390
+Traditionally, an industrial robot needs to be precisely programmed
+
+00:01:02.390 --> 00:01:07.694
+in a tightly controlled environment in order to do something like grasp an object.
+
+00:01:07.694 --> 00:01:10.209
+This is expensive and time-consuming.
+
+00:01:10.209 --> 00:01:15.979
+Fenix robot uses deep RL to train itself to perform a new task.
+
+00:01:15.980 --> 00:01:20.969
+It tries picking up objects while capturing video footage of the process.
+
+00:01:20.969 --> 00:01:23.579
+Each time it succeeds or fails,
+
+00:01:23.579 --> 00:01:27.890
+it refines the deep neural network that controls its action.
+
+00:01:27.890 --> 00:01:34.233
+Warehousing companies that already use robots are looking at deep RL to lower costs.
+
+00:01:34.233 --> 00:01:37.399
+Companies like Amazon with fulfillment centers that
+
+00:01:37.400 --> 00:01:41.180
+deploy thousands of robots are highly motivated to use
+
+00:01:41.180 --> 00:01:44.390
+innovative technologies like deep RL to
+
+00:01:44.390 --> 00:01:48.859
+optimize their resources and remain competitive in the marketplace.
+
+00:01:48.859 --> 00:01:53.329
+A number of companies including big companies such as Google, Autodesk,
+
+00:01:53.329 --> 00:01:58.370
+and Amazon as well as a myriad of smaller companies and startups,
+
+00:01:58.370 --> 00:02:02.670
+are actively working on deep RL solutions in robotics.
+

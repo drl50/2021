@@ -1,0 +1,306 @@
+WEBVTT
+Kind: captions
+Language: pt-BR
+
+00:00:01.024 --> 00:00:03.144
+Experience Replay
+nos ajuda a nos dirigir
+
+00:00:03.179 --> 00:00:05.119
+a um tipo de correlação,
+
+00:00:05.154 --> 00:00:08.321
+entre tuplas experientes
+consecutivas.
+
+00:00:08.356 --> 00:00:12.576
+Há outro tipo de correlação à qual
+Q-Learning também é suscetível.
+
+00:00:14.168 --> 00:00:16.710
+Q-Learning é uma forma
+de diferença temporal,
+
+00:00:16.745 --> 00:00:19.104
+ou TD-Learning, certo?
+
+00:00:19.139 --> 00:00:22.712
+Aqui, R mais gama
+vezes o maior valor possível
+
+00:00:22.747 --> 00:00:25.728
+do estado seguinte
+é chamado de alvo TD,
+
+00:00:25.763 --> 00:00:29.055
+e o nosso objetivo é reduzir
+a diferença entre esse alvo
+
+00:00:29.090 --> 00:00:31.600
+e o valor Q
+atualmente previsto.
+
+00:00:32.119 --> 00:00:34.736
+Essa diferença é o erro TD.
+
+00:00:35.002 --> 00:00:38.584
+Agora, o alvo TD
+deve ser um substituto
+
+00:00:38.619 --> 00:00:41.768
+para a função de valor verdadeira
+q pi (S,A),
+
+00:00:41.803 --> 00:00:43.936
+que é desconhecida
+para nós.
+
+00:00:44.552 --> 00:00:47.080
+Nós usamos q pi originalmente
+para definir
+
+00:00:47.115 --> 00:00:49.248
+uma perda
+de erro quadrático,
+
+00:00:49.283 --> 00:00:52.560
+e a diferenciamos
+em relação a w
+
+00:00:52.595 --> 00:00:55.369
+para obter a regra de atualização
+do nosso gradiente descendente.
+
+00:00:55.720 --> 00:01:01.061
+Mas q pi não depende da aproximação
+de função ou de seus parâmetros,
+
+00:01:01.094 --> 00:01:04.824
+resultando em uma regra simples
+derivativa e atualizada.
+
+00:01:05.265 --> 00:01:09.208
+Mas o nosso alvo TD
+depende desses parâmetros,
+
+00:01:09.243 --> 00:01:12.840
+o que significa que trocar
+a função de valor verdadeira q pi
+
+00:01:12.875 --> 00:01:17.152
+por um alvo como este
+é matematicamente incorreto.
+
+00:01:17.648 --> 00:01:19.944
+Conseguimos fazer isso
+na prática,
+
+00:01:19.979 --> 00:01:23.056
+porque toda atualização resulta
+em uma pequena mudança
+
+00:01:23.091 --> 00:01:26.568
+nos parâmetros,
+que costuma ir na direção correta.
+
+00:01:26.603 --> 00:01:30.783
+Se estabelecermos alfa igual a 1
+e saltarmos em direção ao alvo,
+
+00:01:30.818 --> 00:01:35.121
+provavelmente erraríamos o tiro
+e acabaríamos no lugar errado.
+
+00:01:35.528 --> 00:01:37.456
+Além do mais,
+isso é pouco preocupante
+
+00:01:37.491 --> 00:01:40.064
+quando usamos uma tabela
+de pesquisa ou um dicionário,
+
+00:01:40.099 --> 00:01:42.288
+já que valores Q
+são armazenados separadamente
+
+00:01:42.323 --> 00:01:44.512
+para cada par
+de estado-ação,
+
+00:01:44.547 --> 00:01:47.135
+mas isso pode afetar bastante
+a aprendizagem
+
+00:01:47.170 --> 00:01:49.415
+quando usamos
+aproximação de função
+
+00:01:49.450 --> 00:01:52.846
+em que todos os valores Q
+são intrinsicamente ligados
+
+00:01:52.889 --> 00:01:54.945
+através dos parâmetros
+de função.
+
+00:01:54.980 --> 00:01:56.280
+Você deve se perguntar:
+
+00:01:56.315 --> 00:01:59.712
+"Experience Replay não trata
+desse problema?"
+
+00:01:59.747 --> 00:02:04.152
+Bem, ele trata de um problema
+parecido, mas um pouco diferente.
+
+00:02:04.187 --> 00:02:05.952
+Lá, quebramos os efeitos
+de correlação
+
+00:02:05.987 --> 00:02:08.632
+entre tuplas experientes
+consecutivas
+
+00:02:08.667 --> 00:02:11.783
+fazendo uma amostragem aleatória
+delas fora de ordem.
+
+00:02:11.818 --> 00:02:17.112
+Aqui, a correlação é entre o alvo
+e os parâmetros que estamos mudando.
+
+00:02:17.147 --> 00:02:20.872
+Isso é como perseguir
+um alvo móvel. Literalmente.
+
+00:02:21.757 --> 00:02:23.576
+Na verdade, é pior.
+
+00:02:23.611 --> 00:02:26.583
+É como tentar ensinar
+um burro a andar em linha reta
+
+00:02:26.618 --> 00:02:29.776
+montando nele e balançando
+uma cenoura na frente dele.
+
+00:02:29.811 --> 00:02:31.888
+Sim, o burro pode dar um passo
+à frente
+
+00:02:31.923 --> 00:02:36.528
+e a cenoura pode se afastar,
+sempre ficando fora de alcance,
+
+00:02:36.563 --> 00:02:38.551
+mas contrariando
+a crença popular,
+
+00:02:38.586 --> 00:02:41.143
+isso não funciona
+como o esperado.
+
+00:02:41.178 --> 00:02:44.359
+É mais provável que a cenoura
+balance aleatoriamente,
+
+00:02:44.394 --> 00:02:47.648
+fazendo com que o burro
+desvie a cada passo.
+
+00:02:47.683 --> 00:02:50.744
+Cada ação afeta a posição
+seguinte do alvo
+
+00:02:50.779 --> 00:02:54.295
+de uma maneira muito complicada
+e imprevisível.
+
+00:02:54.330 --> 00:02:57.159
+Não será uma surpresa
+se o burro ficar frustrado
+
+00:02:57.194 --> 00:03:00.142
+pulando no mesmo ponto
+e acabar desistindo.
+
+00:03:00.177 --> 00:03:02.791
+Em vez disso,
+você deve desmontar do burro,
+
+00:03:02.826 --> 00:03:05.856
+ficar parado em um lugar
+e balançar a cenoura.
+
+00:03:05.891 --> 00:03:08.025
+Assim que o burro
+alcançar esse ponto,
+
+00:03:08.060 --> 00:03:12.007
+mova-se alguns passos à frente,
+pendure outra cenoura e repita.
+
+00:03:12.042 --> 00:03:17.335
+Assim, você dissocia a posição
+do alvo das ações do burro,
+
+00:03:17.370 --> 00:03:20.395
+oferecendo a ele um ambiente
+de aprendizagem mais estável.
+
+00:03:21.749 --> 00:03:24.904
+Podemos fazer basicamente
+a mesma coisa em Q-Learning,
+
+00:03:24.939 --> 00:03:29.128
+fixando os parâmetros de função
+usados para gerar nosso alvo.
+
+00:03:29.163 --> 00:03:32.719
+Os parâmetros fixos,
+indicados por um w-,
+
+00:03:32.754 --> 00:03:36.106
+são basicamente uma cópia de w
+que não alteramos
+
+00:03:36.141 --> 00:03:38.008
+durante o passo
+da aprendizagem.
+
+00:03:38.043 --> 00:03:41.063
+Na prática, copiamos w
+para w-,
+
+00:03:41.098 --> 00:03:44.047
+usamos ele para gerar alvos
+enquanto alteramos w
+
+00:03:44.082 --> 00:03:46.207
+para um certo número
+de passos de aprendizagem.
+
+00:03:46.242 --> 00:03:49.175
+Depois, atualizamos w-
+com o w mais recente
+
+00:03:49.210 --> 00:03:51.305
+e, de novo, aprendemos
+com um número de passos
+
+00:03:51.340 --> 00:03:52.902
+e por aí vai.
+
+00:03:52.937 --> 00:03:55.935
+Isso desassocia o alvo
+dos parâmetros,
+
+00:03:55.970 --> 00:03:58.431
+torna o algoritmo de aprendizagem
+muito mais estável
+
+00:03:58.466 --> 00:04:01.911
+e menos suscetível a divergências
+ou oscilações.
+

@@ -1,0 +1,64 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:02.419 --> 00:00:06.390
+The final enhancement of DQNs that we will briefly
+
+00:00:06.389 --> 00:00:09.969
+look at is appropriately titled Dueling networks.
+
+00:00:09.970 --> 00:00:12.670
+Here is a typical DQN architecture.
+
+00:00:12.669 --> 00:00:15.330
+A sequence of convolutional layers followed by
+
+00:00:15.330 --> 00:00:18.940
+a couple of fully connected layers that produce Q values.
+
+00:00:18.940 --> 00:00:23.605
+The core idea of dueling networks is to use two streams,
+
+00:00:23.605 --> 00:00:26.699
+one that estimates the state value function
+
+00:00:26.699 --> 00:00:30.480
+and one that estimates the advantage for each action.
+
+00:00:30.480 --> 00:00:35.130
+These streams may share some layers in the beginning such as convolutional layers,
+
+00:00:35.130 --> 00:00:38.630
+then branch off with their own fully-connected layers.
+
+00:00:38.630 --> 00:00:44.580
+Finally, the desired Q values are obtained by combining the state and advantage values.
+
+00:00:44.579 --> 00:00:47.659
+The intuition behind this is that the value of
+
+00:00:47.659 --> 00:00:51.804
+most states don't vary a lot across actions.
+
+00:00:51.804 --> 00:00:55.519
+So, it makes sense to try and directly estimate them,
+
+00:00:55.520 --> 00:00:59.560
+but we still need to capture the difference actions make in each state.
+
+00:00:59.560 --> 00:01:02.320
+This is where the advantage function comes in.
+
+00:01:02.320 --> 00:01:07.159
+Some modifications are necessary to adapt Q learning to this architecture,
+
+00:01:07.159 --> 00:01:10.129
+which you can find in the dueling networks paper.
+
+00:01:10.129 --> 00:01:13.254
+Along with double DQNs and prioritized replay,
+
+00:01:13.254 --> 00:01:19.149
+this technique has resulted in significant improvement over vanilla DQNs.
+

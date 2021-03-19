@@ -1,0 +1,61 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:06.275
+The Deep Q-Network algorithm has caused a lot of buzz around Deep RL since 2013.
+
+00:00:06.275 --> 00:00:08.550
+It's more or less an online version of
+
+00:00:08.550 --> 00:00:13.440
+a neural fitted value iteration paper from 2005 by Reed Miller and Martin.
+
+00:00:13.439 --> 00:00:19.664
+Which introduced training of acute value function represented by a multilayer perceptron.
+
+00:00:19.664 --> 00:00:24.140
+There are few very useful additions and tweaks though, in DQN.
+
+00:00:24.140 --> 00:00:30.285
+The first edition is the use of a rolly history of the past data via replay pool.
+
+00:00:30.285 --> 00:00:32.325
+By using the replay pool,
+
+00:00:32.325 --> 00:00:36.880
+the behavior distribution is average over many of its previous states,
+
+00:00:36.880 --> 00:00:40.575
+smoothing out learning and avoiding oscillations.
+
+00:00:40.575 --> 00:00:42.245
+This has the advantage that,
+
+00:00:42.244 --> 00:00:47.375
+each step of the experience is potentially used in many weight updates.
+
+00:00:47.375 --> 00:00:52.855
+The other big idea is the use of a target network to represent the old Q-function,
+
+00:00:52.854 --> 00:00:57.284
+which will be used to compute the loss of every action during training.
+
+00:00:57.284 --> 00:00:59.329
+Why not use a single network?
+
+00:00:59.329 --> 00:01:02.364
+Well, the issue is that at each step of training,
+
+00:01:02.365 --> 00:01:04.879
+the Q-functions values change and then
+
+00:01:04.879 --> 00:01:08.369
+the value estimates can easily spiral out of control.
+
+00:01:08.370 --> 00:01:11.685
+These additions enable RL agents to converge,
+
+00:01:11.685 --> 00:01:14.480
+more reliably during training.
+

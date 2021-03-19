@@ -1,0 +1,229 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:05.625
+All right. The next issue we'll look at is related to experience replay.
+
+00:00:05.625 --> 00:00:08.324
+Recall the basic idea behind it.
+
+00:00:08.324 --> 00:00:11.929
+We interact with the environment to collect experience tuples,
+
+00:00:11.929 --> 00:00:14.109
+save them in a buffer, and then later,
+
+00:00:14.109 --> 00:00:16.730
+we randomly sample a batch to learn from.
+
+00:00:16.730 --> 00:00:19.320
+This helps us break the correlation between
+
+00:00:19.320 --> 00:00:23.670
+consecutive experiences and stabilizes our learning algorithm.
+
+00:00:23.670 --> 00:00:25.120
+So far so good.
+
+00:00:25.120 --> 00:00:29.690
+But some of these experiences may be more important for learning than others.
+
+00:00:29.690 --> 00:00:34.234
+Moreover, these important experiences might occur infrequently.
+
+00:00:34.234 --> 00:00:37.039
+If we sample the batches uniformly,
+
+00:00:37.039 --> 00:00:41.314
+then these experiences have a very small chance of getting selected.
+
+00:00:41.314 --> 00:00:44.644
+Since buffers are practically limited in capacity,
+
+00:00:44.645 --> 00:00:47.835
+older important experiences may get lost.
+
+00:00:47.835 --> 00:00:51.910
+This is where the idea of prioritized experience replay comes in.
+
+00:00:51.909 --> 00:00:56.625
+But what criteria should we use to assign priorities to each tuple?
+
+00:00:56.625 --> 00:01:00.039
+One approach is to use the TD error delta.
+
+00:01:00.039 --> 00:01:01.405
+The bigger the error,
+
+00:01:01.405 --> 00:01:03.920
+the more we expect to learn from that tuple.
+
+00:01:03.920 --> 00:01:07.640
+So, let's take the magnitude of this error as a measure of
+
+00:01:07.640 --> 00:01:13.254
+priority and store it along with each corresponding tuple in the replay buffer.
+
+00:01:13.254 --> 00:01:19.009
+When creating batches, we can use this value to compute a sampling probability.
+
+00:01:19.010 --> 00:01:24.814
+Select any tuple i with a probability equal to its priority value PI,
+
+00:01:24.814 --> 00:01:29.239
+normalize by the sum of all priority values in the replay buffer.
+
+00:01:29.239 --> 00:01:31.159
+When a tuple is picked,
+
+00:01:31.159 --> 00:01:37.215
+we can update its priority with a newly computed TD error using the latest q values.
+
+00:01:37.215 --> 00:01:40.790
+This seems to work fairly well and has been shown to
+
+00:01:40.790 --> 00:01:44.930
+reduce the number of batch updates needed to learn a value function.
+
+00:01:44.930 --> 00:01:47.695
+There are a couple of things we can improve.
+
+00:01:47.694 --> 00:01:51.069
+First, note that if the TD error is zero,
+
+00:01:51.069 --> 00:01:53.179
+then the priority value of the tuple and
+
+00:01:53.180 --> 00:01:56.845
+hence its probability of being picked will also be zero.
+
+00:01:56.844 --> 00:02:00.079
+Zero or very low TD error doesn't
+
+00:02:00.079 --> 00:02:03.859
+necessarily mean we have nothing more to learn from such a tuple,
+
+00:02:03.859 --> 00:02:06.109
+it might be the case that our estimate was
+
+00:02:06.109 --> 00:02:09.944
+closed due to the limited samples we visited till that point.
+
+00:02:09.944 --> 00:02:14.264
+So, to prevent such tuples from being starved for selection,
+
+00:02:14.264 --> 00:02:18.500
+we can add a small constant e to every priority value.
+
+00:02:18.500 --> 00:02:21.139
+Another issue along similar lines is
+
+00:02:21.139 --> 00:02:24.409
+that greedily using these priority values may lead to
+
+00:02:24.409 --> 00:02:27.560
+a small subset of experiences being replayed over and
+
+00:02:27.560 --> 00:02:31.414
+over resulting in a overfitting to that subset.
+
+00:02:31.414 --> 00:02:37.120
+To avoid this, we can reintroduce some element of uniform random sampling.
+
+00:02:37.120 --> 00:02:43.580
+This adds another hyperparameter A which we use to redefine the sampling probability as,
+
+00:02:43.580 --> 00:02:49.715
+priority Pi to the power A divided by the sum of all priorities Pk,
+
+00:02:49.715 --> 00:02:51.860
+each raised to the power A.
+
+00:02:51.860 --> 00:02:54.650
+We can control how much we want to use
+
+00:02:54.650 --> 00:02:58.110
+priorities versus randomness by varying this parameter.
+
+00:02:58.110 --> 00:03:00.830
+Wher A equals zero corresponds to pure
+
+00:03:00.830 --> 00:03:05.670
+uniform randomness and A equals one only uses priorities.
+
+00:03:05.669 --> 00:03:08.559
+When we use prioritized experience replay,
+
+00:03:08.560 --> 00:03:11.735
+we have to make one adjustment to our update rule.
+
+00:03:11.735 --> 00:03:14.900
+Remember that our original Q learning update is
+
+00:03:14.900 --> 00:03:18.379
+derived from an expectation over all experiences.
+
+00:03:18.379 --> 00:03:20.754
+When using a stochastic update rule,
+
+00:03:20.754 --> 00:03:22.939
+the way we sample these experiences
+
+00:03:22.939 --> 00:03:26.254
+must match the underlying distribution they came from.
+
+00:03:26.254 --> 00:03:32.090
+This is preserved when we sample experience tuples uniformly from the replay buffer,
+
+00:03:32.090 --> 00:03:36.504
+but this assumption is violated when we use a non-uniform sampling,
+
+00:03:36.504 --> 00:03:38.625
+for example, using priorities.
+
+00:03:38.625 --> 00:03:41.659
+The q values we learn will be biased according to
+
+00:03:41.659 --> 00:03:45.870
+these priority values which we only wanted to use for sampling.
+
+00:03:45.870 --> 00:03:47.909
+To correct for this bias,
+
+00:03:47.909 --> 00:03:51.799
+we need to introduce an important sampling weight equal to,
+
+00:03:51.800 --> 00:03:56.035
+one over n, where n is the size of this replay buffer,
+
+00:03:56.034 --> 00:03:59.474
+times one over the sampling probability Pi.
+
+00:03:59.474 --> 00:04:05.599
+We can add another hyperparameter B and raise each important sampling weight to B,
+
+00:04:05.599 --> 00:04:08.719
+to control how much these weights affect learning.
+
+00:04:08.719 --> 00:04:11.719
+In fact, these weights are more important towards
+
+00:04:11.719 --> 00:04:15.425
+the end of learning when your q values begin to converge.
+
+00:04:15.425 --> 00:04:19.685
+So, you can increase B from a low value to one over time.
+
+00:04:19.685 --> 00:04:23.625
+Again, these details may be hard to understand at first,
+
+00:04:23.625 --> 00:04:26.149
+but each small improvement can contribute
+
+00:04:26.149 --> 00:04:29.239
+a lot towards more stable and efficient learning.
+
+00:04:29.240 --> 00:04:34.730
+So, make sure you give the prioritized experience replay paper a good read.
+
