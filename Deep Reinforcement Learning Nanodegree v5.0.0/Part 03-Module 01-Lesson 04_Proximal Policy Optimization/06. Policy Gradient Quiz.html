@@ -1,0 +1,516 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Policy Gradient Quiz
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Proximal Policy Optimization
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. Instructor Introduction.html">
+       01. Instructor Introduction
+      </a>
+     </li>
+     <li class="">
+      <a href="02. Lesson Preview.html">
+       02. Lesson Preview
+      </a>
+     </li>
+     <li class="">
+      <a href="03. Beyond REINFORCE.html">
+       03. Beyond REINFORCE
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Noise Reduction.html">
+       04. Noise Reduction
+      </a>
+     </li>
+     <li class="">
+      <a href="05. Credit Assignment.html">
+       05. Credit Assignment
+      </a>
+     </li>
+     <li class="">
+      <a href="06. Policy Gradient Quiz.html">
+       06. Policy Gradient Quiz
+      </a>
+     </li>
+     <li class="">
+      <a href="07. pong with REINFORCE (code walkthrough).html">
+       07. pong with REINFORCE (code walkthrough)
+      </a>
+     </li>
+     <li class="">
+      <a href="08. pong with REINFORCE (workspace).html">
+       08. pong with REINFORCE (workspace)
+      </a>
+     </li>
+     <li class="">
+      <a href="09. Importance Sampling.html">
+       09. Importance Sampling
+      </a>
+     </li>
+     <li class="">
+      <a href="10. PPO part 1- The Surrogate Function.html">
+       10. PPO part 1- The Surrogate Function
+      </a>
+     </li>
+     <li class="">
+      <a href="11. PPO part 2- Clipping Policy Updates.html">
+       11. PPO part 2- Clipping Policy Updates
+      </a>
+     </li>
+     <li class="">
+      <a href="12. PPO summary.html">
+       12. PPO summary
+      </a>
+     </li>
+     <li class="">
+      <a href="13. pong with PPO (code walkthrough).html">
+       13. pong with PPO (code walkthrough)
+      </a>
+     </li>
+     <li class="">
+      <a href="14. pong with PPO (workspace).html">
+       14. pong with PPO (workspace)
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          06. Policy Gradient Quiz
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="policy-gradient-quiz">
+          Policy Gradient Quiz
+         </h1>
+         <p>
+          Suppose we are training an agent to play a computer game. There are only two possible action:
+         </p>
+         <p>
+          0 = Do nothing,
+          <br/>
+          1 = Move
+         </p>
+         <p>
+          There are three time-steps in each game, and our policy is completely determined by one parameter
+          <span class="mathquill ud-math">
+           \theta
+          </span>
+          , such that the probability of "moving" is
+          <span class="mathquill ud-math">
+           \theta
+          </span>
+          , and the probability of doing nothing is
+          <span class="mathquill ud-math">
+           1-\theta
+          </span>
+         </p>
+         <p>
+          Initially
+          <span class="mathquill ud-math">
+           \theta=0.5
+          </span>
+          . Three games are played, the results are:
+         </p>
+         <p>
+          Game 1:
+          <br/>
+          actions: (1,0,1)
+          <br/>
+          rewards: (1,0,1)
+         </p>
+         <p>
+          Game 2:
+          <br/>
+          actions: (1,0,0)
+          <br/>
+          rewards: (0,0,1)
+         </p>
+         <p>
+          Game 3:
+          <br/>
+          actions: (0,1,0)
+          <br/>
+          rewards: (1,0,1)
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+         <p>
+          Computing policy gradient
+         </p>
+        </h3>
+        <div>
+         <form>
+          <fieldset>
+           <legend>
+            <p>
+             What are the future rewards for the first game?
+            </p>
+            <p>
+             Recall the results for game 1 are: actions: (1,0,1)
+             <br/>
+             rewards: (1,0,1)
+            </p>
+           </legend>
+          </fieldset>
+          <div>
+           <input id="a1536948177377" name="714710" type="radio" value="a1536948177377"/>
+           <label for="a1536948177377">
+            <p>
+             (1,0,1)
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1536948199614" name="714710" type="radio" value="a1536948199614"/>
+           <label for="a1536948199614">
+            <p>
+             (1,0,2)
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1536948200278" name="714710" type="radio" value="a1536948200278"/>
+           <label for="a1536948200278">
+            <p>
+             (2,0,1)
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1536948200830" name="714710" type="radio" value="a1536948200830"/>
+           <label for="a1536948200830">
+            <p>
+             (2,1,1)
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1536948201430" name="714710" type="radio" value="a1536948201430"/>
+           <label for="a1536948201430">
+            <p>
+             (1,1,2)
+            </p>
+           </label>
+          </div>
+         </form>
+         <details>
+          <summary>
+           <strong>
+            SOLUTION:
+           </strong>
+          </summary>
+          (2,1,1)
+         </details>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <form>
+          <fieldset>
+           <legend>
+            <p>
+             What is the policy gradient computed from the second game, using future rewards?
+            </p>
+            <p>
+             actions: (1,0,0)
+             <br/>
+             rewards: (0,0,1)
+            </p>
+           </legend>
+          </fieldset>
+          <div>
+           <input id="a1536948295902" name="714711" type="radio" value="a1536948295902"/>
+           <label for="a1536948295902">
+            <p>
+             -2
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1536948306948" name="714711" type="radio" value="a1536948306948"/>
+           <label for="a1536948306948">
+            <p>
+             -1
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1536948307572" name="714711" type="radio" value="a1536948307572"/>
+           <label for="a1536948307572">
+            <p>
+             0
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1536948308132" name="714711" type="radio" value="a1536948308132"/>
+           <label for="a1536948308132">
+            <p>
+             1
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1536948308691" name="714711" type="radio" value="a1536948308691"/>
+           <label for="a1536948308691">
+            <p>
+             2
+            </p>
+           </label>
+          </div>
+         </form>
+         <details>
+          <summary>
+           <strong>
+            SOLUTION:
+           </strong>
+          </summary>
+          -2
+         </details>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <form>
+          <fieldset>
+           <legend>
+            <p>
+             Which of these statements are true regarding the 3rd game? Recall the results for the 3rd game are:
+            </p>
+            <p>
+             actions: (0,1,0)
+             <br/>
+             rewards: (1,0,1)
+            </p>
+           </legend>
+          </fieldset>
+          <div>
+           <input id="a1536948352309" name="714712" type="checkbox" value="a1536948352309"/>
+           <label for="a1536948352309">
+            <p>
+             We can add a baseline -1 point to the rewards, the computed gradient wouldn't change
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1536948376233" name="714712" type="checkbox" value="a1536948376233"/>
+           <label for="a1536948376233">
+            <p>
+             The contribution to the gradient from the second and third steps cancel each other
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1536948376802" name="714712" type="checkbox" value="a1536948376802"/>
+           <label for="a1536948376802">
+            <p>
+             The computed policy gradient from this game is 0
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1536948377370" name="714712" type="checkbox" value="a1536948377370"/>
+           <label for="a1536948377370">
+            <p>
+             The computed policy gradient from this game is negative
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1536948377971" name="714712" type="checkbox" value="a1536948377971"/>
+           <label for="a1536948377971">
+            <p>
+             Using the total reward vs future reward give the same policy gradient in this game
+            </p>
+           </label>
+          </div>
+         </form>
+         <details>
+          <summary>
+           <strong>
+            SOLUTION:
+           </strong>
+          </summary>
+          <ul>
+           <li>
+            The contribution to the gradient from the second and third steps cancel each other
+           </li>
+           <li>
+            The computed policy gradient from this game is negative
+           </li>
+           <li>
+            Using the total reward vs future reward give the same policy gradient in this game
+           </li>
+          </ul>
+         </details>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="07. pong with REINFORCE (code walkthrough).html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('06. Policy Gradient Quiz')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

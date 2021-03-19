@@ -1,0 +1,314 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Problem Setup
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Policy Gradient Methods
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. What are Policy Gradient Methods.html">
+       01. What are Policy Gradient Methods?
+      </a>
+     </li>
+     <li class="">
+      <a href="02. The Big Picture.html">
+       02. The Big Picture
+      </a>
+     </li>
+     <li class="">
+      <a href="03. Connections to Supervised Learning.html">
+       03. Connections to Supervised Learning
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Problem Setup.html">
+       04. Problem Setup
+      </a>
+     </li>
+     <li class="">
+      <a href="05. REINFORCE.html">
+       05. REINFORCE
+      </a>
+     </li>
+     <li class="">
+      <a href="06. (Optional) Derivation.html">
+       06. (Optional) Derivation
+      </a>
+     </li>
+     <li class="">
+      <a href="07. Coding Exercise.html">
+       07. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Workspace.html">
+       08. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="09. What's Next.html">
+       09. What's Next?
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Summary.html">
+       10. Summary
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          04. Problem Setup
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="problem-setup">
+          Problem Setup
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          We're now ready to get started with rigorously defining how policy gradient methods will work.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+         <p>
+          M3L3 C04 V2
+         </p>
+        </h3>
+        <video controls="">
+         <source src="04. M3L3 C04 V2-St9ftvMQ_ks.mp4" type="video/mp4"/>
+         <track default="true" kind="subtitles" label="en" src="04. M3L3 C04 V2-St9ftvMQ_ks.en.vtt" srclang="en"/>
+        </video>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-important-note">
+          ## Important Note
+         </h2>
+         <p>
+          Before moving on, make sure it's clear to you that the equation discussed in the video (and shown below) calculates an
+          <a href="https://en.wikipedia.org/wiki/Expected_value" rel="noopener noreferrer" target="_blank">
+           expectation
+          </a>
+          .
+         </p>
+         <div class="mathquill">
+          U(\theta) = \sum_\tau \mathbb{P}(\tau;\theta)R(\tau)
+         </div>
+         <p>
+          To see how it corresponds to the
+          <strong>
+           expected return
+          </strong>
+          , note that we've expressed the
+          <strong>
+           return
+          </strong>
+          <span class="mathquill ud-math">
+           R(\tau)
+          </span>
+          as a function of the trajectory
+          <span class="mathquill ud-math">
+           \tau
+          </span>
+          .  Then, we calculate the weighted average (
+          <em>
+           where the weights are given by
+           <span class="mathquill ud-math">
+            \mathbb{P}(\tau;\theta)
+           </span>
+          </em>
+          ) of all possible values that the return
+          <span class="mathquill ud-math">
+           R(\tau)
+          </span>
+          can take.
+         </p>
+         <h2 id="-why-trajectories">
+          ## Why Trajectories?
+         </h2>
+         <p>
+          You may be wondering:
+          <em>
+           why are we using trajectories instead of episodes?
+          </em>
+          The answer is that maximizing expected return over trajectories (instead of episodes) lets us search for optimal policies for both episodic
+          <em>
+           and continuing
+          </em>
+          tasks!
+         </p>
+         <p>
+          That said, for many episodic tasks, it often makes sense to just use the full episode.  In particular, for the case of the video game example described in the lessons, reward is only delivered at the end of the episode.  In this case, in order to estimate the expected return, the trajectory should correspond to the full episode; otherwise, we don't have enough reward information to meaningfully estimate the expected return.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="05. REINFORCE.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('04. Problem Setup')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

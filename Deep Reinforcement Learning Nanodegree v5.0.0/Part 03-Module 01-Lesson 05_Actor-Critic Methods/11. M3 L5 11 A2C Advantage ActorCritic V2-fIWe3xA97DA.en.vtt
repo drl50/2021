@@ -1,0 +1,73 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.605
+You may be wondering what the asynchronous part in A3C is about?
+
+00:00:04.605 --> 00:00:09.435
+Recall, Asynchronous Advantage Actor-Critic. Let me explain.
+
+00:00:09.435 --> 00:00:13.830
+A3C accumulates gradient updates and applies
+
+00:00:13.830 --> 00:00:18.315
+those updates asynchronously to a global neuronetwork.
+
+00:00:18.315 --> 00:00:22.350
+Each agent in simulation does this at its own time.
+
+00:00:22.350 --> 00:00:29.115
+So, the agents use a local copy of the network to collect experience, calculate,
+
+00:00:29.114 --> 00:00:33.614
+and accumulate gradient updates across multiple time steps,
+
+00:00:33.615 --> 00:00:39.140
+and then they apply these gradients to a global network asynchronously.
+
+00:00:39.140 --> 00:00:45.409
+A synchronous here means that each agent will update the network on its own.
+
+00:00:45.409 --> 00:00:48.724
+There is no synchronization between the agents.
+
+00:00:48.725 --> 00:00:53.990
+These also means that the weights an agent is using might
+
+00:00:53.990 --> 00:00:59.590
+be different from the weights in use by another agent at any given time.
+
+00:00:59.590 --> 00:01:07.299
+There is a synchronous implementation of A3C called Advantage Actor-Critic, A2C.
+
+00:01:07.299 --> 00:01:12.944
+A2C has some extra bit of code that synchronizes all agents.
+
+00:01:12.944 --> 00:01:15.439
+It waits for all agents to finish
+
+00:01:15.439 --> 00:01:19.879
+a segment of interaction with its copy of the environment,
+
+00:01:19.879 --> 00:01:23.839
+and then updates the network at once,
+
+00:01:23.840 --> 00:01:29.260
+before sending the updated weights back to all agents.
+
+00:01:29.260 --> 00:01:33.569
+A2C is arguably simpler to implement,
+
+00:01:33.569 --> 00:01:36.150
+yet it gives pretty much the same result,
+
+00:01:36.150 --> 00:01:40.885
+and allegedly in some cases performs even better.
+
+00:01:40.885 --> 00:01:45.285
+A3C is most easily train on a CPU,
+
+00:01:45.284 --> 00:01:52.299
+while A2C is more straightforward to extend to a GPU implementation.
+

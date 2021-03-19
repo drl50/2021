@@ -1,0 +1,82 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.569
+You know now that an actor-critic agent is an agent that uses
+
+00:00:03.569 --> 00:00:08.070
+function approximation to learn a policy any value function.
+
+00:00:08.070 --> 00:00:11.384
+So, we will then use two neural networks;
+
+00:00:11.384 --> 00:00:14.835
+one for the actor and one for the critic.
+
+00:00:14.835 --> 00:00:22.035
+The critic will learn to evaluate the state value function V Pi using the TD estimate.
+
+00:00:22.035 --> 00:00:24.570
+Using the critic, we will calculate
+
+00:00:24.570 --> 00:00:28.935
+the advantage function and train the actor using this value.
+
+00:00:28.934 --> 00:00:33.045
+A very basic online actor-critic agent is as follows.
+
+00:00:33.045 --> 00:00:34.679
+You have two networks.
+
+00:00:34.679 --> 00:00:36.674
+One network, the actor,
+
+00:00:36.674 --> 00:00:41.789
+takes in a state and outputs the distribution over actions.
+
+00:00:41.789 --> 00:00:46.339
+The other network, the critic takes in a state and
+
+00:00:46.340 --> 00:00:51.005
+outputs a state value function of policy Pi, V Pi.
+
+00:00:51.005 --> 00:00:54.065
+The algorithm goes like this.
+
+00:00:54.064 --> 00:01:02.554
+Input the current state into the actor and get the action to take in that state.
+
+00:01:02.554 --> 00:01:08.780
+Observe next state and reward to get your experienced double s,
+
+00:01:08.780 --> 00:01:11.560
+a, r, s prime.
+
+00:01:11.560 --> 00:01:15.695
+Then, using the TD estimate which is their reward
+
+00:01:15.694 --> 00:01:19.779
+r plus the critic's estimate for s prime.
+
+00:01:19.780 --> 00:01:25.055
+So, r plus Gamma times V of s prime,
+
+00:01:25.055 --> 00:01:27.000
+you train the critic.
+
+00:01:27.000 --> 00:01:32.250
+Next, to calculate the advantage a Pi s,
+
+00:01:32.250 --> 00:01:37.120
+a equals r plus Gamma times V
+
+00:01:37.120 --> 00:01:44.150
+of s prime minus V of s. We also use the critic.
+
+00:01:44.150 --> 00:01:51.580
+Finally, we train the actor using the calculated advantage as a baseline.
+
+00:01:51.579 --> 00:01:58.099
+Easy, right? Let me show you some of the most popular actor-critic agents to date.
+

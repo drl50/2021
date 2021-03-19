@@ -1,0 +1,109 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:06.750
+You now know that the Monte-Carlo estimate is unbiased but has high variance,
+
+00:00:06.750 --> 00:00:12.240
+and that the TD estimate has low variance but it is biased.
+
+00:00:12.240 --> 00:00:15.134
+What are these facts good for?
+
+00:00:15.134 --> 00:00:18.239
+See when you study ring force,
+
+00:00:18.239 --> 00:00:23.684
+you learned that the return G was calculated as the total discounter return.
+
+00:00:23.684 --> 00:00:25.619
+This way of calculating G,
+
+00:00:25.620 --> 00:00:29.550
+which is simply a Monte-Carlo estimate, has high variance.
+
+00:00:29.550 --> 00:00:34.935
+Well you then use a baseline to reduce the variance of the ring force algorithm.
+
+00:00:34.935 --> 00:00:41.125
+However, this baseline was also calculated using a Monte-Carlo approach.
+
+00:00:41.125 --> 00:00:45.230
+Let's now assume you use deep learning to learn these baseline.
+
+00:00:45.229 --> 00:00:50.479
+Even if you still use the Monte-Carlo approach which has high variance,
+
+00:00:50.479 --> 00:00:54.379
+using function approximation still gives you an advantage.
+
+00:00:54.380 --> 00:00:58.100
+Namely, you now gain the power of generalization.
+
+00:00:58.100 --> 00:01:02.510
+That means when you encounter a new state S prime,
+
+00:01:02.509 --> 00:01:04.414
+whether you had visitor or not,
+
+00:01:04.415 --> 00:01:09.170
+your deep neural network will potentially come up with better estimates,
+
+00:01:09.170 --> 00:01:13.070
+since it's been trained to generalize from similar data.
+
+00:01:13.069 --> 00:01:15.004
+Note that at this point,
+
+00:01:15.004 --> 00:01:19.609
+we're still not using a critic even though we are using function approximation.
+
+00:01:19.609 --> 00:01:23.799
+This might be confusing as the literature is often not consistent.
+
+00:01:23.799 --> 00:01:29.099
+They recall a Monte Carlo estimate has high variance and no bias,
+
+00:01:29.099 --> 00:01:33.194
+and that the TD estimate has low variance but low bias.
+
+00:01:33.194 --> 00:01:36.844
+Now, the work critic implies that bias has been
+
+00:01:36.844 --> 00:01:41.269
+introduced and the Monte Carlo estimate is unbiased.
+
+00:01:41.269 --> 00:01:45.664
+If instead of using Monte Carlo estimates to train baselines,
+
+00:01:45.665 --> 00:01:48.020
+we used TD estimates,
+
+00:01:48.019 --> 00:01:50.364
+then we can say we have a critic.
+
+00:01:50.364 --> 00:01:55.129
+Sure, we will be introducing bias but we will be reducing
+
+00:01:55.129 --> 00:02:00.274
+variants thus improving our convergence properties and speeding up learning.
+
+00:02:00.275 --> 00:02:04.609
+In actor-critic methods, all we are trying to do is to continue to
+
+00:02:04.609 --> 00:02:09.365
+reduce the high-variance commonly associated with policy-based agents.
+
+00:02:09.365 --> 00:02:13.399
+By using a TD critic instead of a Monte-Carlo baseline,
+
+00:02:13.399 --> 00:02:16.819
+we further reduce the variance of policy-based methods.
+
+00:02:16.819 --> 00:02:22.129
+These leads to faster learning than policy-based agents alone and we
+
+00:02:22.129 --> 00:02:28.269
+also see better and more consistent convergence than value-based agents alone.
+

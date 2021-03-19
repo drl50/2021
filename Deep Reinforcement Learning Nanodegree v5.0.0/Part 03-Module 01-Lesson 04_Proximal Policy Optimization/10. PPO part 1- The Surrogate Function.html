@@ -1,0 +1,363 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   PPO part 1- The Surrogate Function
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Proximal Policy Optimization
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. Instructor Introduction.html">
+       01. Instructor Introduction
+      </a>
+     </li>
+     <li class="">
+      <a href="02. Lesson Preview.html">
+       02. Lesson Preview
+      </a>
+     </li>
+     <li class="">
+      <a href="03. Beyond REINFORCE.html">
+       03. Beyond REINFORCE
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Noise Reduction.html">
+       04. Noise Reduction
+      </a>
+     </li>
+     <li class="">
+      <a href="05. Credit Assignment.html">
+       05. Credit Assignment
+      </a>
+     </li>
+     <li class="">
+      <a href="06. Policy Gradient Quiz.html">
+       06. Policy Gradient Quiz
+      </a>
+     </li>
+     <li class="">
+      <a href="07. pong with REINFORCE (code walkthrough).html">
+       07. pong with REINFORCE (code walkthrough)
+      </a>
+     </li>
+     <li class="">
+      <a href="08. pong with REINFORCE (workspace).html">
+       08. pong with REINFORCE (workspace)
+      </a>
+     </li>
+     <li class="">
+      <a href="09. Importance Sampling.html">
+       09. Importance Sampling
+      </a>
+     </li>
+     <li class="">
+      <a href="10. PPO part 1- The Surrogate Function.html">
+       10. PPO part 1- The Surrogate Function
+      </a>
+     </li>
+     <li class="">
+      <a href="11. PPO part 2- Clipping Policy Updates.html">
+       11. PPO part 2- Clipping Policy Updates
+      </a>
+     </li>
+     <li class="">
+      <a href="12. PPO summary.html">
+       12. PPO summary
+      </a>
+     </li>
+     <li class="">
+      <a href="13. pong with PPO (code walkthrough).html">
+       13. pong with PPO (code walkthrough)
+      </a>
+     </li>
+     <li class="">
+      <a href="14. pong with PPO (workspace).html">
+       14. pong with PPO (workspace)
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          10. PPO part 1- The Surrogate Function
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="ppo-part-1-the-surrogate-function">
+          PPO Part 1: The Surrogate Function
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+         <p>
+          PPO Part 1: The Surrogate Function
+         </p>
+        </h3>
+        <video controls="">
+         <source src="10. PPO Part 1 The Surrogate Function-Y-boYZlpO7g.mp4" type="video/mp4"/>
+         <track default="true" kind="subtitles" label="en" src="10. PPO Part 1 The Surrogate Function-Y-boYZlpO7g.en.vtt" srclang="en"/>
+        </video>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="re-weighting-the-policy-gradient">
+          Re-weighting the Policy Gradient
+         </h2>
+         <p>
+          Suppose we are trying to update our current policy,
+          <span class="mathquill ud-math">
+           \pi_{\theta'}
+          </span>
+          . To do that, we need to estimate a gradient,
+          <span class="mathquill ud-math">
+           g
+          </span>
+          . But we only have trajectories generated by an older policy
+          <span class="mathquill ud-math">
+           \pi_{\theta}
+          </span>
+          . How do we compute the gradient then?
+         </p>
+         <p>
+          Mathematically, we could utilize importance sampling. The answer just what a normal policy gradient would be, times a re-weighting factor
+          <span class="mathquill ud-math">
+           P(\tau;\theta')/P(\tau;\theta)
+          </span>
+          :
+         </p>
+         <div class="mathquill">
+          g=\frac{P(\tau; \theta')}{P(\tau; \theta)}\sum_t 
+\frac{\nabla_{\theta'} \pi_{\theta'}(a_t|s_t)}{\pi_{\theta'}(a_t|s_t)}R_t^{\rm future}
+         </div>
+         <p>
+          We can rearrange these equations, and the re-weighting factor is just the product of all the policy across each step -- I’ve picked out the terms at time-step
+          <span class="mathquill ud-math">
+           t
+          </span>
+          here. We can cancel some terms, but we're still left with a product of the policies at different times, denoted by "
+          <span class="mathquill ud-math">
+           …
+          </span>
+          ".
+         </p>
+         <div class="mathquill">
+          g=\sum_t
+\frac{...\, \cancel{\pi_{\theta'}(a_t|s_t)} \,...}
+{...\,\pi_{\theta}(a_t|s_t)\,...}
+\,
+\frac{\nabla_{\theta'} \pi_{\theta'}(a_t|s_t)}{\cancel{\pi_{\theta'}(a_t|s_t)}}R_t^{\rm future}
+         </div>
+         <p>
+          Can we simplify this expression further? This is where proximal policy comes in. If the old and current policy is close enough to each other, all the factors inside the "
+          <span class="mathquill ud-math">
+           …
+          </span>
+          " would be pretty close to 1, and then we can ignore them.
+         </p>
+         <p>
+          Then the equation simplifies
+         </p>
+         <div class="mathquill">
+          g=\sum_t
+\frac{\nabla_{\theta'} \pi_{\theta'}(a_t|s_t)}{\pi_{\theta}(a_t|s_t)}R_t^{\rm future}
+         </div>
+         <p>
+          It looks very similar to the old policy gradient. In fact, if the current policy and the old policy is the same, we would have exactly the vanilla policy gradient. But remember, this expression is different because we are comparing two
+          <em>
+           different
+          </em>
+          policies
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="the-surrogate-function">
+          The Surrogate Function
+         </h2>
+         <p>
+          Now that we have the approximate form of the gradient, we can think of it as the gradient of a new object, called the surrogate function
+         </p>
+         <div class="mathquill">
+          g=\nabla_{\theta'} L_{\rm sur}(\theta', \theta)
+         </div>
+         <div class="mathquill">
+          L_{\rm sur}(\theta', \theta)=
+\sum_t
+\frac{\pi_{\theta'}(a_t|s_t)}{\pi_{\theta}(a_t|s_t)}R_t^{\rm future}
+         </div>
+         <p>
+          So using this new gradient, we can perform gradient ascent to update our policy -- which can be thought as directly maximize the surrogate function.
+         </p>
+         <p>
+          But there is still one important issue we haven’t addressed yet. If we keep reusing old trajectories and updating our policy, at some point the new policy might become different enough from the old one, so that all the approximations we made could become invalid.
+         </p>
+         <p>
+          We need to find a way make sure this doesn’t happen. Let’s see how in part 2.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="11. PPO part 2- Clipping Policy Updates.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('10. PPO part 1- The Surrogate Function')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

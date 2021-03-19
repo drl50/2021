@@ -1,0 +1,226 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.424
+Now, if we compare this result to what we had before,
+
+00:00:04.424 --> 00:00:08.294
+we can see that the implementation shortfall in this case
+
+00:00:08.294 --> 00:00:12.675
+is bigger due to the random fluctuations in stock price.
+
+00:00:12.675 --> 00:00:18.690
+We can think of this more realistic price model as the original price model,
+
+00:00:18.690 --> 00:00:21.030
+but with some noise added to it.
+
+00:00:21.030 --> 00:00:24.539
+So, let's see if we can write this out mathematically.
+
+00:00:24.539 --> 00:00:27.809
+Here, I have the first implementation shortfall
+
+00:00:27.809 --> 00:00:31.410
+which corresponds to trading at this points,
+
+00:00:31.410 --> 00:00:34.755
+and here is the second implementation shortfall
+
+00:00:34.755 --> 00:00:37.844
+which corresponds to trading at these points.
+
+00:00:37.844 --> 00:00:40.109
+What I want to do now is to express
+
+00:00:40.109 --> 00:00:44.100
+the second implementation shortfall in terms of the first one.
+
+00:00:44.100 --> 00:00:49.969
+To do this, I will start out by writing 97 as 100 minus 3,
+
+00:00:49.969 --> 00:00:54.439
+77 as an 90 minus 13 and so on.
+
+00:00:54.439 --> 00:00:57.789
+If I simplify and rearrange terms,
+
+00:00:57.789 --> 00:01:00.890
+I can see that this terms over here in blue actually
+
+00:01:00.890 --> 00:01:04.840
+correspond to the capture of the first implementation shortfall,
+
+00:01:04.840 --> 00:01:07.909
+while these terms in yellow actually correspond to
+
+00:01:07.909 --> 00:01:11.239
+the difference in execution price due to noise.
+
+00:01:11.239 --> 00:01:15.560
+For example, this $3 means that
+
+00:01:15.560 --> 00:01:21.215
+the first transaction took place $3 below the first implementation shortfall.
+
+00:01:21.215 --> 00:01:24.799
+Similarly, the minus $2 means that
+
+00:01:24.799 --> 00:01:30.814
+the third transaction took place $2 above the first implementation shortfall.
+
+00:01:30.814 --> 00:01:37.638
+If I simplify further and make the substitution from the first implementation shortfall,
+
+00:01:37.638 --> 00:01:43.429
+then simplifying further I actually get that
+
+00:01:43.430 --> 00:01:46.669
+the second implementation shortfall is actually
+
+00:01:46.668 --> 00:01:51.979
+the first implementation shortfall plus some term that just depends on noise.
+
+00:01:51.980 --> 00:01:55.880
+What I want to do now is actually to write I S1
+
+00:01:55.879 --> 00:02:01.269
+the first implementation shortfall as E of X,
+
+00:02:01.269 --> 00:02:07.024
+and I will write I S2 as simply the implementation shortfall.
+
+00:02:07.025 --> 00:02:11.390
+We call this first term the expected shortfall,
+
+00:02:11.389 --> 00:02:17.629
+because it is the expected implementation shortfall if we had no noise.
+
+00:02:17.629 --> 00:02:22.669
+This expected shortfall will depend on how we sell our shares.
+
+00:02:22.669 --> 00:02:28.184
+For example, if we had decided to sell our shares in this fashion,
+
+00:02:28.185 --> 00:02:31.219
+by selling five shares in the first trade,
+
+00:02:31.219 --> 00:02:34.009
+two shares on the second trade and so on,
+
+00:02:34.009 --> 00:02:38.204
+we will have resulted in a different implementation shortfall.
+
+00:02:38.205 --> 00:02:43.085
+In this case, a smaller one of $172.
+
+00:02:43.085 --> 00:02:47.950
+The way in which we decide to sell our stocks is called a trade list.
+
+00:02:47.949 --> 00:02:51.079
+The trade list tells us the number of trades
+
+00:02:51.080 --> 00:02:54.995
+and the quantity of shares to be sold at each trade.
+
+00:02:54.995 --> 00:02:59.855
+The second term only depends on the random price fluctuations.
+
+00:02:59.854 --> 00:03:02.419
+The absolute value of this term gives us
+
+00:03:02.419 --> 00:03:05.659
+an idea of how much the stock price is fluctuating.
+
+00:03:05.659 --> 00:03:10.865
+For example, if we had bigger price fluctuations like here,
+
+00:03:10.865 --> 00:03:13.475
+we will get a number with a bigger magnitude.
+
+00:03:13.474 --> 00:03:16.245
+In this case, 253.
+
+00:03:16.245 --> 00:03:19.349
+Also notice that in this case,
+
+00:03:19.349 --> 00:03:21.430
+the number is negative.
+
+00:03:21.430 --> 00:03:25.939
+This term will therefore represent how much money we can
+
+00:03:25.939 --> 00:03:30.409
+gain or lose due to the random price fluctuations.
+
+00:03:30.409 --> 00:03:37.280
+In finance, this random price fluctuations are referred to as price volatility or risk.
+
+00:03:37.280 --> 00:03:41.965
+Risk is usually quantified by the variance of the price fluctuations.
+
+00:03:41.965 --> 00:03:45.875
+So, if the price fluctuations of a particular stock are very big,
+
+00:03:45.875 --> 00:03:48.620
+we say that is a risky investment.
+
+00:03:48.620 --> 00:03:52.909
+Now that you have a better idea of what the financial terms mean,
+
+00:03:52.909 --> 00:03:56.500
+let's look at the problem once again in this new light.
+
+00:03:56.500 --> 00:04:00.199
+So, given a certain number of stocks and knowing how
+
+00:04:00.199 --> 00:04:04.084
+much the stock price is affected every time we sell a stock,
+
+00:04:04.085 --> 00:04:09.740
+we have to find the trade list that tells us how many shares to sell at
+
+00:04:09.740 --> 00:04:15.230
+each trade such that the implementation shortfall is minimized.
+
+00:04:15.229 --> 00:04:18.574
+However, we're bound to certain constraints.
+
+00:04:18.574 --> 00:04:23.474
+One of them is that we need to sell theses shares within a given timeframe.
+
+00:04:23.475 --> 00:04:28.485
+So, we need to set a limited number of trades within the liquidation period.
+
+00:04:28.485 --> 00:04:33.935
+The other is that we need to take into account the traders risk aversion.
+
+00:04:33.935 --> 00:04:37.264
+The traders risk aversion that says how much
+
+00:04:37.264 --> 00:04:40.729
+a particular trader is willing to tolerate risk.
+
+00:04:40.730 --> 00:04:44.390
+For example, suppose the stock we're selling
+
+00:04:44.389 --> 00:04:48.334
+is experiencing a large volatility in the stock price.
+
+00:04:48.334 --> 00:04:52.039
+In this scenario, a trader that doesn't like to
+
+00:04:52.040 --> 00:04:56.060
+take risks would rather sell his shares as quickly as possible.
+
+00:04:56.060 --> 00:04:59.959
+On the other hand, a trader that does like to take
+
+00:04:59.959 --> 00:05:05.569
+risks will rather sell these shares at a constant rate over the whole liquidation period,
+
+00:05:05.569 --> 00:05:08.290
+even if the price volatility is high.
+

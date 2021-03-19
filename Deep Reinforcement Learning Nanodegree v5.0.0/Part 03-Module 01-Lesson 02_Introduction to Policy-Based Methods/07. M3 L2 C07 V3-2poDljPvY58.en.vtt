@@ -1,0 +1,88 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.330
+So far, you've learned about a couple of different algorithms that
+
+00:00:03.330 --> 00:00:06.554
+we can use to optimize the weights of the Policy Network.
+
+00:00:06.554 --> 00:00:09.945
+Hill climbing begins with a best guess for the weights,
+
+00:00:09.945 --> 00:00:15.144
+then it adds a little bit of noise to propose one new policy that might perform better.
+
+00:00:15.144 --> 00:00:18.750
+Steepest-ascent Hill climbing, does a little bit more work by
+
+00:00:18.750 --> 00:00:22.559
+generating several neighboring policies at each iteration.
+
+00:00:22.559 --> 00:00:24.285
+But in both cases,
+
+00:00:24.285 --> 00:00:26.530
+only the best policy prevails.
+
+00:00:26.530 --> 00:00:28.585
+For Steepest-ascent Hill climbing,
+
+00:00:28.585 --> 00:00:31.460
+there's a lot of useful information that we're throwing out.
+
+00:00:31.460 --> 00:00:34.789
+In this video, you'll learn about some methods that leverage
+
+00:00:34.789 --> 00:00:38.734
+useful information from the weights that aren't selected as best.
+
+00:00:38.734 --> 00:00:43.615
+So what if, instead of selecting only the best policy,
+
+00:00:43.615 --> 00:00:48.835
+we selected the top 10 or 20 percent of them, and took the average?
+
+00:00:48.835 --> 00:00:51.740
+This is what the Cross-Entropy Method does
+
+00:00:51.740 --> 00:00:55.265
+and you'll look at an implementation later in the lesson.
+
+00:00:55.265 --> 00:01:00.804
+Another approach is to look at the return that was collected by each candidate policy.
+
+00:01:00.804 --> 00:01:04.099
+The best policy will be a weighted sum of all of these,
+
+00:01:04.099 --> 00:01:06.339
+where policies that got higher return,
+
+00:01:06.340 --> 00:01:09.090
+are given more say or get a higher weight.
+
+00:01:09.090 --> 00:01:12.335
+This technique is called Evolution Strategies.
+
+00:01:12.334 --> 00:01:16.849
+The name originally comes from the idea of biological evolution,
+
+00:01:16.849 --> 00:01:21.069
+where the idea is that the most successful individuals in the policy population,
+
+00:01:21.069 --> 00:01:25.069
+who have the most influence on the next generation or iteration.
+
+00:01:25.069 --> 00:01:27.454
+That said, it's best to think of
+
+00:01:27.454 --> 00:01:31.844
+evolution strategies as just another black box optimization technique.
+
+00:01:31.844 --> 00:01:33.429
+In the upcoming concepts,
+
+00:01:33.430 --> 00:01:36.430
+you'll have the chance to compare some of these approaches.
+

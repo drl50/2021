@@ -1,0 +1,384 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   What are Policy Gradient Methods?
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Policy Gradient Methods
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. What are Policy Gradient Methods.html">
+       01. What are Policy Gradient Methods?
+      </a>
+     </li>
+     <li class="">
+      <a href="02. The Big Picture.html">
+       02. The Big Picture
+      </a>
+     </li>
+     <li class="">
+      <a href="03. Connections to Supervised Learning.html">
+       03. Connections to Supervised Learning
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Problem Setup.html">
+       04. Problem Setup
+      </a>
+     </li>
+     <li class="">
+      <a href="05. REINFORCE.html">
+       05. REINFORCE
+      </a>
+     </li>
+     <li class="">
+      <a href="06. (Optional) Derivation.html">
+       06. (Optional) Derivation
+      </a>
+     </li>
+     <li class="">
+      <a href="07. Coding Exercise.html">
+       07. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Workspace.html">
+       08. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="09. What's Next.html">
+       09. What's Next?
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Summary.html">
+       10. Summary
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          01. What are Policy Gradient Methods?
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="what-are-policy-gradient-methods">
+          What are Policy Gradient Methods?
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          Policy gradient methods are a subclass of policy-based methods.  Watch the video below to learn more!
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+         <p>
+          M3L3 C01 V3
+         </p>
+        </h3>
+        <video controls="">
+         <source src="01. M3L3 C01 V3-ZEhQRASU5O4.mp4" type="video/mp4"/>
+         <track default="true" kind="subtitles" label="en" src="01. M3L3 C01 V3-ZEhQRASU5O4.en.vtt" srclang="en"/>
+        </video>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          In the
+          <strong>
+           Introduction to Policy-Based Methods
+          </strong>
+          lesson, you learned about many policy-based methods that could approximate either a deterministic or stochastic policy.
+         </p>
+         <p>
+          In this lesson, we'll confine our attention to stochastic policies.
+         </p>
+         <h2 id="-quiz">
+          ## Quiz
+         </h2>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <form>
+          <fieldset>
+           <legend>
+            <p>
+             Which of the following is a valid approach, if we'd like to use a neural network to approximate an agent's stochastic policy (
+             <em>
+              for a discrete action space
+             </em>
+             )? (Select all that apply.)
+            </p>
+           </legend>
+          </fieldset>
+          <div>
+           <input id="a1532618811284" name="682347" type="checkbox" value="a1532618811284"/>
+           <label for="a1532618811284">
+            <p>
+             Use a softmax activation function in the output layer. This will ensure the network outputs probabilities. For each state input, sample an action from the output probability distribution.
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1532618998737" name="682347" type="checkbox" value="a1532618998737"/>
+           <label for="a1532618998737">
+            <p>
+             Use a ReLU activation function in the output layer. This will ensure the network outputs probabilities. For each state input, sample an action from the output probability distribution.
+            </p>
+           </label>
+          </div>
+         </form>
+         <details>
+          <summary>
+           <strong>
+            SOLUTION:
+           </strong>
+          </summary>
+          <ul>
+           <li>
+            Use a softmax activation function in the output layer. This will ensure the network outputs probabilities. For each state input, sample an action from the output probability distribution.
+           </li>
+          </ul>
+         </details>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <form>
+          <fieldset>
+           <legend>
+            <p>
+             Which of the following is true about the difference between policy-based and policy gradient methods? (Select all that apply.)
+            </p>
+           </legend>
+          </fieldset>
+          <div>
+           <input id="a1534778163053" name="694398" type="checkbox" value="a1534778163053"/>
+           <label for="a1534778163053">
+            <p>
+             Policy gradient methods are a subclass of policy-based methods.
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1534778202295" name="694398" type="checkbox" value="a1534778202295"/>
+           <label for="a1534778202295">
+            <p>
+             Not all policy gradient methods are policy-based methods.
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1534778213226" name="694398" type="checkbox" value="a1534778213226"/>
+           <label for="a1534778213226">
+            <p>
+             Not all policy-based methods are policy gradient methods.
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1534778226328" name="694398" type="checkbox" value="a1534778226328"/>
+           <label for="a1534778226328">
+            <p>
+             Both policy-based methods and policy gradient methods directly try to optimize for the optimal policy, without maintaining value function estimates.
+            </p>
+           </label>
+          </div>
+         </form>
+         <details>
+          <summary>
+           <strong>
+            SOLUTION:
+           </strong>
+          </summary>
+          <ul>
+           <li>
+            Policy gradient methods are a subclass of policy-based methods.
+           </li>
+           <li>
+            Not all policy-based methods are policy gradient methods.
+           </li>
+           <li>
+            Both policy-based methods and policy gradient methods directly try to optimize for the optimal policy, without maintaining value function estimates.
+           </li>
+          </ul>
+         </details>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="02. The Big Picture.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('01. What are Policy Gradient Methods?')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

@@ -1,0 +1,154 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:01.720
+By the end of the last video,
+
+00:00:01.720 --> 00:00:05.080
+we had discussed a game that we'd like to teach an agent to play.
+
+00:00:05.080 --> 00:00:08.714
+There were four possible actions corresponding to moving up,
+
+00:00:08.714 --> 00:00:10.890
+down, left, or right.
+
+00:00:10.890 --> 00:00:16.010
+The output layer of our neural network had a node for each possible action.
+
+00:00:16.010 --> 00:00:19.440
+The weights begin with initially random values and
+
+00:00:19.440 --> 00:00:23.339
+we can use the corresponding policy to play the game for an episode.
+
+00:00:23.339 --> 00:00:26.579
+Say, the reward is delivered only at the end of
+
+00:00:26.579 --> 00:00:29.434
+the game and is positive one if the agent wins,
+
+00:00:29.434 --> 00:00:31.934
+and negative one if the agent loses.
+
+00:00:31.934 --> 00:00:34.710
+So how can we use this information to improve
+
+00:00:34.710 --> 00:00:38.149
+the network weights to get us closer to the optimal policy?
+
+00:00:38.149 --> 00:00:43.104
+For now, say that we collected a single episode for the agent one.
+
+00:00:43.104 --> 00:00:47.539
+Well, the policy gradient method that we'll discuss in this lesson.
+
+00:00:47.539 --> 00:00:51.030
+We'll look at each state action pair separately,
+
+00:00:51.030 --> 00:00:53.160
+beginning with the first one,
+
+00:00:53.159 --> 00:00:58.359
+and we'll recall how the agent ultimately selected action left from the state.
+
+00:00:58.359 --> 00:01:03.369
+It just passed that state through the network which returned action probabilities.
+
+00:01:03.369 --> 00:01:05.599
+The agent then sampled from
+
+00:01:05.599 --> 00:01:09.949
+those probabilities which ultimately led to selecting action left.
+
+00:01:09.950 --> 00:01:12.174
+So the idea is this,
+
+00:01:12.174 --> 00:01:14.384
+since the agent won the game,
+
+00:01:14.385 --> 00:01:17.180
+that's an indication that it was a good decision to
+
+00:01:17.180 --> 00:01:20.015
+select action left when in this game state.
+
+00:01:20.015 --> 00:01:24.590
+So we can change the network weights just a little bit to make it even
+
+00:01:24.590 --> 00:01:29.555
+more likely to select action left from that game state in the future.
+
+00:01:29.555 --> 00:01:32.870
+Then, we move on to the next state action pair
+
+00:01:32.870 --> 00:01:36.615
+and look at the probabilities that lead to selecting action up,
+
+00:01:36.614 --> 00:01:40.429
+and we amend the network weights again, just a little,
+
+00:01:40.430 --> 00:01:46.285
+to make it slightly more likely to select action up from the corresponding game state.
+
+00:01:46.284 --> 00:01:51.950
+Once we've done all of those updates for every state action pair in the episode,
+
+00:01:51.950 --> 00:01:54.325
+we can collect another episode.
+
+00:01:54.325 --> 00:01:57.650
+Say, in the second episode we lost.
+
+00:01:57.650 --> 00:02:00.830
+We'll again consider each of the state action
+
+00:02:00.829 --> 00:02:05.084
+pairs one at a time and begin with the first one.
+
+00:02:05.084 --> 00:02:10.224
+Say, the action probabilities corresponding to the state are given here.
+
+00:02:10.224 --> 00:02:14.060
+Then it makes sense that since this choice to select action
+
+00:02:14.060 --> 00:02:17.979
+up was part of an episode where we eventually lost the game,
+
+00:02:17.979 --> 00:02:22.829
+we'll amend the network weights to now put less probability on that action.
+
+00:02:22.830 --> 00:02:27.740
+We'll do the same for all other state action pairs in the episode where we want to
+
+00:02:27.740 --> 00:02:33.020
+amend the network to make it less likely to repeat these bad decisions in the future.
+
+00:02:33.020 --> 00:02:36.560
+We'll continue with collecting more episodes and
+
+00:02:36.560 --> 00:02:40.314
+making these modifications to the network. But that's it.
+
+00:02:40.314 --> 00:02:42.530
+In this lesson, we'll dig more deeply into
+
+00:02:42.530 --> 00:02:45.890
+this process but it's useful to keep the big picture in mind.
+
+00:02:45.889 --> 00:02:50.689
+We just collect a lot of episodes and then for each episode we amend
+
+00:02:50.689 --> 00:02:56.389
+the network weights to make all of the state action pairs more likely if we won the game,
+
+00:02:56.389 --> 00:02:59.899
+and to make them all less likely if we lost the game.
+
+00:02:59.900 --> 00:03:03.125
+This method isn't perfect but it's a start.
+
+00:03:03.125 --> 00:03:07.400
+Later in this lesson we'll learn about some ways to improve it.
+

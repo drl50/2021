@@ -1,0 +1,451 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   (Optional) Derivation
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Policy Gradient Methods
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. What are Policy Gradient Methods.html">
+       01. What are Policy Gradient Methods?
+      </a>
+     </li>
+     <li class="">
+      <a href="02. The Big Picture.html">
+       02. The Big Picture
+      </a>
+     </li>
+     <li class="">
+      <a href="03. Connections to Supervised Learning.html">
+       03. Connections to Supervised Learning
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Problem Setup.html">
+       04. Problem Setup
+      </a>
+     </li>
+     <li class="">
+      <a href="05. REINFORCE.html">
+       05. REINFORCE
+      </a>
+     </li>
+     <li class="">
+      <a href="06. (Optional) Derivation.html">
+       06. (Optional) Derivation
+      </a>
+     </li>
+     <li class="">
+      <a href="07. Coding Exercise.html">
+       07. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Workspace.html">
+       08. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="09. What's Next.html">
+       09. What's Next?
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Summary.html">
+       10. Summary
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          06. (Optional) Derivation
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="Behavior of different optimizers for stochastic gradient descent. ([Source](http://ruder.io/optimizing-gradient-descent/))" class="img img-fluid" src="img/grad-descent.gif"/>
+          <figcaption class="figure-caption">
+           <p>
+            Behavior of different optimizers for stochastic gradient descent. (
+            <a href="http://ruder.io/optimizing-gradient-descent/" rel="noopener noreferrer" target="_blank">
+             Source
+            </a>
+            )
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="optional-derivation">
+          (Optional) Derivation
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          If you'd like to learn how to derive the equation that we use to approximate the gradient, please read the text below.  Specifically, you'll learn how to derive
+         </p>
+         <div class="mathquill">
+          \nabla_\theta U(\theta) \approx \hat{g}= \frac{1}{m}\sum_{i=1}^m \sum_{t=0}^{H} \nabla_\theta \log \pi_\theta(a_t^{(i)}|s_t^{(i)}) R(\tau^{(i)})
+         </div>
+         <p>
+          This derivation is
+          <strong>
+           optional
+          </strong>
+          and can be safely skipped.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-likelihood-ratio-policy-gradient">
+          ## Likelihood Ratio Policy Gradient
+         </h2>
+         <p>
+          We'll begin by exploring how to calculate the gradient
+          <span class="mathquill ud-math">
+           \nabla_\theta U(\theta)
+          </span>
+          .  The calculation proceeds as follows:
+         </p>
+         <div class="mathquill">
+          \begin{aligned}\nabla_\theta U(\theta) &amp;= \nabla_\theta \sum_\tau P(\tau;\theta)R(\tau) &amp; (1)\\
+&amp;=  \sum_\tau \nabla_\theta P(\tau;\theta)R(\tau) &amp; (2)\\
+&amp;= \sum_\tau \frac{P(\tau;\theta)}{P(\tau;\theta)} \nabla_\theta P(\tau;\theta)R(\tau) &amp; (3)\\
+&amp;= \sum_\tau P(\tau;\theta) \frac{\nabla_\theta P(\tau;\theta)}{P(\tau;\theta)}R(\tau) &amp; (4)\\
+&amp;= \sum_\tau P(\tau;\theta) \nabla_\theta \log P(\tau;\theta) R(\tau) &amp; (5)
+\end{aligned}
+         </div>
+         <p>
+          First, we note line (1) follows directly from
+          <span class="mathquill ud-math">
+           U(\theta) = \sum_\tau P(\tau;\theta)R(\tau)
+          </span>
+          , where we've only taken the gradient of both sides.
+         </p>
+         <p>
+          Then, we can get line (2) by just noticing that we can rewrite the gradient of the sum as the sum of the gradients.
+         </p>
+         <p>
+          In line (3), we only multiply every term in the sum by
+          <span class="mathquill ud-math">
+           \frac{P(\tau;\theta)}{P(\tau;\theta)}
+          </span>
+          , which is perfectly allowed because this fraction is equal to one!
+         </p>
+         <p>
+          Next, line (4) is just a simple rearrangement of the terms from the previous line.  That is,
+          <span class="mathquill ud-math">
+           \frac{P(\tau;\theta)}{P(\tau;\theta)} \nabla_\theta P(\tau;\theta) = P(\tau;\theta) \frac{\nabla_\theta P(\tau;\theta)}{P(\tau;\theta)}
+          </span>
+          .
+         </p>
+         <p>
+          Finally, line (5) follows from the chain rule, and the fact that the gradient of the log of a function is always equal to the gradient of the function, divided by the function.  (
+          <em>
+           In case it helps to see this with simpler notation, recall that
+           <span class="mathquill ud-math">
+            \nabla_x \log f(x) = \frac{\nabla_x f(x)}{f(x)}
+           </span>
+           .
+          </em>
+          )  Thus,
+          <span class="mathquill ud-math">
+           \nabla_\theta \log P(\tau;\theta) = \frac{\nabla_\theta P(\tau;\theta)}{P(\tau;\theta)}
+          </span>
+          .
+         </p>
+         <p>
+          The final "trick" that yields line (5) (i.e.,
+          <span class="mathquill ud-math">
+           \nabla_\theta \log P(\tau;\theta) = \frac{\nabla_\theta P(\tau;\theta)}{P(\tau;\theta)}
+          </span>
+          ) is referred to as the
+          <strong>
+           likelihood ratio trick
+          </strong>
+          or
+          <strong>
+           REINFORCE trick
+          </strong>
+          .
+         </p>
+         <p>
+          Likewise, it is common to refer to the gradient as the
+          <strong>
+           likelihood ratio policy gradient
+          </strong>
+          :
+         </p>
+         <div class="mathquill">
+          \nabla_\theta U(\theta) = \sum_\tau P(\tau;\theta) \nabla_\theta \log P(\tau;\theta) R(\tau)
+         </div>
+         <p>
+          Once we’ve written the gradient as an expected value in this way, it becomes much easier to estimate.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-sample-based-estimate">
+          ## Sample-Based Estimate
+         </h2>
+         <p>
+          In the video on the previous page, you learned that we can approximate the likelihood ratio policy gradient with a sample-based average, as shown below:
+         </p>
+         <div class="mathquill">
+          \nabla_\theta U(\theta) \approx \frac{1}{m}\sum_{i=1}^m \nabla_\theta \log \mathbb{P}(\tau^{(i)};\theta)R(\tau^{(i)})
+         </div>
+         <p>
+          where each
+          <span class="mathquill ud-math">
+           \tau^{(i)}
+          </span>
+          is a sampled trajectory.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-finishing-the-calculation">
+          ## Finishing the Calculation
+         </h2>
+         <p>
+          Before calculating the expression above, we will need to further simplify
+          <span class="mathquill ud-math">
+           \nabla_\theta \log \mathbb{P}(\tau^{(i)};\theta)
+          </span>
+          .  The derivation proceeds as follows:
+         </p>
+         <div class="mathquill">
+          \begin{aligned} \nabla_\theta \log \mathbb{P}(\tau^{(i)};\theta) &amp;= \nabla_\theta \log \Bigg[ \prod_{t=0}^{H} \mathbb{P}(s_{t+1}^{(i)}|s_{t}^{(i)}, a_t^{(i)} )\pi_\theta(a_t^{(i)}|s_t^{(i)})  \Bigg] &amp; (1)\\
+&amp;= \nabla_\theta \Bigg[ \sum_{t=0}^{H} \log \mathbb{P}(s_{t+1}^{(i)}|s_{t}^{(i)}, a_t^{(i)} ) + \sum_{t=0}^{H}\log \pi_\theta(a_t^{(i)}|s_t^{(i)})  \Bigg] &amp; (2)\\
+&amp;= \nabla_\theta\sum_{t=0}^{H} \log \mathbb{P}(s_{t+1}^{(i)}|s_{t}^{(i)}, a_t^{(i)} ) + \nabla_\theta \sum_{t=0}^{H}\log \pi_\theta(a_t^{(i)}|s_t^{(i)}) &amp; (3)\\
+&amp;= \nabla_\theta \sum_{t=0}^{H}\log \pi_\theta(a_t^{(i)}|s_t^{(i)}) &amp; (4)\\
+&amp;= \sum_{t=0}^{H} \nabla_\theta \log \pi_\theta(a_t^{(i)}|s_t^{(i)}) &amp; (5)
+\end{aligned}
+         </div>
+         <p>
+          First, line (1) shows how to calculate the probability of an arbitrary trajectory
+          <span class="mathquill ud-math">
+           \tau^{(i)}
+          </span>
+          .  Namely,
+          <span class="mathquill ud-math">
+           \mathbb{P}(\tau^{(i)};\theta) = \prod_{t=0}^{H} \mathbb{P}(s_{t+1}^{(i)}|s_{t}^{(i)}, a_t^{(i)} )\pi_\theta(a_t^{(i)}|s_t^{(i)})
+          </span>
+          , where we have to take into account the action-selection probabilities from the policy and the state transition dynamics of the MDP.
+         </p>
+         <p>
+          Then, line (2) follows from the fact that the log of a product is equal to the sum of the logs.
+         </p>
+         <p>
+          Then, line (3) follows because the gradient of the sum can be written as the sum of gradients.
+         </p>
+         <p>
+          Next, line (4) holds, because
+          <span class="mathquill ud-math">
+           \sum_{t=0}^{H} \log \mathbb{P}(s_{t+1}^{(i)}|s_{t}^{(i)}, a_t^{(i)} )
+          </span>
+          has no dependence on
+          <span class="mathquill ud-math">
+           \theta
+          </span>
+          , so
+          <span class="mathquill ud-math">
+           \nabla_\theta\sum_{t=0}^{H} \log \mathbb{P}(s_{t+1}^{(i)}|s_{t}^{(i)}, a_t^{(i)} )=0
+          </span>
+          .
+         </p>
+         <p>
+          Finally, line (5) holds, because we can rewrite the gradient of the sum as the sum of gradients.
+         </p>
+         <h2 id="-thats-it">
+          ## That's it!
+         </h2>
+         <p>
+          Plugging in the calculation above yields the equation for estimating the gradient:
+         </p>
+         <div class="mathquill">
+          \nabla_\theta U(\theta) \approx \hat{g} = \frac{1}{m}\sum_{i=1}^m \sum_{t=0}^{H} \nabla_\theta \log \pi_\theta(a_t^{(i)}|s_t^{(i)}) R(\tau^{(i)})
+         </div>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="07. Coding Exercise.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('06. (Optional) Derivation')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

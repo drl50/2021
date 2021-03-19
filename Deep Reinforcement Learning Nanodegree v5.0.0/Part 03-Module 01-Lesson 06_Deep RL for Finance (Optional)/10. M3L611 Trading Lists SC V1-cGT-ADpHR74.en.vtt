@@ -1,0 +1,274 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.560 --> 00:00:05.939
+In this notebook, we will take a look at trading lists and trading trajectories.
+
+00:00:05.940 --> 00:00:08.804
+In particular, you will see how trading lists
+
+00:00:08.804 --> 00:00:11.969
+vary depending on your initial trading parameters.
+
+00:00:11.970 --> 00:00:17.399
+You will also see how to implement a trade list in a simulated trading environment.
+
+00:00:17.399 --> 00:00:19.094
+In this first section,
+
+00:00:19.094 --> 00:00:23.910
+we will see how trading lists vary according to the traders risk aversion,
+
+00:00:23.910 --> 00:00:25.589
+the number of trades,
+
+00:00:25.589 --> 00:00:27.899
+and the liquidation time.
+
+00:00:27.899 --> 00:00:34.155
+The code outputs the plot of the trading lists and the corresponding trading trajectory.
+
+00:00:34.155 --> 00:00:37.575
+It also prints the total number of shares sold,
+
+00:00:37.575 --> 00:00:43.025
+and the trading list telling us how many shares to sell at each trading step.
+
+00:00:43.024 --> 00:00:47.929
+In this example, since we want it to sell our shares in 60 trades,
+
+00:00:47.929 --> 00:00:50.359
+this is exactly what we see.
+
+00:00:50.359 --> 00:00:54.924
+We can change the traders risk aversion to see how the plots change.
+
+00:00:54.924 --> 00:00:58.789
+If I simulate a trader that wants to take a lot of risk,
+
+00:00:58.789 --> 00:01:02.269
+we can see that the plots now look very different.
+
+00:01:02.270 --> 00:01:05.750
+A trader that wants to take a lot of risk would rather
+
+00:01:05.750 --> 00:01:09.400
+sell his shares evenly across the liquidation period.
+
+00:01:09.400 --> 00:01:13.565
+This is exactly what we see by looking at the trade list.
+
+00:01:13.564 --> 00:01:16.719
+We can also simulate a trader that doesn't
+
+00:01:16.719 --> 00:01:19.879
+like to take risk and see how the blocks change.
+
+00:01:19.879 --> 00:01:23.239
+We can see that the plots now are very different.
+
+00:01:23.239 --> 00:01:27.905
+A trader that doesn't like to take risks would rather sell his shares
+
+00:01:27.905 --> 00:01:32.689
+quickly rather than to sell them out evenly over the entire liquidation period.
+
+00:01:32.689 --> 00:01:35.870
+This is exactly what we see in the trading list.
+
+00:01:35.870 --> 00:01:37.450
+In the second section,
+
+00:01:37.450 --> 00:01:40.250
+we will see how to implement a trading list.
+
+00:01:40.250 --> 00:01:41.944
+Once we have a trading list,
+
+00:01:41.944 --> 00:01:43.774
+we would like to implement it.
+
+00:01:43.775 --> 00:01:47.000
+What this means is that we would like to sell our shares in
+
+00:01:47.000 --> 00:01:52.385
+the stock market according to the trading list and see how much money we made or lost.
+
+00:01:52.385 --> 00:01:54.230
+To do this, we're going to simulate
+
+00:01:54.230 --> 00:01:57.590
+the stock market with a very simple trading environment.
+
+00:01:57.590 --> 00:02:02.915
+The details of the simulated trading environment will be covered in another notebook.
+
+00:02:02.915 --> 00:02:06.785
+In this notebook, we will just take a look at some of its parameters.
+
+00:02:06.784 --> 00:02:12.604
+For example, we can see that we're going to use an annual volatility of 12 percent.
+
+00:02:12.604 --> 00:02:16.069
+Below, we can see the parameters we're going to use to calculate
+
+00:02:16.069 --> 00:02:19.344
+the trading list according to the Almgren and Chriss model,
+
+00:02:19.344 --> 00:02:22.504
+such as the total number of shares to sell,
+
+00:02:22.504 --> 00:02:25.490
+and the starting price per share.
+
+00:02:25.490 --> 00:02:30.790
+This code will implement a trade list in our simulated trading environment.
+
+00:02:30.789 --> 00:02:34.840
+Again, you can set the values for the traders risk aversion,
+
+00:02:34.840 --> 00:02:36.534
+the number of trades,
+
+00:02:36.534 --> 00:02:38.865
+and the liquidation time.
+
+00:02:38.865 --> 00:02:43.540
+The code will output the value of the implementation shortfall,
+
+00:02:43.539 --> 00:02:46.099
+which tells you how much money you made or
+
+00:02:46.099 --> 00:02:49.219
+lost by selling your shares according to the trade list.
+
+00:02:49.219 --> 00:02:53.555
+The code also outputs the plot of the impacted stock price.
+
+00:02:53.555 --> 00:02:56.599
+This impacted stock price reflects the effects of
+
+00:02:56.599 --> 00:03:00.340
+both the permanent and temporary market impacts.
+
+00:03:00.340 --> 00:03:04.609
+Each dot in the plot represents when a trade took place
+
+00:03:04.609 --> 00:03:09.034
+and the corresponding price per share at which the stocks were sold.
+
+00:03:09.034 --> 00:03:14.734
+We can change the parameters in the code to see how the implementation shortfall varies.
+
+00:03:14.735 --> 00:03:18.530
+We can see that for this level of traders risk aversion,
+
+00:03:18.530 --> 00:03:23.905
+we have an implementation shortfall of around $580,000,
+
+00:03:23.905 --> 00:03:26.909
+and the plot shows many trades.
+
+00:03:26.909 --> 00:03:31.310
+Now, we can simulate a trader that doesn't like to take risk.
+
+00:03:31.310 --> 00:03:37.099
+We can see that now the implementation shortfall is around two million dollars.
+
+00:03:37.099 --> 00:03:41.314
+We can also see that the plot only shows a few trades.
+
+00:03:41.314 --> 00:03:44.810
+This is consistent with the fact that in this case,
+
+00:03:44.810 --> 00:03:47.270
+since the trader doesn't like to take any risk,
+
+00:03:47.270 --> 00:03:50.689
+he wants to sell his shares as quickly as possible.
+
+00:03:50.689 --> 00:03:54.574
+Notice that as a consequence of selling his shares quickly,
+
+00:03:54.574 --> 00:03:58.849
+the stock price of the first trade is greatly impacted from
+
+00:03:58.849 --> 00:04:03.400
+its initial value of $50 because this is when most of the stocks are sold,
+
+00:04:03.400 --> 00:04:05.750
+as can be seen from the trading list that
+
+00:04:05.750 --> 00:04:09.485
+shows that most of the stocks were sold in the first trade.
+
+00:04:09.485 --> 00:04:12.110
+The last thing to notice is that implementing
+
+00:04:12.110 --> 00:04:15.109
+the same trading list for different random realizations
+
+00:04:15.109 --> 00:04:17.389
+of the simulated stock price will
+
+00:04:17.389 --> 00:04:20.629
+yield different values for the implementation shortfall.
+
+00:04:20.629 --> 00:04:25.444
+For example, given these trading parameters and this random seed,
+
+00:04:25.444 --> 00:04:31.915
+we get that the implementation shortfall is around $580,000.
+
+00:04:31.915 --> 00:04:36.300
+Now, if we leave all the trading parameters the same,
+
+00:04:36.300 --> 00:04:38.699
+but only change the random seed,
+
+00:04:38.699 --> 00:04:41.084
+I will get the same trading list.
+
+00:04:41.084 --> 00:04:50.724
+However, we can see that now the implementation shortfall is around minus $788,000.
+
+00:04:50.725 --> 00:04:55.895
+The negative sign indicates that this time we actually made money.
+
+00:04:55.894 --> 00:04:59.019
+We can see why this happened from the plot.
+
+00:04:59.019 --> 00:05:02.849
+Remember, the initial stock price was $50.
+
+00:05:02.850 --> 00:05:04.860
+As we can see from the plot,
+
+00:05:04.860 --> 00:05:10.220
+most of the trade took place when the stock price was above its initial value.
+
+00:05:10.220 --> 00:05:13.610
+Since we sold most of our shares at a higher price,
+
+00:05:13.610 --> 00:05:15.845
+that means that we actually made money.
+
+00:05:15.845 --> 00:05:20.855
+Notice that this happened simply because of random fluctuations in the stock price.
+
+00:05:20.855 --> 00:05:23.360
+So, even if we use the same trade list,
+
+00:05:23.360 --> 00:05:26.795
+we're not always going to get the same implementation shortfall.
+
+00:05:26.795 --> 00:05:31.670
+This is why we had to re-frame the problem of finding the optimal strategy,
+
+00:05:31.670 --> 00:05:34.189
+not in terms of a single realization,
+
+00:05:34.189 --> 00:05:38.009
+but in terms of the average or the expected value of the shortfall.
+

@@ -1,0 +1,193 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:06.059
+Let's explore two very distinct and complimentary ways for estimating expected returns.
+
+00:00:06.059 --> 00:00:09.809
+On the one hand, you'd have the Monte-Carlo estimate.
+
+00:00:09.810 --> 00:00:13.769
+The Monte-Carlo estimate consists of rolling out an episode in
+
+00:00:13.769 --> 00:00:18.225
+calculating the discounter total reward from the rewards sequence.
+
+00:00:18.225 --> 00:00:21.720
+For example, in an episode A,
+
+00:00:21.719 --> 00:00:26.049
+you start in state S_t, take action A_t.
+
+00:00:26.050 --> 00:00:31.370
+The environment then transitions gives you a reward R_t plus
+
+00:00:31.370 --> 00:00:36.439
+1 and sends you to a new state S_t plus 1.
+
+00:00:36.439 --> 00:00:39.109
+Then, you continue with a new action A_t plus
+
+00:00:39.109 --> 00:00:43.129
+1 and so on until you reach the end of the episode.
+
+00:00:43.130 --> 00:00:47.210
+The Monte-Carlo estimate just at other rewards up,
+
+00:00:47.210 --> 00:00:49.100
+whether discounted or not.
+
+00:00:49.100 --> 00:00:54.590
+When you then have a collection of episodes A, B, C,
+
+00:00:54.590 --> 00:01:01.205
+and D, some of those episodes will have trajectories that go through the same states.
+
+00:01:01.204 --> 00:01:03.994
+Each of these episodes can give you
+
+00:01:03.994 --> 00:01:08.974
+a different Monte-Carlo estimate for the same value function.
+
+00:01:08.974 --> 00:01:11.000
+To calculate the value function,
+
+00:01:11.000 --> 00:01:14.885
+all you need to do is average the estimates.
+
+00:01:14.885 --> 00:01:19.250
+Obviously, the more estimates you have when taking the average,
+
+00:01:19.250 --> 00:01:21.635
+the better your value function will be.
+
+00:01:21.635 --> 00:01:26.255
+On the other hand, you have the temporal difference or TD estimate.
+
+00:01:26.254 --> 00:01:29.179
+Say we're estimating a state value function
+
+00:01:29.180 --> 00:01:33.215
+V. For estimating the value of the current state,
+
+00:01:33.215 --> 00:01:35.870
+it uses a single rewards sample.
+
+00:01:35.870 --> 00:01:39.650
+In an estimate of the discounted total return,
+
+00:01:39.650 --> 00:01:43.870
+the agent will obtain from the next state onwards.
+
+00:01:43.870 --> 00:01:47.810
+So, you're estimating with an estimate.
+
+00:01:47.810 --> 00:01:50.674
+For example, in episode A,
+
+00:01:50.674 --> 00:01:55.685
+you start in state S_t, take action A_t,
+
+00:01:55.685 --> 00:02:01.984
+the environment then transitions gives you a reward R_t plus 1,
+
+00:02:01.984 --> 00:02:06.560
+and sends you to a new state S_t plus 1.
+
+00:02:06.560 --> 00:02:09.159
+But then you can actually stop there.
+
+00:02:09.159 --> 00:02:12.044
+By the magic of dynamic programming,
+
+00:02:12.044 --> 00:02:16.625
+you are allowed to do what is called bootstrapping,
+
+00:02:16.625 --> 00:02:22.340
+which basically means that you can leverage the estimate you're currently have for
+
+00:02:22.340 --> 00:02:24.935
+the next state in order to calculate
+
+00:02:24.935 --> 00:02:29.240
+a new estimate for the value function of the current state.
+
+00:02:29.240 --> 00:02:36.620
+Now, the estimates of the next state will probably be off particularly early on,
+
+00:02:36.620 --> 00:02:41.930
+but that value will become better and better as your agencies more data,
+
+00:02:41.930 --> 00:02:47.080
+making in turn other values better, clever right?
+
+00:02:47.080 --> 00:02:50.115
+After doing this many many times,
+
+00:02:50.115 --> 00:02:54.254
+you will have estimated the desired value function well.
+
+00:02:54.254 --> 00:02:55.949
+As you can imagine,
+
+00:02:55.949 --> 00:02:59.435
+Monte-Carlo estimates will have high variance because
+
+00:02:59.435 --> 00:03:04.250
+estimates for a state can vary greatly across episodes.
+
+00:03:04.250 --> 00:03:10.169
+G_t, A here could be minus 100, while G_t,
+
+00:03:10.169 --> 00:03:13.544
+B could be plus 100,
+
+00:03:13.544 --> 00:03:17.309
+and G_t, C plus 1,000.
+
+00:03:17.310 --> 00:03:20.634
+The reason these high variance is likely,
+
+00:03:20.634 --> 00:03:22.969
+is because you are compounding lots of
+
+00:03:22.969 --> 00:03:27.560
+random events that happened during the course of a single episode.
+
+00:03:27.560 --> 00:03:31.175
+But Monte-Carlo methods are unbiased.
+
+00:03:31.175 --> 00:03:34.640
+You are not estimating using estimates.
+
+00:03:34.639 --> 00:03:39.319
+You are only using the true rewards you obtained.
+
+00:03:39.319 --> 00:03:41.435
+So, given lots and lots of data,
+
+00:03:41.435 --> 00:03:43.810
+your estimates will be accurate.
+
+00:03:43.810 --> 00:03:48.365
+TD estimates are low variance because you're only compounding
+
+00:03:48.365 --> 00:03:53.155
+a single time step of randomness instead of a full rollout.
+
+00:03:53.155 --> 00:03:55.759
+Though because you're bootstrapping on
+
+00:03:55.759 --> 00:03:59.899
+the next state estimates and those are not true values,
+
+00:03:59.900 --> 00:04:03.319
+you're adding bias into your calculations.
+
+00:04:03.319 --> 00:04:05.625
+Your agent will learn faster,
+
+00:04:05.625 --> 00:04:08.680
+but we'll have more problems converging.
+

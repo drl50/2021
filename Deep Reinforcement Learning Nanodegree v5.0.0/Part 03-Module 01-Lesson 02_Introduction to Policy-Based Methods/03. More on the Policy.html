@@ -1,0 +1,520 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   More on the Policy
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Introduction to Policy-Based Methods
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. Policy-Based Methods.html">
+       01. Policy-Based Methods
+      </a>
+     </li>
+     <li class="">
+      <a href="02. Policy Function Approximation.html">
+       02. Policy Function Approximation
+      </a>
+     </li>
+     <li class="">
+      <a href="03. More on the Policy.html">
+       03. More on the Policy
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Hill Climbing.html">
+       04. Hill Climbing
+      </a>
+     </li>
+     <li class="">
+      <a href="05. Hill Climbing Pseudocode.html">
+       05. Hill Climbing Pseudocode
+      </a>
+     </li>
+     <li class="">
+      <a href="06. Beyond Hill Climbing.html">
+       06. Beyond Hill Climbing
+      </a>
+     </li>
+     <li class="">
+      <a href="07. More Black-Box Optimization.html">
+       07. More Black-Box Optimization
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Coding Exercise.html">
+       08. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="09. Workspace.html">
+       09. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="10. OpenAI Request for Research.html">
+       10. OpenAI Request for Research
+      </a>
+     </li>
+     <li class="">
+      <a href="11. Why Policy-Based Methods.html">
+       11. Why Policy-Based Methods?
+      </a>
+     </li>
+     <li class="">
+      <a href="12. Summary.html">
+       12. Summary
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          03. More on the Policy
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="more-on-the-policy">
+          More on the Policy
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          In the previous video, you learned how the agent could use a simple neural network architecture to approximate a
+          <strong>
+           stochastic policy
+          </strong>
+          .  The agent passes the current environment state as input to the network, which returns action probabilities.  Then, the agent samples from those probabilities to select an action.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="Neural network that encodes action probabilities ([Source](https://blog.openai.com/evolution-strategies/))" class="img img-fluid" src="img/screen-shot-2018-07-01-at-10.54.05-am.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            Neural network that encodes action probabilities (
+            <a href="https://blog.openai.com/evolution-strategies/" rel="noopener noreferrer" target="_blank">
+             Source
+            </a>
+            )
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          The same neural network architecture can be used to approximate a
+          <strong>
+           deterministic policy
+          </strong>
+          .  Instead of sampling from the action probabilities, the agent need only choose the greedy action.
+         </p>
+         <h2 id="-quiz">
+          ## Quiz
+         </h2>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <form>
+          <fieldset>
+           <legend>
+            <p>
+             In the video above, you learned that the neural network that approximates the policy takes the environment state as input.  The output layer returns the probability that the agent should select each possible action.  Which of the following is a valid activation function for the output layer?
+            </p>
+           </legend>
+          </fieldset>
+          <div>
+           <input id="a1530116683048" name="667016" type="radio" value="a1530116683048"/>
+           <label for="a1530116683048">
+            <p>
+             linear (i.e., no activation function)
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1530117818140" name="667016" type="radio" value="a1530117818140"/>
+           <label for="a1530117818140">
+            <p>
+             softmax
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1530117839905" name="667016" type="radio" value="a1530117839905"/>
+           <label for="a1530117839905">
+            <p>
+             ReLu
+            </p>
+           </label>
+          </div>
+         </form>
+         <details>
+          <summary>
+           <strong>
+            SOLUTION:
+           </strong>
+          </summary>
+          softmax
+         </details>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-what-about-continuous-action-spaces">
+          ## What about continuous action spaces?
+         </h2>
+         <p>
+          The CartPole environment has a discrete action space.  So, how do we use a neural network to approximate a policy, if the environment has a continuous action space?
+         </p>
+         <p>
+          As you learned above, in the case of
+          <strong>
+           <em>
+            discrete
+           </em>
+          </strong>
+          action spaces, the neural network has one node for each possible action.
+         </p>
+         <p>
+          For
+          <strong>
+           <em>
+            continuous
+           </em>
+          </strong>
+          action spaces, the neural network has one node for each action entry (or index).  For example, consider the action space of the
+          <a href="https://github.com/openai/gym/wiki/BipedalWalker-v2" rel="noopener noreferrer" target="_blank">
+           bipedal walker
+          </a>
+          environment, shown in the figure below.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="Action space of `BipedalWalker-v2` ([Source](https://github.com/openai/gym/wiki/BipedalWalker-v2))" class="img img-fluid" src="img/screen-shot-2018-07-01-at-11.28.57-am.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            Action space of
+            <code>
+             BipedalWalker-v2
+            </code>
+            (
+            <a href="https://github.com/openai/gym/wiki/BipedalWalker-v2" rel="noopener noreferrer" target="_blank">
+             Source
+            </a>
+            )
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          In this case, any action is a vector of four numbers, so the output layer of the policy network will have four nodes.
+         </p>
+         <p>
+          Since every entry in the action must be a number between -1 and 1, we will add a
+          <a href="https://pytorch.org/docs/stable/nn.html#torch.nn.Tanh" rel="noopener noreferrer" target="_blank">
+           tanh activation function
+          </a>
+          to the output layer.
+         </p>
+         <p>
+          As another example, consider the
+          <a href="https://github.com/openai/gym/wiki/MountainCarContinuous-v0" rel="noopener noreferrer" target="_blank">
+           continuous mountain car
+          </a>
+          benchmark.  The action space is shown in the figure below.  Note that for this environment, the action must be a value between -1 and 1.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="Action space of `MountainCarContinuous-v0` ([Source](https://github.com/openai/gym/wiki/MountainCarContinuous-v0))" class="img img-fluid" src="img/screen-shot-2018-07-01-at-11.19.22-am.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            Action space of
+            <code>
+             MountainCarContinuous-v0
+            </code>
+            (
+            <a href="https://github.com/openai/gym/wiki/MountainCarContinuous-v0" rel="noopener noreferrer" target="_blank">
+             Source
+            </a>
+            )
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-quiz">
+          ## Quiz
+         </h2>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <form>
+          <fieldset>
+           <legend>
+            <p>
+             Consider the
+             <code>
+              MountainCarContinuous-v0
+             </code>
+             environment.  Which of the following describes a valid output layer for the policy?  (
+             <em>
+              Select the option that yields valid actions that can be passed directly to the environment without any additional preprocessing.
+             </em>
+             )
+            </p>
+           </legend>
+          </fieldset>
+          <div>
+           <input id="a1530804512794" name="671397" type="radio" value="a1530804512794"/>
+           <label for="a1530804512794">
+            <p>
+             Layer size: 1, Activation function: softmax
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1530804568539" name="671397" type="radio" value="a1530804568539"/>
+           <label for="a1530804568539">
+            <p>
+             Layer size: 1, Activation function: tanh
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1530804573827" name="671397" type="radio" value="a1530804573827"/>
+           <label for="a1530804573827">
+            <p>
+             Layer size: 2, Activation function: softmax
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1530804578678" name="671397" type="radio" value="a1530804578678"/>
+           <label for="a1530804578678">
+            <p>
+             Layer size: 2, Activation function: ReLu
+            </p>
+           </label>
+          </div>
+         </form>
+         <details>
+          <summary>
+           <strong>
+            SOLUTION:
+           </strong>
+          </summary>
+          Layer size: 1, Activation function: tanh
+         </details>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="04. Hill Climbing.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('03. More on the Policy')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

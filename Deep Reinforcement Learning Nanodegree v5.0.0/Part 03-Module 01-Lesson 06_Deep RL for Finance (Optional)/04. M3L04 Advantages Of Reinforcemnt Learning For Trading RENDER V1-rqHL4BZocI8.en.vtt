@@ -1,0 +1,124 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.500
+Let's see how reinforcement learning can get around many of the problems we
+
+00:00:04.500 --> 00:00:06.540
+encounter while trying to create
+
+00:00:06.540 --> 00:00:10.050
+a trading algorithm using a supervised learning approach.
+
+00:00:10.050 --> 00:00:14.339
+The main benefit of using reinforcement learning for trading is that we don't
+
+00:00:14.339 --> 00:00:18.390
+need to use mathematical models or hand-code trading strategy,
+
+00:00:18.390 --> 00:00:22.920
+because the deep reinforcement agent learns this on its own.
+
+00:00:22.920 --> 00:00:25.530
+All you have to do is to train
+
+00:00:25.530 --> 00:00:30.780
+your deep reinforcement learning algorithm to optimize the metric of your choice.
+
+00:00:30.780 --> 00:00:37.200
+For example, you might want to optimize for net profit or for risk-adjusted return.
+
+00:00:37.200 --> 00:00:41.855
+Net profit is simply how much money your investment made, or lost,
+
+00:00:41.854 --> 00:00:43.894
+over some period of time,
+
+00:00:43.895 --> 00:00:47.710
+taking into account trading fees and any other costs.
+
+00:00:47.710 --> 00:00:51.620
+Risk-adjusted return is a measure of how much money your investment
+
+00:00:51.619 --> 00:00:55.864
+made relative to the amount of risk of having made that investment.
+
+00:00:55.865 --> 00:01:00.515
+This mean that if you're already optimizing for risk-adjusted return,
+
+00:01:00.515 --> 00:01:01.969
+the policies learned by
+
+00:01:01.969 --> 00:01:07.054
+the deep reinforcement learning algorithm will already take risks into account.
+
+00:01:07.055 --> 00:01:10.835
+In addition, since deep reinforcement learning algorithms
+
+00:01:10.834 --> 00:01:13.289
+are trained on simulated environments,
+
+00:01:13.290 --> 00:01:18.920
+we can create environments that capture all the complexity of the financial markets.
+
+00:01:18.920 --> 00:01:24.174
+For example, we can simulate all the things we mentioned earlier and much more,
+
+00:01:24.174 --> 00:01:26.409
+such as transaction fees,
+
+00:01:26.409 --> 00:01:30.515
+network latencies, the number of stocks available for sale,
+
+00:01:30.515 --> 00:01:32.795
+different agents making transactions,
+
+00:01:32.795 --> 00:01:35.840
+different market conditions, et cetera.
+
+00:01:35.840 --> 00:01:39.590
+Therefore, deep reinforcement learning algorithms can
+
+00:01:39.590 --> 00:01:43.225
+be trained to be robust to all these factors.
+
+00:01:43.224 --> 00:01:48.033
+Moreover, because deep reinforcement learning agents produce actions,
+
+00:01:48.034 --> 00:01:51.380
+then in principle we could teach the algorithms to
+
+00:01:51.379 --> 00:01:55.129
+produce actions that indicate when to buy or,
+
+00:01:55.129 --> 00:01:59.765
+and sell by rewarding the agent appropriately depending on the action taken.
+
+00:01:59.765 --> 00:02:04.400
+In fact, deep reinforcement learning agents could go even further than that,
+
+00:02:04.400 --> 00:02:07.670
+not just learning when to buy, sell or hold,
+
+00:02:07.670 --> 00:02:12.259
+but also learning the number of stocks to sell or buy at each transaction.
+
+00:02:12.259 --> 00:02:14.405
+These are just a couple of reasons why
+
+00:02:14.405 --> 00:02:18.289
+deep reinforcement learning could play a major role in the financial markets,
+
+00:02:18.289 --> 00:02:23.044
+and may even outperform other trading algorithms such as HFT.
+
+00:02:23.044 --> 00:02:25.489
+Now that you have some intuition as to why
+
+00:02:25.490 --> 00:02:29.719
+reinforcement learning is a good alternative to current trading algorithms,
+
+00:02:29.719 --> 00:02:33.069
+let's dive into the problem we want to solve.
+

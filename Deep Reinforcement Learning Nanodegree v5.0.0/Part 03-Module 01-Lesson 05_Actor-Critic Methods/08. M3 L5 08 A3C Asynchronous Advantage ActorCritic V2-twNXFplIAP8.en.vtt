@@ -1,0 +1,154 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:05.759
+A3C stands for Asynchronous Advantage Actor-Critic.
+
+00:00:05.759 --> 00:00:08.279
+As you can probably infer from the name,
+
+00:00:08.279 --> 00:00:10.949
+we'll be calculating the advantage function.
+
+00:00:10.949 --> 00:00:14.639
+A Pi essay, and the critic will be learning
+
+00:00:14.640 --> 00:00:18.885
+to estimate V Pi to help with that just as before.
+
+00:00:18.885 --> 00:00:22.675
+If you're using images as inputs to your agent,
+
+00:00:22.675 --> 00:00:26.480
+A3C can use a single convolutional neural network
+
+00:00:26.480 --> 00:00:29.609
+with the actor and critic sharing weights,
+
+00:00:29.609 --> 00:00:31.059
+in two separate heads,
+
+00:00:31.059 --> 00:00:32.504
+one for the actor,
+
+00:00:32.505 --> 00:00:34.035
+and one for the critic.
+
+00:00:34.034 --> 00:00:39.719
+Note that, A3C not to be used exclusively with CNN's and images.
+
+00:00:39.719 --> 00:00:41.920
+But if you where to use it,
+
+00:00:41.920 --> 00:00:44.270
+sharing weights to some more efficient,
+
+00:00:44.270 --> 00:00:48.080
+more complex approach, and can be harder to train.
+
+00:00:48.079 --> 00:00:51.799
+It's a good idea to start with two separate networks,
+
+00:00:51.799 --> 00:00:55.299
+and change it only to improve performance.
+
+00:00:55.299 --> 00:00:59.259
+Now, one interesting aspect of A3C,
+
+00:00:59.259 --> 00:01:02.089
+is that instead of using a TD estimate,
+
+00:01:02.090 --> 00:01:08.725
+it will use another estimate commonly referred to as n-step bootstrapping.
+
+00:01:08.724 --> 00:01:13.250
+N-step bootstrapping, is simply an abstraction and
+
+00:01:13.250 --> 00:01:18.439
+a generalization of a TD and Monte-Carlo estimates.
+
+00:01:18.439 --> 00:01:22.114
+TD is a one-step bootstrapping.
+
+00:01:22.114 --> 00:01:27.724
+Your agent goes out and experiences one-time-step of real rewards,
+
+00:01:27.724 --> 00:01:30.129
+and then bootstraps right there.
+
+00:01:30.129 --> 00:01:32.719
+Monte-Carlo goes out all the way,
+
+00:01:32.719 --> 00:01:36.454
+and it does not bootstrap because it doesn't need to.
+
+00:01:36.454 --> 00:01:41.109
+Monte-Carlo estimate is an infinite step bootstrapping.
+
+00:01:41.109 --> 00:01:44.400
+But how about going more than one step,
+
+00:01:44.400 --> 00:01:46.935
+but not all the way out?
+
+00:01:46.935 --> 00:01:50.415
+Can we do two-time steps of real reward,
+
+00:01:50.415 --> 00:01:53.850
+and then bootstrap from the second next state?
+
+00:01:53.849 --> 00:01:55.724
+Can we do three?
+
+00:01:55.724 --> 00:01:59.954
+How about four or more? We sure can.
+
+00:01:59.954 --> 00:02:02.414
+This is what is called end-step bootstrapping,
+
+00:02:02.415 --> 00:02:07.000
+and A3C uses this return to train the critic.
+
+00:02:07.000 --> 00:02:09.689
+For example, on our tennis example,
+
+00:02:09.689 --> 00:02:12.995
+end-step bootstrapping means that you will wait
+
+00:02:12.995 --> 00:02:17.045
+a little bit before guessing what the final score will look like.
+
+00:02:17.044 --> 00:02:20.554
+Waiting to experience the environment for a little longer
+
+00:02:20.555 --> 00:02:24.694
+before you calculate the expected return of the original state,
+
+00:02:24.694 --> 00:02:27.995
+allows you to have less bias in your prediction,
+
+00:02:27.995 --> 00:02:30.409
+keeping variance under control.
+
+00:02:30.409 --> 00:02:33.185
+In practice, only a few steps out,
+
+00:02:33.185 --> 00:02:36.545
+say four or five steps bootstrapping,
+
+00:02:36.544 --> 00:02:38.494
+are often the best.
+
+00:02:38.495 --> 00:02:41.325
+By using n-step bootstrapping,
+
+00:02:41.324 --> 00:02:46.509
+A3C propagates values to the last end states visited,
+
+00:02:46.509 --> 00:02:49.519
+which allows for faster convergence with
+
+00:02:49.520 --> 00:02:54.210
+less experience required while still keeping variance under control.
+

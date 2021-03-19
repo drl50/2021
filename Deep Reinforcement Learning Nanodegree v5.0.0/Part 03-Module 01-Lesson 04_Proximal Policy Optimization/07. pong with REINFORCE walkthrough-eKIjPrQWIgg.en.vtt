@@ -1,0 +1,574 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.790
+Hi, welcome to the screencast.
+
+00:00:02.790 --> 00:00:06.960
+Here, I'll show you the pong-reinforce Jupyter notebook,
+
+00:00:06.960 --> 00:00:10.169
+where you are going to try to train an agent to play
+
+00:00:10.169 --> 00:00:13.769
+pong using only the pixels as inputs.
+
+00:00:13.769 --> 00:00:18.134
+Now, let's go over each individual cell in the notebook.
+
+00:00:18.135 --> 00:00:24.570
+I will only highlight some of the key features and nuances in some of the code here.
+
+00:00:24.570 --> 00:00:27.464
+The first cell is essentially initialization,
+
+00:00:27.464 --> 00:00:31.725
+where you install the JSAnimation package for displaying animations.
+
+00:00:31.725 --> 00:00:35.859
+We also import the pong_utils.py file,
+
+00:00:35.859 --> 00:00:40.609
+which includes many useful function for collecting trajectories,
+
+00:00:40.609 --> 00:00:48.899
+also includes solutions for some of the exercises and also other useful functions.
+
+00:00:49.070 --> 00:00:53.659
+Also, notice that I'm using the GPU environment here,
+
+00:00:53.659 --> 00:00:58.174
+and I will strongly encourage you to turn GPU off,
+
+00:00:58.174 --> 00:00:59.375
+play with the code,
+
+00:00:59.375 --> 00:01:02.793
+and then make sure that the code is working properly,
+
+00:01:02.793 --> 00:01:06.239
+and then you can turn it back on.
+
+00:01:06.239 --> 00:01:09.934
+So, the next step is to
+
+00:01:09.935 --> 00:01:14.840
+initialize our environment and get a few of what the game looks like.
+
+00:01:14.840 --> 00:01:17.900
+We're using PongDeterministic-V4, which is a
+
+00:01:17.900 --> 00:01:21.155
+little easier to train than the vanilla environment.
+
+00:01:21.155 --> 00:01:27.609
+The difference is that the deterministic version does not contain random frame skipping.
+
+00:01:27.609 --> 00:01:33.364
+So, there's a little less noise and makes it a little easier to train.
+
+00:01:33.364 --> 00:01:37.234
+Now, let's take a look at the number of actions available.
+
+00:01:37.234 --> 00:01:41.090
+We'll only be using 'RIGHTFIRE' and 'LEFTFIRE',
+
+00:01:41.090 --> 00:01:43.755
+which will keep our policies simple.
+
+00:01:43.754 --> 00:01:48.948
+So, our policy will just output the probability of going to the right,
+
+00:01:48.948 --> 00:01:52.609
+such that the probability of going left is just one minus that.
+
+00:01:52.609 --> 00:01:58.129
+Now, why are we using the fire version instead of the normal version, you might ask?
+
+00:01:58.129 --> 00:01:59.944
+Well, it's because when we lose a life,
+
+00:01:59.944 --> 00:02:02.314
+we want the game to start right away.
+
+00:02:02.314 --> 00:02:07.219
+We don't want the agent to have to learn how to fire to keep the game going.
+
+00:02:07.219 --> 00:02:09.759
+So, this will also make training a little easier.
+
+00:02:09.759 --> 00:02:12.905
+So, we'll only be using these two actions here.
+
+00:02:12.905 --> 00:02:17.300
+Now, given that we're only using the pixels as inputs,
+
+00:02:17.300 --> 00:02:20.030
+it will be advantageous for us to
+
+00:02:20.030 --> 00:02:23.409
+preprocess the image to keep the input a little smaller.
+
+00:02:23.409 --> 00:02:25.444
+That also speed up training.
+
+00:02:25.444 --> 00:02:26.780
+Now, what we do is,
+
+00:02:26.780 --> 00:02:28.805
+we down-sample the image,
+
+00:02:28.805 --> 00:02:30.004
+make it black and white,
+
+00:02:30.004 --> 00:02:33.289
+and also crop the boundaries that are irrelevant.
+
+00:02:33.289 --> 00:02:35.954
+So, the original image looks something like this,
+
+00:02:35.955 --> 00:02:39.260
+the preprocessed image looks something like this.
+
+00:02:39.259 --> 00:02:42.530
+Also, know that in order to catch the temporal difference,
+
+00:02:42.530 --> 00:02:48.150
+we are actually stacking two consecutive time frames together.
+
+00:02:48.150 --> 00:02:55.795
+So, our input image will be 80 by 80 pixels times two channels as the input.
+
+00:02:55.794 --> 00:02:59.179
+Now, the first exercise is shown here.
+
+00:02:59.180 --> 00:03:01.295
+Where do you implement your own policy?
+
+00:03:01.294 --> 00:03:06.704
+Now, I've included a toy policy for you to test your code on.
+
+00:03:06.705 --> 00:03:13.805
+But, this only includes one convolutional layer and one fully-connected layer.
+
+00:03:13.805 --> 00:03:16.700
+It's very simple network and you're unlikely to get
+
+00:03:16.699 --> 00:03:20.419
+any interesting results using this to train.
+
+00:03:20.419 --> 00:03:25.369
+So, I encourage you to play around to add maybe two to the three convolutional layers,
+
+00:03:25.370 --> 00:03:28.069
+maybe two to three fully connected layers.
+
+00:03:28.069 --> 00:03:33.364
+You can try different combinations, different non-linear activations.
+
+00:03:33.365 --> 00:03:37.280
+But for illustration purposes,
+
+00:03:37.280 --> 00:03:42.824
+I'm going to use the solution provided from pong utils file,
+
+00:03:42.824 --> 00:03:45.884
+the policy that I came up with,
+
+00:03:45.884 --> 00:03:48.764
+which is pretty good.
+
+00:03:48.764 --> 00:03:50.219
+Gives you pretty good results.
+
+00:03:50.219 --> 00:03:56.229
+The next step is you can play again using the play function from the pong utils.
+
+00:03:56.229 --> 00:03:57.849
+Now, this is what it looks like.
+
+00:03:57.849 --> 00:03:59.259
+You load this function,
+
+00:03:59.259 --> 00:04:01.449
+give it the environment, the policy.
+
+00:04:01.449 --> 00:04:04.329
+You can also add in an optional argument,
+
+00:04:04.330 --> 00:04:06.715
+the preprocess, which is a function.
+
+00:04:06.715 --> 00:04:10.344
+You can add this in and you can see what the agent
+
+00:04:10.344 --> 00:04:13.900
+sees during training to get a better sense.
+
+00:04:13.900 --> 00:04:17.004
+Now, we can play this animation little bit here.
+
+00:04:17.004 --> 00:04:19.029
+Go all the way to the beginning.
+
+00:04:19.029 --> 00:04:20.409
+It looks something like this.
+
+00:04:20.410 --> 00:04:21.580
+It's more or less random,
+
+00:04:21.579 --> 00:04:23.979
+so it's not doing much to the agent here.
+
+00:04:23.980 --> 00:04:30.055
+The next step is we can collect rollouts now or the trajectories using this function.
+
+00:04:30.055 --> 00:04:31.340
+I've included an environment,
+
+00:04:31.339 --> 00:04:34.639
+a parallel environment that allows you to
+
+00:04:34.639 --> 00:04:39.564
+collect trajectories from multiple agents in parallel.
+
+00:04:39.564 --> 00:04:45.134
+So, you only need to give it the name of the environment,
+
+00:04:45.134 --> 00:04:47.219
+the number of parallel agents.
+
+00:04:47.220 --> 00:04:53.380
+Given that the GPU mode has four parallel virtual CPUs,
+
+00:04:53.379 --> 00:04:56.600
+I would recommend you use a multiple of four.
+
+00:04:56.600 --> 00:04:59.705
+I'll be using eight in the train runs you'll see later.
+
+00:04:59.704 --> 00:05:03.139
+There is also a seed that you can put in.
+
+00:05:03.139 --> 00:05:07.909
+Now, the output of this trajectory is essentially a list of the policy,
+
+00:05:07.910 --> 00:05:10.705
+which is the probability of going to the right,
+
+00:05:10.704 --> 00:05:15.014
+the states, which are just the frames,
+
+00:05:15.014 --> 00:05:16.964
+the actions, and the reward.
+
+00:05:16.964 --> 00:05:20.359
+Now, I can print out, for example, the probability here.
+
+00:05:20.360 --> 00:05:26.500
+What you get is a huge list of probabilities.
+
+00:05:26.500 --> 00:05:31.295
+Each term in this list correspond to one time step.
+
+00:05:31.295 --> 00:05:32.840
+For example, the first time step,
+
+00:05:32.839 --> 00:05:35.359
+it contains an array of four numbers.
+
+00:05:35.360 --> 00:05:39.920
+This tells you the probability of moving to the right for
+
+00:05:39.920 --> 00:05:45.045
+that particular timestamp for those four parallel agents.
+
+00:05:45.045 --> 00:05:47.120
+You can see that it's pretty close to point five.
+
+00:05:47.120 --> 00:05:50.209
+So, it's more or less random.
+
+00:05:50.209 --> 00:05:52.504
+Now, here comes exercise two.
+
+00:05:52.504 --> 00:05:58.540
+This is where you are going to code your scalar function that you feed two PyTorch,
+
+00:05:58.540 --> 00:06:02.990
+such that it can invoke the backward function and compute the gradient.
+
+00:06:02.990 --> 00:06:04.625
+Now, for the reinforce,
+
+00:06:04.625 --> 00:06:06.064
+you really have two choices.
+
+00:06:06.064 --> 00:06:08.180
+You can either compute the log,
+
+00:06:08.180 --> 00:06:12.670
+the sum of the log times the future reward straightforwardly,
+
+00:06:12.670 --> 00:06:17.555
+or you can choose the second option which is what's provided in the solution.
+
+00:06:17.555 --> 00:06:22.050
+Instead, you can put a fraction.
+
+00:06:22.250 --> 00:06:26.254
+But, the difference is that you need to make sure that
+
+00:06:26.254 --> 00:06:30.605
+the denominator when you use derivatives,
+
+00:06:30.605 --> 00:06:33.805
+it gives you a constant,
+
+00:06:33.805 --> 00:06:35.829
+such that when you take the derivative,
+
+00:06:35.829 --> 00:06:39.169
+it only affects the numerator.
+
+00:06:39.170 --> 00:06:43.345
+So, at the end these two options will give you the same results.
+
+00:06:43.345 --> 00:06:47.210
+So, here's the skeleton code to write your scalar function,
+
+00:06:47.209 --> 00:06:49.069
+which I call the surrogate function.
+
+00:06:49.069 --> 00:06:53.240
+Now, I've only included you an entropy term here
+
+00:06:53.240 --> 00:06:58.329
+for regularization with a coefficient Beta that you can input to the function here.
+
+00:06:58.329 --> 00:07:07.129
+Now, this regularization basically forces the policy to not be exactly zero or one.
+
+00:07:07.129 --> 00:07:11.485
+So, it helps with a little bit of exploration in the beginning.
+
+00:07:11.485 --> 00:07:13.520
+Now, once you've coded up this function,
+
+00:07:13.519 --> 00:07:14.884
+you can give it a shot.
+
+00:07:14.884 --> 00:07:18.064
+You can pass it through a trajectory and compute it.
+
+00:07:18.064 --> 00:07:21.379
+You will see that you get a tensor.
+
+00:07:21.379 --> 00:07:24.170
+Now, here comes the training one.
+
+00:07:24.170 --> 00:07:27.410
+What you do is you initialize the environments.
+
+00:07:27.410 --> 00:07:29.930
+Here are a parallel agents.
+
+00:07:29.930 --> 00:07:32.965
+Choose number of episodes to train.
+
+00:07:32.964 --> 00:07:34.669
+Now, in the beginning,
+
+00:07:34.670 --> 00:07:37.310
+you can try to train maybe fewer episodes,
+
+00:07:37.310 --> 00:07:41.420
+maybe like 100 to get a feel of how things go.
+
+00:07:41.420 --> 00:07:48.615
+This is the code to display a progress bar that tells you how long training will take,
+
+00:07:48.615 --> 00:07:51.120
+how much remaining time there is.
+
+00:07:51.120 --> 00:07:55.129
+Now, here are some other hyperparameters you can tune.
+
+00:07:55.129 --> 00:07:58.504
+This count rate 0.99 is fairly standard.
+
+00:07:58.504 --> 00:08:01.399
+A Beta, this is the coefficient of the entropy term.
+
+00:08:01.399 --> 00:08:04.159
+So, 0.01 is sensible.
+
+00:08:04.160 --> 00:08:07.745
+Also, the maximum timestep to collect trajectories.
+
+00:08:07.745 --> 00:08:11.285
+You could certainly run entire episodes,
+
+00:08:11.285 --> 00:08:14.900
+but given that we're trying to train an agent and
+
+00:08:14.899 --> 00:08:18.859
+see that it can generalize us the information,
+
+00:08:18.860 --> 00:08:24.590
+it's nice to have trajectories that are smaller than entire episode.
+
+00:08:24.589 --> 00:08:30.943
+So, I recommend somewhere around 300 to 400 so that once you go to the training,
+
+00:08:30.944 --> 00:08:36.710
+it's general enough that the agent can play through an entire episode.
+
+00:08:36.710 --> 00:08:38.600
+So, now you go to the training run.
+
+00:08:38.600 --> 00:08:40.024
+This the trailing loop,
+
+00:08:40.024 --> 00:08:41.840
+go to each episode,
+
+00:08:41.840 --> 00:08:44.690
+you collect trajectories, compute the total rewards.
+
+00:08:44.690 --> 00:08:46.430
+That's just for bookkeeping.
+
+00:08:46.429 --> 00:08:48.875
+Now here, if you code up your own function,
+
+00:08:48.875 --> 00:08:52.460
+you will call L equals to negative surrogate function.
+
+00:08:52.460 --> 00:08:55.580
+Notice that we have an extra negative sign here.
+
+00:08:55.580 --> 00:09:00.879
+This is because PyTorch by default computes gradient descent.
+
+00:09:00.879 --> 00:09:03.615
+But, we want gradient ascent.
+
+00:09:03.615 --> 00:09:06.014
+So, that's why this extra negative sign.
+
+00:09:06.014 --> 00:09:09.139
+Now, for illustration, I'm also going to use
+
+00:09:09.139 --> 00:09:13.205
+the solution I provided in pong utils, the surrogate function.
+
+00:09:13.205 --> 00:09:16.925
+You perform gradient ascent.
+
+00:09:16.924 --> 00:09:19.549
+You also reduce Beta because as you learn,
+
+00:09:19.549 --> 00:09:23.014
+you imagine that we don't need as much exploration anymore.
+
+00:09:23.014 --> 00:09:25.774
+You can reduce this or you can remove this.
+
+00:09:25.774 --> 00:09:26.970
+Both options are okay.
+
+00:09:26.970 --> 00:09:30.705
+You can play around, and then it will output some statistics.
+
+00:09:30.705 --> 00:09:33.000
+So, training takes quite a while here.
+
+00:09:33.000 --> 00:09:37.034
+So, for me, it takes roughly 40 minutes for this training round.
+
+00:09:37.034 --> 00:09:40.429
+You can see that the training scores slightly improves.
+
+00:09:40.429 --> 00:09:44.104
+Here's a figure that shows you the mean reward.
+
+00:09:44.105 --> 00:09:46.325
+You can see that after 500 episode.
+
+00:09:46.325 --> 00:09:47.945
+It's still not very good.
+
+00:09:47.945 --> 00:09:50.125
+I'm still in the negative here,
+
+00:09:50.125 --> 00:09:52.009
+but training is still continuing.
+
+00:09:52.009 --> 00:09:53.225
+If I run this for long,
+
+00:09:53.225 --> 00:09:55.279
+it'll probably get better,
+
+00:09:55.279 --> 00:09:57.620
+but it might take a few hours.
+
+00:09:57.620 --> 00:10:01.325
+I can play a game after training for 500 episodes.
+
+00:10:01.325 --> 00:10:08.345
+You can see that the agent is playing not too well,
+
+00:10:08.345 --> 00:10:11.960
+but it definitely learn some strategies.
+
+00:10:11.960 --> 00:10:15.275
+We might see it pick up a point or two.
+
+00:10:15.274 --> 00:10:16.819
+You got a point here.
+
+00:10:16.820 --> 00:10:18.680
+So, it's not very good right now,
+
+00:10:18.679 --> 00:10:21.339
+but you can see that training has happened.
+
+00:10:21.340 --> 00:10:27.695
+You can try to run the policy during the training for longer to see if it improves.
+
+00:10:27.695 --> 00:10:29.719
+Now, given that training takes awhile,
+
+00:10:29.719 --> 00:10:33.470
+I would encourage you to save your policy such that you can
+
+00:10:33.470 --> 00:10:38.415
+reload it later and continue the training.
+
+00:10:38.414 --> 00:10:40.909
+Also, we can compare policy across
+
+00:10:40.909 --> 00:10:44.389
+different training lines in different random seed and so forth.
+
+00:10:44.389 --> 00:10:49.009
+But, the reinforce algorithm is known to be fairly noisy,
+
+00:10:49.009 --> 00:10:50.689
+requires a lot of training.
+
+00:10:50.690 --> 00:10:56.255
+So, don't get discouraged if at the end the results are not very good.
+
+00:10:56.254 --> 00:10:58.835
+As we will see later, using PPO,
+
+00:10:58.835 --> 00:11:04.190
+you can improve the training efficiency by a lot and you will be able
+
+00:11:04.190 --> 00:11:10.620
+to train an agent that's able to beat the computer given the same amount of time.
+

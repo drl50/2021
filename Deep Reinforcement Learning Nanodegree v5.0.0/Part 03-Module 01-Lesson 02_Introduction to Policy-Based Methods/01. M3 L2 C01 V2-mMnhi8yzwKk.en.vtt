@@ -1,0 +1,136 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.669
+Reinforcement learning is ultimately about learning
+
+00:00:02.669 --> 00:00:05.790
+an optimal policy from interaction with the environment.
+
+00:00:05.790 --> 00:00:09.199
+So far, we've been looking at value-based methods,
+
+00:00:09.199 --> 00:00:13.399
+where we first tried to find an estimate of the optimal action value function.
+
+00:00:13.400 --> 00:00:15.214
+For small state spaces,
+
+00:00:15.214 --> 00:00:17.730
+this optimal value function was represented in
+
+00:00:17.730 --> 00:00:22.329
+a table with one row for each state and one column for each action.
+
+00:00:22.329 --> 00:00:26.919
+Then we use the table to build the optimal policy one state at a time.
+
+00:00:26.920 --> 00:00:29.880
+For each state, we just pull its corresponding row from
+
+00:00:29.879 --> 00:00:34.839
+the table and the optimal action is just the action with the largest entry.
+
+00:00:34.840 --> 00:00:38.285
+But what about environments with much larger state spaces?
+
+00:00:38.284 --> 00:00:41.149
+For instance, consider the carpool environment,
+
+00:00:41.149 --> 00:00:45.479
+where the goal is to teach an agent to balance a pole that's attached to a moving cart.
+
+00:00:45.479 --> 00:00:48.500
+At each time step, the agent pushes the cart either to
+
+00:00:48.500 --> 00:00:52.494
+the left or to the right to try to keep the pole from falling down.
+
+00:00:52.494 --> 00:00:55.234
+The stated ending timestamp is a vector with
+
+00:00:55.234 --> 00:00:58.839
+four numbers containing the carts position and velocity,
+
+00:00:58.840 --> 00:01:01.535
+along with the poles angle and velocity.
+
+00:01:01.534 --> 00:01:04.084
+There's a huge number of possible states
+
+00:01:04.084 --> 00:01:08.139
+corresponding to every possible value that these board numbers can have.
+
+00:01:08.140 --> 00:01:11.060
+So, without some sort of discretization technique,
+
+00:01:11.060 --> 00:01:15.129
+it's impossible to represent the optimal action value function in a table.
+
+00:01:15.129 --> 00:01:18.634
+This is because we would need a row for each possible state
+
+00:01:18.635 --> 00:01:23.085
+and that would make the table way too big to be useful in practice.
+
+00:01:23.084 --> 00:01:27.829
+So, we investigated how to represent the optimal action value function with
+
+00:01:27.829 --> 00:01:32.500
+a neural network which formed the basis for the deep Q learning algorithm.
+
+00:01:32.500 --> 00:01:37.290
+In this case, the neural network took the environment state as input.
+
+00:01:37.290 --> 00:01:42.075
+As output, it returned the value of each possible action.
+
+00:01:42.075 --> 00:01:44.359
+In the case of carpool, for instance,
+
+00:01:44.359 --> 00:01:48.105
+the possible actions are to move the cart left or right.
+
+00:01:48.105 --> 00:01:52.329
+Then identical to the previous setting where we used the table,
+
+00:01:52.329 --> 00:01:55.625
+we can easily obtain the best action for any state
+
+00:01:55.625 --> 00:01:59.584
+by just looking at the values of the input state produces in the network.
+
+00:01:59.584 --> 00:02:03.164
+It's just the action that maximizes these values.
+
+00:02:03.165 --> 00:02:06.859
+But the important message here is that in both cases,
+
+00:02:06.859 --> 00:02:08.300
+whether we used a table for
+
+00:02:08.300 --> 00:02:12.760
+small state spaces or a neural network for much larger state spaces,
+
+00:02:12.759 --> 00:02:14.509
+we had to first estimate
+
+00:02:14.509 --> 00:02:19.429
+the optimal action value function before we could tackle the optimal policy.
+
+00:02:19.430 --> 00:02:21.974
+But now the question is,
+
+00:02:21.974 --> 00:02:27.694
+can we directly find the optimal policy without worrying about a value function at all?
+
+00:02:27.694 --> 00:02:29.609
+The answer is yes,
+
+00:02:29.610 --> 00:02:34.370
+and we accomplish this through a class of algorithms known as policy-based methods.
+
+00:02:34.370 --> 00:02:37.680
+This is what we'll explore in this lesson.
+

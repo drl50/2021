@@ -1,0 +1,181 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.480
+Now that you have some foundational concepts down,
+
+00:00:03.480 --> 00:00:05.370
+let me give you some intuition.
+
+00:00:05.370 --> 00:00:07.964
+Let's say you want to get better at tennis.
+
+00:00:07.964 --> 00:00:12.884
+The actor or policy-based approaching you roughly learns this way.
+
+00:00:12.884 --> 00:00:14.910
+You play a bunch of matches.
+
+00:00:14.910 --> 00:00:17.129
+You then go home, lay on the couch,
+
+00:00:17.129 --> 00:00:21.794
+and commit to yourself to do more of what I did in matches I worn,
+
+00:00:21.795 --> 00:00:24.600
+and less of what I did in matches I lost.
+
+00:00:24.600 --> 00:00:27.719
+After many, many times repeating this process,
+
+00:00:27.719 --> 00:00:31.859
+you will have increased the probability of actions that lead to a win,
+
+00:00:31.859 --> 00:00:35.310
+and decrease the probability of actions that lead to losses.
+
+00:00:35.310 --> 00:00:38.789
+But you can see how these approaches rather inefficient as it
+
+00:00:38.789 --> 00:00:42.119
+needs loss of data to learn a useful policy.
+
+00:00:42.119 --> 00:00:45.799
+See, many of the actions that occur within the game that
+
+00:00:45.799 --> 00:00:49.524
+ended up in a loss could have been really good actions.
+
+00:00:49.524 --> 00:00:52.579
+So, decreasing the probability of good actions taken in
+
+00:00:52.579 --> 00:00:56.614
+a match only because you lost is not the best idea.
+
+00:00:56.615 --> 00:01:00.630
+Sure, if you repeat this process infinitely often,
+
+00:01:00.630 --> 00:01:03.294
+you're likely to end up with a good policy,
+
+00:01:03.293 --> 00:01:05.924
+but at the cost of slow learning.
+
+00:01:05.924 --> 00:01:10.129
+It is clear that policy-based agents have high variance.
+
+00:01:10.129 --> 00:01:14.674
+The critic or a value-based approaching you learns differently.
+
+00:01:14.674 --> 00:01:16.724
+You start playing a match,
+
+00:01:16.724 --> 00:01:18.569
+and even before you get started,
+
+00:01:18.569 --> 00:01:22.189
+you start guessing what the final score is going to be like.
+
+00:01:22.189 --> 00:01:25.474
+You continue to make guesses throughout the match.
+
+00:01:25.474 --> 00:01:28.204
+At first, your guesses will be off.
+
+00:01:28.204 --> 00:01:30.379
+But as you get more and more experience,
+
+00:01:30.379 --> 00:01:33.109
+you will be able to make pretty solid guesses.
+
+00:01:33.109 --> 00:01:34.759
+The better your guesses,
+
+00:01:34.759 --> 00:01:37.864
+the better you'll tell good from bad situations,
+
+00:01:37.864 --> 00:01:39.724
+or good from bad actions.
+
+00:01:39.724 --> 00:01:42.409
+The better you can make these distinctions,
+
+00:01:42.409 --> 00:01:44.164
+the better you'll perform.
+
+00:01:44.165 --> 00:01:47.750
+Of course, given that you select good actions.
+
+00:01:47.750 --> 00:01:50.584
+Though, this is not a perfect approach either,
+
+00:01:50.584 --> 00:01:55.204
+guesses introduce a bias because they'll sometimes be wrong,
+
+00:01:55.204 --> 00:01:58.265
+particularly because of a lack of experience.
+
+00:01:58.265 --> 00:02:03.010
+Guesses are prone to under or overestimation.
+
+00:02:03.010 --> 00:02:06.275
+Though, guesses are more consistent through time.
+
+00:02:06.275 --> 00:02:10.115
+If you think you'll win a match five minutes into it,
+
+00:02:10.115 --> 00:02:13.939
+chances are you'll still think so 10 minutes into it.
+
+00:02:13.939 --> 00:02:18.680
+This is what makes the TD estimate have lower variance.
+
+00:02:18.680 --> 00:02:22.115
+As you can see, in a policy-based approach,
+
+00:02:22.115 --> 00:02:24.395
+the agent is learning to act,
+
+00:02:24.395 --> 00:02:26.045
+and it is good at that.
+
+00:02:26.044 --> 00:02:28.339
+While in a value-based approach,
+
+00:02:28.340 --> 00:02:31.909
+the agent is learning to estimate situations and actions,
+
+00:02:31.909 --> 00:02:33.560
+and it's pretty good at that.
+
+00:02:33.560 --> 00:02:36.905
+Combining these two approaches sounds like a great idea,
+
+00:02:36.905 --> 00:02:40.015
+and it often yields better results.
+
+00:02:40.014 --> 00:02:44.209
+Actor-critic agents learn by playing games and adjusting
+
+00:02:44.210 --> 00:02:48.740
+the probabilities of good and bad actions just as with the actor alone.
+
+00:02:48.740 --> 00:02:51.950
+But this time, you'll also use a critic
+
+00:02:51.949 --> 00:02:55.459
+to be able to tell good from bad actions more quickly,
+
+00:02:55.460 --> 00:02:57.099
+and speed up learning.
+
+00:02:57.099 --> 00:03:02.313
+In the end, actor-critic agents are more stable than value-based agents,
+
+00:03:02.313 --> 00:03:05.974
+and need fewer samples than policy-based agents.
+
+00:03:05.974 --> 00:03:09.699
+Let's now look at a basic actor-critic agent.
+

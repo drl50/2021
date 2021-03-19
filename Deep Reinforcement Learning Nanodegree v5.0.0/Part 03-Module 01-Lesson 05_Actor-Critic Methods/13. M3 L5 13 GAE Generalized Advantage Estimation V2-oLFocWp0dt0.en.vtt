@@ -1,0 +1,151 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.110 --> 00:00:06.720
+There is another way for estimating expected returns called the lambda return.
+
+00:00:06.719 --> 00:00:09.029
+The intuition goes this way.
+
+00:00:09.029 --> 00:00:13.679
+Say after you try and step bootstrapping you realize
+
+00:00:13.679 --> 00:00:18.600
+that numbers of n larger than one often perform better.
+
+00:00:18.600 --> 00:00:21.929
+But it's still hard to tell what the number should be.
+
+00:00:21.929 --> 00:00:24.030
+Should it be a two,
+
+00:00:24.030 --> 00:00:28.170
+three, six or something else?
+
+00:00:28.170 --> 00:00:30.765
+To make the decision even more difficult,
+
+00:00:30.765 --> 00:00:36.164
+in some problems small numbers of n are better while in others,
+
+00:00:36.164 --> 00:00:39.000
+large numbers of n are better.
+
+00:00:39.000 --> 00:00:41.185
+How do you get this right?
+
+00:00:41.185 --> 00:00:44.705
+The idea of the lambda return is to create
+
+00:00:44.704 --> 00:00:50.274
+a mixture of all n-step bootstrapping estimates out once.
+
+00:00:50.274 --> 00:00:54.109
+Lambda is a hyperparameter used for waiting
+
+00:00:54.109 --> 00:01:00.125
+the combination of each n-step estimate to the lambda return.
+
+00:01:00.125 --> 00:01:04.640
+Say you set lambda to 0.5.
+
+00:01:04.640 --> 00:01:11.795
+The contribution to the lambda return would be a combination of all n-step returns
+
+00:01:11.795 --> 00:01:19.700
+weighted by the exponentially decaying factor across the different n-step estimates.
+
+00:01:19.700 --> 00:01:23.960
+Notice how the weight depends on the value of lambda you
+
+00:01:23.959 --> 00:01:29.689
+set and it decays exponentially at the rate of that value.
+
+00:01:29.689 --> 00:01:36.194
+So, for calculating the lambda return for state s at time step t,
+
+00:01:36.194 --> 00:01:40.324
+we would use all n-step returns and multiply
+
+00:01:40.325 --> 00:01:45.034
+each of the n-step return by the currents bonding weight.
+
+00:01:45.034 --> 00:01:47.604
+Then add them all up.
+
+00:01:47.605 --> 00:01:56.359
+Remember, that sum will be the lambda return for state s at time step t. Interestingly,
+
+00:01:56.359 --> 00:01:59.905
+when lambda is set to zero, the two-step,
+
+00:01:59.905 --> 00:02:05.493
+three-step and all n-step return other than the one step return,
+
+00:02:05.493 --> 00:02:07.715
+will be equal to zero.
+
+00:02:07.715 --> 00:02:15.944
+So, the lambda return when lambda is set to zero will be equivalent to the td estimate.
+
+00:02:15.944 --> 00:02:20.900
+If your lambda is set to one all n-step return
+
+00:02:20.900 --> 00:02:25.765
+other than the infinite step return will be equal to zero.
+
+00:02:25.764 --> 00:02:29.899
+So, the lambda return when lambda is set to one,
+
+00:02:29.900 --> 00:02:34.430
+will be equivalent to the Monte Carlo estimate.
+
+00:02:34.430 --> 00:02:37.985
+Again, a number between zero and one gives
+
+00:02:37.985 --> 00:02:42.455
+a mixture of all n-step bootstrapping estimate.
+
+00:02:42.455 --> 00:02:47.815
+But isn't this amazing that a single algorithm can do that?
+
+00:02:47.814 --> 00:02:50.199
+I think is beautiful.
+
+00:02:50.210 --> 00:02:54.555
+Generalized Advantage Estimation, GAE
+
+00:02:54.555 --> 00:02:58.775
+is a way to train the critic with this lambda return.
+
+00:02:58.775 --> 00:03:03.170
+You can fit the advantage function just like in A3C and
+
+00:03:03.169 --> 00:03:09.259
+A2C or using a mixture of n-step bootstrapping estimates.
+
+00:03:09.259 --> 00:03:12.530
+It's important to highlight that this type of
+
+00:03:12.530 --> 00:03:16.789
+return can be combined with virtually any policy-based method.
+
+00:03:16.789 --> 00:03:21.539
+In fact, in the paper that introduce GAE,
+
+00:03:21.539 --> 00:03:25.114
+TRPO was that policy-based method used.
+
+00:03:25.115 --> 00:03:29.004
+By using this type of estimation, this algorithm,
+
+00:03:29.004 --> 00:03:33.979
+TRPO plus GAE trains very quickly because
+
+00:03:33.979 --> 00:03:37.504
+multiple value functions are spread around on
+
+00:03:37.504 --> 00:03:42.439
+every time step due to the lambda return star estimate.
+

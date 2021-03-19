@@ -1,0 +1,390 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   REINFORCE
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Policy Gradient Methods
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. What are Policy Gradient Methods.html">
+       01. What are Policy Gradient Methods?
+      </a>
+     </li>
+     <li class="">
+      <a href="02. The Big Picture.html">
+       02. The Big Picture
+      </a>
+     </li>
+     <li class="">
+      <a href="03. Connections to Supervised Learning.html">
+       03. Connections to Supervised Learning
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Problem Setup.html">
+       04. Problem Setup
+      </a>
+     </li>
+     <li class="">
+      <a href="05. REINFORCE.html">
+       05. REINFORCE
+      </a>
+     </li>
+     <li class="">
+      <a href="06. (Optional) Derivation.html">
+       06. (Optional) Derivation
+      </a>
+     </li>
+     <li class="">
+      <a href="07. Coding Exercise.html">
+       07. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Workspace.html">
+       08. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="09. What's Next.html">
+       09. What's Next?
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Summary.html">
+       10. Summary
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          05. REINFORCE
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="reinforce">
+          REINFORCE
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          You've learned that our goal is to find the values of the weights
+          <span class="mathquill ud-math">
+           \theta
+          </span>
+          in the neural network that maximize the expected return
+          <span class="mathquill ud-math">
+           U
+          </span>
+         </p>
+         <div class="mathquill">
+          U(\theta) = \sum_\tau P(\tau;\theta)R(\tau)
+         </div>
+         <p>
+          where
+          <span class="mathquill ud-math">
+           \tau
+          </span>
+          is an arbitrary trajectory.  One way to determine the value of
+          <span class="mathquill ud-math">
+           \theta
+          </span>
+          that maximizes this function is through
+          <strong>
+           gradient ascent
+          </strong>
+          .  This algorithm is closely related to
+          <strong>
+           gradient descent
+          </strong>
+          , where the differences are that:
+         </p>
+         <ul>
+          <li>
+           gradient descent is designed to find the
+           <strong>
+            minimum
+           </strong>
+           of a function, whereas gradient ascent will find the
+           <strong>
+            maximum
+           </strong>
+           , and
+          </li>
+          <li>
+           gradient descent steps in the direction of the
+           <strong>
+            negative gradient
+           </strong>
+           , whereas gradient ascent steps in the direction of the
+           <strong>
+            gradient
+           </strong>
+           .
+          </li>
+         </ul>
+         <p>
+          Our update step for gradient ascent appears as follows:
+         </p>
+         <div class="mathquill">
+          \theta \leftarrow \theta + \alpha \nabla_\theta U(\theta)
+         </div>
+         <p>
+          where
+          <span class="mathquill ud-math">
+           \alpha
+          </span>
+          is the step size that is generally allowed to decay over time.  Once we know how to calculate or estimate this gradient, we can repeatedly apply this update step, in the hopes that
+          <span class="mathquill ud-math">
+           \theta
+          </span>
+          converges to the value that maximizes
+          <span class="mathquill ud-math">
+           U(\theta)
+          </span>
+          .
+         </p>
+         <h2 id="-video">
+          ## Video
+         </h2>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+         <p>
+          M3L3 C05 V2
+         </p>
+        </h3>
+        <video controls="">
+         <source src="05. M3L3 C05 V2-o6CI2q3IXEs.mp4" type="video/mp4"/>
+         <track default="true" kind="subtitles" label="en" src="05. M3L3 C05 V2-o6CI2q3IXEs.en.vtt" srclang="en"/>
+        </video>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-pseudocode">
+          ## Pseudocode
+         </h2>
+         <p>
+          The algorithm described in the video is known as
+          <strong>
+           REINFORCE
+          </strong>
+          .  The pseudocode is summarized below.
+         </p>
+         <ol>
+          <li>
+           Use the policy
+           <span class="mathquill ud-math">
+            \pi_\theta
+           </span>
+           to collect
+           <span class="mathquill ud-math">
+            m
+           </span>
+           trajectories
+           <span class="mathquill ud-math">
+            { \tau^{(1)}, \tau^{(2)}, \ldots, \tau^{(m)}}
+           </span>
+           with horizon
+           <span class="mathquill ud-math">
+            H
+           </span>
+           .  We refer to the
+           <span class="mathquill ud-math">
+            i
+           </span>
+           -th trajectory as
+           <div class="mathquill">
+            \tau^{(i)} = (s_0^{(i)}, a_0^{(i)}, \ldots, s_H^{(i)}, a_H^{(i)}, s_{H+1}^{(i)})
+           </div>
+           .
+          </li>
+          <li>
+           Use the trajectories to estimate the gradient
+           <span class="mathquill ud-math">
+            \nabla_\theta U(\theta)
+           </span>
+           :
+           <div class="mathquill">
+            \nabla_\theta U(\theta) \approx \hat{g} := \frac{1}{m}\sum_{i=1}^m \sum_{t=0}^{H} \nabla_\theta \log \pi_\theta(a_t^{(i)}|s_t^{(i)}) R(\tau^{(i)})
+           </div>
+          </li>
+          <li>
+           Update the weights of the policy:
+           <div class="mathquill">
+            \theta \leftarrow \theta + \alpha \hat{g}
+           </div>
+          </li>
+          <li>
+           Loop over steps 1-3.
+          </li>
+         </ol>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="06. (Optional) Derivation.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('05. REINFORCE')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

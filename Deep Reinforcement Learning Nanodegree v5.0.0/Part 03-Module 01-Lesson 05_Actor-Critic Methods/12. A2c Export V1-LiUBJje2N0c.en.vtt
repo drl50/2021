@@ -1,0 +1,628 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.110 --> 00:00:03.524
+Hey guys, you are here,
+
+00:00:03.524 --> 00:00:07.390
+I wanted to do a code walkthrough video.
+
+00:00:07.389 --> 00:00:17.489
+I wanted to show a very nice implementation of the A2C algorithm by Shangtong Zang.
+
+00:00:17.489 --> 00:00:21.449
+He's a student in University of Alberta.
+
+00:00:21.449 --> 00:00:27.929
+He's a student of [inaudible] Professor [inaudible].
+
+00:00:27.929 --> 00:00:33.469
+He actually was the guy that ported all the code for the reinforcement
+
+00:00:33.469 --> 00:00:40.024
+learning an introduction book in the second edition from List to Python.
+
+00:00:40.024 --> 00:00:46.039
+After that, he started this repository with
+
+00:00:46.039 --> 00:00:48.979
+deep reinforcement learning algorithms like
+
+00:00:48.979 --> 00:00:55.804
+very very modular implementation of deep reinforcement learning algorithms in PyTorch.
+
+00:00:55.804 --> 00:00:59.210
+So to begin with,
+
+00:00:59.210 --> 00:01:03.740
+I'm just going to show you how to navigate his repository.
+
+00:01:03.740 --> 00:01:05.799
+In this file over here,
+
+00:01:05.799 --> 00:01:12.179
+this is the domain page in the examples.py file,
+
+00:01:12.179 --> 00:01:15.540
+you'll see- well here you obviously you have the readme file,
+
+00:01:15.540 --> 00:01:21.480
+what to install and things like that and here you're going to have overview of DQN,
+
+00:01:21.480 --> 00:01:26.775
+C51, A2C, N-Step, DDPG and so on,
+
+00:01:26.775 --> 00:01:31.070
+like the overview of the algorithms that he's implemented.
+
+00:01:31.069 --> 00:01:33.649
+If you go to the examples file,
+
+00:01:33.650 --> 00:01:35.525
+open a tab over here,
+
+00:01:35.525 --> 00:01:39.140
+you're going to see that he creates examples,
+
+00:01:39.140 --> 00:01:41.090
+like for example, DQN CartPole.
+
+00:01:41.090 --> 00:01:46.010
+So, the DQN algorithm solving the CartPole environment or the DQN solving
+
+00:01:46.010 --> 00:01:55.530
+the PixelAtari environment or the DQN solving their ram atari environment and so on.
+
+00:01:55.530 --> 00:01:57.269
+Many different algorithms and so on.
+
+00:01:57.269 --> 00:02:00.579
+So, it's very modular the code, it's very nice.
+
+00:02:00.579 --> 00:02:04.549
+Here for example you can see how he's function,
+
+00:02:04.549 --> 00:02:07.744
+the function approximation he's using here is
+
+00:02:07.745 --> 00:02:13.379
+VanillaNet with fully-connected body so because this is a CartPole,
+
+00:02:13.379 --> 00:02:16.530
+the input state is for variables,
+
+00:02:16.530 --> 00:02:21.384
+the position and the velocity and the change on those two.
+
+00:02:21.384 --> 00:02:27.935
+The body of the network does not need to be
+
+00:02:27.935 --> 00:02:30.259
+a convolutional neural network but it's
+
+00:02:30.259 --> 00:02:32.889
+just a regular neural network and
+
+00:02:32.889 --> 00:02:36.634
+then VanillaNet I'll show you what those look like in a minute.
+
+00:02:36.634 --> 00:02:40.024
+For example, here in the DQN PixelAtari,
+
+00:02:40.025 --> 00:02:46.474
+he's actually using a VanillaNet on the top and then in NatureConvBody.
+
+00:02:46.474 --> 00:02:48.139
+So the ConvBody is basically
+
+00:02:48.139 --> 00:02:52.309
+the ConvNet convolution in neural networks that we're introducing
+
+00:02:52.310 --> 00:03:00.150
+the nature paper by main and company.
+
+00:03:01.129 --> 00:03:05.729
+You can see how very nice and modular,
+
+00:03:05.729 --> 00:03:07.409
+he can reuse those,
+
+00:03:07.409 --> 00:03:11.224
+the same VanillaNet with a fully-connected body and so on.
+
+00:03:11.224 --> 00:03:15.894
+The one that we're going to be looking at is down here A2C.
+
+00:03:15.895 --> 00:03:18.945
+So you can see there, A2C here has several ones,
+
+00:03:18.944 --> 00:03:21.030
+we have A2C for the CartPole,
+
+00:03:21.030 --> 00:03:23.039
+A2C for the pixelAtari,
+
+00:03:23.039 --> 00:03:25.769
+A2C for continuous and so on.
+
+00:03:25.770 --> 00:03:29.140
+So, I'm going to be walking through this,
+
+00:03:29.139 --> 00:03:33.889
+most most of the code not all of it but most at least to get you guys started.
+
+00:03:33.889 --> 00:03:36.244
+Here, you can see how he's using a CartPole.
+
+00:03:36.245 --> 00:03:41.675
+Here he's creating a log directory function,
+
+00:03:41.675 --> 00:03:43.520
+classic control name, blah, blah, blah,
+
+00:03:43.520 --> 00:03:46.844
+this is just for keeping track of things.
+
+00:03:46.844 --> 00:03:52.349
+If you remember, you just watch the actor, the A2C lecture,
+
+00:03:52.349 --> 00:03:58.574
+you know that the actor-critic methods say A3C and A2C use multiple agents workers.
+
+00:03:58.574 --> 00:04:04.369
+So, the parallel environments and agents gathering information.
+
+00:04:04.370 --> 00:04:07.770
+So, you see here number of workers is five.
+
+00:04:07.810 --> 00:04:12.219
+In this one you can see how the number of workers is 16.
+
+00:04:12.219 --> 00:04:15.289
+Okay, just to give you an idea of what this is.
+
+00:04:15.289 --> 00:04:18.689
+You also remember, so here you can see how
+
+00:04:18.689 --> 00:04:22.040
+he's creating a parallelized task which is basically you want to
+
+00:04:22.040 --> 00:04:24.500
+create all these bunch of
+
+00:04:24.500 --> 00:04:29.720
+workers with this task function which is a classical control game,
+
+00:04:29.720 --> 00:04:31.370
+there's going to pass it basically the log.
+
+00:04:31.370 --> 00:04:33.965
+So, you can look to a directories and so on,
+
+00:04:33.964 --> 00:04:36.484
+very nice, very modular code.
+
+00:04:36.485 --> 00:04:42.110
+Here you can see the optimizer is using is the Adam optimizer and the network is using is
+
+00:04:42.110 --> 00:04:47.870
+a CategoricalActorCritic network with a fully connected body because again,
+
+00:04:47.870 --> 00:04:51.035
+we're using carpel so we don't need anything other than that.
+
+00:04:51.035 --> 00:04:54.439
+If we were using Atari for example,
+
+00:04:54.439 --> 00:05:00.834
+we will be using a nature convolution init and then the same CategoricalActorCriticNet.
+
+00:05:00.834 --> 00:05:07.489
+Here, later, I'm going to talk about Generalized Advantage Estimation GAE.
+
+00:05:07.490 --> 00:05:13.809
+Here he's setting this to false but you can set that to true
+
+00:05:13.809 --> 00:05:17.180
+and then you said this parameter here and
+
+00:05:17.180 --> 00:05:21.655
+then you'll be using that other type both return.
+
+00:05:21.654 --> 00:05:27.099
+However, you remember probably from previous lectures that A2C
+
+00:05:27.100 --> 00:05:32.090
+uses an N-Step bootstrapping and here you can see how the rollout length is five.
+
+00:05:32.089 --> 00:05:35.239
+So, this is basically saying that he's going to go five steps
+
+00:05:35.240 --> 00:05:38.810
+and then he's going to back the value up,
+
+00:05:38.810 --> 00:05:41.800
+so it's going to use a five-step bootstrapping in there.
+
+00:05:41.800 --> 00:05:43.980
+So, that's the configuration.
+
+00:05:43.980 --> 00:05:46.069
+Let's take a look real quick a couple of things.
+
+00:05:46.069 --> 00:05:47.750
+First the parallelize task,
+
+00:05:47.750 --> 00:05:49.295
+so we go to the task,
+
+00:05:49.295 --> 00:05:52.129
+here there's a DeepRL component task.
+
+00:05:52.129 --> 00:05:53.795
+You go all the way to the bottom.
+
+00:05:53.795 --> 00:05:55.699
+You're going to see ParallizedTask.
+
+00:05:55.699 --> 00:05:58.009
+Here you can see if he's a single process,
+
+00:05:58.009 --> 00:05:59.659
+you do basically nothing,
+
+00:05:59.660 --> 00:06:02.600
+it's just a dummy thing but if you have more processes,
+
+00:06:02.600 --> 00:06:07.955
+then you're going to just create number of workers, number of tasks.
+
+00:06:07.954 --> 00:06:11.509
+In this case it's going to call this class which we're going to
+
+00:06:11.509 --> 00:06:15.469
+look in a minute but right now we have the state dimension,
+
+00:06:15.470 --> 00:06:18.440
+action I mentioned and so on.
+
+00:06:18.439 --> 00:06:26.204
+This is sort of like somewhat a wrapper for the opening IJim,
+
+00:06:26.204 --> 00:06:29.805
+but nevertheless it's interesting code,
+
+00:06:29.805 --> 00:06:31.725
+try to dig into this.
+
+00:06:31.725 --> 00:06:35.310
+ProcessTask is a little bit up here.
+
+00:06:35.310 --> 00:06:37.889
+You can see how process task desk is actually using
+
+00:06:37.889 --> 00:06:43.490
+the MP library which it's basically multiprocessing.
+
+00:06:43.490 --> 00:06:45.949
+You can see the multiprocessing library and then he's
+
+00:06:45.949 --> 00:06:48.064
+going to create a pipe and then he's going to communicate,
+
+00:06:48.064 --> 00:06:50.285
+going to have a bunch of workers communicate,
+
+00:06:50.285 --> 00:06:53.255
+send information back and forth.
+
+00:06:53.254 --> 00:06:59.694
+So, this is what is allowing the multi workers agent.
+
+00:06:59.694 --> 00:07:04.079
+So, that's the ParallelizeTask.
+
+00:07:04.079 --> 00:07:06.514
+Now, we'll move on to the network.
+
+00:07:06.514 --> 00:07:07.834
+The network is right here.
+
+00:07:07.834 --> 00:07:12.034
+You can see here we have a full connected body and then the CategoricalActorCritic.
+
+00:07:12.035 --> 00:07:18.135
+So, we have, in the network folder, so DeepRL.
+
+00:07:18.134 --> 00:07:20.204
+In the network folder we have network bodies,
+
+00:07:20.204 --> 00:07:22.319
+network heads, and network utils.
+
+00:07:22.319 --> 00:07:28.259
+So, the bodies are like a bunch of so these are the comm net,
+
+00:07:28.259 --> 00:07:30.105
+the is the foward function for that,
+
+00:07:30.105 --> 00:07:33.550
+DDPG, will talk about that later.
+
+00:07:34.500 --> 00:07:39.654
+The one that he's using is the full connective body this one over here,
+
+00:07:39.654 --> 00:07:47.259
+which is it's pretty straightforward just the layer linear depending on what you're
+
+00:07:47.259 --> 00:07:55.209
+putting in now and stay dimensions and the hidden units 6464 and so on.
+
+00:07:55.209 --> 00:08:02.724
+So, negate is going to be a value by default this is also the activation function.
+
+00:08:02.725 --> 00:08:09.895
+So, these are pretty straightforward for network with the four function over there.
+
+00:08:09.894 --> 00:08:11.649
+So, regular things.
+
+00:08:11.649 --> 00:08:14.364
+So, we go back to the examples.
+
+00:08:14.365 --> 00:08:17.185
+I'm going to close this tab.
+
+00:08:17.185 --> 00:08:20.199
+Then here we can see so we have the full connect it.
+
+00:08:20.199 --> 00:08:24.639
+Then the head of that is a categorical actor-critic net.
+
+00:08:24.639 --> 00:08:31.419
+So, we go to the head and then here we can see a nice implementation.
+
+00:08:31.420 --> 00:08:35.365
+This is why I wanted to show this one at this point.
+
+00:08:35.365 --> 00:08:38.710
+Hopefully, you guys appreciate the good code as well and
+
+00:08:38.710 --> 00:08:45.490
+not just not simplicity only but also very nice implementation.
+
+00:08:45.490 --> 00:08:47.470
+All right. So, you have the actor-critic net
+
+00:08:47.470 --> 00:08:51.639
+here which you say base class we look at that in a second.
+
+00:08:51.639 --> 00:08:55.764
+But here you can see how the network has you get the body.
+
+00:08:55.764 --> 00:08:59.304
+The observation gets transformed into a tensor.
+
+00:08:59.304 --> 00:09:01.870
+Then you pass that through the body and then you
+
+00:09:01.870 --> 00:09:04.600
+split two heads into the actor and the critic.
+
+00:09:04.600 --> 00:09:12.504
+Then you get the logic and the values from this and here's a categorical pass.
+
+00:09:12.504 --> 00:09:17.948
+Yeah. Log probability of the actions and then you're going to return the action,
+
+00:09:17.948 --> 00:09:25.629
+the log probability and the entropy distribution and then the output of this critic.
+
+00:09:25.629 --> 00:09:27.144
+So, the volume function.
+
+00:09:27.144 --> 00:09:31.975
+We go up to actor-critic net which is here.
+
+00:09:31.975 --> 00:09:35.725
+Then you can see how here we had
+
+00:09:35.725 --> 00:09:45.264
+the actor-critic body which are the bodies that we initialized back then here.
+
+00:09:45.264 --> 00:09:51.205
+All right. So, the critic the actor,
+
+00:09:51.205 --> 00:10:01.460
+the joint body and then all the pass forward is here.
+
+00:10:01.500 --> 00:10:04.149
+So, back to this.
+
+00:10:04.149 --> 00:10:07.225
+So, here you see how the head is.
+
+00:10:07.225 --> 00:10:12.070
+The actor head is going to be basically the the actor body,
+
+00:10:12.070 --> 00:10:17.185
+feature dimensions and then the output is going to be the dimensions of the actions.
+
+00:10:17.184 --> 00:10:19.434
+Then it's going to initialize it with
+
+00:10:19.434 --> 00:10:25.134
+some particular functioning here that's initializing that layer.
+
+00:10:25.134 --> 00:10:26.784
+Then for the critic,
+
+00:10:26.784 --> 00:10:34.639
+the feature dimension is one output and it has that same initialization.
+
+00:10:35.429 --> 00:10:38.424
+So, that's the network.
+
+00:10:38.424 --> 00:10:40.089
+Here's the forward pass.
+
+00:10:40.090 --> 00:10:43.644
+You can study this a little bit more.
+
+00:10:43.644 --> 00:10:46.659
+This is the body.
+
+00:10:46.659 --> 00:10:49.929
+Then so the next thing to look at,
+
+00:10:49.929 --> 00:10:52.074
+is to the actual agent.
+
+00:10:52.075 --> 00:10:56.860
+So, the code that's actually running the agent is an DeepRL.
+
+00:10:56.860 --> 00:11:00.745
+DeepRL agent has A2C agent in there.
+
+00:11:00.745 --> 00:11:04.960
+There you can see how he's grabbing stuff from the config file.
+
+00:11:04.960 --> 00:11:06.759
+Then here's a task function.
+
+00:11:06.759 --> 00:11:07.899
+Here's the network function.
+
+00:11:07.899 --> 00:11:10.779
+He's the optimizer function with the parameters
+
+00:11:10.779 --> 00:11:15.264
+and the total steps and everything you know initialized in it.
+
+00:11:15.264 --> 00:11:18.110
+From the steps,
+
+00:11:21.450 --> 00:11:28.060
+so depending on the royal length you're going to basically collect that information.
+
+00:11:28.059 --> 00:11:30.114
+The rewards is there.
+
+00:11:30.115 --> 00:11:33.370
+So, this is the special case in case that you reach
+
+00:11:33.370 --> 00:11:37.240
+a terminal state before the roll out length.
+
+00:11:37.240 --> 00:11:41.470
+So, you want to handle that in a special way.
+
+00:11:41.470 --> 00:11:47.649
+Here's some more processing for the roll out configuration, pending value.
+
+00:11:47.649 --> 00:11:53.259
+So, here you can see when he passes the state, I want to show you here.
+
+00:11:53.259 --> 00:11:58.254
+So, the network when he does a forward pass here and here,
+
+00:11:58.254 --> 00:12:02.620
+you can see how states normalising here the states.
+
+00:12:02.620 --> 00:12:05.784
+So, here's some processing and they're going on.
+
+00:12:05.784 --> 00:12:07.509
+If you want to know what that is,
+
+00:12:07.509 --> 00:12:10.450
+then you would have to go and you see this coming from the config.
+
+00:12:10.450 --> 00:12:12.715
+Go to the examples.
+
+00:12:12.715 --> 00:12:17.139
+We'll look forward normalizer if there is anything declaring there,
+
+00:12:17.139 --> 00:12:22.059
+and this one for example I've seen that normalizer is the image normalizer.
+
+00:12:22.059 --> 00:12:24.129
+There's probably something by default.
+
+00:12:24.129 --> 00:12:31.000
+So, you have to dig down into the config class to see what's being used in there.
+
+00:12:31.000 --> 00:12:34.000
+Here, remember A2C.
+
+00:12:34.000 --> 00:12:38.365
+So, we're using actually advantages for baselines.
+
+00:12:38.365 --> 00:12:42.504
+Here you are calculating the values.
+
+00:12:42.504 --> 00:12:44.365
+The TD errors right here.
+
+00:12:44.365 --> 00:12:47.680
+This isn't the case that we're using the generalized advantage estimation.
+
+00:12:47.679 --> 00:12:53.109
+So, it's actually going to work also after you watch the GAE videos.
+
+00:12:53.110 --> 00:12:59.259
+You probably can understand what's happening then in this few lines which is pretty cool
+
+00:12:59.259 --> 00:13:07.284
+then come back after that the GAE videos and then you can read this part over here.
+
+00:13:07.284 --> 00:13:11.214
+This is the different way for estimating the return.
+
+00:13:11.215 --> 00:13:13.899
+Then here's the way that we're doing that currently.
+
+00:13:13.899 --> 00:13:17.169
+So, the return, my value, detach.
+
+00:13:17.169 --> 00:13:18.579
+That's the advantage.
+
+00:13:18.580 --> 00:13:21.160
+Yeah. So, here there's a policy laws,
+
+00:13:21.159 --> 00:13:23.514
+the value laws, the entropy.
+
+00:13:23.514 --> 00:13:26.845
+Here is the initialized on the gradient and here is
+
+00:13:26.845 --> 00:13:31.810
+actual step of the optimizer that learning. All right.
+
+00:13:31.809 --> 00:13:36.250
+So, then this is basically synchronizing everything,
+
+00:13:36.250 --> 00:13:41.664
+getting everything all of the steps from the different workers and so on. So, yeah.
+
+00:13:41.664 --> 00:13:43.839
+Take a look at this in more detail.
+
+00:13:43.840 --> 00:13:46.495
+I think it's a very nice code.
+
+00:13:46.495 --> 00:13:51.835
+So, very nice implementation and I hope that is useful to you.
+
+00:13:51.835 --> 00:13:54.790
+There are many other implementations out there.
+
+00:13:54.789 --> 00:14:00.174
+I found other implementations easier perhaps to understand.
+
+00:14:00.174 --> 00:14:07.099
+But nevertheless this is definitely high-quality implementation that's worth looking at.
+

@@ -1,0 +1,52 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.530
+We will now take a look at a very common problem in finance known as
+
+00:00:04.530 --> 00:00:09.375
+the optimal liquidation problem or how to sell stocks with minimal loss.
+
+00:00:09.375 --> 00:00:12.570
+So, what is the optimal liquidation problem?
+
+00:00:12.570 --> 00:00:15.240
+Let's assume that you have a certain number of stocks
+
+00:00:15.240 --> 00:00:17.865
+that you want to sell within a given timeframe.
+
+00:00:17.864 --> 00:00:24.254
+For example, let's assume you had a million shares that you want to sell within 30 days.
+
+00:00:24.254 --> 00:00:30.299
+Taking into account the costs arising from market impact and a trader's risk aversion,
+
+00:00:30.300 --> 00:00:33.855
+the goal is to create a trading list that sells all the stocks,
+
+00:00:33.854 --> 00:00:35.534
+within the given timeframe,
+
+00:00:35.534 --> 00:00:38.909
+such that the total cost of trading is minimized.
+
+00:00:38.909 --> 00:00:45.000
+So, this problem talks about market impact and a trader's risk aversion, and so on.
+
+00:00:45.000 --> 00:00:47.420
+For those of you who are unfamiliar with
+
+00:00:47.420 --> 00:00:50.515
+the financial markets may not know what these terms mean.
+
+00:00:50.515 --> 00:00:52.405
+So, for the rest of this lesson,
+
+00:00:52.405 --> 00:00:57.200
+I'm going to give a very simple example that explains what these terms mean,
+
+00:00:57.200 --> 00:00:59.480
+and what this problem entails.
+

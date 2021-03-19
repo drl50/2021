@@ -1,0 +1,121 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.349
+Now that we have the big picture of how the policy gradient method will work,
+
+00:00:04.349 --> 00:00:06.205
+we're ready to get more specific.
+
+00:00:06.205 --> 00:00:08.140
+We'll build slowly and carefully,
+
+00:00:08.140 --> 00:00:11.550
+and I strongly encourage you to keep the big picture in mind as
+
+00:00:11.550 --> 00:00:15.400
+the mathematical details unfold over the next several videos.
+
+00:00:15.400 --> 00:00:18.955
+The first thing we need to define is a Trajectory.
+
+00:00:18.954 --> 00:00:22.354
+A Trajectory is just a state action sequence.
+
+00:00:22.355 --> 00:00:25.820
+You can start to think of it as just a fancy way of referring
+
+00:00:25.820 --> 00:00:29.359
+to an episode where we don't keep track of the rewards.
+
+00:00:29.359 --> 00:00:32.119
+But actually, a Trajectory is a little bit more
+
+00:00:32.119 --> 00:00:35.244
+flexible because there are no restrictions on its length.
+
+00:00:35.244 --> 00:00:40.149
+So, it can correspond to a full episode or just a small part of an episode.
+
+00:00:40.149 --> 00:00:42.539
+We denote the length with a capital H,
+
+00:00:42.539 --> 00:00:44.670
+where H stands for Horizon.
+
+00:00:44.670 --> 00:00:48.190
+We denote a Trajectory with the Greek letter Tau.
+
+00:00:48.189 --> 00:00:53.634
+Then, the sum reward from that Trajectory is written as R of Tau.
+
+00:00:53.634 --> 00:00:57.954
+Our goal in this lesson is the same as in the previous lesson.
+
+00:00:57.954 --> 00:01:03.879
+We want to find the weights Theta of the neural network that maximize expected return.
+
+00:01:03.880 --> 00:01:06.995
+One way of accomplishing this is by setting the weights
+
+00:01:06.995 --> 00:01:09.800
+of the neural network so that on average,
+
+00:01:09.799 --> 00:01:13.954
+the Egypt experiences Trajectories that yield high return.
+
+00:01:13.954 --> 00:01:17.784
+We denote the expected return by capital U,
+
+00:01:17.784 --> 00:01:20.884
+and note that U is a function of Theta.
+
+00:01:20.885 --> 00:01:24.500
+We want to find the value for Theta that maximizes
+
+00:01:24.500 --> 00:01:28.939
+U. U is defined in the expression here.
+
+00:01:28.939 --> 00:01:32.609
+To understand it, we'll look at each part separately.
+
+00:01:32.609 --> 00:01:35.739
+First, recall that this R of Tau is
+
+00:01:35.739 --> 00:01:39.724
+just the return corresponding to an arbitrary Trajectory tab.
+
+00:01:39.724 --> 00:01:45.114
+So then, to take this quantity and use it to calculate the expected return,
+
+00:01:45.114 --> 00:01:50.524
+we need only take into account the probability of each possible Trajectory.
+
+00:01:50.525 --> 00:01:55.175
+That probability depends on the weights Theta in the neural network.
+
+00:01:55.174 --> 00:01:58.295
+This is because Theta defines the policy
+
+00:01:58.295 --> 00:02:01.659
+which is used to select the actions in the Trajectory,
+
+00:02:01.659 --> 00:02:06.679
+which also in turn plays a role in determining the states that the agencies.
+
+00:02:06.680 --> 00:02:10.909
+We use this notation with a semicolon only to indicate
+
+00:02:10.909 --> 00:02:14.965
+that Theta has this influence on the probability of a Trajectory.
+
+00:02:14.965 --> 00:02:16.765
+In the upcoming concepts,
+
+00:02:16.764 --> 00:02:19.009
+we work directly with this formula as we
+
+00:02:19.009 --> 00:02:22.679
+explore the details behind the policy gradients method.
+

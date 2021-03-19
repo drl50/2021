@@ -1,0 +1,319 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:05.639
+As you've learned, we can express the expected return as a probability weighted sum,
+
+00:00:05.639 --> 00:00:10.439
+where we take into account the probability of each possible trajectory and,
+
+00:00:10.439 --> 00:00:12.463
+the return permits trajectory.
+
+00:00:12.464 --> 00:00:17.225
+Our goal is to find the value of theta that maximizes expected return.
+
+00:00:17.225 --> 00:00:20.025
+One way to do that is by Gradient Ascent,
+
+00:00:20.024 --> 00:00:24.244
+where we just iteratively take small steps in the direction of the gradient.
+
+00:00:24.245 --> 00:00:28.675
+This algorithm is closely related to Gradient Descent where
+
+00:00:28.675 --> 00:00:34.170
+the differences are that gradient descent is designed to find the minimum of a function,
+
+00:00:34.170 --> 00:00:36.965
+whereas gradient ascent will find the maximum.
+
+00:00:36.965 --> 00:00:42.020
+Gradient descent, steps in the direction of the negative gradient,
+
+00:00:42.020 --> 00:00:46.565
+whereas gradient ascent steps in the direction of the gradient.
+
+00:00:46.564 --> 00:00:49.399
+Remember that alpha is the step size and we'll
+
+00:00:49.399 --> 00:00:52.129
+let it decay over time to avoid overshooting
+
+00:00:52.130 --> 00:00:57.955
+the target but now to apply this method will need to be able to calculate the gradient.
+
+00:00:57.954 --> 00:01:01.280
+Now, we won't be able to calculate the exact value of
+
+00:01:01.280 --> 00:01:04.844
+the gradient since that is computationally too expensive.
+
+00:01:04.844 --> 00:01:10.215
+It's computationally expensive because in order to calculate the gradient exactly,
+
+00:01:10.215 --> 00:01:13.774
+we'll have to consider every possible trajectory.
+
+00:01:13.774 --> 00:01:15.409
+Instead of doing this,
+
+00:01:15.409 --> 00:01:18.979
+we'll just sample a few trajectories using the policy
+
+00:01:18.980 --> 00:01:23.450
+and then use those trajectories only to estimate the gradient.
+
+00:01:23.450 --> 00:01:27.829
+Specifically, we'll use the policy to collect end trajectories.
+
+00:01:27.829 --> 00:01:31.810
+Will denote those by tau1 tau2 all the way to tau m,
+
+00:01:31.810 --> 00:01:34.665
+where the trajectory number is in the superscript.
+
+00:01:34.665 --> 00:01:38.120
+Remember, any trajectory is just a sequence of states and
+
+00:01:38.120 --> 00:01:42.689
+actions and we'll use this notation to refer to the eighth trajectory.
+
+00:01:42.689 --> 00:01:46.564
+Then, we'll use these M trajectories to estimate the gradient,
+
+00:01:46.564 --> 00:01:49.265
+will do that by using the equation here.
+
+00:01:49.265 --> 00:01:53.719
+You'll learn more about how to use that equation soon for now know that,
+
+00:01:53.719 --> 00:01:57.079
+it consolidates information from the M trajectories to yield
+
+00:01:57.079 --> 00:02:00.954
+an estimate for the gradient which we refer to as g hat.
+
+00:02:00.954 --> 00:02:03.319
+Once we have an estimate for the gradient,
+
+00:02:03.319 --> 00:02:06.309
+we can use it to update the weights of the policy.
+
+00:02:06.310 --> 00:02:08.270
+Then, we repeatedly loop over
+
+00:02:08.270 --> 00:02:11.810
+these steps to converge to the weights of the optimal policy.
+
+00:02:11.810 --> 00:02:13.640
+Now, before moving on,
+
+00:02:13.639 --> 00:02:15.899
+make sure that the high level details are clear.
+
+00:02:15.900 --> 00:02:18.069
+We're just doing gradient ascent,
+
+00:02:18.069 --> 00:02:20.400
+where we work with an estimate of the gradient.
+
+00:02:20.400 --> 00:02:23.775
+But let's look a bit more closely at this equation,
+
+00:02:23.775 --> 00:02:25.730
+to understand how it ties into
+
+00:02:25.729 --> 00:02:29.269
+the big picture that we've learned about at the beginning of the lesson.
+
+00:02:29.270 --> 00:02:33.380
+We'll begin by making some simplifying assumptions that we will remove later.
+
+00:02:33.379 --> 00:02:37.129
+So for now, assume that we only collect a single trajectory,
+
+00:02:37.129 --> 00:02:39.000
+so m is equal to one.
+
+00:02:39.000 --> 00:02:43.810
+Furthermore, assume that the trajectory tau corresponds to a full episode.
+
+00:02:43.810 --> 00:02:48.020
+Then we can simplify the equation for the gradient to look like this.
+
+00:02:48.020 --> 00:02:53.135
+All of the superscripts have been removed because now we only have one trajectory.
+
+00:02:53.134 --> 00:02:58.375
+So let's see how this equation accomplishes exactly what's described in the big picture.
+
+00:02:58.375 --> 00:03:00.919
+Remember, we're currently assuming that we collect
+
+00:03:00.919 --> 00:03:03.684
+a full episode which we referred to as tau.
+
+00:03:03.685 --> 00:03:08.420
+Then R of tau is just the cumulative reward from that trajectory.
+
+00:03:08.419 --> 00:03:12.319
+Remember that the reward signal and the sample game we're working with,
+
+00:03:12.319 --> 00:03:14.930
+gives the agent a reward of positive one if we
+
+00:03:14.930 --> 00:03:18.215
+won the game and a reward of negative one if we lost.
+
+00:03:18.215 --> 00:03:21.955
+Recall that tau is just a sequence of states and actions.
+
+00:03:21.955 --> 00:03:27.770
+This term looks at the probability that the agent selects action a sub T from state s sub
+
+00:03:27.770 --> 00:03:30.680
+t. Remember pi with this theta and
+
+00:03:30.680 --> 00:03:35.125
+the subscript refers to the policy which is parameterized by theta.
+
+00:03:35.125 --> 00:03:37.514
+Then this full calculation here,
+
+00:03:37.514 --> 00:03:40.594
+takes the gradient of the log of that probability.
+
+00:03:40.594 --> 00:03:44.750
+This will tell us how we should change the weights of the policy theta,
+
+00:03:44.750 --> 00:03:48.064
+if we want to increase the log probability of selecting
+
+00:03:48.064 --> 00:03:52.509
+action a sub T from state s sub t. Specifically,
+
+00:03:52.509 --> 00:03:57.769
+if we nudge the policy weights by taking a small step in the direction of this gradient,
+
+00:03:57.770 --> 00:04:01.460
+will increase the log probability of selecting the action from
+
+00:04:01.460 --> 00:04:07.060
+that state and if we step in the opposite direction will decrease the log probability.
+
+00:04:07.060 --> 00:04:09.640
+So here's where it gets really cool,
+
+00:04:09.639 --> 00:04:14.524
+because we're ready to understand exactly how this equation fits into the big picture.
+
+00:04:14.525 --> 00:04:19.590
+So, this equation comes into play after we have collected a trajectory.
+
+00:04:19.589 --> 00:04:22.519
+It will tell us how to use the information in
+
+00:04:22.519 --> 00:04:26.034
+that trajectory to update the weights of the policy network.
+
+00:04:26.035 --> 00:04:30.645
+It will specifically take into account whether we have won or lost,
+
+00:04:30.644 --> 00:04:34.789
+and it will tell us how to do all of these updates all at once for
+
+00:04:34.790 --> 00:04:39.050
+each state action pair at each time step in the episode.
+
+00:04:39.050 --> 00:04:42.795
+To see this, assume that the agent won the episode.
+
+00:04:42.795 --> 00:04:46.310
+Then this R of tau is just positive one,
+
+00:04:46.310 --> 00:04:48.500
+which means we can effectively ignore it.
+
+00:04:48.500 --> 00:04:53.324
+So, we're just multiplying each term in the sum by one which doesn't do anything.
+
+00:04:53.324 --> 00:04:57.709
+So then, what the sum does is just add up all the gradient directions we should
+
+00:04:57.709 --> 00:05:01.894
+step in to increase the log probability of selecting each state action pair.
+
+00:05:01.894 --> 00:05:05.509
+If we take a step in the direction of g hat,
+
+00:05:05.509 --> 00:05:07.430
+that's equivalent to just taking H plus
+
+00:05:07.430 --> 00:05:12.750
+one simultaneous steps where each step corresponds to a state action pair in the episode.
+
+00:05:12.750 --> 00:05:18.935
+It is designed to increase the log probability of selecting the action from that state.
+
+00:05:18.935 --> 00:05:21.545
+In the event that we lost,
+
+00:05:21.545 --> 00:05:24.810
+well, this R of tau becomes negative one,
+
+00:05:24.810 --> 00:05:27.470
+which ensures that instead of stepping in
+
+00:05:27.470 --> 00:05:30.735
+the direction of steepest increase of the log probabilities,
+
+00:05:30.735 --> 00:05:34.280
+we step in the direction of steepest decrease.
+
+00:05:34.279 --> 00:05:36.259
+I strongly encourage you to take
+
+00:05:36.259 --> 00:05:39.189
+your time here and make sure that this makes sense to you.
+
+00:05:39.189 --> 00:05:41.230
+But then the question becomes,
+
+00:05:41.230 --> 00:05:45.694
+how did this get more complex if we remove our original assumptions?
+
+00:05:45.694 --> 00:05:50.290
+Well, remember that this was the original equation.
+
+00:05:50.290 --> 00:05:53.000
+You'll notice that it's almost identical,
+
+00:05:53.000 --> 00:05:57.339
+where we now just need to add contributions from multiple trajectories.
+
+00:05:57.339 --> 00:06:00.154
+You'll also note that there's a scaling factor
+
+00:06:00.154 --> 00:06:03.189
+that's inversely proportional to the number of trajectories.
+
+00:06:03.189 --> 00:06:05.899
+If you like, you can read more about how to
+
+00:06:05.899 --> 00:06:09.875
+derive this equation for yourself and the text that follows the video.
+
+00:06:09.875 --> 00:06:12.459
+But before digging into those details,
+
+00:06:12.459 --> 00:06:16.549
+make sure it's clear to you how this equation fits into the big picture.
+
+00:06:16.550 --> 00:06:19.250
+Feel free to watch this video multiple times if
+
+00:06:19.250 --> 00:06:23.910
+needed and when you're ready we'll work with an implementation of this method.
+

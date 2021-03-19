@@ -1,0 +1,145 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:05.144
+Let's try to create a trading algorithm using a supervised learning approach.
+
+00:00:05.144 --> 00:00:07.319
+We can try for example,
+
+00:00:07.320 --> 00:00:10.080
+to use supervised learning to teach a computer to
+
+00:00:10.080 --> 00:00:13.349
+predict stock prices within a given timeframe.
+
+00:00:13.349 --> 00:00:16.530
+Being able to predict stock prices however,
+
+00:00:16.530 --> 00:00:19.395
+will not guarantee that we will make money.
+
+00:00:19.394 --> 00:00:21.530
+There are many reasons for this.
+
+00:00:21.530 --> 00:00:23.835
+One of them is network latencies.
+
+00:00:23.835 --> 00:00:27.570
+Network latencies result in delays between the time an order is
+
+00:00:27.570 --> 00:00:31.695
+placed and the time the order is delivered over a network.
+
+00:00:31.695 --> 00:00:37.170
+Therefore, even if your algorithm can accurately predict the price of a particular stock,
+
+00:00:37.170 --> 00:00:38.594
+at a specific time,
+
+00:00:38.594 --> 00:00:42.399
+by the time the order is delivered over the network and executed,
+
+00:00:42.399 --> 00:00:44.960
+the stock price might have change.
+
+00:00:44.960 --> 00:00:48.620
+The net result is that the orders that you place will be executed
+
+00:00:48.619 --> 00:00:52.969
+at a different price than the one predicted by the algorithm.
+
+00:00:52.969 --> 00:00:56.314
+Another problem you will see is trading fees.
+
+00:00:56.314 --> 00:00:59.869
+Trading fees are associated with each transaction and can
+
+00:00:59.869 --> 00:01:03.469
+vary greatly ultimately affecting the price per share.
+
+00:01:03.469 --> 00:01:07.129
+These factors and many others are uncertain
+
+00:01:07.129 --> 00:01:11.704
+and vary with each transaction making them very hard to predict.
+
+00:01:11.704 --> 00:01:16.189
+Consequently, training a supervised learning algorithm to take all of
+
+00:01:16.189 --> 00:01:20.649
+these uncertainties into account will be extremely difficult.
+
+00:01:20.650 --> 00:01:24.620
+But even if we manage to train our system to accurately predict
+
+00:01:24.620 --> 00:01:28.909
+stock prices and take all the uncertainties into account,
+
+00:01:28.909 --> 00:01:30.590
+that wouldn't be enough.
+
+00:01:30.590 --> 00:01:33.085
+We also need a trading strategy.
+
+00:01:33.084 --> 00:01:36.859
+A trading strategy is a set of rules that determine when to buy,
+
+00:01:36.859 --> 00:01:39.319
+hold or sell a stock.
+
+00:01:39.319 --> 00:01:43.229
+For example, suppose the price of a stock goes up for
+
+00:01:43.230 --> 00:01:47.290
+awhile and then begins to drop. What will you do?
+
+00:01:47.290 --> 00:01:53.090
+Will you sell or will you keep the stock and hope that it goes up again in the future?
+
+00:01:53.090 --> 00:01:57.829
+Having a trading strategy will allow the computer to automatically decide,
+
+00:01:57.829 --> 00:01:59.765
+what the best action should be.
+
+00:01:59.765 --> 00:02:03.439
+The trading strategy could also include rules that determine
+
+00:02:03.439 --> 00:02:07.894
+the amount of shares to sell or buy in a particular transaction.
+
+00:02:07.894 --> 00:02:10.849
+Training a supervised learning algorithm to learn
+
+00:02:10.849 --> 00:02:14.750
+a trading strategy can be challenging for a couple of reasons.
+
+00:02:14.750 --> 00:02:20.330
+One reason is that trading strategies can vary greatly depending on market conditions.
+
+00:02:20.330 --> 00:02:25.490
+This means that supervised learning algorithm has to learn not just one trading strategy,
+
+00:02:25.490 --> 00:02:29.800
+but many in order to be robust to varying market conditions.
+
+00:02:29.800 --> 00:02:31.375
+Another reason is that,
+
+00:02:31.375 --> 00:02:34.939
+it's often not clear what the best strategy should be.
+
+00:02:34.939 --> 00:02:40.069
+Consequently, training a supervised learning algorithm can be very difficult,
+
+00:02:40.069 --> 00:02:43.944
+since it's not always clear what strategy we should optimize for.
+
+00:02:43.944 --> 00:02:46.400
+In the next lesson, we'll learn how
+
+00:02:46.400 --> 00:02:50.620
+reinforcement learning can get around many of these problems.
+

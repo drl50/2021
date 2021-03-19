@@ -1,0 +1,79 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:05.280
+Unlike in DQN, A3C does not use a replay buffer.
+
+00:00:05.280 --> 00:00:08.669
+The main reason we needed a replay buffer was so that we
+
+00:00:08.669 --> 00:00:12.224
+could decorrelate experienced topple. Let me explain.
+
+00:00:12.224 --> 00:00:17.295
+In reinforcement learning, an agent collects experience in a sequential manner.
+
+00:00:17.295 --> 00:00:21.780
+The experience collected at time step t plus 1 will be
+
+00:00:21.780 --> 00:00:26.880
+correlated to the experience collected at time step t because it is
+
+00:00:26.879 --> 00:00:30.989
+the action taken at time step t that is partially
+
+00:00:30.989 --> 00:00:37.125
+responsible for the reward and the state up served at time step t plus 1,
+
+00:00:37.125 --> 00:00:41.695
+and that they will influence all our future decisions.
+
+00:00:41.695 --> 00:00:43.460
+There is no way out of that.
+
+00:00:43.460 --> 00:00:48.170
+The replay buffer allows us to collect these experiences
+
+00:00:48.170 --> 00:00:55.820
+sequentially by adding them one at a time to the replay buffer for later processing.
+
+00:00:55.820 --> 00:00:59.210
+So, independent from the data collection process,
+
+00:00:59.210 --> 00:01:04.700
+we can randomly select experiences from the replay buffer into mini batches.
+
+00:01:04.700 --> 00:01:09.695
+The experiences in the mini batches will not show the same correlation.
+
+00:01:09.694 --> 00:01:13.414
+These allows us to train our network successfully.
+
+00:01:13.415 --> 00:01:20.005
+Interestingly, A3C replaces the replay buffer with parallel training.
+
+00:01:20.004 --> 00:01:23.719
+By creating multiple instances of the environment and
+
+00:01:23.719 --> 00:01:28.754
+agent and running them all at the same time,
+
+00:01:28.754 --> 00:01:35.739
+your agent will receive mini batches of the correlated experiences just as we need.
+
+00:01:35.739 --> 00:01:39.859
+Samples will be decorrelated because agents will likely be
+
+00:01:39.859 --> 00:01:45.355
+experiencing different states at any given time. Cool, right?
+
+00:01:45.355 --> 00:01:49.820
+On top of that, these way of training allows us to use on
+
+00:01:49.819 --> 00:01:52.924
+policy learning in our learning algorithm
+
+00:01:52.924 --> 00:01:56.289
+which is often associated with more stable learning.
+

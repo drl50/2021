@@ -1,0 +1,64 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.044
+Now that we have a mental picture of how the hill climbing algorithm should work,
+
+00:00:04.044 --> 00:00:06.379
+we're ready to dig into the pseudo-code.
+
+00:00:06.379 --> 00:00:10.570
+So remember, we begin with an initially random set of weights Theta.
+
+00:00:10.570 --> 00:00:14.429
+We'll collect an episode with the policy that correspond to those weights,
+
+00:00:14.429 --> 00:00:19.344
+and then record the return which we'll denote by capital G. At the start,
+
+00:00:19.344 --> 00:00:22.419
+this value for Theta is our first best guess for the weights,
+
+00:00:22.420 --> 00:00:24.585
+which we'll record as Theta best.
+
+00:00:24.585 --> 00:00:29.039
+We'll also record the return as the highest return we've gotten so far.
+
+00:00:29.039 --> 00:00:31.429
+Then, we'll add a little bit of random noise to
+
+00:00:31.429 --> 00:00:36.189
+these weights to give us another set of candidate weights we can try out.
+
+00:00:36.189 --> 00:00:39.744
+We'll refer to those new weights as Theta new.
+
+00:00:39.744 --> 00:00:42.079
+To see how good those new weights are,
+
+00:00:42.079 --> 00:00:45.750
+we'll use the policy that they give us to interact with the environment.
+
+00:00:45.750 --> 00:00:50.469
+Then, will calculate the return we got which we refer to as G new.
+
+00:00:50.469 --> 00:00:54.935
+If the new weights gave us more return than our current best estimate,
+
+00:00:54.935 --> 00:00:57.984
+we update the best weights to that new value.
+
+00:00:57.984 --> 00:01:02.909
+Then, we just repeat or a loop over these steps until we solve the environment.
+
+00:01:02.909 --> 00:01:04.914
+That's the complete algorithm.
+
+00:01:04.915 --> 00:01:06.295
+In the upcoming video,
+
+00:01:06.295 --> 00:01:10.269
+you'll learn about some modifications we can make to improve it.
+

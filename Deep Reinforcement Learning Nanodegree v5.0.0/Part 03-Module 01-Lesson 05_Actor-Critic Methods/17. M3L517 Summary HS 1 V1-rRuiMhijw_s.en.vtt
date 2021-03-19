@@ -1,0 +1,73 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.830
+Well, this is the end of the actor-critic methods lesson.
+
+00:00:04.830 --> 00:00:06.629
+That was a lot, I know.
+
+00:00:06.629 --> 00:00:10.259
+But you'll soon have a chance to put everything into practice,
+
+00:00:10.259 --> 00:00:12.879
+and that should help you cement concepts.
+
+00:00:12.880 --> 00:00:17.089
+In this lesson, you learned about actor-critic methods,
+
+00:00:17.089 --> 00:00:21.689
+which are simply a way to reduce the variance in policy-based methods.
+
+00:00:21.690 --> 00:00:26.760
+You learned that the TD estimate is a one-step bootstrapping estimate
+
+00:00:26.760 --> 00:00:32.385
+and that the Monte Carlo estimate is an infinite step bootstrap in estimate.
+
+00:00:32.384 --> 00:00:35.189
+You learned that you can use any number of
+
+00:00:35.189 --> 00:00:39.570
+n-step bootstrapping to estimate expected returns.
+
+00:00:39.570 --> 00:00:46.924
+You also learn that you can create a mixture of all n-step returns into Lambda return.
+
+00:00:46.924 --> 00:00:51.969
+You learn some of the differences between off-policy and non-policy learning.
+
+00:00:51.969 --> 00:00:57.064
+You also learn about many different actor-critic algorithms: A3C,
+
+00:00:57.064 --> 00:01:00.979
+A2C, GAE, and DDPG.
+
+00:01:00.979 --> 00:01:03.799
+Lastly, I hope that the code walk
+
+00:01:03.799 --> 00:01:07.000
+through videos help you understand these algorithms better.
+
+00:01:07.000 --> 00:01:09.840
+That's it. Good luck going forward.
+
+00:01:09.840 --> 00:01:13.784
+Remember to keep your Gamma as high as possible,
+
+00:01:13.784 --> 00:01:17.189
+to really indicate your learning rate to zero,
+
+00:01:17.189 --> 00:01:21.204
+and to never ever set your Epsilon to zero.
+
+00:01:21.204 --> 00:01:22.739
+If you didn't get that,
+
+00:01:22.739 --> 00:01:25.009
+you ought to get back to the basics and continue
+
+00:01:25.010 --> 00:01:28.130
+studying reinforcement learning. See you out there.
+

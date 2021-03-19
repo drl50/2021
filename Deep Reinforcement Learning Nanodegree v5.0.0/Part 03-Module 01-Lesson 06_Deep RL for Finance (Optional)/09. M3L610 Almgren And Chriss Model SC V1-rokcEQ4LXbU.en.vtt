@@ -1,0 +1,211 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.450
+Now, we're going to talk about the Almagren and Chriss model
+
+00:00:03.450 --> 00:00:06.419
+for optimal execution of portfolio transactions.
+
+00:00:06.419 --> 00:00:10.500
+So, the aim of the previous lesson was to give you guys some intuition of what
+
+00:00:10.500 --> 00:00:15.105
+the optimal liquidation problem was about without diving into the mathematics.
+
+00:00:15.105 --> 00:00:18.420
+In this notebook, we will dive into the mathematics and gave
+
+00:00:18.420 --> 00:00:23.790
+formal definitions of the terms that we talked about before such as Trading Lists.
+
+00:00:23.789 --> 00:00:26.309
+Almagren and Chriss provided a solution to
+
+00:00:26.309 --> 00:00:29.459
+the optimal liquidation problem by assuming that
+
+00:00:29.460 --> 00:00:32.745
+the permanent and temporary market impact functions
+
+00:00:32.744 --> 00:00:35.239
+were linear functions of the trading rate,
+
+00:00:35.240 --> 00:00:38.565
+and that the stock price followed a discrete random walk.
+
+00:00:38.564 --> 00:00:43.519
+One of the reasons we chose this problem was because the solution given by Almagren and
+
+00:00:43.520 --> 00:00:48.680
+Chriss gives us a nice benchmark to compare our reinforcement learning algorithm too.
+
+00:00:48.679 --> 00:00:54.965
+So, we can see how well or how bad our algorithm performs compared to their solution.
+
+00:00:54.965 --> 00:01:00.050
+The reason we're taking time to go over their model is because we're going to train
+
+00:01:00.049 --> 00:01:02.570
+our reinforcement learning algorithm using
+
+00:01:02.570 --> 00:01:07.355
+the same price dynamics and market impact functions that they used.
+
+00:01:07.355 --> 00:01:10.865
+So, you're encouraged to read this notebook to get a better idea
+
+00:01:10.864 --> 00:01:13.849
+of the equations we're going to use in our training environment.
+
+00:01:13.849 --> 00:01:18.905
+I will now give a quick summary of the topics covered in this notebook.
+
+00:01:18.905 --> 00:01:24.394
+We begin by taking a look at the formal definitions for trading trajectory,
+
+00:01:24.394 --> 00:01:27.185
+trading list, and trading strategy.
+
+00:01:27.185 --> 00:01:30.094
+This definitions are based on dividing
+
+00:01:30.094 --> 00:01:34.730
+the liquidation time T into N intervals of equal length.
+
+00:01:34.730 --> 00:01:37.280
+This number N will determine the number of
+
+00:01:37.280 --> 00:01:40.310
+trades we will make within the liquidation time.
+
+00:01:40.310 --> 00:01:45.909
+Here, we see an example of a trading trajectory for n equals 12.
+
+00:01:45.909 --> 00:01:49.804
+Then, we will take a look at the price dynamics.
+
+00:01:49.805 --> 00:01:55.100
+We will assume that the stock prices evolve according to this equation,
+
+00:01:55.099 --> 00:01:57.214
+which describes a random walk.
+
+00:01:57.215 --> 00:02:00.880
+This equation at random noise to the stock price at
+
+00:02:00.879 --> 00:02:05.259
+every trading step in order to simulate price fluctuations.
+
+00:02:05.260 --> 00:02:09.430
+We can see what this prize model looks like with this code.
+
+00:02:09.430 --> 00:02:14.290
+Here, we can see the price model for 60 days.
+
+00:02:14.289 --> 00:02:18.973
+We can change if we want the number of days to 100, for example,
+
+00:02:18.973 --> 00:02:22.479
+and we can also change the random seed to see
+
+00:02:22.479 --> 00:02:26.739
+a different realization of the random stock price.
+
+00:02:26.740 --> 00:02:31.510
+Then, we will take a look at the market impact equations.
+
+00:02:31.509 --> 00:02:36.569
+This is the equation we're going to use to simulate permanent market impact.
+
+00:02:36.569 --> 00:02:42.044
+This is the equation that we're going to use to simulate temporary market impact.
+
+00:02:42.044 --> 00:02:44.494
+The important thing to remember is that,
+
+00:02:44.495 --> 00:02:49.640
+Sk tilde is the price at which our sell transactions are going to be executed.
+
+00:02:49.639 --> 00:02:56.599
+In other words, Sk tilde is the price per share that we receive whenever we sell a stock.
+
+00:02:56.599 --> 00:03:00.259
+Then we will take a look at the equation for capture.
+
+00:03:00.259 --> 00:03:04.039
+Remember, captured tells us the amount of money that we
+
+00:03:04.039 --> 00:03:08.719
+make by selling our shares following a particular trading strategy.
+
+00:03:08.719 --> 00:03:12.439
+We will then take a look at the implementation shortfall.
+
+00:03:12.439 --> 00:03:16.234
+The implementation shortfall is given by this equation.
+
+00:03:16.235 --> 00:03:18.800
+This is the equation that we want to minimize
+
+00:03:18.800 --> 00:03:21.500
+when determining the optimal trading strategy.
+
+00:03:21.500 --> 00:03:26.250
+However, since the execution price is random fluctuations,
+
+00:03:26.250 --> 00:03:28.729
+so will the implementation shortfall.
+
+00:03:28.729 --> 00:03:33.319
+Therefore, we have to reframe the problem in terms of the average or
+
+00:03:33.319 --> 00:03:37.969
+expectation value of the shortfall and its corresponding variants.
+
+00:03:37.969 --> 00:03:41.960
+So minimizing the implementation shortfall will entail
+
+00:03:41.960 --> 00:03:47.405
+minimizing the expectation value given a particular level of variance.
+
+00:03:47.405 --> 00:03:48.919
+To solve this problem,
+
+00:03:48.919 --> 00:03:54.769
+we will introduce a Lagrange multiplier which is represented by the variable lambda.
+
+00:03:54.770 --> 00:03:59.480
+So, the problem above reduces to the following: Given
+
+00:03:59.479 --> 00:04:03.834
+a particular value of lambda which represents the traders risk aversion,
+
+00:04:03.835 --> 00:04:09.560
+the goal is to find a trading lists that minimizes this utility function.
+
+00:04:09.560 --> 00:04:14.694
+Finally, we will take a look at the solution given by Almgren and Chriss.
+
+00:04:14.694 --> 00:04:20.134
+This equations minimize the utility function given a particular value of lambda.
+
+00:04:20.134 --> 00:04:25.324
+The equation we're more interested in is the trading list given here.
+
+00:04:25.324 --> 00:04:30.425
+This equation tells us how many shares to sell at each trading step.
+
+00:04:30.425 --> 00:04:33.710
+If we sell our shares following the straight lists,
+
+00:04:33.709 --> 00:04:36.109
+we'll get an expected shortfall given by
+
+00:04:36.110 --> 00:04:40.504
+this equation and the corresponding variance given by this equation.
+
+00:04:40.504 --> 00:04:45.569
+In the next lesson, we will take a look at this equations more closely.
+

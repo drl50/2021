@@ -1,0 +1,190 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.500
+Hello and welcome to this lesson on policy gradient methods.
+
+00:00:04.500 --> 00:00:05.629
+In the previous lesson,
+
+00:00:05.629 --> 00:00:08.195
+you learned all about policy-based method.
+
+00:00:08.195 --> 00:00:13.199
+Remember, policy-based methods are a class of algorithms that search directly for
+
+00:00:13.199 --> 00:00:18.350
+the optimal policy without simultaneously maintaining value function estimates.
+
+00:00:18.350 --> 00:00:22.050
+You learned how to represent the policy as a neural network,
+
+00:00:22.050 --> 00:00:24.800
+and in that setting, the agent's goal is to find
+
+00:00:24.800 --> 00:00:27.865
+the best ways to maximize expected return.
+
+00:00:27.864 --> 00:00:31.834
+Policy gradient methods are a subclass of policy-based methods
+
+00:00:31.835 --> 00:00:36.500
+that estimate the weights of an optimal policy through gradient ascent.
+
+00:00:36.500 --> 00:00:39.814
+In this lesson, you'll learn all about the theory behind this
+
+00:00:39.814 --> 00:00:43.210
+before training your own agent with the policy gradient method.
+
+00:00:43.210 --> 00:00:45.564
+For now, to set the stage,
+
+00:00:45.564 --> 00:00:50.019
+we'll explore an example that will help us understand how these methods will work.
+
+00:00:50.020 --> 00:00:52.920
+So, first, remember the cart-pole example.
+
+00:00:52.920 --> 00:00:58.280
+This is a classic benchmark task where the goal is to balance a poll on a moving cart.
+
+00:00:58.280 --> 00:01:00.980
+To solve it, we can represent the policy
+
+00:01:00.979 --> 00:01:04.129
+with a neural network that takes the state as input.
+
+00:01:04.129 --> 00:01:07.234
+As output, it returns the probability of
+
+00:01:07.234 --> 00:01:09.890
+each potential action and then the agent
+
+00:01:09.890 --> 00:01:13.230
+can sample from those probabilities to select an action.
+
+00:01:13.230 --> 00:01:15.094
+But now let's consider
+
+00:01:15.094 --> 00:01:20.840
+a much more challenging task where the goal is to teach a chicken to cross a road.
+
+00:01:20.840 --> 00:01:24.594
+At each time step, our chicken agent can move up, down,
+
+00:01:24.594 --> 00:01:28.150
+left, or right, and the goal is to get there safely.
+
+00:01:28.150 --> 00:01:31.835
+So, we have to avoid getting hit by a car or truck.
+
+00:01:31.834 --> 00:01:34.709
+Say there's a time limit of five seconds,
+
+00:01:34.709 --> 00:01:38.309
+and if we make it safely to the other side in time, we win.
+
+00:01:38.310 --> 00:01:40.534
+Otherwise, we lose.
+
+00:01:40.534 --> 00:01:43.524
+So, just as with this cart-pole example,
+
+00:01:43.525 --> 00:01:46.600
+we can represent the agent's policy with a neural network.
+
+00:01:46.599 --> 00:01:49.969
+It takes the game state as input and returns
+
+00:01:49.969 --> 00:01:53.530
+the probability that the chicken selects each possible action.
+
+00:01:53.530 --> 00:01:55.129
+So, in this case,
+
+00:01:55.129 --> 00:01:59.560
+the output layer will have four notes because there are four possible actions.
+
+00:01:59.560 --> 00:02:03.305
+Now, if we're training our agent to learn from raw pixels,
+
+00:02:03.305 --> 00:02:07.195
+probably, a convolutional neural network is the best bet.
+
+00:02:07.194 --> 00:02:10.204
+But we'll work with this simpler diagram
+
+00:02:10.205 --> 00:02:13.000
+that doesn't pick an architecture or network type.
+
+00:02:13.000 --> 00:02:14.990
+It's only meant to communicate that
+
+00:02:14.990 --> 00:02:18.105
+the state of the game is passed as input to a neural network.
+
+00:02:18.104 --> 00:02:21.935
+Maybe it's a convolutional neural network and maybe it's not.
+
+00:02:21.935 --> 00:02:24.250
+We'll discuss a method that's flexible,
+
+00:02:24.250 --> 00:02:25.740
+and we'll work with either.
+
+00:02:25.740 --> 00:02:28.340
+As output, the network returns
+
+00:02:28.340 --> 00:02:32.844
+action probabilities that the agent uses to select its next action.
+
+00:02:32.844 --> 00:02:35.000
+As in the previous lesson,
+
+00:02:35.000 --> 00:02:39.955
+our goal is to find the weights of the neural network that yield the optimal policy.
+
+00:02:39.955 --> 00:02:43.370
+We'll begin with an initially random set of weights and
+
+00:02:43.370 --> 00:02:46.645
+use the corresponding policy to interact with the environment.
+
+00:02:46.645 --> 00:02:50.990
+So, for instance, say the agent plays the game for a single round or
+
+00:02:50.990 --> 00:02:56.094
+episode and ends up making it to the other side safely and within the time limit.
+
+00:02:56.094 --> 00:02:59.539
+But then, when it plays the game for another episode,
+
+00:02:59.539 --> 00:03:03.944
+it chooses an unwise series of actions that leads to it losing the round.
+
+00:03:03.944 --> 00:03:06.709
+Then, in order to teach the agent to win,
+
+00:03:06.710 --> 00:03:10.670
+we'll give a reward of positive one if it won and negative one if
+
+00:03:10.669 --> 00:03:15.329
+it lost and see that reward is only delivered at the end of the game.
+
+00:03:15.330 --> 00:03:19.550
+Now, so far, everything that we've discussed is along the lines of what we did in
+
+00:03:19.550 --> 00:03:23.665
+the previous lesson when we talked about several policy-based methods.
+
+00:03:23.664 --> 00:03:27.319
+The difference, which we'll talk about in the next video,
+
+00:03:27.319 --> 00:03:30.169
+arises in how exactly the agent will use
+
+00:03:30.169 --> 00:03:34.319
+this reward signal to learn the weights of the optimal policy.
+

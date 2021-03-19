@@ -1,0 +1,214 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.459
+So far, you've learned how to represent a policy as a neural network.
+
+00:00:04.459 --> 00:00:08.195
+This network takes the current environment state as input,
+
+00:00:08.195 --> 00:00:11.925
+then if the environment has a discrete action space it outputs
+
+00:00:11.925 --> 00:00:15.945
+the action probabilities that the agent uses to select its next action.
+
+00:00:15.945 --> 00:00:18.690
+In this video, we'll describe an algorithm that the agent
+
+00:00:18.690 --> 00:00:21.570
+can use to gradually improve the network weights.
+
+00:00:21.570 --> 00:00:27.079
+So, remember that the agent's goal is always to maximize expected return.
+
+00:00:27.079 --> 00:00:30.814
+Let's denote the expected return as capital J.
+
+00:00:30.815 --> 00:00:34.210
+We'll refer to the set of weights in the neural network as
+
+00:00:34.210 --> 00:00:40.439
+Theta and there's some mathematical relationship between Theta and the expected return J.
+
+00:00:40.439 --> 00:00:42.979
+This is because Theta encodes
+
+00:00:42.979 --> 00:00:46.849
+the policy which makes some actions more likely than others,
+
+00:00:46.850 --> 00:00:49.399
+and then depending on the action that influences
+
+00:00:49.399 --> 00:00:53.450
+the reward and then we sum up the rewards to get the return.
+
+00:00:53.450 --> 00:00:56.675
+Actually, it sounds potentially quite complicated.
+
+00:00:56.674 --> 00:01:00.469
+But the main idea is that it's possible to write the expected return
+
+00:01:00.469 --> 00:01:04.739
+J as a function of Theta and that function looks like this.
+
+00:01:04.739 --> 00:01:07.969
+Now, this equation shouldn't make any sense to you yet,
+
+00:01:07.969 --> 00:01:10.090
+and we'll come back to it later in the course.
+
+00:01:10.090 --> 00:01:12.685
+For now, just know that it exists,
+
+00:01:12.685 --> 00:01:15.230
+and our goal is to find the values for Theta,
+
+00:01:15.230 --> 00:01:18.079
+or the values for the weights that maximize J.
+
+00:01:18.079 --> 00:01:19.745
+To understand this better,
+
+00:01:19.745 --> 00:01:21.454
+let's draw a picture.
+
+00:01:21.454 --> 00:01:25.069
+Consider the case that the neural network has only two weights.
+
+00:01:25.069 --> 00:01:27.379
+Theta zero and Theta one.
+
+00:01:27.379 --> 00:01:30.319
+Then, we can plot the expected return J as
+
+00:01:30.319 --> 00:01:33.029
+a function of the values of both of the weights.
+
+00:01:33.030 --> 00:01:35.420
+For each weight gets a different axis,
+
+00:01:35.420 --> 00:01:39.650
+and once we have that function we can use it to find the value of Theta or
+
+00:01:39.650 --> 00:01:44.090
+the values of both of the weights that maximize expected return.
+
+00:01:44.090 --> 00:01:47.210
+Maybe you're familiar with one algorithm that
+
+00:01:47.209 --> 00:01:50.224
+could be useful for this called gradient ascent.
+
+00:01:50.224 --> 00:01:53.390
+Gradient ascent begins with an initial guess
+
+00:01:53.390 --> 00:01:56.665
+for the value of Theta that maximizes the function,
+
+00:01:56.665 --> 00:01:59.945
+then we evaluate the gradient at that point.
+
+00:01:59.944 --> 00:02:04.259
+Remember that the gradient points in the direction of steepest increase of the function,
+
+00:02:04.260 --> 00:02:07.465
+and so we can make a small step in that direction.
+
+00:02:07.465 --> 00:02:09.650
+In the hope that we end up at a new value of
+
+00:02:09.650 --> 00:02:13.135
+Theta or the value of the function is a little bit larger.
+
+00:02:13.134 --> 00:02:16.699
+Then we repeat with evaluating the gradient and taking
+
+00:02:16.699 --> 00:02:21.109
+a step until we eventually reach the maximum of the function.
+
+00:02:21.110 --> 00:02:23.190
+Now in order to do this,
+
+00:02:23.189 --> 00:02:25.449
+we have to take the gradient of the function.
+
+00:02:25.449 --> 00:02:28.639
+We'll save that for later in the course and for now we
+
+00:02:28.639 --> 00:02:31.673
+will discuss a different algorithm called hill-climbing,
+
+00:02:31.674 --> 00:02:33.555
+that's a little bit simpler.
+
+00:02:33.555 --> 00:02:35.390
+As with gradient ascent,
+
+00:02:35.389 --> 00:02:38.599
+we begin with an initially random set of weights Theta.
+
+00:02:38.599 --> 00:02:41.989
+We collect a single episode with the policy that corresponds
+
+00:02:41.990 --> 00:02:45.685
+to those weights and then record the return.
+
+00:02:45.685 --> 00:02:50.689
+This return is an estimate of what the surface looks like at that value of Theta.
+
+00:02:50.689 --> 00:02:54.349
+Now, it's not going to be a perfect estimate because the return we just
+
+00:02:54.349 --> 00:02:58.144
+collected is unlikely to be equal to the expected return,
+
+00:02:58.145 --> 00:03:01.860
+but in practice the estimates often turns out to be good enough.
+
+00:03:01.860 --> 00:03:04.250
+Then, we'll add a little bit of random noise to
+
+00:03:04.250 --> 00:03:08.099
+those weights to give us another set of candidate weights we can try.
+
+00:03:08.099 --> 00:03:10.544
+To see how good those new weights are,
+
+00:03:10.544 --> 00:03:13.489
+we'll use the policy that they give us to again interact with
+
+00:03:13.490 --> 00:03:16.460
+the environment for an episode and add up the return.
+
+00:03:16.460 --> 00:03:19.004
+In up the new weights,
+
+00:03:19.004 --> 00:03:22.250
+give us more return than our current best estimate,
+
+00:03:22.250 --> 00:03:25.085
+we focus our attention on that new value,
+
+00:03:25.085 --> 00:03:28.580
+and then we just repeat by iteratively proposing
+
+00:03:28.580 --> 00:03:32.650
+new policies in the hope that they outperform the existing policy.
+
+00:03:32.650 --> 00:03:34.715
+In the event that they don't,
+
+00:03:34.715 --> 00:03:37.729
+well we just go back to our last best guess for
+
+00:03:37.729 --> 00:03:42.649
+the optimal policy and iterate until we end up with the optimal policy.
+
+00:03:42.650 --> 00:03:45.170
+Later in this lesson, you'll work with an implementation
+
+00:03:45.169 --> 00:03:48.479
+of this algorithm to see it working for yourself.
+

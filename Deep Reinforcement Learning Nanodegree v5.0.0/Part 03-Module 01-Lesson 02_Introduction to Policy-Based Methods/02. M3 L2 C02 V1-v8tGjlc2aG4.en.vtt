@@ -1,0 +1,100 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.220
+So, first things first.
+
+00:00:02.220 --> 00:00:05.839
+How might we approach this idea of estimating an optimal policy?
+
+00:00:05.839 --> 00:00:08.310
+Let's consider this cart pole example.
+
+00:00:08.310 --> 00:00:11.470
+In this case, the agent has two possible actions,
+
+00:00:11.470 --> 00:00:14.235
+he can push the cart either left or right.
+
+00:00:14.234 --> 00:00:15.660
+So, at each time step,
+
+00:00:15.660 --> 00:00:18.625
+the agent picks one of these two options.
+
+00:00:18.625 --> 00:00:22.519
+We can construct a neural network that approximates the policy,
+
+00:00:22.519 --> 00:00:24.570
+that accepts the state as input.
+
+00:00:24.570 --> 00:00:29.324
+As output, it can return the probability that the agent selects each possible action.
+
+00:00:29.324 --> 00:00:31.570
+So, if there are two possible actions,
+
+00:00:31.570 --> 00:00:34.045
+the output layer will have two nodes.
+
+00:00:34.045 --> 00:00:36.950
+The agent uses this policy to interact with
+
+00:00:36.950 --> 00:00:40.265
+the environment by just passing the most recent state to the network.
+
+00:00:40.265 --> 00:00:43.100
+It outputs action probabilities and then
+
+00:00:43.100 --> 00:00:47.435
+the agent samples from those probabilities to select an action in response.
+
+00:00:47.435 --> 00:00:51.185
+So in this case, there's a 90 percent chance that the agent selects
+
+00:00:51.185 --> 00:00:55.609
+action left and a 10 percent chance it decides to push the cart right.
+
+00:00:55.609 --> 00:00:59.030
+Our objective then is to determine appropriate values for
+
+00:00:59.030 --> 00:01:01.910
+the network weights so that for each state that we pass
+
+00:01:01.909 --> 00:01:03.739
+into the network it returns
+
+00:01:03.740 --> 00:01:08.200
+action probabilities where the optimal action is most likely to be selected.
+
+00:01:08.200 --> 00:01:12.439
+This will help the agent with its goal to maximize expected return.
+
+00:01:12.439 --> 00:01:17.909
+This is an iterative process where the weights are initially set to random values.
+
+00:01:17.909 --> 00:01:21.170
+Then, as the agent interacts with the environment and learns
+
+00:01:21.170 --> 00:01:24.670
+more about what strategies are best for maximizing reward,
+
+00:01:24.670 --> 00:01:26.135
+it amends those weights.
+
+00:01:26.135 --> 00:01:27.695
+As a direct result,
+
+00:01:27.694 --> 00:01:30.199
+the agent starts to choose the appropriate action for
+
+00:01:30.200 --> 00:01:33.480
+each date and it gradually masters the task.
+
+00:01:33.480 --> 00:01:35.090
+In this lesson, you'll learn about
+
+00:01:35.090 --> 00:01:38.600
+many different approaches that we can take towards optimizing these weights.
+

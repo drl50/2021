@@ -1,0 +1,58 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.910
+In this video, we'll learn how to modify the reward function so that we can
+
+00:00:04.910 --> 00:00:10.339
+better differentiate good versus bad actions within a trajectory.
+
+00:00:12.050 --> 00:00:14.910
+Going back to the gradient estimate,
+
+00:00:14.910 --> 00:00:19.004
+we can take a closer look at the total reward R,
+
+00:00:19.004 --> 00:00:22.835
+which is just the sum of reward at each step.
+
+00:00:22.835 --> 00:00:29.810
+Now, let's think about what happens at time step t. Even before an action, a of t,
+
+00:00:29.809 --> 00:00:32.769
+is decided, the agent has already
+
+00:00:32.770 --> 00:00:37.270
+received all the rewards up until time step t minus one.
+
+00:00:37.270 --> 00:00:42.975
+So, we can think of that part of the total reward as a reward from the past,
+
+00:00:42.975 --> 00:00:46.670
+labeled by R past.
+
+00:00:46.670 --> 00:00:52.250
+The rest of the reward can be denoted by the future reward, R future.
+
+00:00:52.250 --> 00:00:55.045
+Now, because we have a Markov process,
+
+00:00:55.045 --> 00:01:00.150
+the action at time step t can only affect the future rewards,
+
+00:01:00.149 --> 00:01:06.459
+so the past rewards should not really be contributing to the policy gradient here.
+
+00:01:06.459 --> 00:01:11.109
+So, the properly assign credit to the action at time step t,
+
+00:01:11.109 --> 00:01:14.400
+we should just ignore the past reward,
+
+00:01:14.400 --> 00:01:18.640
+like this, so that a better policy gradient will
+
+00:01:18.640 --> 00:01:24.349
+simply have the future rewards as a coefficient, like this.
+

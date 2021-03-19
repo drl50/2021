@@ -1,0 +1,235 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.559
+Hi, welcome to the Pong from pixel screen-cast.
+
+00:00:04.559 --> 00:00:08.309
+This time I'm going to walk you through how to use
+
+00:00:08.310 --> 00:00:14.100
+PPO algorithm to train an agent to play Pong from the pixels.
+
+00:00:14.099 --> 00:00:17.789
+Now the code is very similar to the reinforced version.
+
+00:00:17.789 --> 00:00:23.414
+So I'll only highlight the main differences compared to the previous version.
+
+00:00:23.414 --> 00:00:28.379
+So for details please look at the screen-cast for the pong reinforced
+
+00:00:28.379 --> 00:00:33.835
+version where I will discuss some of the functions that are used.
+
+00:00:33.835 --> 00:00:36.799
+So let's skip right away to the policy part.
+
+00:00:36.799 --> 00:00:38.765
+The policy remains the same,
+
+00:00:38.765 --> 00:00:45.590
+so I encourage you to copy the policy you used from the reinforced version to here.
+
+00:00:45.590 --> 00:00:50.540
+Next we're going to skip straight to the surrogate function.
+
+00:00:50.539 --> 00:00:53.899
+This is where you will code up your scalar function,
+
+00:00:53.899 --> 00:00:59.405
+such that Pytorch can invoke backward to compute the gradient.
+
+00:00:59.405 --> 00:01:03.320
+Now in PPO, the scalar function is
+
+00:01:03.320 --> 00:01:07.040
+quite a bit different from the reinforce version where you compute
+
+00:01:07.040 --> 00:01:10.820
+this ratio of new policy overall policy apply
+
+00:01:10.819 --> 00:01:16.414
+clipping and then multiply it by the future reward and take some minimum.
+
+00:01:16.415 --> 00:01:23.690
+So here I've included a skeleton code but where I've only included the entropy term.
+
+00:01:23.689 --> 00:01:30.125
+So when you're done please add your clipped part here,
+
+00:01:30.125 --> 00:01:35.510
+clipped result say, and then finish your function.
+
+00:01:35.510 --> 00:01:37.660
+But for illustration purposes,
+
+00:01:37.659 --> 00:01:43.069
+I'm also going to use the solution that's included in pong details.
+
+00:01:43.069 --> 00:01:46.414
+So to see that, let's skip straight to the training around.
+
+00:01:46.415 --> 00:01:49.940
+As before, use the parallel environment that
+
+00:01:49.939 --> 00:01:54.319
+allows me to collect multiple trajectories in a row.
+
+00:01:54.319 --> 00:01:58.250
+I also use a parallel agents the same as before.
+
+00:01:58.250 --> 00:02:04.295
+The difference is now we have a few extra hyper-parameters to tune.
+
+00:02:04.295 --> 00:02:09.229
+The first one is this epsilon parameter which controls the clipping,
+
+00:02:09.229 --> 00:02:11.254
+and I've set it to 0.1.
+
+00:02:11.254 --> 00:02:12.875
+During the training run,
+
+00:02:12.875 --> 00:02:16.610
+the 0.1 will decay to smaller and smaller as training happens.
+
+00:02:16.610 --> 00:02:18.935
+Now this clipping epsilon,
+
+00:02:18.935 --> 00:02:23.185
+is used for the clip surrogate function in here.
+
+00:02:23.185 --> 00:02:26.115
+Now there's an additional hyper-parameter,
+
+00:02:26.115 --> 00:02:29.324
+the epoch of updating policy,
+
+00:02:29.324 --> 00:02:32.395
+called the SGD epoch-4.
+
+00:02:32.395 --> 00:02:40.330
+This controls how many times we use the same trajectories to update your policy.
+
+00:02:40.330 --> 00:02:43.235
+This is one of the key points of the PPO algorithm
+
+00:02:43.235 --> 00:02:48.680
+where we use trajectories to update your policy multiple times.
+
+00:02:48.680 --> 00:02:51.064
+Now in the training loop,
+
+00:02:51.064 --> 00:02:53.854
+as before we collect trajectories,
+
+00:02:53.854 --> 00:02:56.449
+compute the total reward.
+
+00:02:56.449 --> 00:03:00.814
+Now the gradient ascent step is quite different.
+
+00:03:00.814 --> 00:03:04.819
+First you have to loop over all the SGD epoch.
+
+00:03:04.819 --> 00:03:06.544
+Here I've set it to four.
+
+00:03:06.544 --> 00:03:09.694
+You feel free to try a smaller number.
+
+00:03:09.694 --> 00:03:11.579
+If four is changed to one,
+
+00:03:11.580 --> 00:03:14.150
+you are essentially doing reinforce algorithm.
+
+00:03:14.150 --> 00:03:19.370
+So something between say four to eight,
+
+00:03:19.370 --> 00:03:23.105
+or even three is probably reasonable.
+
+00:03:23.104 --> 00:03:31.594
+Now at each step you should compute the scalar clipped surrogate function shown here.
+
+00:03:31.594 --> 00:03:34.835
+Pong utils is the solution.
+
+00:03:34.835 --> 00:03:38.665
+Then you perform gradient ascent.
+
+00:03:38.664 --> 00:03:40.629
+Now after each step,
+
+00:03:40.629 --> 00:03:47.875
+you can decrease the epsilon along with the beta which encourages exploration,
+
+00:03:47.875 --> 00:03:50.314
+and keep track of the progress here.
+
+00:03:50.314 --> 00:03:51.859
+So the training takes quite a while,
+
+00:03:51.860 --> 00:03:57.800
+and again it takes roughly 45 minutes in this round.
+
+00:03:57.800 --> 00:04:01.810
+You can see some of the progress that's being done,
+
+00:04:01.810 --> 00:04:06.155
+but the difference is compared to the reinforce algorithm.
+
+00:04:06.155 --> 00:04:11.229
+After roughly 500 or 600 episodes,
+
+00:04:11.229 --> 00:04:13.879
+the agent is already able to beat the computer.
+
+00:04:13.879 --> 00:04:15.769
+Now you can plot the mean we want here.
+
+00:04:15.770 --> 00:04:19.019
+You can see there's a steady learning going on until
+
+00:04:19.019 --> 00:04:22.459
+it we caps out around an average of three points,
+
+00:04:22.459 --> 00:04:27.879
+which is roughly the best you can do given that we're limiting the time frame.
+
+00:04:27.879 --> 00:04:33.605
+So let's see how the agent generalizes the 320 frames for the entire game.
+
+00:04:33.605 --> 00:04:36.515
+This is one particular episode you can play.
+
+00:04:36.514 --> 00:04:39.500
+You can see that it misses the first point.
+
+00:04:39.500 --> 00:04:45.334
+But afterwards is very consistent in getting the winning move.
+
+00:04:45.334 --> 00:04:47.704
+Now the agent learns much better.
+
+00:04:47.704 --> 00:04:49.504
+Let me speed this up.
+
+00:04:49.504 --> 00:04:55.449
+You stare it consistently his winning points and he got 21 points.
+
+00:04:55.449 --> 00:04:58.574
+Now you can also save your policy,
+
+00:04:58.574 --> 00:05:01.295
+and load it to keep your progress.
+
+00:05:01.295 --> 00:05:04.680
+So that's it. Now you've implemented
+
+00:05:04.680 --> 00:05:10.199
+PPO algorithm to train an agent to play pong from the pixel.
+

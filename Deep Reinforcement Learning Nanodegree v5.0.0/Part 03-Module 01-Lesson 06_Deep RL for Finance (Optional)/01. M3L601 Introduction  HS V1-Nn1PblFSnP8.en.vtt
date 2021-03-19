@@ -1,0 +1,40 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.995
+Now that you've learned how actor-critic methods work, in this lesson,
+
+00:00:04.995 --> 00:00:08.038
+we'll take a look at a particular problem in finance,
+
+00:00:08.038 --> 00:00:12.179
+and formulate it so that it can be solved through reinforcement learning.
+
+00:00:12.179 --> 00:00:14.309
+In particular, we'll be using
+
+00:00:14.310 --> 00:00:17.640
+the deep deterministic policy gradients algorithm to
+
+00:00:17.640 --> 00:00:21.615
+determine the optimal execution of portfolio transactions.
+
+00:00:21.614 --> 00:00:24.464
+If you're unfamiliar with the financial markets,
+
+00:00:24.464 --> 00:00:27.945
+don't worry, we'll explain everything step-by-step.
+
+00:00:27.945 --> 00:00:29.519
+But before we dive in,
+
+00:00:29.519 --> 00:00:32.039
+let's start by getting some intuition as to why
+
+00:00:32.039 --> 00:00:36.043
+reinforcement learning is a good alternative to current trading algorithms,
+
+00:00:36.043 --> 00:00:41.750
+and why it's better than other machine learning techniques such as supervised learning.
+

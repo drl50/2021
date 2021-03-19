@@ -1,0 +1,100 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.410 --> 00:00:03.900
+Let's talk about bias and variance.
+
+00:00:03.899 --> 00:00:06.400
+In machine learning, we're often presented there with
+
+00:00:06.400 --> 00:00:09.250
+a trade off between bias and variance.
+
+00:00:09.250 --> 00:00:11.550
+Let me give you some intuition first.
+
+00:00:11.550 --> 00:00:14.610
+Let's say you're a practicing your soccer shooting skills.
+
+00:00:14.609 --> 00:00:19.449
+The thing you want to do is to put the ball in the top right corner of the goal.
+
+00:00:19.449 --> 00:00:22.585
+You want to be able to repeatedly kicked the ball there.
+
+00:00:22.585 --> 00:00:24.400
+If after a day of training,
+
+00:00:24.399 --> 00:00:27.625
+you place the ball most of the time in the middle right,
+
+00:00:27.625 --> 00:00:32.109
+this means that you have a bias to shoot the ball lower.
+
+00:00:32.109 --> 00:00:37.534
+It also means that you have low variance because the shots where clumped together.
+
+00:00:37.534 --> 00:00:42.765
+Now, say the average of your shots were center on the top right corner,
+
+00:00:42.765 --> 00:00:46.710
+but most of your shots were spread around that spot.
+
+00:00:46.710 --> 00:00:50.780
+Then, you have low bias because you were mostly center where you
+
+00:00:50.780 --> 00:00:54.859
+were aiming in high variance because of the spread.
+
+00:00:54.859 --> 00:01:01.225
+Obviously, you want to avoid both high bias and high variance,
+
+00:01:01.225 --> 00:01:05.180
+and you want to have both low bias and low variance.
+
+00:01:05.180 --> 00:01:08.150
+The thing is, this is very hard to achieve,
+
+00:01:08.150 --> 00:01:12.620
+but we'll look at several techniques that are designed to accomplish this.
+
+00:01:12.620 --> 00:01:16.670
+We have to consider the bias-variance tradeoff in reinforcement learning,
+
+00:01:16.670 --> 00:01:22.325
+when an agent tries to estimate value functions or policies from returns.
+
+00:01:22.325 --> 00:01:26.695
+A return is calculated using a single trajectory.
+
+00:01:26.694 --> 00:01:30.784
+However, value functions which is what we're trying to
+
+00:01:30.784 --> 00:01:36.004
+estimate are calculated using the expectation of returns.
+
+00:01:36.004 --> 00:01:40.159
+A big part of the effort in reinforcement learning and research is an attempt to
+
+00:01:40.159 --> 00:01:44.780
+reduce the variance of algorithms while keeping bias to a minimum.
+
+00:01:44.780 --> 00:01:48.275
+You know by now that a reinforcement learning agent
+
+00:01:48.275 --> 00:01:52.520
+tries to find policies to maximize the total expected reward.
+
+00:01:52.519 --> 00:01:55.640
+But since we're limited to sampling the environment,
+
+00:01:55.640 --> 00:01:58.430
+we can only estimate these expectation.
+
+00:01:58.430 --> 00:02:00.905
+The question is, what's the best way to
+
+00:02:00.905 --> 00:02:04.609
+estimate value functions for our actor-critic methods.
+

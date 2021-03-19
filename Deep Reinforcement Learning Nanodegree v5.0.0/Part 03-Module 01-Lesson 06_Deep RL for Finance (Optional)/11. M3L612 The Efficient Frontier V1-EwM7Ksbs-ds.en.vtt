@@ -1,0 +1,223 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.110
+In this notebook, we will take a look at the efficient frontier.
+
+00:00:04.110 --> 00:00:07.845
+Recall that the expected shortfall and the variance
+
+00:00:07.844 --> 00:00:11.969
+of the optimal strategy are given by these equations.
+
+00:00:11.970 --> 00:00:17.039
+In this notebook, we will learn how to visualize and interpret this equations.
+
+00:00:17.039 --> 00:00:21.254
+We will start by taking a look at the expected shortfall.
+
+00:00:21.254 --> 00:00:25.259
+Recall that even if we use the same trading list,
+
+00:00:25.260 --> 00:00:26.550
+we're not always going to get
+
+00:00:26.550 --> 00:00:31.289
+the same implementation shortfall due to random fluctuations in stock price.
+
+00:00:31.289 --> 00:00:36.390
+This is why we had to reframe the problem of finding the optimal strategy
+
+00:00:36.390 --> 00:00:39.149
+in terms of the average implementation shortfall
+
+00:00:39.149 --> 00:00:41.629
+and the variance of the implementation shortfall.
+
+00:00:41.630 --> 00:00:44.298
+So, whenever we talk about the expected shortfall,
+
+00:00:44.298 --> 00:00:47.750
+we're really talking about the average implementation shortfall.
+
+00:00:47.750 --> 00:00:51.994
+Therefore, we can think of the expected shortfall as follows.
+
+00:00:51.994 --> 00:00:54.289
+Given a single trading list,
+
+00:00:54.289 --> 00:00:58.939
+the expected shortfall will be the value of the average implementation shortfall.
+
+00:00:58.939 --> 00:01:03.259
+If we were to implement this straight lists in the stock market many times.
+
+00:01:03.259 --> 00:01:05.480
+To see this in this code,
+
+00:01:05.480 --> 00:01:06.620
+we're going to implement
+
+00:01:06.620 --> 00:01:10.925
+the same trading list for the certain number of trading simulations.
+
+00:01:10.924 --> 00:01:14.329
+We call this trading simulations episodes.
+
+00:01:14.329 --> 00:01:19.679
+Each episode consists of different random fluctuations in the stock price.
+
+00:01:19.680 --> 00:01:24.500
+The code outputs the average implementation shortfall and
+
+00:01:24.500 --> 00:01:29.540
+the standard deviation of the implementation shortfall for these episodes.
+
+00:01:29.540 --> 00:01:32.810
+It also outputs the expected shortfall and
+
+00:01:32.810 --> 00:01:37.200
+standard deviation of the shortfall from the Almgren increased model.
+
+00:01:37.200 --> 00:01:44.780
+In addition, it also outputs a plot of the implementation shortfall for each episode.
+
+00:01:44.780 --> 00:01:50.120
+We can see that the implementation shortfall for each episode is different.
+
+00:01:50.120 --> 00:01:57.635
+For example, for this episode we got an implementation shortfall of around $1 million.
+
+00:01:57.635 --> 00:01:59.555
+But for this episode,
+
+00:01:59.555 --> 00:02:05.150
+we've got an implementation shortfall around minus $500,000.
+
+00:02:05.150 --> 00:02:10.655
+Remember, that the negative sign means that we actually made money in this episode.
+
+00:02:10.655 --> 00:02:16.835
+This purple line indicates the average implementation shortfall for all these episodes.
+
+00:02:16.835 --> 00:02:21.770
+We can see that it has a value around $546,000
+
+00:02:21.770 --> 00:02:27.105
+with a standard deviation of around $473,000.
+
+00:02:27.104 --> 00:02:31.204
+We will now see that as we increase the number of episodes,
+
+00:02:31.205 --> 00:02:33.980
+the average implementation shortfall and
+
+00:02:33.979 --> 00:02:36.319
+its standard deviation will get closer to
+
+00:02:36.319 --> 00:02:39.215
+the values predicted by the Almgren increase model.
+
+00:02:39.215 --> 00:02:44.020
+For example, if I set the number of episodes to 100,000,
+
+00:02:44.020 --> 00:02:48.380
+I now get values for the average implementation shortfall and
+
+00:02:48.379 --> 00:02:51.379
+its standard deviation that are pretty close to
+
+00:02:51.379 --> 00:02:55.174
+the values predicted by the ongoing increase model.
+
+00:02:55.175 --> 00:02:59.645
+We will then take a look at two extreme trading strategies.
+
+00:02:59.645 --> 00:03:02.600
+The first trading strategy corresponds to
+
+00:03:02.599 --> 00:03:06.919
+a trader that has no regard for risk and therefore,
+
+00:03:06.919 --> 00:03:09.679
+takes as much risk as possible by selling
+
+00:03:09.680 --> 00:03:13.730
+his shares at a constant rate over a long period of time.
+
+00:03:13.729 --> 00:03:18.349
+This trading strategy will deal with the lowest possible expected shortfall,
+
+00:03:18.349 --> 00:03:22.159
+but it will also yield the largest possible standard deviation.
+
+00:03:22.159 --> 00:03:27.319
+The second strategy corresponds to a trader that wants to take zero-risk.
+
+00:03:27.319 --> 00:03:34.084
+Therefore, he sells all his shares in a single trade despite the huge transaction costs.
+
+00:03:34.085 --> 00:03:38.270
+This strategy would yield the highest expected shortfall,
+
+00:03:38.270 --> 00:03:43.210
+but will yield the lowest possible standard deviation of zero.
+
+00:03:43.210 --> 00:03:47.825
+In the last section, we will take a look at the efficient frontier.
+
+00:03:47.824 --> 00:03:51.258
+Almgren and Chris showed that for each value of lambda,
+
+00:03:51.258 --> 00:03:54.500
+there is a uniquely determine optimal trading strategy.
+
+00:03:54.500 --> 00:03:57.139
+We will define the efficient frontier to be
+
+00:03:57.139 --> 00:04:00.229
+the set of all these optimal trading strategies.
+
+00:04:00.229 --> 00:04:03.500
+That is the efficient frontier is the set that
+
+00:04:03.500 --> 00:04:07.405
+contains the optimal strategy for each value of lambda.
+
+00:04:07.405 --> 00:04:12.349
+This code plus to the efficient frontier for a range of lambda values.
+
+00:04:12.349 --> 00:04:15.155
+You can choose a particular value of lambda to
+
+00:04:15.155 --> 00:04:18.004
+see if it's suspect shortfall and level a variance.
+
+00:04:18.004 --> 00:04:21.680
+For example, here we see the expected shortfall and
+
+00:04:21.680 --> 00:04:25.715
+level of variance for a trader with this value of lambda.
+
+00:04:25.714 --> 00:04:29.629
+A trader that wants to take more risk will be at
+
+00:04:29.629 --> 00:04:33.618
+this end of the plot displaying a smaller spectrum shortfall,
+
+00:04:33.619 --> 00:04:35.630
+but a higher level of variants.
+
+00:04:35.629 --> 00:04:38.389
+On the other hand, a traitor that also who want to take
+
+00:04:38.389 --> 00:04:41.329
+a lot of risk will be at this under the plot,
+
+00:04:41.329 --> 00:04:44.019
+displaying a much higher expected shortfall,
+
+00:04:44.019 --> 00:04:46.639
+but at much lower level of variance.
+

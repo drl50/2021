@@ -1,0 +1,133 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.165
+Actor-critic methods are at the intersection of
+
+00:00:03.165 --> 00:00:08.655
+value-based methods such as DQN and policy-based methods such as reinforce.
+
+00:00:08.654 --> 00:00:11.730
+If a deep reinforcement learning agent uses
+
+00:00:11.730 --> 00:00:15.195
+a deep neural network to approximate a value function,
+
+00:00:15.195 --> 00:00:18.225
+the agent is said to be value-based.
+
+00:00:18.225 --> 00:00:22.690
+If an agent uses a deep neural network to approximate a policy,
+
+00:00:22.690 --> 00:00:26.190
+the agent is said to be policy-based.
+
+00:00:26.190 --> 00:00:28.755
+The DQN agent you learned about,
+
+00:00:28.754 --> 00:00:34.409
+is a value-based agent because it learns about the optimal action value function.
+
+00:00:34.409 --> 00:00:37.750
+This is just one of the many functions you can approximate.
+
+00:00:37.750 --> 00:00:41.570
+You can learn about the state value function V pi,
+
+00:00:41.570 --> 00:00:44.405
+the action value function Q pi,
+
+00:00:44.405 --> 00:00:49.399
+the advantage function A pi and the optimal versions of these;
+
+00:00:49.399 --> 00:00:52.024
+V star, Q star and A star.
+
+00:00:52.024 --> 00:00:55.670
+If your agent learns a value function well,
+
+00:00:55.670 --> 00:00:58.984
+deriving a good policy from it is straight forward.
+
+00:00:58.984 --> 00:01:04.385
+They reinforce agent previously learned about is a policy-based agent.
+
+00:01:04.385 --> 00:01:10.355
+These agent parameterizes the policy and learns to optimize it directly.
+
+00:01:10.355 --> 00:01:14.240
+The policy is usually stochastic in this setting.
+
+00:01:14.239 --> 00:01:18.109
+But you can also learn about deterministic policies.
+
+00:01:18.109 --> 00:01:20.489
+Remember that stochastic policies,
+
+00:01:20.489 --> 00:01:25.734
+taking a state and returned a probability distribution over the actions.
+
+00:01:25.734 --> 00:01:29.000
+Though you often see is slightly different notation,
+
+00:01:29.000 --> 00:01:32.569
+in which you taking a state and an action and
+
+00:01:32.569 --> 00:01:36.829
+return the probability of taking that action in that state.
+
+00:01:36.829 --> 00:01:38.944
+But there are pretty much the same though.
+
+00:01:38.944 --> 00:01:40.774
+Given the same state,
+
+00:01:40.775 --> 00:01:44.900
+the policy could prescribe a different action.
+
+00:01:44.900 --> 00:01:47.609
+This policy is a stochastic.
+
+00:01:47.609 --> 00:01:50.364
+Deterministic policies on the other hand,
+
+00:01:50.364 --> 00:01:53.750
+prescribe a single action for any given state.
+
+00:01:53.750 --> 00:01:58.454
+So, they take in a state and return an action.
+
+00:01:58.454 --> 00:02:00.140
+There's no stochasticity.
+
+00:02:00.140 --> 00:02:04.308
+The policy is deterministic Finally,
+
+00:02:04.308 --> 00:02:09.935
+you also learned about using baselines to reduce the variance of policy-based agents.
+
+00:02:09.935 --> 00:02:13.699
+Did you notice that you can use a value function as a baseline.
+
+00:02:13.699 --> 00:02:15.530
+So, think about it.
+
+00:02:15.530 --> 00:02:18.365
+If we train a neural network to approximate
+
+00:02:18.365 --> 00:02:22.010
+a value function and then use it as a baseline,
+
+00:02:22.009 --> 00:02:25.614
+would this make for a better baseline, and if so,
+
+00:02:25.615 --> 00:02:30.844
+would a better baseline further reduce the variance of policy-based methods?
+
+00:02:30.844 --> 00:02:36.009
+Indeed. In fact, that's basically all actor-critic methods are trying to do,
+
+00:02:36.009 --> 00:02:42.349
+to use value-based techniques to further reduce the variance of policy-based methods.
+

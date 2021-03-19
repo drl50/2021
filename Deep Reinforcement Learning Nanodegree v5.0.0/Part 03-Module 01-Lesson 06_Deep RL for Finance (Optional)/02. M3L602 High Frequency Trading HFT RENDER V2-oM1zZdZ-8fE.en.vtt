@@ -1,0 +1,115 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.970
+Funded by the National Association of Securities,
+
+00:00:02.970 --> 00:00:04.950
+dealers the Nasdaq became
+
+00:00:04.950 --> 00:00:11.250
+the world's first electronic stock market when it began trading on February eighth 1971.
+
+00:00:11.250 --> 00:00:15.330
+Since then, people have used computers to sell and buy stocks
+
+00:00:15.330 --> 00:00:19.469
+at speeds and frequency that are unmatched by any human trader.
+
+00:00:19.469 --> 00:00:23.789
+The use of computers with pre-programmed algorithms to perform
+
+00:00:23.789 --> 00:00:28.454
+traits in the stock market has become known as algorithmic trading.
+
+00:00:28.454 --> 00:00:30.059
+In the past decade,
+
+00:00:30.059 --> 00:00:33.225
+high-frequency trading or HFT for short,
+
+00:00:33.225 --> 00:00:37.160
+has become one of the most popular methods of algorithmic trading.
+
+00:00:37.159 --> 00:00:40.774
+High frequency trading consists of using powerful computers,
+
+00:00:40.774 --> 00:00:45.979
+with dedicated connections to the stock exchanges to analyze stock data and
+
+00:00:45.979 --> 00:00:52.344
+execute a large number of transactions across multiple markets at extremely high speeds.
+
+00:00:52.344 --> 00:00:55.759
+Despite its assess, high-frequency trading has been
+
+00:00:55.759 --> 00:00:59.210
+losing popularity due to many factors including;
+
+00:00:59.210 --> 00:01:00.950
+the decline in profit margins,
+
+00:01:00.950 --> 00:01:04.939
+attributed to a decrease in volatility and trading volume,
+
+00:01:04.939 --> 00:01:09.185
+high maintenance costs and a large amount of competition among trading firms
+
+00:01:09.185 --> 00:01:15.030
+that use HFT algorithms to try to detect and outbid each other.
+
+00:01:15.069 --> 00:01:20.819
+Trading algorithms such as HFT make decisions are nanosecond time scales,
+
+00:01:20.819 --> 00:01:24.125
+taking human decisions and interaction out of the loop.
+
+00:01:24.125 --> 00:01:29.025
+By contrast, people often look at the news, use high-level analysis,
+
+00:01:29.025 --> 00:01:34.435
+and sometimes intuition before they make any decisions about a particular transaction.
+
+00:01:34.435 --> 00:01:37.579
+Ideally, one would like to create an algorithm that
+
+00:01:37.579 --> 00:01:40.760
+falls somewhere in the middle of these two extremes.
+
+00:01:40.760 --> 00:01:44.450
+For example, it'll be ideal to create an algorithm that
+
+00:01:44.450 --> 00:01:48.140
+can analyze stock data faster than any person possibly could,
+
+00:01:48.140 --> 00:01:51.575
+but that can make smart decisions like a human trader would.
+
+00:01:51.575 --> 00:01:56.825
+Allowing you to perform better than any other trading algorithms such as HFT.
+
+00:01:56.825 --> 00:01:59.299
+Due to its assess in many fields,
+
+00:01:59.299 --> 00:02:03.969
+it's not surprising that Machine Learning techniques such as reinforcement learning,
+
+00:02:03.969 --> 00:02:09.694
+has gained popularity in creating such fully automated and smart trading algorithms.
+
+00:02:09.694 --> 00:02:12.169
+But why use reinforcement learning?
+
+00:02:12.169 --> 00:02:16.375
+Why not use more conventional Machine Learning techniques such as supervised learning?
+
+00:02:16.375 --> 00:02:17.860
+In the next lesson,
+
+00:02:17.860 --> 00:02:20.120
+we'll see some of the challenges faced by
+
+00:02:20.120 --> 00:02:23.980
+supervised learning in creating such automated trading systems.
+

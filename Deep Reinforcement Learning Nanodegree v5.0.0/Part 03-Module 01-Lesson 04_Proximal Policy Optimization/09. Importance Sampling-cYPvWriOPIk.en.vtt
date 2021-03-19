@@ -1,0 +1,199 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.140 --> 00:00:05.654
+In this video, we'll learn how to utilize important sampling to use trajectories.
+
+00:00:05.655 --> 00:00:11.269
+This will improve the efficiency of policy based methods. Let's get started.
+
+00:00:11.269 --> 00:00:14.399
+Let's go back to the reinforce algorithm.
+
+00:00:14.400 --> 00:00:16.984
+We start with a policy pi_theta.
+
+00:00:16.984 --> 00:00:20.464
+Then, using that policy we generate some trajectories.
+
+00:00:20.464 --> 00:00:24.734
+Afterward, using those trajectories we compute a policy gradient,
+
+00:00:24.734 --> 00:00:28.390
+g, and update theta to theta prime.
+
+00:00:28.390 --> 00:00:31.969
+Now, we have a new policy pi_theta prime.
+
+00:00:31.969 --> 00:00:37.335
+At this point, the trajectories we've just generated are simply thrown away.
+
+00:00:37.335 --> 00:00:40.130
+If we want to update our policy again,
+
+00:00:40.130 --> 00:00:45.440
+we would need to generate new trajectories once more using the updated policy.
+
+00:00:45.439 --> 00:00:49.339
+You might ask, "Why is all this necessary?"
+
+00:00:49.340 --> 00:00:53.535
+Well, is because we need to compute the gradient for the current policy,
+
+00:00:53.534 --> 00:00:58.934
+and to do that the trajectories need to be representative of the current policy.
+
+00:00:58.935 --> 00:01:01.250
+But this sounds a little wasteful.
+
+00:01:01.250 --> 00:01:06.829
+What if we could just somehow recycle all trajectories by modifying them,
+
+00:01:06.829 --> 00:01:10.079
+so that they are representative of the new policy.
+
+00:01:10.079 --> 00:01:14.370
+So, instead of just throwing them away, we recycle them.
+
+00:01:14.370 --> 00:01:20.510
+Then, we could just reuse the recycled trajectory to compute gradients,
+
+00:01:20.510 --> 00:01:23.885
+and to update our policy again and again,
+
+00:01:23.885 --> 00:01:27.625
+which will make updating the policy a lot more efficient.
+
+00:01:27.625 --> 00:01:30.969
+So, how exactly would that work?
+
+00:01:32.450 --> 00:01:36.284
+This is where importance sampling comes in.
+
+00:01:36.284 --> 00:01:41.459
+Let's look at the trajectories we generated using the policy pi_theta.
+
+00:01:41.609 --> 00:01:47.045
+It had a probability p of Tau theta to be sampled.
+
+00:01:47.045 --> 00:01:52.840
+Now, just by chance the same trajectory can be sampled under the new policy,
+
+00:01:52.840 --> 00:01:57.585
+but with a slightly different probability p of Tau theta prime.
+
+00:01:57.584 --> 00:02:02.719
+Imagine we want to compute the average of some quantity say f of Tau,
+
+00:02:02.719 --> 00:02:04.760
+under the new policy.
+
+00:02:04.760 --> 00:02:10.325
+The easiest way we could do this is to simply generate trajectories from the new policy,
+
+00:02:10.324 --> 00:02:13.839
+then compute f of Tau and average them up.
+
+00:02:13.840 --> 00:02:16.789
+Mathematically, this is equivalent to adding
+
+00:02:16.789 --> 00:02:20.424
+a body f of Tau over all possible trajectories,
+
+00:02:20.425 --> 00:02:22.780
+weighted by probability factor,
+
+00:02:22.780 --> 00:02:24.849
+p of Tau theta prime.
+
+00:02:24.849 --> 00:02:28.280
+Now, we can modify this equation by multiplying and
+
+00:02:28.280 --> 00:02:31.719
+dividing by the same number p of Tau theta,
+
+00:02:31.719 --> 00:02:34.984
+and then we can rearrange the terms like this.
+
+00:02:34.985 --> 00:02:37.710
+Now, it doesn't look like we've done much,
+
+00:02:37.710 --> 00:02:40.159
+but written in this way we can reinterpret
+
+00:02:40.159 --> 00:02:45.245
+the first part as the coefficient of sampling under the old policy.
+
+00:02:45.245 --> 00:02:48.384
+With an extra re-weighting factor,
+
+00:02:48.384 --> 00:02:52.384
+this term, in addition to f of Tau.
+
+00:02:52.384 --> 00:02:56.074
+Intuitively, this tells us we can use
+
+00:02:56.074 --> 00:03:00.084
+all trajectories for computing averages for the policies,
+
+00:03:00.085 --> 00:03:03.655
+as long as we add this extra re-weighting factor,
+
+00:03:03.655 --> 00:03:07.414
+which basically takes into account how under or
+
+00:03:07.414 --> 00:03:14.109
+over-represented each trajectory is under the new policy compared to the old one.
+
+00:03:14.110 --> 00:03:19.090
+The same trick, has been used frequently across statistics,
+
+00:03:19.090 --> 00:03:24.750
+where the re-weighting factor is included to unbias surveys and voting predictions.
+
+00:03:24.750 --> 00:03:29.740
+So, in order that we use samples for computing gradients for new policy,
+
+00:03:29.740 --> 00:03:34.260
+all we need to do is include this extra re-weight factor.
+
+00:03:35.319 --> 00:03:39.180
+Now, let's take a closer look at the re-weighting factor,
+
+00:03:39.180 --> 00:03:42.365
+because each trajectory contains many steps.
+
+00:03:42.365 --> 00:03:49.530
+The probability contains a chain of products of the policy at each step, like this.
+
+00:03:49.530 --> 00:03:52.430
+This formula is a little bit complicated,
+
+00:03:52.430 --> 00:03:54.724
+but there's actually a bigger problem.
+
+00:03:54.724 --> 00:03:58.364
+You see when some of the policy gets close to zero,
+
+00:03:58.365 --> 00:04:02.490
+the re-weighting factor can easily become very close to zero,
+
+00:04:02.490 --> 00:04:05.485
+or worse very close to one over zero,
+
+00:04:05.485 --> 00:04:07.540
+which diverges to infinity.
+
+00:04:07.539 --> 00:04:12.245
+When this happens, the re-weighting trick becomes very unreliable.
+
+00:04:12.245 --> 00:04:15.034
+So, in practice, we always want to make
+
+00:04:15.034 --> 00:04:18.120
+sure that the re-weighting factor is not too far from one,
+
+00:04:18.120 --> 00:04:21.540
+when we utilize important sampling.
+

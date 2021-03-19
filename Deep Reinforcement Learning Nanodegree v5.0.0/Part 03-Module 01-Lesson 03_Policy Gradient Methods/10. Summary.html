@@ -1,0 +1,426 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Summary
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Policy Gradient Methods
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. What are Policy Gradient Methods.html">
+       01. What are Policy Gradient Methods?
+      </a>
+     </li>
+     <li class="">
+      <a href="02. The Big Picture.html">
+       02. The Big Picture
+      </a>
+     </li>
+     <li class="">
+      <a href="03. Connections to Supervised Learning.html">
+       03. Connections to Supervised Learning
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Problem Setup.html">
+       04. Problem Setup
+      </a>
+     </li>
+     <li class="">
+      <a href="05. REINFORCE.html">
+       05. REINFORCE
+      </a>
+     </li>
+     <li class="">
+      <a href="06. (Optional) Derivation.html">
+       06. (Optional) Derivation
+      </a>
+     </li>
+     <li class="">
+      <a href="07. Coding Exercise.html">
+       07. Coding Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Workspace.html">
+       08. Workspace
+      </a>
+     </li>
+     <li class="">
+      <a href="09. What's Next.html">
+       09. What's Next?
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Summary.html">
+       10. Summary
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          10. Summary
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="summary">
+          Summary
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt='REINFORCE increases the probability of "good" actions and decreases the probability of "bad" actions. ([Source](https://blog.openai.com/evolution-strategies/))' class="img img-fluid" src="img/screen-shot-2018-07-17-at-4.44.10-pm.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            REINFORCE increases the probability of "good" actions and decreases the probability of "bad" actions. (
+            <a href="https://blog.openai.com/evolution-strategies/" rel="noopener noreferrer" target="_blank">
+             Source
+            </a>
+            )
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-what-are-policy-gradient-methods">
+          ### What are Policy Gradient Methods?
+         </h2>
+         <ul>
+          <li>
+           <strong>
+            Policy-based methods
+           </strong>
+           are a class of algorithms that search directly for the optimal policy, without simultaneously maintaining value function estimates.
+          </li>
+          <li>
+           <strong>
+            Policy gradient methods
+           </strong>
+           are a subclass of policy-based methods that estimate the weights of an optimal policy through gradient ascent.
+          </li>
+          <li>
+           In this lesson, we represent the policy with a neural network, where our goal is to find the weights
+           <span class="mathquill ud-math">
+            \theta
+           </span>
+           of the network that maximize expected return.
+          </li>
+         </ul>
+         <h2 id="-the-big-picture">
+          ### The Big Picture
+         </h2>
+         <ul>
+          <li>
+           The policy gradient method will iteratively amend the policy network weights to:
+           <ul>
+            <li>
+             make (state, action) pairs that resulted in positive return more likely, and
+            </li>
+            <li>
+             make (state, action) pairs that resulted in negative return less likely.
+            </li>
+           </ul>
+          </li>
+         </ul>
+         <h2 id="-problem-setup">
+          ### Problem Setup
+         </h2>
+         <ul>
+          <li>
+           A
+           <strong>
+            trajectory
+           </strong>
+           <span class="mathquill ud-math">
+            \tau
+           </span>
+           is a state-action sequence
+           <span class="mathquill ud-math">
+            s_0, a_0, \ldots, s_H, a_H, s_{H+1}
+           </span>
+           .
+          </li>
+          <li>
+           In this lesson, we will use the notation
+           <span class="mathquill ud-math">
+            R(\tau)
+           </span>
+           to refer to the return corresponding to trajectory
+           <span class="mathquill ud-math">
+            \tau
+           </span>
+           .
+          </li>
+          <li>
+           Our goal is to find the weights
+           <span class="mathquill ud-math">
+            \theta
+           </span>
+           of the policy network to maximize the
+           <strong>
+            expected return
+           </strong>
+           <span class="mathquill ud-math">
+            U(\theta) := \sum_\tau \mathbb{P}(\tau;\theta)R(\tau)
+           </span>
+           .
+          </li>
+         </ul>
+         <h2 id="-reinforce">
+          ### REINFORCE
+         </h2>
+         <ul>
+          <li>
+           The pseudocode for REINFORCE is as follows:
+          </li>
+         </ul>
+         <ol>
+          <li>
+           Use the policy
+           <span class="mathquill ud-math">
+            \pi_\theta
+           </span>
+           to collect
+           <span class="mathquill ud-math">
+            m
+           </span>
+           trajectories
+           <span class="mathquill ud-math">
+            { \tau^{(1)}, \tau^{(2)}, \ldots, \tau^{(m)}}
+           </span>
+           with horizon
+           <span class="mathquill ud-math">
+            H
+           </span>
+           .  We refer to the
+           <span class="mathquill ud-math">
+            i
+           </span>
+           -th trajectory as
+           <div class="mathquill">
+            \tau^{(i)} = (s_0^{(i)}, a_0^{(i)}, \ldots, s_H^{(i)}, a_H^{(i)}, s_{H+1}^{(i)})
+           </div>
+           .
+          </li>
+          <li>
+           Use the trajectories to estimate the gradient
+           <span class="mathquill ud-math">
+            \nabla_\theta U(\theta)
+           </span>
+           :
+           <div class="mathquill">
+            \nabla_\theta U(\theta) \approx \hat{g} := \frac{1}{m}\sum_{i=1}^m \sum_{t=0}^{H} \nabla_\theta \log \pi_\theta(a_t^{(i)}|s_t^{(i)}) R(\tau^{(i)})
+           </div>
+          </li>
+          <li>
+           Update the weights of the policy:
+           <div class="mathquill">
+            \theta \leftarrow \theta + \alpha \hat{g}
+           </div>
+          </li>
+          <li>
+           Loop over steps 1-3.
+          </li>
+         </ol>
+         <h2 id="-derivation">
+          ### Derivation
+         </h2>
+         <ul>
+          <li>
+           We derived the
+           <strong>
+            likelihood ratio policy gradient
+           </strong>
+           :
+           <span class="mathquill ud-math">
+            \nabla_\theta U(\theta) = \sum_\tau \mathbb{P}(\tau;\theta)\nabla_\theta \log \mathbb{P}(\tau;\theta)R(\tau)
+           </span>
+           .
+          </li>
+          <li>
+           We can approximate the gradient above with a sample-weighted average:
+           <div class="mathquill">
+            \nabla_\theta U(\theta) \approx \frac{1}{m}\sum_{i=1}^m \nabla_\theta \log \mathbb{P}(\tau^{(i)};\theta)R(\tau^{(i)})
+           </div>
+           .
+          </li>
+          <li>
+           We calculated the following:
+           <div class="mathquill">
+            \nabla_\theta \log \mathbb{P}(\tau^{(i)};\theta) = \sum_{t=0}^{H} \nabla_\theta \log \pi_\theta (a_t^{(i)}|s_t^{(i)})
+           </div>
+           .
+          </li>
+         </ul>
+         <h2 id="-whats-next">
+          ### What's Next?
+         </h2>
+         <ul>
+          <li>
+           REINFORCE can solve Markov Decision Processes (MDPs) with either discrete or continuous action spaces.
+          </li>
+         </ul>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('10. Summary')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

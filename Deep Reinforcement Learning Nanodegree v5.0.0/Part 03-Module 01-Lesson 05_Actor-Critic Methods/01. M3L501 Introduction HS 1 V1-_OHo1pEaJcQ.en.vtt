@@ -1,0 +1,100 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.205
+Hi, my name is Miguel.
+
+00:00:02.205 --> 00:00:06.160
+I'm a software engineer for Lockheed Martin working on autonomous systems.
+
+00:00:06.160 --> 00:00:09.449
+Lockheed Martin is a global security in aerospace company
+
+00:00:09.449 --> 00:00:12.839
+engaged in the production of advanced technology systems.
+
+00:00:12.839 --> 00:00:15.359
+The majority of our business is naturally,
+
+00:00:15.359 --> 00:00:17.504
+with the US Department of Defense.
+
+00:00:17.504 --> 00:00:20.309
+At autonomous systems in Littleton, Colorado,
+
+00:00:20.309 --> 00:00:22.214
+we do all things autonomy,
+
+00:00:22.214 --> 00:00:25.274
+from traditional robotics to machine learning.
+
+00:00:25.274 --> 00:00:28.414
+In recent years, we have been working on developing
+
+00:00:28.414 --> 00:00:32.780
+high levels of autonomy in complex missions, and environments.
+
+00:00:32.780 --> 00:00:34.910
+We've applied deep learning techniques,
+
+00:00:34.909 --> 00:00:39.469
+including deep reinforcement learning to real-world military applications.
+
+00:00:39.469 --> 00:00:44.585
+I'm also a part-time instructional associate at Georgia Institute of Technology.
+
+00:00:44.585 --> 00:00:48.200
+At Georgia Tech, I have the privilege of guiding hundreds of
+
+00:00:48.200 --> 00:00:50.660
+graduate students every semester through
+
+00:00:50.659 --> 00:00:53.289
+their reinforcement learning of decision-making course,
+
+00:00:53.289 --> 00:00:57.659
+co-taught by Professor Charles Isbell and Professor Michael Littman.
+
+00:00:57.659 --> 00:00:59.649
+In a special teaching sessions,
+
+00:00:59.649 --> 00:01:01.070
+I've had the privilege to host
+
+00:01:01.070 --> 00:01:05.239
+several prominent contributors to the reinforcement learning community,
+
+00:01:05.239 --> 00:01:09.214
+including Professor Rich Sutton and Professor Leslie Caubain.
+
+00:01:09.215 --> 00:01:13.295
+Teaching at Tech has been one of the most rewarding jobs I've had.
+
+00:01:13.295 --> 00:01:16.174
+Finally, I'm the author of the book
+
+00:01:16.174 --> 00:01:19.519
+Grokking Deep Reinforcement Learning by Manning Publications.
+
+00:01:19.519 --> 00:01:22.659
+Writing a book is unlike anything I have done before.
+
+00:01:22.659 --> 00:01:25.569
+Teaching in a static medium such as paper,
+
+00:01:25.569 --> 00:01:29.958
+and to students of diverse backgrounds poses great challenges,
+
+00:01:29.959 --> 00:01:34.174
+but it has also taught me many things that I intend to apply to these lessons.
+
+00:01:34.174 --> 00:01:36.950
+In this module, I'll be guiding you through one of
+
+00:01:36.950 --> 00:01:39.665
+the most important classes of algorithms to date,
+
+00:01:39.665 --> 00:01:43.470
+Actor-Critic Methods. Let's get started.
+

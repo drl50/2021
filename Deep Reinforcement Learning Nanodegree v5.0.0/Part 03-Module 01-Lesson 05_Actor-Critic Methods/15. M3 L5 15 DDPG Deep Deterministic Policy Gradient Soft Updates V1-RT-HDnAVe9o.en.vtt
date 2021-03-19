@@ -1,0 +1,91 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.855
+Two other interesting aspects of DDPG are first,
+
+00:00:03.855 --> 00:00:06.554
+the use of a replay buffer, and second,
+
+00:00:06.554 --> 00:00:09.750
+the soft updates to the target networks.
+
+00:00:09.750 --> 00:00:12.945
+You already know how the replay buffer part works.
+
+00:00:12.945 --> 00:00:17.175
+I just wanted to mention that DDPG uses a replay buffer.
+
+00:00:17.175 --> 00:00:20.445
+But the soft updates are a bit different.
+
+00:00:20.445 --> 00:00:24.990
+In DQN, you have two copies of your network weights,
+
+00:00:24.989 --> 00:00:29.159
+the regular and the target network.
+
+00:00:29.160 --> 00:00:33.615
+In the Atari paper in which DQN was introduced,
+
+00:00:33.615 --> 00:00:38.405
+the target network is updated every 10,000 time steps.
+
+00:00:38.405 --> 00:00:45.185
+You simply copy the weights of your regular network into your target network.
+
+00:00:45.185 --> 00:00:53.905
+That is the target network is fixed for 10,000 time steps and then he gets a big update.
+
+00:00:53.905 --> 00:00:59.929
+In DDPG, you have two copies of your network weights for each network,
+
+00:00:59.929 --> 00:01:01.685
+a regular for the actor,
+
+00:01:01.685 --> 00:01:03.440
+an irregular for the critic,
+
+00:01:03.439 --> 00:01:05.750
+and a target for the actor,
+
+00:01:05.750 --> 00:01:07.745
+and a target for the critic.
+
+00:01:07.745 --> 00:01:15.710
+But in DDPG, the target networks are updated using a soft updates strategy.
+
+00:01:15.709 --> 00:01:20.089
+A soft update strategy consists of slowly blending
+
+00:01:20.090 --> 00:01:25.159
+your regular network weights with your target network weights.
+
+00:01:25.159 --> 00:01:31.909
+So, every time step you make your target network be 99.99 percent of
+
+00:01:31.909 --> 00:01:39.229
+your target network weights and only a 0.01 percent of your regular network weights.
+
+00:01:39.230 --> 00:01:45.564
+You are slowly mix in your regular network weights into your target network weights.
+
+00:01:45.564 --> 00:01:47.879
+Recall, the regular network is
+
+00:01:47.879 --> 00:01:51.679
+the most up today network because it's their one where training,
+
+00:01:51.680 --> 00:01:57.565
+while the target network is the one we use for prediction to stabilize strain.
+
+00:01:57.564 --> 00:02:03.799
+In practice, you'll get faster convergence by using this update strategy, and in fact,
+
+00:02:03.799 --> 00:02:07.939
+this way for updating the target network weights can be used
+
+00:02:07.939 --> 00:02:12.949
+with other algorithms that use target networks including DQN.
+
