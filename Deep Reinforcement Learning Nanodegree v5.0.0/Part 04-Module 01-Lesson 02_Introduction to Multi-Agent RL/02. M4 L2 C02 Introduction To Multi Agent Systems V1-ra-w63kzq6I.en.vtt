@@ -1,0 +1,67 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.900
+In this video, we are going to get an understanding of multi-agent systems.
+
+00:00:04.900 --> 00:00:08.550
+Multi-agent systems are present everywhere around us,
+
+00:00:08.550 --> 00:00:10.800
+be it early in the morning when you're making your way
+
+00:00:10.800 --> 00:00:13.260
+through traffic to get to work or when
+
+00:00:13.259 --> 00:00:15.914
+your favorite soccer players are competing in a game
+
+00:00:15.914 --> 00:00:19.664
+or when a swarm of bees is trying to build a comb in your garden.
+
+00:00:19.664 --> 00:00:24.134
+Let's consider a scenario where an autonomous car is driving you to office.
+
+00:00:24.135 --> 00:00:27.600
+The aim is to reach office quickly and safely.
+
+00:00:27.600 --> 00:00:29.760
+Anytime it wants to accelerate,
+
+00:00:29.760 --> 00:00:31.300
+break or change lanes,
+
+00:00:31.300 --> 00:00:34.795
+it does so while considering the other cars in its vicinity.
+
+00:00:34.795 --> 00:00:36.785
+Other cars do the same.
+
+00:00:36.784 --> 00:00:39.679
+All of them are trying to enhance their driving skills on
+
+00:00:39.679 --> 00:00:42.905
+the go as they get more and more driving experience.
+
+00:00:42.905 --> 00:00:47.765
+Contrast this with a scenario where your car is the only car on the road.
+
+00:00:47.765 --> 00:00:53.120
+The fact that now it doesn't have to interact with other cars makes driving much simpler.
+
+00:00:53.119 --> 00:00:58.549
+This is nothing but a multi-agent system where multiple agents interact with one another.
+
+00:00:58.549 --> 00:01:03.299
+Agents may or may not know everything about all the others in the system.
+
+00:01:03.299 --> 00:01:08.674
+A multi-agent system is more complex than a single bond as illustrated before.
+
+00:01:08.674 --> 00:01:10.189
+In the next few videos,
+
+00:01:10.189 --> 00:01:13.120
+we'll dive deeper into this topic.
+

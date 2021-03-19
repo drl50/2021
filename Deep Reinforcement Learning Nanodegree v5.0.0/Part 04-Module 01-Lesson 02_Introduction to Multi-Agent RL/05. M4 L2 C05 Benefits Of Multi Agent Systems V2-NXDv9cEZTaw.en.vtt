@@ -1,0 +1,79 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:05.554
+Hi, all. Having multiple agents in a system brings in a few benefits.
+
+00:00:05.554 --> 00:00:10.754
+The agents can share their experiences with one another making each other smarter,
+
+00:00:10.755 --> 00:00:13.714
+just as we learned from our teachers and friends.
+
+00:00:13.714 --> 00:00:16.214
+However, when agents want to share,
+
+00:00:16.214 --> 00:00:17.570
+they have to communicate,
+
+00:00:17.570 --> 00:00:19.800
+which leads to a cost of communication,
+
+00:00:19.800 --> 00:00:22.995
+like extra hardware and software capabilities.
+
+00:00:22.995 --> 00:00:25.769
+A multi-agent system is robust.
+
+00:00:25.769 --> 00:00:28.800
+Agents can be replaced with a copy when they fail.
+
+00:00:28.800 --> 00:00:33.024
+Other agents in the system can take over the tasks of the failed agent,
+
+00:00:33.024 --> 00:00:36.729
+but the substituting agent now has to do some extra work.
+
+00:00:36.729 --> 00:00:39.584
+Scalability comes by virtue of design,
+
+00:00:39.585 --> 00:00:43.609
+as most multi-agent systems allow insertion of new agents easily.
+
+00:00:43.609 --> 00:00:46.638
+But, if more agents are added to the system,
+
+00:00:46.639 --> 00:00:49.820
+the system becomes more complex than before.
+
+00:00:49.820 --> 00:00:52.399
+So, it depends on the assumptions made by
+
+00:00:52.399 --> 00:00:56.170
+the algorithm and the software-hardware capabilities of the agents,
+
+00:00:56.170 --> 00:00:59.390
+whether or not these advantages will be exploited.
+
+00:00:59.390 --> 00:01:03.219
+From here onwards, we will learn about multi-agent RL,
+
+00:01:03.219 --> 00:01:04.879
+also known as MARL.
+
+00:01:04.879 --> 00:01:07.909
+When multi-agent systems used reinforcement learning
+
+00:01:07.909 --> 00:01:11.715
+techniques to train the agents and make them learn their behaviors,
+
+00:01:11.715 --> 00:01:15.579
+we call the process multi-agent reinforcement learning.
+
+00:01:15.579 --> 00:01:18.399
+Next, we will talk about a framework for MARL,
+
+00:01:18.400 --> 00:01:23.840
+just like Markov decision processes are MDPs for single-agent RL.
+

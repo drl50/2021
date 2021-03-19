@@ -1,0 +1,187 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.379
+In order to talk about AlphaZero,
+
+00:00:02.379 --> 00:00:05.339
+we first need to formalize the concepts of games that
+
+00:00:05.339 --> 00:00:08.744
+AlphaZero specializes in, Zero-Sum games.
+
+00:00:08.744 --> 00:00:11.009
+We start with a board game environment,
+
+00:00:11.009 --> 00:00:12.519
+a grid for example,
+
+00:00:12.519 --> 00:00:18.214
+then two competing agents take turns to perform actions to try to win the game.
+
+00:00:18.214 --> 00:00:23.195
+In the end, one agent's win is another agent's loss.
+
+00:00:23.195 --> 00:00:27.839
+Usually, we also assumed that the game contains no hidden information,
+
+00:00:27.839 --> 00:00:29.945
+so there's no element of luck,
+
+00:00:29.945 --> 00:00:34.070
+and winning or losing is entirely determined by skill.
+
+00:00:34.070 --> 00:00:37.670
+This concept is applicable to games as simple as
+
+00:00:37.670 --> 00:00:43.429
+tic-tac-toe to more complicated games such as chess and go.
+
+00:00:45.189 --> 00:00:48.634
+Let's go back to our tic-tac-toe example.
+
+00:00:48.634 --> 00:00:51.074
+The goal is to get three in a row,
+
+00:00:51.075 --> 00:00:52.984
+so the first player might make a move,
+
+00:00:52.984 --> 00:00:56.804
+say at the center, then the second player makes a move.
+
+00:00:56.804 --> 00:01:00.579
+Now, there are usually multiple possibilities at each step.
+
+00:01:00.579 --> 00:01:02.539
+In this case, there are eight.
+
+00:01:02.539 --> 00:01:04.935
+Focusing on one of these possibilities,
+
+00:01:04.935 --> 00:01:07.859
+we might have a game sequence like this.
+
+00:01:07.859 --> 00:01:12.209
+Now, in this case, the first player wins.
+
+00:01:12.569 --> 00:01:17.309
+We can represent all this information mathematically.
+
+00:01:17.310 --> 00:01:22.034
+The board can be represented by a matrix where zero indicates
+
+00:01:22.034 --> 00:01:27.994
+empty space and plus or minus one indicates the pieces of player one and player two.
+
+00:01:27.995 --> 00:01:32.079
+Given that there are only circles and crosses in tic-tac-toe,
+
+00:01:32.079 --> 00:01:34.709
+each entry can then only be zero,
+
+00:01:34.709 --> 00:01:36.979
+plus one, or minus one.
+
+00:01:36.980 --> 00:01:40.325
+We can also encode the final outcome by a score,
+
+00:01:40.325 --> 00:01:43.185
+where plus one indicates a win by the first player,
+
+00:01:43.185 --> 00:01:46.120
+and negative one indicates a win by the second player,
+
+00:01:46.120 --> 00:01:48.650
+and zero indicates a draw.
+
+00:01:48.650 --> 00:01:51.990
+This way of representing the board is convenient
+
+00:01:51.989 --> 00:01:56.409
+because the board can easily be fed into a neural network.
+
+00:01:56.620 --> 00:02:00.435
+Also, if you want to switch other player's pieces,
+
+00:02:00.435 --> 00:02:03.150
+we can just multiply the matrix by negative one.
+
+00:02:03.150 --> 00:02:08.039
+We can also flip the score by multiplying it by negative one.
+
+00:02:08.039 --> 00:02:13.519
+This property will come in handy when we build an agent to play the game.
+
+00:02:14.550 --> 00:02:18.070
+Now that we've encoded the game mathematically,
+
+00:02:18.069 --> 00:02:21.954
+we can rephrase everything in the language of reinforcement learning.
+
+00:02:21.955 --> 00:02:26.770
+We have a sequence of states for the board game denoted by a sub t,
+
+00:02:26.770 --> 00:02:31.064
+and we have two players denoted by plus or minus one.
+
+00:02:31.064 --> 00:02:34.784
+Here, I've simplified the negative one to the power of t,
+
+00:02:34.784 --> 00:02:37.620
+assuming we start with t equals zero.
+
+00:02:37.620 --> 00:02:40.420
+Player plus one performs actions at
+
+00:02:40.419 --> 00:02:46.069
+all the even timesteps and tries to maximize the final score plus z,
+
+00:02:46.580 --> 00:02:50.680
+while player negative one performs actions at
+
+00:02:50.680 --> 00:02:57.099
+all the odd timesteps and tries to maximize negative one times the final score.
+
+00:02:57.099 --> 00:03:01.159
+Now, imagine we've constructed an intelligent agent
+
+00:03:01.159 --> 00:03:04.865
+who is able to play a perfect game as player plus one,
+
+00:03:04.865 --> 00:03:08.080
+then it should be able to play a perfect game as player
+
+00:03:08.080 --> 00:03:11.895
+negative one as well as long as we flipped the state,
+
+00:03:11.895 --> 00:03:15.145
+s of t, at all the odd timestep.
+
+00:03:15.145 --> 00:03:21.100
+Then we can have the agent play against itself with a common policy.
+
+00:03:21.099 --> 00:03:23.864
+Now, besides having a common policy,
+
+00:03:23.865 --> 00:03:26.795
+we can also have a common critic that can
+
+00:03:26.794 --> 00:03:31.939
+evaluate the expected outcome from the perspective of the current player.
+
+00:03:31.939 --> 00:03:36.514
+This essentially estimates the expected value
+
+00:03:36.514 --> 00:03:40.359
+of negative one to the t power times a score z.
+
+00:03:40.360 --> 00:03:44.680
+We will see later that this is the basic idea behind AlphaZero,
+
+00:03:44.680 --> 00:03:49.040
+where we have one agent playing against itself along with
+
+00:03:49.039 --> 00:03:54.919
+one critic that self-improves as more and more games are played.
+

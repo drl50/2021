@@ -1,0 +1,440 @@
+{
+  "data": {
+    "lesson": {
+      "id": 549284,
+      "key": "dbcfca44-fc82-4985-8ba3-076db77c9e57",
+      "title": "Case Study: AlphaZero",
+      "semantic_type": "Lesson",
+      "is_public": true,
+      "version": "1.0.0",
+      "locale": "en-us",
+      "summary": null,
+      "lesson_type": "Classroom",
+      "display_workspace_project_only": false,
+      "resources": {
+        "files": [
+          {
+            "name": "Videos Zip File",
+            "uri": "https://zips.udacity-data.com/dbcfca44-fc82-4985-8ba3-076db77c9e57/549284/1544455660589/Case+Study%3A+AlphaZero+Videos.zip"
+          },
+          {
+            "name": "Transcripts Zip File",
+            "uri": "https://zips.udacity-data.com/dbcfca44-fc82-4985-8ba3-076db77c9e57/549284/1544455655975/Case+Study%3A+AlphaZero+Subtitles.zip"
+          }
+        ],
+        "google_plus_link": null,
+        "career_resource_center_link": null,
+        "coaching_appointments_link": null,
+        "office_hours_link": null,
+        "aws_provisioning_link": null
+      },
+      "project": null,
+      "lab": null,
+      "concepts": [
+        {
+          "id": 613185,
+          "key": "600a5bb5-dc57-40c2-893d-843dfebd3ff3",
+          "title": "AlphaZero Preview",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "600a5bb5-dc57-40c2-893d-843dfebd3ff3",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 737648,
+              "key": "7d8065c5-a00a-4a1d-adc6-7970611a9eea",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# AlphaZero Preview",
+              "instructor_notes": ""
+            },
+            {
+              "id": 751700,
+              "key": "c604d682-169b-45e2-9a67-76174c0ba435",
+              "title": "Alpha Zero Preview",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "Zzc1XJ1aJ-4",
+                "china_cdn_id": "Zzc1XJ1aJ-4.mp4"
+              }
+            },
+            {
+              "id": 751738,
+              "key": "ec640ea2-ead1-45f3-8072-a6cf5117dde7",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "\nIn 2016, researchers at DeepMind announced a new breakthrough -- the development of  a new AI engine, alphago for the game of go.The AI was able to beat a professional player LeeSedol. The breakthrough was significant, because go was far more complex than chess: the number of possible games is so high, that a professional go engine was believed to be way out of reach at that point, and human intuition was believed to be a key component in professional play. \nStill, performance in alphago depends on expert input during the training step, and so the algorithm cannot be easily be transferred to other domains\n\nThis changed in 2017, when the team at DeepMind updated their algorithm, and developed a new engine called alphago zero. This time, instead of depending on expert gameplay for the training, alphago zero learned from playing against itself, only knowing the rules of the game. More impressively, the algorithm was generic enough to be adapted to chess and shogi (also known as japanese chess). This leads to an entirely new framework for developing AI engine, and the researchers called their algorithm, simply as the alphazero.\n\nThe best part of the alphazero algorithm is simplicity: it consists of a Monte Carlo tree search, guided by a deep neural network. This is analogous to the way humans think about board games -- where professional players employ hard calculations guides with intuitions. \n\nIn the following lesson, we will cover how the alphazero algorithm works, and implement it to play an advanced version of tic-tac-toe. So let’s get started!\n\n(Much of the lesson material is derived from the original paper, for [alphago zero](https://deepmind.com/documents/119/agz_unformatted_nature.pdf), and [alphazero](https://arxiv.org/abs/1712.01815) by the researchers at DeepMind. I encourage you to visit links -- click on the words-- to check out those papers)",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 733866,
+          "key": "3a5a388d-c86c-4fdf-aee4-cd412c480d19",
+          "title": "Zero-Sum Game",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "3a5a388d-c86c-4fdf-aee4-cd412c480d19",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 751701,
+              "key": "ad5888bc-ced7-4f91-90ff-bf55d026c4b8",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Zero-Sum Game",
+              "instructor_notes": ""
+            },
+            {
+              "id": 751702,
+              "key": "7e1c7a34-e8d8-4c84-8a8f-16d16a5d5dbb",
+              "title": "Zero-Sum Game",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "uPw1dHVqdXQ",
+                "china_cdn_id": "uPw1dHVqdXQ.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 733867,
+          "key": "b980a530-b9e6-46c6-8968-6f4028907218",
+          "title": "Monte Carlo Tree Search 1 - Random Sampling",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "b980a530-b9e6-46c6-8968-6f4028907218",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 751705,
+              "key": "11c22130-7372-4383-b68d-f4a2b0b1a817",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Monte Carlo Tree Search 1 - Random Sampling",
+              "instructor_notes": ""
+            },
+            {
+              "id": 751706,
+              "key": "77581757-c89c-46af-8342-a26ca0a01390",
+              "title": "Monte Carlo Tree Search 1 - Random Sampling",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "wn2B3j_Qz6E",
+                "china_cdn_id": "wn2B3j_Qz6E.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 737388,
+          "key": "2ba0d255-95d0-4c11-b5b4-6967cb392fea",
+          "title": "Monte Carlo Tree Search 2 - Expansion and Back-propagation",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "2ba0d255-95d0-4c11-b5b4-6967cb392fea",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 751708,
+              "key": "f778dbb6-5ec3-4db7-96eb-493b0d35c711",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Monte Carlo Tree Search 2 - Expansion and Back-propagation",
+              "instructor_notes": ""
+            },
+            {
+              "id": 751709,
+              "key": "1ee465e2-5053-42ab-98ab-add95aa2ac1f",
+              "title": "Monte Carlo Tree Search 2 - Expansion and Back-propagation",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "H34Wtk1iNDY",
+                "china_cdn_id": "H34Wtk1iNDY.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 733869,
+          "key": "90005c0a-3a43-4766-8763-5a36907e32a6",
+          "title": "AlphaZero 1: Guided Tree Search",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "90005c0a-3a43-4766-8763-5a36907e32a6",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 751711,
+              "key": "79bb42f5-9394-4b24-83e7-69747184fda5",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# AlphaZero 1: Guided Tree Search",
+              "instructor_notes": ""
+            },
+            {
+              "id": 751712,
+              "key": "3934765a-5f71-4e93-a710-0a54c242b833",
+              "title": "AlphaZero 1: Guided Tree Search",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "LinuRy47xbw",
+                "china_cdn_id": "LinuRy47xbw.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 733870,
+          "key": "34dd74e0-b56b-43bd-9f00-7eba2ffeaaff",
+          "title": "AlphaZero 2: Self-Play Training",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "34dd74e0-b56b-43bd-9f00-7eba2ffeaaff",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 751713,
+              "key": "adea0cc0-e7bd-4788-a921-de85b2e2a030",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Alpha Zero 2: Self-Play Training",
+              "instructor_notes": ""
+            },
+            {
+              "id": 751714,
+              "key": "cdc4d0e4-b37f-469b-8f24-c1543e7b4478",
+              "title": "Alpha Zero 2: Self-Play Training",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "wl1qfPXqRuQ",
+                "china_cdn_id": "wl1qfPXqRuQ.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 733871,
+          "key": "a2350044-9a0c-4a3a-91f6-bc1476293cc4",
+          "title": "TicTacToe using AlphaZero - walkthrough",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "a2350044-9a0c-4a3a-91f6-bc1476293cc4",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 751715,
+              "key": "af6a0f72-b85c-4855-93df-0693bdaa97fd",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# TicTacToe using AlphaZero - notebook walkthrough\n\n",
+              "instructor_notes": ""
+            },
+            {
+              "id": 751716,
+              "key": "fbcac50b-5a14-44af-b609-2b8fa632fb45",
+              "title": "TicTacToe using AlphaZero - notebook walkthrough",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "uUFuBscf98I",
+                "china_cdn_id": "uUFuBscf98I.mp4"
+              }
+            },
+            {
+              "id": 751717,
+              "key": "9a3b6c96-5c51-458d-8af0-c15ac9d89306",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# python classes walkthrough",
+              "instructor_notes": ""
+            },
+            {
+              "id": 751718,
+              "key": "bf3af0b9-a74a-4b31-9703-f272dce29813",
+              "title": "Alphazero python classes walkthrough",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "hKnBQvtJ_zQ",
+                "china_cdn_id": "hKnBQvtJ_zQ.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 733872,
+          "key": "d4637b46-a063-45c9-8305-0229f13870e9",
+          "title": "TicTacToe using AlphaZero - Workspace",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "d4637b46-a063-45c9-8305-0229f13870e9",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 737387,
+              "key": "d9bbd84c-4543-41f0-9574-8d488593728c",
+              "title": null,
+              "semantic_type": "WorkspaceAtom",
+              "is_public": true,
+              "workspace_id": "view84u67jqnh5n",
+              "pool_id": "jupyter",
+              "view_id": "jupyter-2wku29t0d7p",
+              "gpu_capable": false,
+              "configuration": {
+                "id": "reserved",
+                "blueprint": {
+                  "conf": {
+                    "disk": null,
+                    "ports": [],
+                    "allowGrade": false,
+                    "allowSubmit": false,
+                    "defaultPath": "/notebooks/alphazero-TicTacToe.ipynb"
+                  },
+                  "kind": "jupyter"
+                },
+                "workspaceId": "reserved"
+              },
+              "starter_files": null
+            }
+          ]
+        },
+        {
+          "id": 733873,
+          "key": "9270ec1a-604a-47d1-829d-280dc8473247",
+          "title": "Advanced TicTacToe using AlphaZero",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "9270ec1a-604a-47d1-829d-280dc8473247",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 751719,
+              "key": "b579a676-3b2c-4701-877f-cab9f46178ba",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Advanced TicTacToe with AlphaZero - Walkthrough",
+              "instructor_notes": ""
+            },
+            {
+              "id": 751720,
+              "key": "1d902166-1a00-490a-991f-29170b2da20f",
+              "title": "Alphazero advanced tictactoe walkthrough",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "MOIk_BbCjRw",
+                "china_cdn_id": "MOIk_BbCjRw.mp4"
+              }
+            },
+            {
+              "id": 751721,
+              "key": "50c4190e-b977-4dbb-82ce-92c80bdd8af5",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Advanced TicTacToe workspace\n\nThis is the same workspace as in the previous concept (except alphazero-TicTacToe-advanced.ipynb is opened by default)",
+              "instructor_notes": ""
+            },
+            {
+              "id": 751722,
+              "key": "b76ef641-4c1e-4e6b-98dc-1168106754a3",
+              "title": null,
+              "semantic_type": "WorkspaceAtom",
+              "is_public": true,
+              "workspace_id": "view84u67jqnh5n",
+              "pool_id": "jupyter",
+              "view_id": "jupyter-uqgralvkfo",
+              "gpu_capable": false,
+              "configuration": {
+                "id": "reserved",
+                "blueprint": {
+                  "conf": {
+                    "disk": null,
+                    "ports": [],
+                    "allowGrade": false,
+                    "allowSubmit": false,
+                    "defaultPath": "/notebooks/alphazero-TicTacToe-advanced.ipynb"
+                  },
+                  "kind": "jupyter"
+                },
+                "workspaceId": "reserved"
+              },
+              "starter_files": null
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

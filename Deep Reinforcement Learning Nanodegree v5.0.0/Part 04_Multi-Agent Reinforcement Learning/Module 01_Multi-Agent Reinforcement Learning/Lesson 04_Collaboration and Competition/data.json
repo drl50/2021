@@ -1,0 +1,528 @@
+{
+  "data": {
+    "lesson": {
+      "id": 613187,
+      "key": "3cf5c0c4-e837-4fe6-8071-489dcdb3ab3e",
+      "title": "Collaboration and Competition",
+      "semantic_type": "Lesson",
+      "is_public": true,
+      "version": "1.0.0",
+      "locale": "en-us",
+      "summary": "Train a pair of agents to play tennis.",
+      "lesson_type": "Classroom",
+      "display_workspace_project_only": false,
+      "resources": {
+        "files": [
+          {
+            "name": "Videos Zip File",
+            "uri": "https://zips.udacity-data.com/3cf5c0c4-e837-4fe6-8071-489dcdb3ab3e/613187/1545254089282/Collaboration+and+Competition+Videos.zip"
+          },
+          {
+            "name": "Transcripts Zip File",
+            "uri": "https://zips.udacity-data.com/3cf5c0c4-e837-4fe6-8071-489dcdb3ab3e/613187/1545254087394/Collaboration+and+Competition+Subtitles.zip"
+          }
+        ],
+        "google_plus_link": null,
+        "career_resource_center_link": null,
+        "coaching_appointments_link": null,
+        "office_hours_link": null,
+        "aws_provisioning_link": null
+      },
+      "project": {
+        "key": "a363218d-2cf9-4d06-bb13-a703bde02927",
+        "version": "1.0.0",
+        "locale": "en-us",
+        "duration": 30240,
+        "semantic_type": "Project",
+        "title": "Collaboration and Competition",
+        "description": "In this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1.  If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01.  Thus, the goal of each agent is to keep the ball in play.\n\nThe observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation.  Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping. \n\nThe task is episodic, and in order to solve the environment, your agents must get an average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents). Specifically,\n\n- After each episode, we add up the rewards that each agent received (without discounting), to get a score for each agent. This yields 2 (potentially different) scores. We then take the maximum of these 2 scores.\n- This yields a single **score** for each episode.\n\nThe environment is considered solved, when the average (over 100 episodes) of those **scores** is at least +0.5.\n\n## Note\n---\nThe project environment is similar to, but **not identical to** the Tennis environment on the [Unity ML-Agents GitHub page](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md).  \n> You are **required** to work with the environment that we will provide as part of the project.  \n\nIn particular, your project submission should **not** use the environment on the ML-Agents GitHub page.\n\n## Evaluation\n---\nYour project will be reviewed by a Udacity reviewer against the [project rubric](https://review.udacity.com/#!/rubrics/1891/view). Review this rubric thoroughly, and self-evaluate your project before submission. All criteria found in the rubric must meet specifications for you to pass.\n\n## Ready to submit your project?\n---\nClick on the \"Submit Project\" button and follow the instructions to submit!",
+        "is_public": true,
+        "summary": null,
+        "forum_path": "",
+        "rubric_id": "1891",
+        "terminal_project_id": null,
+        "resources": null,
+        "image": {
+          "url": "https://s3.amazonaws.com/video.udacity-data.com/topher/2018/May/5af7955a_tennis/tennis.png",
+          "width": 2257,
+          "height": 1187
+        }
+      },
+      "lab": null,
+      "concepts": [
+        {
+          "id": 613315,
+          "key": "9812fef1-aa14-414e-a86c-fabac3585387",
+          "title": "Unity ML-Agents",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "9812fef1-aa14-414e-a86c-fabac3585387",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 613317,
+              "key": "94747266-e6fc-4614-973c-2bfb097deed1",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/April/5ad8aca0_unity-wide/unity-wide.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/94747266-e6fc-4614-973c-2bfb097deed1",
+              "caption": "",
+              "alt": "",
+              "width": 3000,
+              "height": 500,
+              "instructor_notes": null
+            },
+            {
+              "id": 613320,
+              "key": "e276e8ee-acb5-43e5-b1f6-bedf87062c0e",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Unity ML-Agents",
+              "instructor_notes": ""
+            },
+            {
+              "id": 613316,
+              "key": "855e6150-00fd-4b48-8538-90bb6a8e110b",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "**Unity Machine Learning Agents (ML-Agents)** is an open-source Unity plugin that enables games and simulations to serve as environments for training intelligent agents. \n\nFor game developers, these trained agents can be used for multiple purposes, including controlling [NPC](https://en.wikipedia.org/wiki/Non-player_character) behavior (in a variety of settings such as multi-agent and adversarial), automated testing of game builds and evaluating different game design decisions pre-release. \n\nIn this course, you will use Unity's rich environments to design, train, and evaluate your own deep reinforcement learning algorithms.  You can read more about ML-Agents by perusing the [GitHub repository](https://github.com/Unity-Technologies/ml-agents).\n\n> **Note: The Unity ML-Agent team frequently releases updated versions of their environment. We are using the v0.4 interface.  To avoid any confusion, please use the workspace we provide here or work with v0.4 locally.**",
+              "instructor_notes": ""
+            },
+            {
+              "id": 613319,
+              "key": "09855c95-a395-4ebc-ab83-a2afa11a6ad5",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/April/5ad8b114_2018-02-27-16-05-37/2018-02-27-16-05-37.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/09855c95-a395-4ebc-ab83-a2afa11a6ad5",
+              "caption": "Winner of the Unity ML-Agents Challenge: A robotic arm that can make pancakes!",
+              "alt": "Winner of the Unity ML-Agents Challenge: A robotic arm that can make pancakes!",
+              "width": 480,
+              "height": 286,
+              "instructor_notes": null
+            }
+          ]
+        },
+        {
+          "id": 613188,
+          "key": "da65c741-cdeb-4f34-bb56-d8977385596e",
+          "title": "The Environment - Introduction",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "da65c741-cdeb-4f34-bb56-d8977385596e",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 627586,
+              "key": "f59984aa-7e32-4f80-9c03-ff8ac29b6960",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# The Environment",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627585,
+              "key": "6ff8408b-f417-40c1-be46-757d9a8ef3c5",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "For this project, you will work with the [Tennis](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md#tennis) environment.  ",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627588,
+              "key": "91d9b658-3d3f-4d32-ba1a-b8073abe592d",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af7955a_tennis/tennis.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/91d9b658-3d3f-4d32-ba1a-b8073abe592d",
+              "caption": "Unity ML-Agents Tennis Environment",
+              "alt": "Unity ML-Agents Tennis Environment",
+              "width": 600,
+              "height": 1187,
+              "instructor_notes": null
+            },
+            {
+              "id": 627587,
+              "key": "3f013682-dd5d-4bdf-b9d4-ece1d283a2fa",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In this environment, two agents control rackets to bounce a ball over a net. If an agent hits the ball over the net, it receives a reward of +0.1.  If an agent lets a ball hit the ground or hits the ball out of bounds, it receives a reward of -0.01.  Thus, the goal of each agent is to keep the ball in play.\n\nThe observation space consists of 8 variables corresponding to the position and velocity of the ball and racket. Each agent receives its own, local observation.  Two continuous actions are available, corresponding to movement toward (or away from) the net, and jumping. \n\nThe task is episodic, and in order to solve the environment, your agents must get an average score of +0.5 (over 100 consecutive episodes, after taking the maximum over both agents). Specifically,\n\n- After each episode, we add up the rewards that each agent received (without discounting), to get a score for each agent. This yields 2 (potentially different) scores. We then take the maximum of these 2 scores.\n- This yields a single **score** for each episode.\n\nThe environment is considered solved, when the average (over 100 episodes) of those **scores** is at least +0.5.\n\n## Note\n---\nThe project environment is similar to, but **not identical to** the Tennis environment on the [Unity ML-Agents GitHub page](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md).  \n> You are **required** to work with the environment that we will provide as part of the project.  \n\nIn particular, your project submission should **not** use the environment on the ML-Agents GitHub page.",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 627589,
+          "key": "e85db55c-5f55-4f54-9b2b-d523569d9276",
+          "title": "The Environment - Explore",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "e85db55c-5f55-4f54-9b2b-d523569d9276",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 627590,
+              "key": "1c3f4f38-77a4-4c94-89f7-8c528bb5d9f2",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# The Environment",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627591,
+              "key": "f9c0ad8c-79e9-4107-a03f-b5a2f3bdaae9",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Follow the instructions below to explore the environment on your own machine!  You will also learn how to use the Python API to control your agent.\n\n## Step 1: Activate the Environment\n---\nIf you haven't already, please follow the [instructions in the DRLND GitHub repository](https://github.com/udacity/deep-reinforcement-learning#dependencies) to set up your Python environment.  These instructions can be found in `README.md` at the root of the repository.  By following these instructions, you will install PyTorch, the ML-Agents toolkit, and a few more Python packages required to complete the project.\n\n(_For Windows users_) The ML-Agents toolkit supports Windows 10. While it might be possible to run the ML-Agents toolkit using other versions of Windows, it has not been tested on other versions. Furthermore, the ML-Agents toolkit has not been tested on a Windows VM such as Bootcamp or Parallels.  \n\n> **SPECIAL NOTE TO BETA TESTERS** - please also download the `p3_collab-compet` folder from [here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/tmp/p3_collab-compet.zip) and place it in the DRLND GitHub repository.\n\n## Step 2: Download the Unity Environment\n---\nFor this project, you will **not** need to install Unity - this is because we have already built the environment for you, and you can download it from one of the links below.  You need only select the environment that matches your operating system:\n- Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux.zip)\n- Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis.app.zip)\n- Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86.zip)\n- Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Windows_x86_64.zip)\n\nThen, place the file in the `p3_collab-compet/` folder in the DRLND GitHub repository, and unzip (or decompress) the file.\n\n(_For Windows users_) Check out [this link](https://support.microsoft.com/en-us/help/827218/how-to-determine-whether-a-computer-is-running-a-32-bit-version-or-64) if you need help with determining if your computer is running a 32-bit version or 64-bit version of the Windows operating system.\n\n(_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Tennis/Tennis_Linux_NoVis.zip) to obtain the \"headless\" version of the environment.  You will **not** be able to watch the agent without enabling a virtual screen, but you will be able to train the agent.  (_To watch the agent, you should follow the instructions to [enable a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above._)\n\n## Step 3: Explore the Environment\n---\nAfter you have followed the instructions above, open `Tennis.ipynb` (located in the `p3_collab-compet/` folder in the DRLND GitHub repository) and follow the instructions to learn how to use the Python API to control the agent.\n\nWatch the (_silent_) video below to see what kind of output to expect from the notebook, if everything is working properly!  ",
+              "instructor_notes": ""
+            },
+            {
+              "id": 797450,
+              "key": "273c3630-24bb-44f4-895c-9f9b330bc2e2",
+              "title": "Untitled",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "kxDvrkg8ep0",
+                "china_cdn_id": "kxDvrkg8ep0.mp4"
+              }
+            },
+            {
+              "id": 627593,
+              "key": "058fe4dc-f69d-4297-8a7e-17074b6c4d3a",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In the last code cell of the notebook, you'll learn how to design and observe an agent that always selects random actions at each timestep.  Your goal in this project is to create an agent that performs much better!\n\n## (Optional) Build your Own Environment\n---\nFor this project, we have built the Unity environment for you, and you must use the environment files that we have provided.  \n\nIf you are interested in learning to build your own Unity environments **after completing the project**, you are encouraged to follow the instructions [here](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Getting-Started-with-Balance-Ball.md), which walk you through all of the details of building an environment from a Unity scene.  ",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 627595,
+          "key": "41b1baa1-e727-4f05-ae2b-51e218809dfb",
+          "title": "Project Instructions",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "41b1baa1-e727-4f05-ae2b-51e218809dfb",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 690747,
+              "key": "84600765-4e48-42e4-89f4-efef119ce0ed",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Project Instructions",
+              "instructor_notes": ""
+            },
+            {
+              "id": 690748,
+              "key": "0773be0b-c9e0-41a3-8078-e4f367d95c58",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "For this project, you will train an agent to solve the provided environment. \n\nTo submit the project, you will provide a link to a GitHub repository with your implementation.  If you would like a refresher on GitHub, please check out the lessons on GitHub in the extracurricular content.\n\nTo review the detailed project requirements, please read the [project rubric](https://review.udacity.com/#!/rubrics/1891/view).  \n\nThe format of this project is largely open-ended; you need only satisfy the points in the rubric.  For instance, while we suspect that the majority of students will train the agent in a Jupyter notebook, you are welcome to instead structure your repository so that your Python code is run from the command line instead.  \n\n## Your GitHub Submission\n---\nAs described in the rubric, your GitHub submission should contain:\n- a **README** that describes how someone not familiar with this project should use your repository.  The README should be designed for a general audience that may not be familiar with the Nanodegree program; you should describe the environment that you solved, along with how to install the requirements before running the code in your repository.\n- the **code** that you use for training the agent, along with the trained model weights.\n- a **report** describing your learning algorithm.  This is where you will describe the details of your implementation, along with ideas for future work.\n  \nThis GitHub repository will serve as a portfolio piece to share your new skills with the global community of reinforcement learning students and practitioners, along with potential employers!\n\n## Project Workspace\n---\nWhile you are welcome to train the agent locally on your own machine, you can also complete the project in the **Workspace** that appears towards the end of this lesson.  Note that the Workspace does not allow you to see the simulator of the environment; so, if you want to watch the agent while it is training, you should train locally.\n\nThe Workspace provides a Jupyter server directly in your browser and has GPU support.  You can learn more about the Workspace by perusing the **Udacity Workspaces** lesson in the extracurricular content.",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 627596,
+          "key": "9a05b852-7c76-48ee-acb7-807c0ebe57b9",
+          "title": "Benchmark Implementation",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "9a05b852-7c76-48ee-acb7-807c0ebe57b9",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 690749,
+              "key": "232f87d4-b192-4261-8c94-b78d10c2b4cc",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Benchmark Implementation",
+              "instructor_notes": ""
+            },
+            {
+              "id": 690750,
+              "key": "a17ef1a6-6c18-4290-8a4b-fd2ab5e12998",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "For this project, you can use any algorithm of your choosing to solve the task. You are strongly encouraged to do your own research, to devise your own approach towards solving this problem.\n\n## Some Hints\n---\nSince you're well on your way to mastering deep reinforcement learning, we won't provide too many hints for this project.  That said, in our solution code, we decided to start with the DDPG code to solve this project.  To adapt it to train multiple agents, we first noted that **each agent receives its own, local observation**.  Thus, we can easily adapt the code to simultaneously train both agents through self-play.  In our case, each agent used the same actor network to select actions, and the experience was added to a shared replay buffer.\n\nBut we'll leave the rest of the details up to you to discover! :)",
+              "instructor_notes": ""
+            },
+            {
+              "id": 693448,
+              "key": "855e6f0b-618b-444d-b460-9e1590c2d5c5",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/August/5b75bf5a_we-can-do-it-poster-1393770492mjo/we-can-do-it-poster-1393770492mjo.jpg",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/855e6f0b-618b-444d-b460-9e1590c2d5c5",
+              "caption": "You can do it!",
+              "alt": "You can do it! (picture of Rosie the Riveter)",
+              "width": 200,
+              "height": 200,
+              "instructor_notes": null
+            },
+            {
+              "id": 693491,
+              "key": "5ee96d83-ceff-4a58-bcf0-4cab1522becc",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Note\n---\nNote that due to the multi-agent nature of this problem, you are likely to experience a bit of instability during training.  For instance, we have plotted the scores plot from the solution code below.  The blue line shows the maximum score over both agents, for each episode, and the orange line shows the average score (after taking the maximum over both agents) over the next 100 episodes.\n\n\nNote that the agents perform horribly starting around episode 2500 and show no evidence of recovery.  However, at one point, we accomplished an average score (over 100 episodes) of +0.9148!",
+              "instructor_notes": ""
+            },
+            {
+              "id": 693492,
+              "key": "d5a3a8fb-5c34-4df2-85f6-05986fbdbad5",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/August/5b75ef77_screen-shot-2018-08-16-at-4.37.07-pm/screen-shot-2018-08-16-at-4.37.07-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/d5a3a8fb-5c34-4df2-85f6-05986fbdbad5",
+              "caption": "Scores plot from the solution code.",
+              "alt": "Scores plot from the solution code.",
+              "width": 400,
+              "height": 400,
+              "instructor_notes": null
+            }
+          ]
+        },
+        {
+          "id": 617023,
+          "key": "f8581138-d0a6-44ef-92ea-dfe7e9ecb5a3",
+          "title": "Collaborate!",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "f8581138-d0a6-44ef-92ea-dfe7e9ecb5a3",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 626248,
+              "key": "f828b1d2-b9be-47fb-910b-9b33aefe58ce",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af1d1ae_849-1234251683jkyt/849-1234251683jkyt.jpg",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/f828b1d2-b9be-47fb-910b-9b33aefe58ce",
+              "caption": "",
+              "alt": "",
+              "width": 400,
+              "height": 700,
+              "instructor_notes": null
+            },
+            {
+              "id": 617024,
+              "key": "0752ae45-999d-45e6-ac4a-eb96911b1fbb",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Collaborate!",
+              "instructor_notes": ""
+            },
+            {
+              "id": 617025,
+              "key": "bc3e7151-590c-4aaf-bd49-d7064e06f908",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "If at any point you get stuck, remember you are part of a strong learning community!  Please do not hesitate to reach out to your instructors and fellow students by posting in Study Groups or Knowledge.  You may also find it useful to post after you've solved the environment, to get more ideas for further improving your agent! :)",
+              "instructor_notes": ""
+            },
+            {
+              "id": 662932,
+              "key": "ab235c84-8595-404b-b115-1ced5629b65d",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Share your project success!\n---\nPassed your project? Share the good news!\n\nWhat you’ve accomplished is no small feat. Give yourself a pat on the back and some well-deserved recognition by sharing your success with your network.\n\n<iframe\n  src=\"https://platform.twitter.com/widgets/tweet_button.html?size=l&url=www.udacity.com&text=I%20trained%20my%20own%20intelligent%20agent%20in%20the%20Deep%20Reinforcement%20Learning%20Nanodegree!%20@udacity\n[Insert%20your%20Github%20repository%20url%20here]&hashtags=udacityDeepRL\"\nwidth=\"140\"\nheight=\"28\"\nscrolling=\"no\">\n</iframe>\n\nMake sure to use **@udacity** and **#udacityDeepRL** in your posts!\n\n<html>\n\n<head>\n<style>\n.fb {color: white;\n  background-color: #4661b0;\n  border-radius: 4px;\n  font-weight: bold;\n  height: 28px;\n  font-size: 14px;}\n.fb:hover {color: #4661b0;\n  background-color: white;\n  border-color: #4661b0;\n  transition: background-color 0.4s}\n.linkedin {color: white;\n  background-color: #0077B5;\n  border-radius: 4px;\n  font-weight: bold;\n  height: 28px;\n  font-size: 14px;}\n.linkedin:hover {color: #0077B5;\n  background-color: white;\n  border-color: #0077B5;\n  transition: background-color 0.4s}\n</style>\n\n</head>\n\n<body>\n<form action=\"https://www.facebook.com/sharer.php?\">\n  Enter the full URL of your GitHub repository or a YouTube video of your trained agent:<br>\n  <input type=\"url\" name=\"u\" placeholder=\"Paste URL here\">\n  <input type=\"hidden\" name=\"hashtag\" value=\"#udacityDeepRL\">\n  <button class=\"fb\">Share on Facebook</button>\n</form>\n\n<form action=\"https://www.linkedin.com/shareArticle?mini=true\">\n  <input type=\"url\" name=\"url\" placeholder=\"Paste URL here\">\n  <input type=\"hidden\" name=\"title\" value=\"Train your own AI agent!\">\n  <input type=\"hidden\" name=\"summary\" value=\"I trained my own intelligent agent in the Deep Reinforcement Learning Nanodegree @udacity #udacityDeepRL\">\n  <button class=\"linkedin\">Share on LinkedIn</button>\n</form>\n\n</body>\n\n</html>",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 627598,
+          "key": "9d83f1cd-2270-4a1d-ad60-68fe26e0cf71",
+          "title": "Workspace",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "9d83f1cd-2270-4a1d-ad60-68fe26e0cf71",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 690753,
+              "key": "0f9ca81e-d11b-4584-8faa-6cf02673704e",
+              "title": null,
+              "semantic_type": "WorkspaceAtom",
+              "is_public": true,
+              "workspace_id": "viewka0rezltofl",
+              "pool_id": "jupytergpu",
+              "view_id": "jupyter-dl0h60qc6ik",
+              "gpu_capable": true,
+              "configuration": {
+                "id": "reserved",
+                "blueprint": {
+                  "conf": {
+                    "disk": {
+                      "id": "mldatasets",
+                      "paths": [
+                        {
+                          "src": "/drlnd_projects_v4/Tennis_Linux_NoVis",
+                          "dest": "/data/Tennis_Linux_NoVis"
+                        }
+                      ]
+                    },
+                    "ports": [],
+                    "allowSubmit": false,
+                    "defaultPath": "/notebooks/Tennis.ipynb"
+                  },
+                  "kind": "jupyter"
+                },
+                "workspaceId": "reserved"
+              },
+              "starter_files": null
+            }
+          ]
+        },
+        {
+          "id": 690513,
+          "key": "f33c537d-8de7-413b-8004-74374e992fd4",
+          "title": "(Optional) Challenge: Play Soccer",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "f33c537d-8de7-413b-8004-74374e992fd4",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 690514,
+              "key": "afba4659-8b57-4fc5-bb13-23ca9cfff9d9",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# (Optional) Challenge: Play Soccer",
+              "instructor_notes": ""
+            },
+            {
+              "id": 694357,
+              "key": "aad66793-5f3b-47aa-9d19-270c3057e869",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "After you have successfully completed the project, you might like to solve a more difficult environment, where the goal is to train a small team of agents to play soccer.\n\nYou can read more about this environment in the ML-Agents GitHub [here](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Learning-Environment-Examples.md).",
+              "instructor_notes": ""
+            },
+            {
+              "id": 698625,
+              "key": "db8a01c5-68ca-4f19-8237-d6f0bc89a485",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/August/5b81cd05_soccer/soccer.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/db8a01c5-68ca-4f19-8237-d6f0bc89a485",
+              "caption": "ML-Agents Soccer Environment",
+              "alt": "ML-Agents Soccer Environment",
+              "width": 600,
+              "height": 600,
+              "instructor_notes": null
+            },
+            {
+              "id": 698627,
+              "key": "67ce033b-4c36-4073-80c4-6fc85b9c24ed",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Download the Unity Environment\n---\nTo solve this harder task, you'll need to download a new Unity environment.  You need only select the environment that matches your operating system:\n- Linux: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer_Linux.zip)\n- Mac OSX: [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer.app.zip)\n- Windows (32-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer_Windows_x86.zip)\n- Windows (64-bit): [click here](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer_Windows_x86_64.zip)\n\nThen, place the file in the `p3_collab-compet/` folder in the DRLND GitHub repository, and unzip (or decompress) the file.\n\n> Please do not submit a project with this new environment.  You are **required** to complete the project with the Tennis environment that was provided earlier in this lesson, in **The Environment - Explore**.\n\n(_For AWS_) If you'd like to train the agents on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P3/Soccer/Soccer_Linux_NoVis.zip) to obtain the \"headless\" version of the environment.  You will **not** be able to watch the agents without enabling a virtual screen, but you will be able to train the agents.  (_To watch the agents, you should follow the instructions to [enable a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md), and then download the environment for the **Linux** operating system above._)\n\n## Explore the Environment\n---\nAfter you have followed the instructions above, open `Soccer.ipynb` (located in the `p3_collab-compet/` folder in the DRLND GitHub repository) and follow the instructions to learn how to use the Python API to control the agent.",
+              "instructor_notes": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "_deprecated": [
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    }
+  ]
+}

@@ -1,0 +1,754 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.875
+Hi, welcome to the screencast.
+
+00:00:02.875 --> 00:00:09.405
+Today, I'll share with you how to train an alphazero agent to play a game of TicTacToe.
+
+00:00:09.404 --> 00:00:11.669
+Before I go into the Jupiter notebook,
+
+00:00:11.669 --> 00:00:14.580
+let's go back up that directory to
+
+00:00:14.580 --> 00:00:18.189
+check out all the files available to you in the workspace.
+
+00:00:18.189 --> 00:00:20.339
+So, you should see something like this,
+
+00:00:20.339 --> 00:00:23.559
+it will be working with the alphazero TicTacToe Jupiter notebook.
+
+00:00:23.559 --> 00:00:26.464
+I'll cover the more advanced version later.
+
+00:00:26.464 --> 00:00:30.175
+The important files are these Python files.
+
+00:00:30.175 --> 00:00:36.049
+ConnectN.py implements a gameplay environment.
+
+00:00:36.049 --> 00:00:39.409
+It's a class that contains the game state,
+
+00:00:39.409 --> 00:00:41.644
+the game score, the game player.
+
+00:00:41.645 --> 00:00:48.390
+MCTS implements a Monte-Carlo Tree Search algorithm for the alphazero.
+
+00:00:48.390 --> 00:00:54.920
+Inside this class, there are functions such as explore that explores the tree,
+
+00:00:54.920 --> 00:00:59.480
+you can pick a move from the tree, and so forth.
+
+00:00:59.479 --> 00:01:07.079
+The play.py class implements an interactive environment for you to play the game.
+
+00:01:07.079 --> 00:01:10.069
+So, you can play a game against yourself,
+
+00:01:10.069 --> 00:01:13.854
+just to see, get a feeling of the structure of the game.
+
+00:01:13.855 --> 00:01:19.105
+You can play a game against a given AI or you can watch two AI,
+
+00:01:19.105 --> 00:01:21.969
+play against each other to see who wins.
+
+00:01:21.969 --> 00:01:25.359
+Now, let's go back to our Jupiter notebook here.
+
+00:01:25.359 --> 00:01:28.334
+The first step is we can initialize a game.
+
+00:01:28.334 --> 00:01:33.054
+To do that, we simply initialize a ConnectN object.
+
+00:01:33.055 --> 00:01:39.045
+The inputs are the board size and the winning condition.
+
+00:01:39.045 --> 00:01:41.825
+Now, the ConnectN can accommodate
+
+00:01:41.825 --> 00:01:45.814
+a much larger board size with much more winning conditions,
+
+00:01:45.814 --> 00:01:48.414
+but for the case of TicTacToe,
+
+00:01:48.415 --> 00:01:51.470
+we'll go for the simplest non trivial game,
+
+00:01:51.469 --> 00:01:54.355
+a three-by-three board with
+
+00:01:54.355 --> 00:01:58.150
+a winning condition win three three in a row, so we can do that.
+
+00:01:58.150 --> 00:01:59.580
+Initialize the game.
+
+00:01:59.579 --> 00:02:04.489
+Now, what does the game object contain?
+
+00:02:04.489 --> 00:02:06.844
+It contains members such as the state,
+
+00:02:06.844 --> 00:02:10.300
+which is a three-by-three matrix depending on the board size,
+
+00:02:10.300 --> 00:02:14.344
+and the player, the player alternates as you perform moves.
+
+00:02:14.344 --> 00:02:16.875
+So, the first player is player plus one,
+
+00:02:16.875 --> 00:02:20.664
+and the second player is player negative one, and so forth.
+
+00:02:20.664 --> 00:02:24.000
+Also, it keeps track of the game score.
+
+00:02:24.000 --> 00:02:26.210
+Every time you make a move,
+
+00:02:26.210 --> 00:02:28.810
+it tries the computer game score.
+
+00:02:28.810 --> 00:02:31.094
+When the game is not over yet,
+
+00:02:31.094 --> 00:02:33.525
+the game score is simply none.
+
+00:02:33.525 --> 00:02:36.995
+If it's zero, that means a draw has been reached.
+
+00:02:36.995 --> 00:02:39.270
+If it's plus one, the first player wins.
+
+00:02:39.270 --> 00:02:40.409
+If it's negative one,
+
+00:02:40.409 --> 00:02:41.979
+the second player wins.
+
+00:02:41.979 --> 00:02:44.449
+So, let's see what happens when we make a move.
+
+00:02:44.449 --> 00:02:49.935
+Now, notice that the game that the player was player one,
+
+00:02:49.935 --> 00:02:52.039
+so when I make a move zero one,
+
+00:02:52.039 --> 00:02:55.239
+player one plays a piece at the zero, one location.
+
+00:02:55.240 --> 00:02:59.415
+The player is automatically advanced to negative one.
+
+00:02:59.414 --> 00:03:01.069
+The game has not ended yet still,
+
+00:03:01.069 --> 00:03:05.034
+so the score is still none and the state has been updated.
+
+00:03:05.034 --> 00:03:08.465
+So, what happens when I make a sequence of move like this?
+
+00:03:08.465 --> 00:03:11.224
+You can see that, now,
+
+00:03:11.224 --> 00:03:15.324
+player one has successfully created three in a row,
+
+00:03:15.324 --> 00:03:18.574
+so the game has been automatically updated
+
+00:03:18.574 --> 00:03:22.799
+to game score equals one and the game has ended.
+
+00:03:22.840 --> 00:03:25.140
+Now, the next step is,
+
+00:03:25.139 --> 00:03:27.709
+let's try to play a game interactively.
+
+00:03:27.710 --> 00:03:29.425
+We can do that by first,
+
+00:03:29.425 --> 00:03:35.090
+supplying this matplotlib notebook magic command in Jupiter.
+
+00:03:35.090 --> 00:03:39.439
+Then, you can use the play cat class from the play.py file.
+
+00:03:39.439 --> 00:03:45.150
+To initialize it, you simply feed in a game environment like this,
+
+00:03:45.150 --> 00:03:47.030
+you can initialize a new one,
+
+00:03:47.030 --> 00:03:48.930
+and you can supply the player.
+
+00:03:48.930 --> 00:03:55.319
+When the players are none, basically means that they are from mouse click,
+
+00:03:55.319 --> 00:03:58.719
+their moves are registered by mouse clicks, although,
+
+00:03:58.719 --> 00:04:01.694
+you could supply different AI agent,
+
+00:04:01.694 --> 00:04:03.094
+and I'll cover that later.
+
+00:04:03.094 --> 00:04:08.254
+So, let's play a game against ourselves to see how it looks.
+
+00:04:08.254 --> 00:04:09.609
+So, you have a game board,
+
+00:04:09.610 --> 00:04:10.715
+and I can click,
+
+00:04:10.715 --> 00:04:12.125
+and play a piece in the middle,
+
+00:04:12.125 --> 00:04:13.955
+where I always starts first.
+
+00:04:13.955 --> 00:04:16.189
+Then, I can place another piece.
+
+00:04:16.189 --> 00:04:17.629
+If I get three in a row,
+
+00:04:17.629 --> 00:04:19.394
+I win and the game is terminated.
+
+00:04:19.394 --> 00:04:23.365
+You can play with this just got a feel.
+
+00:04:23.365 --> 00:04:27.675
+Now, the next step is we need to initialize an AI to play the game.
+
+00:04:27.675 --> 00:04:33.665
+To do that, I create a neural network using PyTorch and I call this the policy.
+
+00:04:33.665 --> 00:04:36.935
+Although in alphazero, the neural network can
+
+00:04:36.935 --> 00:04:41.470
+actually contains both the policy and the critic.
+
+00:04:41.470 --> 00:04:45.650
+This is what we'll follow here as well.
+
+00:04:48.509 --> 00:04:53.524
+So, I've already prepared a neural network for you,
+
+00:04:53.524 --> 00:04:57.714
+it contains a convolutional layer, fully linear layer,
+
+00:04:57.714 --> 00:05:02.049
+and the important parts are they are separate layers for
+
+00:05:02.050 --> 00:05:06.814
+the policy and the critic after these convolutional and linear layers.
+
+00:05:06.814 --> 00:05:11.170
+I encourage you to play with this to try to come up with
+
+00:05:11.170 --> 00:05:17.449
+even simpler policy that can learn to play TicTacToe.
+
+00:05:17.449 --> 00:05:21.860
+So, next step is we look at the forward function.
+
+00:05:21.860 --> 00:05:26.355
+The way this works is it takes in first,
+
+00:05:26.355 --> 00:05:28.620
+you use the convolutional layer,
+
+00:05:28.620 --> 00:05:29.925
+the fully connected layer,
+
+00:05:29.925 --> 00:05:37.884
+then they're separate policy head and critic head that needs to be computed separately.
+
+00:05:37.884 --> 00:05:46.069
+Now, you can easily use a Softmax on a nine-by-nine matrix to get the probability,
+
+00:05:46.069 --> 00:05:49.730
+but this doesn't work quite that well.
+
+00:05:49.730 --> 00:05:54.345
+Given that not all the moves are available because say,
+
+00:05:54.345 --> 00:05:57.345
+player one plays a piece in a position,
+
+00:05:57.345 --> 00:06:01.725
+then player negative one could not place another piece in that same location.
+
+00:06:01.725 --> 00:06:08.535
+To fix it, I compute this thing called the availability matrix,
+
+00:06:08.535 --> 00:06:14.410
+which basically gives zero when the move is unavailable in that location,
+
+00:06:14.410 --> 00:06:18.390
+and it gives one when a move is available.
+
+00:06:18.389 --> 00:06:21.074
+So, during the Softmax operation,
+
+00:06:21.074 --> 00:06:22.849
+when I compute the exponential,
+
+00:06:22.850 --> 00:06:30.245
+I can multiply that by the availability matrix and then compute the probability.
+
+00:06:30.245 --> 00:06:35.610
+Doing it this way will ensure that when a move is not legal,
+
+00:06:35.610 --> 00:06:38.379
+the probability will be exactly zero.
+
+00:06:38.379 --> 00:06:42.610
+So, it will make coding up the rest of the functions a little easier.
+
+00:06:42.610 --> 00:06:45.990
+Now, the critic head is fairly straightforward,
+
+00:06:45.990 --> 00:06:49.610
+I just feed it through some fully connected layers
+
+00:06:49.610 --> 00:06:53.210
+and output a value using the tanh functions,
+
+00:06:53.209 --> 00:06:56.699
+so that the value is in between negative one and one.
+
+00:06:56.699 --> 00:06:58.704
+Now, for training to work,
+
+00:06:58.704 --> 00:07:02.615
+I have to initialize a policy using our favorite optimizer.
+
+00:07:02.615 --> 00:07:04.980
+A learning ray and also include
+
+00:07:04.980 --> 00:07:13.550
+a regularization weight decay and feel free to play around with the numbers here.
+
+00:07:13.550 --> 00:07:16.845
+The next step is I need to code up
+
+00:07:16.845 --> 00:07:23.795
+a player that can use Monte Carlo tree search to play a game.
+
+00:07:23.795 --> 00:07:27.890
+So, this is defined here.
+
+00:07:27.889 --> 00:07:31.560
+Basically, each time I have a game I make
+
+00:07:31.560 --> 00:07:36.459
+a copy and I initialize a Monte Carlo tree search class.
+
+00:07:36.459 --> 00:07:44.789
+You can explore this tree by simply invoking this explore function by supplying a policy.
+
+00:07:44.790 --> 00:07:48.215
+This function will compute all the U's,
+
+00:07:48.214 --> 00:07:52.259
+pick the branch with maximal U, search, expand,
+
+00:07:52.259 --> 00:07:57.399
+back-propagate and then increase the VisiCalc and after that you can use
+
+00:07:57.399 --> 00:08:03.299
+the next function and tell the tree to choose a next move.
+
+00:08:03.300 --> 00:08:05.189
+We'll cover what these are later,
+
+00:08:05.189 --> 00:08:07.629
+these are useful for training but this function is only
+
+00:08:07.629 --> 00:08:10.574
+used for visualization so we don't care about these.
+
+00:08:10.574 --> 00:08:15.009
+Then, what it does is it returns the move that was
+
+00:08:15.009 --> 00:08:19.699
+played after this increment, incrementing the tree.
+
+00:08:19.699 --> 00:08:24.069
+Now you might wonder what is this temperature parameter doing here.
+
+00:08:24.069 --> 00:08:29.319
+Well remember that in our lessons we mentioned that in Monte Carlo tree search
+
+00:08:29.319 --> 00:08:35.309
+especially during training we choose the next action based on the VisiCalc,
+
+00:08:35.309 --> 00:08:39.314
+and to encourage exploration we choose
+
+00:08:39.315 --> 00:08:44.110
+a VisiCalc based on a probability that's proportional to the VisiCalc.
+
+00:08:44.110 --> 00:08:48.740
+But when we play a game we want to find the strongest move.
+
+00:08:48.740 --> 00:08:53.460
+So we don't really want to make it too random.
+
+00:08:53.460 --> 00:08:57.875
+To do that we include this temperature parameter.
+
+00:08:57.875 --> 00:09:02.379
+Basically when temperatures approaches zero we're
+
+00:09:02.379 --> 00:09:07.544
+essentially choosing the node with dot largest VisiCalc.
+
+00:09:07.544 --> 00:09:10.524
+So 0.1 is that it's more or less good enough
+
+00:09:10.524 --> 00:09:14.129
+so that's why we put this temperature equals 0.1 here.
+
+00:09:14.129 --> 00:09:19.115
+I've also supply you a random player that just makes random moves.
+
+00:09:19.115 --> 00:09:21.690
+So let's see what this function does,
+
+00:09:21.690 --> 00:09:24.445
+so given that you initialize a game,
+
+00:09:24.445 --> 00:09:27.065
+the game board is all zero,
+
+00:09:27.065 --> 00:09:29.630
+the policy player will spit out
+
+00:09:29.629 --> 00:09:34.279
+a move that gives you the corner on where to place the next piece,
+
+00:09:34.279 --> 00:09:35.855
+so 1, 2 in this case.
+
+00:09:35.855 --> 00:09:40.090
+So, let's see how well this policy does by play a game against it,
+
+00:09:40.090 --> 00:09:42.014
+so player one is none so that's me,
+
+00:09:42.014 --> 00:09:45.335
+so policy player will play against me so let's see.
+
+00:09:45.335 --> 00:09:49.785
+So clearly if you know tic-tac-toe you know that this is not an optimal move.
+
+00:09:49.784 --> 00:09:54.784
+So this is more or less random and I can easily beat, you see?
+
+00:09:54.784 --> 00:10:00.189
+So it does know how to block given that there is a tree search component,
+
+00:10:00.190 --> 00:10:08.545
+so it's able to find moves that will stop it from losing.
+
+00:10:08.544 --> 00:10:10.919
+So notice that it's able to block me,
+
+00:10:10.919 --> 00:10:16.389
+but it doesn't know slightly more advanced strategy namely that you shouldn't
+
+00:10:16.389 --> 00:10:23.100
+put a piece in the edge middle here when I put a piece in the center.
+
+00:10:23.100 --> 00:10:26.129
+Now let's try to improve this agent,
+
+00:10:26.129 --> 00:10:33.434
+to do that you can initialize your policy and your optimizer here,
+
+00:10:33.434 --> 00:10:35.669
+and your optimizer here,
+
+00:10:35.669 --> 00:10:38.379
+I think that's redundant if given that I already done it here,
+
+00:10:38.379 --> 00:10:45.460
+but you can do it again and then you can train your agent.
+
+00:10:45.460 --> 00:10:47.470
+Let's go to the training loop,
+
+00:10:47.470 --> 00:10:56.200
+here I've included a progress bar just to tell you the estimated time remaining.
+
+00:10:56.200 --> 00:10:58.210
+Now let's go through the training loop,
+
+00:10:58.210 --> 00:11:02.660
+for each episode I have to initialize a top node for
+
+00:11:02.659 --> 00:11:08.814
+the Monte Carlo tree search and whenever the game is not over yet,
+
+00:11:08.815 --> 00:11:10.820
+meaning the outcome is still none,
+
+00:11:10.820 --> 00:11:13.894
+I explore the tree 50 steps,
+
+00:11:13.894 --> 00:11:16.644
+after I explore the tree,
+
+00:11:16.644 --> 00:11:20.720
+I keep track of the player and then increment to the next tree.
+
+00:11:20.720 --> 00:11:25.035
+So in this step the tree was to choose an action based on
+
+00:11:25.034 --> 00:11:31.194
+the VisiCalc and these are the outputs that will be used to update my policy.
+
+00:11:31.195 --> 00:11:35.340
+V is the expected outcome
+
+00:11:35.340 --> 00:11:41.085
+computed from the tree search but it's not going to be useful here,
+
+00:11:41.085 --> 00:11:49.095
+nn v is the critic value evaluating the current board.
+
+00:11:49.095 --> 00:11:56.660
+P is a list of probability of taking each action computed from Monte Carlo tree search,
+
+00:11:56.659 --> 00:11:59.509
+nn p is the same thing but with
+
+00:11:59.509 --> 00:12:03.524
+dot Monte Carlo tree search basically coming straight from the policy.
+
+00:12:03.524 --> 00:12:11.334
+So we need to compute a loss function by comparing p with nn p and also comparing
+
+00:12:11.335 --> 00:12:15.900
+the critic value to the actual outcome of the game which will be
+
+00:12:15.899 --> 00:12:20.949
+recorded when the game is over in the dot outcome.
+
+00:12:20.950 --> 00:12:24.400
+Now let's go through how to calculate the loss function.
+
+00:12:24.399 --> 00:12:30.059
+First we compute the probability times log policy.
+
+00:12:30.059 --> 00:12:33.234
+This will contribute to part of the loss function,
+
+00:12:33.235 --> 00:12:36.460
+I've also included a constant term here,
+
+00:12:36.460 --> 00:12:39.445
+this is not necessary at all,
+
+00:12:39.445 --> 00:12:43.410
+given that this does not contain any of the policy information
+
+00:12:43.409 --> 00:12:47.504
+and will not change the back propagation.
+
+00:12:47.504 --> 00:12:55.054
+But the reason why I include this term which is essentially log p times p is such that
+
+00:12:55.054 --> 00:13:03.704
+when the policy probability is exactly equal to the Monte Carlo tree search probability,
+
+00:13:03.705 --> 00:13:05.570
+this will give zero,
+
+00:13:05.570 --> 00:13:10.415
+and that's not the case when you just compute probability times log policy.
+
+00:13:10.414 --> 00:13:17.500
+Doing it this way I can keep track of the loss function as training
+
+00:13:17.500 --> 00:13:21.740
+happens given that it's not so
+
+00:13:21.740 --> 00:13:26.480
+easy to keep track of whether learning has occurred in alpha zero,
+
+00:13:26.480 --> 00:13:29.335
+since we're performing self play,
+
+00:13:29.335 --> 00:13:33.475
+there's no metric to really see that learning has happened.
+
+00:13:33.475 --> 00:13:39.654
+So the loss function is a useful proxy after adding in this constant.
+
+00:13:39.654 --> 00:13:44.620
+So that we know that the smaller this whole term is,
+
+00:13:44.620 --> 00:13:49.304
+the more we sort of roughly speaking has learned.
+
+00:13:49.304 --> 00:13:54.794
+I've also included the critic value
+
+00:13:54.794 --> 00:13:58.954
+in the list but I have to multiply that by the current player.
+
+00:13:58.955 --> 00:14:03.520
+The reason I do this is because whenever a critic evaluates a board,
+
+00:14:03.519 --> 00:14:08.299
+the outcome is with respect to the current player.
+
+00:14:08.299 --> 00:14:14.559
+But at the end of the day the game outcome is with respect to the first player only.
+
+00:14:14.559 --> 00:14:20.659
+So in order to compare apples to apples I have to do this multiplication.
+
+00:14:20.659 --> 00:14:23.579
+Now the next step is the game has ended,
+
+00:14:23.580 --> 00:14:29.115
+I've saved the outcome then I compute the loss function and it contains two terms;
+
+00:14:29.115 --> 00:14:32.590
+The first term is the difference squared of
+
+00:14:32.590 --> 00:14:37.315
+the prediction from the critic minus the actual outcome.
+
+00:14:37.315 --> 00:14:40.545
+Pretty straightforward, and the second term is
+
+00:14:40.544 --> 00:14:47.439
+the cross entropy loss that's computed here and I'm just adding them up,
+
+00:14:47.440 --> 00:14:53.955
+then I can perform back propagation and update my policy.
+
+00:14:53.955 --> 00:14:56.889
+Now, I've already done the training,
+
+00:14:56.889 --> 00:14:58.139
+it shouldn't take long at all,
+
+00:14:58.139 --> 00:14:59.809
+roughly a minute or two,
+
+00:14:59.809 --> 00:15:03.899
+you see that I've kept track of mean loss,
+
+00:15:03.899 --> 00:15:09.824
+the loss is sort of decreasing and outcomes even from the get-go is
+
+00:15:09.825 --> 00:15:16.605
+already mostly draws and player one wins a majority of the time.
+
+00:15:16.605 --> 00:15:22.914
+It's not obvious that training was done,
+
+00:15:22.914 --> 00:15:32.584
+but given that during training the policy will still choose move somewhat randomly.
+
+00:15:32.585 --> 00:15:37.650
+We just have to play a game and see it if that's learned.
+
+00:15:37.649 --> 00:15:40.250
+So let's plot the losses and you see that
+
+00:15:40.250 --> 00:15:43.044
+it's sort of decreasing so something has happened,
+
+00:15:43.044 --> 00:15:49.899
+now let's play a game using the policy that we've just trained like this,
+
+00:15:49.899 --> 00:15:56.899
+initialize the game and put player one and player two both as the policy player MCTS,
+
+00:15:56.899 --> 00:15:58.529
+let's see what happens.
+
+00:15:58.529 --> 00:16:02.360
+You see that the first player puts the piece in the center,
+
+00:16:02.360 --> 00:16:04.555
+which is the strongest position possible,
+
+00:16:04.554 --> 00:16:09.899
+the second player knows how to stop it by placing a piece at the corner.
+
+00:16:10.399 --> 00:16:14.804
+So it's all sensible.
+
+00:16:14.804 --> 00:16:17.479
+Play a few more games.
+
+00:16:18.379 --> 00:16:24.085
+Now you see that it more or less leads to a draw.
+
+00:16:24.085 --> 00:16:26.220
+Let's try something more interesting,
+
+00:16:26.220 --> 00:16:29.759
+let's see how I do against this policy.
+
+00:16:29.759 --> 00:16:32.965
+If I place a piece at the center it blocks,
+
+00:16:32.965 --> 00:16:38.379
+and if I miss this it wins, obviously.
+
+00:16:38.379 --> 00:16:44.254
+Let's try again, okay, so it's pretty good.
+
+00:16:44.254 --> 00:16:47.850
+Now to make things even more interesting let it be the first player and see what
+
+00:16:47.850 --> 00:16:52.075
+happens if I place a suboptimal move like this.
+
+00:16:52.075 --> 00:16:54.650
+You see that it knows how to take advantage of
+
+00:16:54.649 --> 00:16:57.725
+the suboptimal move and it's now guaranteed to win.
+
+00:16:57.725 --> 00:17:02.540
+Let's try again, okay it consistently
+
+00:17:02.539 --> 00:17:07.994
+knows how to exploit my suboptimal move to win and there we go,
+
+00:17:07.994 --> 00:17:13.679
+we've trained an alpha zero agent to play a game of tic-tac-toe.
+

@@ -1,0 +1,70 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.050 --> 00:00:03.089
+The normal agents are rewarded based on
+
+00:00:03.089 --> 00:00:06.619
+the least distance of any of the agents to the landmark,
+
+00:00:06.620 --> 00:00:11.925
+and penalized based on the distance between the adversary and the target landmark.
+
+00:00:11.925 --> 00:00:13.670
+Under this reward structure,
+
+00:00:13.669 --> 00:00:17.259
+the agents cooperate to spread out across all the landmarks,
+
+00:00:17.260 --> 00:00:19.545
+so as to deceive the adversary.
+
+00:00:19.545 --> 00:00:22.170
+The framework of centralized trading with
+
+00:00:22.170 --> 00:00:26.330
+decentralized execution has been adopted in this paper.
+
+00:00:26.329 --> 00:00:30.719
+This implies that some extra information is used to ease dreaming,
+
+00:00:30.719 --> 00:00:34.839
+but that information is not used during the testing time.
+
+00:00:34.840 --> 00:00:39.715
+This framework can be naturally implemented using an actor-critic algorithm.
+
+00:00:39.715 --> 00:00:41.530
+Let me explain why.
+
+00:00:41.530 --> 00:00:45.094
+During training, the pretext for each agent uses
+
+00:00:45.094 --> 00:00:50.914
+extra information like state's observed and actions taken by all the other regions.
+
+00:00:50.914 --> 00:00:52.469
+As for the actor,
+
+00:00:52.469 --> 00:00:55.835
+you'll notice that there is one for each agent.
+
+00:00:55.835 --> 00:01:01.015
+Each actor has access to only its agent's observation and actions.
+
+00:01:01.015 --> 00:01:04.820
+During execution time, only the actors are present,
+
+00:01:04.819 --> 00:01:08.779
+and hence, on observations and actions are used.
+
+00:01:08.780 --> 00:01:14.715
+Learning critic for each agent allows us to use a different reward structure for each.
+
+00:01:14.715 --> 00:01:17.920
+Hence, the algorithm can be used in all,
+
+00:01:17.920 --> 00:01:21.320
+cooperative, competitive, and mixed scenarios.
+

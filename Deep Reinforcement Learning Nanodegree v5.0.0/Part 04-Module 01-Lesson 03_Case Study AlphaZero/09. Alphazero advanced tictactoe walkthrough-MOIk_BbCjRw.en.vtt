@@ -1,0 +1,328 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:05.599
+Hi. Today, I'm going to show you how to use Alpha
+
+00:00:05.599 --> 00:00:11.085
+zero to train an agent to play a more advanced version of tic-tac-toe.
+
+00:00:11.085 --> 00:00:14.339
+Hopefully, by now you've gotten the chance to play with
+
+00:00:14.339 --> 00:00:20.054
+the basic version and successfully training a Alpha zero tic-tac-toe agent.
+
+00:00:20.054 --> 00:00:24.570
+This time, we're going to initialize a slightly more complicated game that
+
+00:00:24.570 --> 00:00:29.039
+is played on a six by six board and in order to win,
+
+00:00:29.039 --> 00:00:31.829
+we need to have four pieces in a row,
+
+00:00:31.829 --> 00:00:38.429
+and also I've included an extra new rule called the pie rule which I'll explain later.
+
+00:00:38.429 --> 00:00:42.439
+Now, let's play a game, interactive game here.
+
+00:00:42.439 --> 00:00:46.519
+Now, the reason why a six by six board,
+
+00:00:46.520 --> 00:00:48.740
+four in a row game is not that interesting is because
+
+00:00:48.740 --> 00:00:51.640
+there's a strong advantage for the first player.
+
+00:00:51.640 --> 00:00:55.259
+What I mean by is this if I've placed the first piece here,
+
+00:00:55.259 --> 00:00:59.309
+the second player probably needs to start defending right away.
+
+00:00:59.310 --> 00:01:01.469
+Say put a piece here.
+
+00:01:01.469 --> 00:01:04.539
+Now, if red puts another piece here,
+
+00:01:04.540 --> 00:01:09.205
+blue has to defend already because if red plays in other move,
+
+00:01:09.204 --> 00:01:11.890
+there'll be both side,
+
+00:01:11.890 --> 00:01:16.250
+they're both side, they can go to four piece in a row and red will win.
+
+00:01:16.250 --> 00:01:19.700
+So, blue has to defend this by placing a move here or there.
+
+00:01:19.700 --> 00:01:23.579
+So, this is more sensible because now blue can attack as well.
+
+00:01:23.579 --> 00:01:26.274
+Now, red can continue to do this,
+
+00:01:26.275 --> 00:01:27.984
+blue has to defend.
+
+00:01:27.984 --> 00:01:36.933
+Now, red has to block this and then blue has to block this and continue and so forth.
+
+00:01:36.933 --> 00:01:40.859
+You see that already.
+
+00:01:40.859 --> 00:01:42.540
+Blue has to block this move,
+
+00:01:42.540 --> 00:01:46.735
+but red has another move here that can get three in a row,
+
+00:01:46.734 --> 00:01:49.769
+so now blue will lose.
+
+00:01:49.780 --> 00:01:53.680
+But, the pie rule makes this interesting.
+
+00:01:53.680 --> 00:01:58.909
+Now, how it does that is that if the first player plays a very strong move,
+
+00:01:58.909 --> 00:02:03.109
+the second player can choose to change rows
+
+00:02:03.108 --> 00:02:09.419
+compare to player one or in a more simple way,
+
+00:02:09.419 --> 00:02:16.559
+player two can just place another piece on top of the piece of player one, say this.
+
+00:02:16.560 --> 00:02:19.965
+Now, player two has the advantage now.
+
+00:02:19.965 --> 00:02:21.610
+So, in order to avoid this,
+
+00:02:21.610 --> 00:02:25.410
+player one has to play an opening move.
+
+00:02:25.409 --> 00:02:27.569
+That's quite a bit weaker,
+
+00:02:27.569 --> 00:02:31.400
+so that player two won't take advantage of this.
+
+00:02:31.400 --> 00:02:34.110
+Now, this is called the pie rule.
+
+00:02:34.110 --> 00:02:39.140
+This turns the table around and basically give a slight advantage
+
+00:02:39.139 --> 00:02:44.294
+to player two given that player two can always choose the better of two option.
+
+00:02:44.294 --> 00:02:51.419
+Either to switch player with player one or place a new piece and player one continues.
+
+00:02:51.419 --> 00:02:57.474
+Now, the next step is to define a random policy.
+
+00:02:57.474 --> 00:03:01.159
+Now, this is very similar to the tic-tac-toe except they're
+
+00:03:01.159 --> 00:03:05.340
+more convolutional layers and linear layers.
+
+00:03:05.340 --> 00:03:09.020
+There also the policy hat and the critic hat.
+
+00:03:09.020 --> 00:03:12.885
+Now, I've also played with leaky, rectified, linear unit.
+
+00:03:12.884 --> 00:03:15.655
+You can try rectified linear unit.
+
+00:03:15.655 --> 00:03:19.259
+I haven't really tested which one's better,
+
+00:03:19.259 --> 00:03:22.879
+but you can give it a shot and there's also
+
+00:03:22.879 --> 00:03:28.370
+the availability matrix just like before and so you can initialize a policy like this.
+
+00:03:28.370 --> 00:03:32.960
+Now, we define our Monte Carlo Tree Search player
+
+00:03:32.960 --> 00:03:37.615
+that can be fed into the play class to play an interactive game.
+
+00:03:37.615 --> 00:03:43.189
+I recommend you to choose somewhere around a 1,000 or 2,000
+
+00:03:43.189 --> 00:03:48.889
+for the tree search and this is definitely not going to be enough for a random policy.
+
+00:03:48.889 --> 00:03:50.759
+So, let's initialize it.
+
+00:03:50.759 --> 00:03:55.840
+Now, let's play a game against a random policy and see how we do.
+
+00:03:55.840 --> 00:03:58.365
+Now, the first this is more or less random,
+
+00:03:58.365 --> 00:04:00.990
+so I choose to play a strong move here.
+
+00:04:00.990 --> 00:04:02.300
+Let's see what happens.
+
+00:04:02.300 --> 00:04:04.910
+So, this is more or less useless.
+
+00:04:04.909 --> 00:04:07.909
+See if red knows how to defend.
+
+00:04:07.909 --> 00:04:13.430
+Let's see. Okay. It doesn't know how to defend yet,
+
+00:04:13.430 --> 00:04:15.150
+and now I'm able to win.
+
+00:04:15.150 --> 00:04:18.379
+So, clearly this policy when it's random,
+
+00:04:18.379 --> 00:04:20.954
+it hasn't even learn.
+
+00:04:20.954 --> 00:04:26.365
+It doesn't know how to defend this three in a row attack yet.
+
+00:04:26.365 --> 00:04:33.210
+So, it definitely needs to be trained to learn that and training does take quite a while.
+
+00:04:33.209 --> 00:04:36.094
+You can go through the training loop here,
+
+00:04:36.095 --> 00:04:38.305
+set up your optimizer,
+
+00:04:38.305 --> 00:04:42.600
+weight decay learning ray is the same as the tic-tac-toe as before.
+
+00:04:42.600 --> 00:04:50.450
+You can try different numbers of N max the number to explore the policy.
+
+00:04:50.449 --> 00:04:54.034
+I've also included an extra step here that saves you a little bit of
+
+00:04:54.035 --> 00:04:58.255
+time is that whenever I increment to the next tree,
+
+00:04:58.254 --> 00:05:03.350
+I only explore enough such that the branches,
+
+00:05:03.350 --> 00:05:06.970
+the total visit count for the branch is N max.
+
+00:05:06.970 --> 00:05:11.165
+This saves a little bit of time given that each time you go to the
+
+00:05:11.165 --> 00:05:16.780
+subsequent branch,some of the moves have been explored previously,
+
+00:05:16.779 --> 00:05:19.469
+so you don't have to explore the entire 2,000.
+
+00:05:19.470 --> 00:05:23.285
+This saves a little bit of time and also I've added
+
+00:05:23.285 --> 00:05:28.580
+an extra condition that saves your policy periodically,
+
+00:05:28.579 --> 00:05:30.529
+so you don't lose your progress,
+
+00:05:30.529 --> 00:05:33.189
+so feel free to edit this to be more frequent,
+
+00:05:33.189 --> 00:05:36.055
+less frequent, change the name of the policy.
+
+00:05:36.055 --> 00:05:38.009
+Now, training takes quite a while.
+
+00:05:38.009 --> 00:05:42.365
+It took me like a day or so to get my policy and I play with
+
+00:05:42.365 --> 00:05:48.840
+training a few different epoch and then at the end,
+
+00:05:48.839 --> 00:05:53.609
+I come up with a very strong policy that you can try to beat.
+
+00:05:53.610 --> 00:05:55.759
+So, let's initialize this.
+
+00:05:55.759 --> 00:05:58.649
+I've included it in your Jupyter Notebook.
+
+00:05:58.649 --> 00:06:04.089
+You can see here the 6-6-4 pie rule policy.
+
+00:06:04.089 --> 00:06:07.339
+You can load it and play a game and
+
+00:06:07.339 --> 00:06:10.474
+see if you can beat it given that second player has an advantage.
+
+00:06:10.475 --> 00:06:12.325
+Let's give it a shot.
+
+00:06:12.324 --> 00:06:14.719
+So, I'm going to try to be careful in playing
+
+00:06:14.720 --> 00:06:18.140
+this game and see if I can defeat this agent.
+
+00:06:18.139 --> 00:06:21.769
+Now, let's play a game against the policy that I've
+
+00:06:21.769 --> 00:06:28.099
+trained given that it takes a bit of time for the agent to think for the next moves,
+
+00:06:28.100 --> 00:06:32.125
+I'm going to speed this part of the video here.
+
+00:06:32.125 --> 00:06:34.625
+So, the first player has played a first move.
+
+00:06:34.625 --> 00:06:36.839
+I think I overtake it.
+
+00:06:39.889 --> 00:06:44.389
+Now, as you can see, I was really trying to initiate
+
+00:06:44.389 --> 00:06:48.870
+an attack and try to defend and try to initiate another attack,
+
+00:06:48.870 --> 00:06:53.899
+but then I missed the fact that red already has some winning moves.
+
+00:06:53.899 --> 00:07:00.784
+So, you can see that this agent is quite strong and training seems to have succeeded.
+
+00:07:00.785 --> 00:07:04.340
+It's pretty good at challenging the human player.
+
+00:07:04.339 --> 00:07:06.739
+So, I encourage you to play around with this and
+
+00:07:06.740 --> 00:07:10.720
+see maybe you come up with an even better policy.
+

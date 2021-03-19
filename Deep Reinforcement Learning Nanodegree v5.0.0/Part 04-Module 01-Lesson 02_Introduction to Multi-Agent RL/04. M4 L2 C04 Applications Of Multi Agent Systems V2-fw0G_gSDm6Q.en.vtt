@@ -1,0 +1,55 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.520
+In this video, we will discuss
+
+00:00:02.520 --> 00:00:06.529
+some potential real-life applications of multi-agent systems.
+
+00:00:06.530 --> 00:00:09.690
+A group of drones or robots whose aim is to pick up
+
+00:00:09.689 --> 00:00:13.559
+a package and drop it to the destination is a multi-agent system.
+
+00:00:13.560 --> 00:00:15.044
+In the stock market,
+
+00:00:15.044 --> 00:00:18.300
+each person who is trading can be considered as an agent and
+
+00:00:18.300 --> 00:00:22.850
+the profit maximization process can be modeled as a multi-agent problem.
+
+00:00:22.850 --> 00:00:27.255
+Interactive robots or humanoids that interact with humans and get some task
+
+00:00:27.254 --> 00:00:32.494
+done are nothing but multi-agent systems if we consider humans to be agents.
+
+00:00:32.494 --> 00:00:36.589
+Windmills in a wind farm can be thought of as multiple agents.
+
+00:00:36.590 --> 00:00:38.930
+It would be cool if all the agents, that is,
+
+00:00:38.929 --> 00:00:43.115
+the wind turbines figured out the optimal direction to face by themselves,
+
+00:00:43.115 --> 00:00:45.650
+and obtained maximum energy from the wind farm.
+
+00:00:45.649 --> 00:00:50.689
+The aim here is to collaboratively maximize the profit obtained from the wind farm.
+
+00:00:50.689 --> 00:00:55.464
+These are some of the many cases where multi-agent systems can be used.
+
+00:00:55.465 --> 00:00:58.790
+In the next video, we will discuss some benefits that come with
+
+00:00:58.789 --> 00:01:02.640
+having multiple agents in a system. See you there.
+

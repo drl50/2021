@@ -1,0 +1,100 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.069
+So, can we think about adapting
+
+00:00:02.069 --> 00:00:07.070
+the single-agent auto techniques we've learned about so far to the multi-agent case?
+
+00:00:07.070 --> 00:00:10.230
+Two extreme approaches come to mind.
+
+00:00:10.230 --> 00:00:13.350
+The simplest approach should be to train all the agents
+
+00:00:13.349 --> 00:00:17.739
+independently without considering the existence of other agents.
+
+00:00:17.739 --> 00:00:20.669
+In this approach, any agent considers
+
+00:00:20.670 --> 00:00:24.905
+all the others to be a part of the environment and learns its own policy.
+
+00:00:24.905 --> 00:00:27.740
+Since all are learning simultaneously,
+
+00:00:27.739 --> 00:00:32.829
+the environment as seen from the prospective of a single agent, changes dynamically.
+
+00:00:32.829 --> 00:00:37.064
+This condition is called non-stationarity of the environment.
+
+00:00:37.064 --> 00:00:39.125
+In most single agent algorithms,
+
+00:00:39.125 --> 00:00:41.869
+it is assumed that the environment is stationary,
+
+00:00:41.869 --> 00:00:44.689
+which leads to certain convergence guarantees.
+
+00:00:44.689 --> 00:00:47.579
+Hence, under non-stationarity conditions,
+
+00:00:47.579 --> 00:00:50.164
+these guarantees no longer hold.
+
+00:00:50.164 --> 00:00:53.369
+The second approach is the matter agent approach.
+
+00:00:53.369 --> 00:00:58.123
+The matter agent approach takes into account the existence of multiple agents.
+
+00:00:58.124 --> 00:01:01.745
+Here, a single policy is lowered for all the agents.
+
+00:01:01.744 --> 00:01:05.269
+It takes as input the present state of the environment and returns
+
+00:01:05.269 --> 00:01:09.659
+the action of each agent in the form of a single joint action vector.
+
+00:01:09.659 --> 00:01:12.709
+Typically, a single reward function given
+
+00:01:12.709 --> 00:01:17.030
+the environment state and the action vector returns a global reward.
+
+00:01:17.030 --> 00:01:20.180
+The joint action space as we had discussed before,
+
+00:01:20.180 --> 00:01:23.545
+would increase exponentially with the number of agents.
+
+00:01:23.545 --> 00:01:29.015
+If the environment is partially observable or the agents can only see locally,
+
+00:01:29.015 --> 00:01:32.750
+each agent will have a different observation of the environment state,
+
+00:01:32.750 --> 00:01:35.750
+hence it will be difficult to disambiguate the state
+
+00:01:35.750 --> 00:01:38.900
+of the environment from different local observations.
+
+00:01:38.900 --> 00:01:45.065
+So this approach works well only when each agent knows everything about the environment.
+
+00:01:45.064 --> 00:01:48.129
+In the next video, we will talk about the different kinds of
+
+00:01:48.129 --> 00:01:51.464
+environment that exist in multi-agent systems.
+
+00:01:51.465 --> 00:01:54.159
+Let's move on to the next video.
+

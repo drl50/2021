@@ -1,0 +1,75 @@
+{
+  "data": {
+    "lesson": {
+      "id": 549278,
+      "key": "d09f6da4-a148-419f-b54b-cf30929ad666",
+      "title": "Study Plan",
+      "semantic_type": "Lesson",
+      "is_public": true,
+      "version": "1.0.0",
+      "locale": "en-us",
+      "summary": "Obtain helpful resources to accelerate your learning in the fourth part of the Nanodegree program.",
+      "lesson_type": "Classroom",
+      "display_workspace_project_only": false,
+      "resources": null,
+      "project": null,
+      "lab": null,
+      "concepts": [
+        {
+          "id": 552110,
+          "key": "90ef0a4b-eaed-4079-ace7-f798127142ea",
+          "title": "Study Plan",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "90ef0a4b-eaed-4079-ace7-f798127142ea",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 626170,
+              "key": "0deadbf5-c942-42ec-8f65-34a0fbfc2087",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/March/5a9f9552_udacitylogo/udacitylogo.jpg",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/0deadbf5-c942-42ec-8f65-34a0fbfc2087",
+              "caption": "",
+              "alt": "",
+              "width": 100,
+              "height": 100,
+              "instructor_notes": null
+            },
+            {
+              "id": 626175,
+              "key": "b1a97557-418c-4b57-b8de-4949ad812d01",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Study Plan",
+              "instructor_notes": ""
+            },
+            {
+              "id": 626176,
+              "key": "e1282a71-9ea8-41d6-9307-e5a74827f854",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "The fourth part of this nanodegree program covers multi-agent deep reinforcement learning and lasts **3 weeks**.  You can find all of the coding exercises from the lessons in this [GitHub repository](https://github.com/udacity/deep-reinforcement-learning).\n\n## Week 1\n---\nMost of reinforcement learning is concerned with a single agent that must demonstrate proficiency at a task. In that scenario, there are no other agents. However, if we’d like our agents to become truly intelligent, they must be able to communicate with — and learn from — other agents. Multi-agent reinforcement learning has many real-world applications, ranging from self-driving cars to warehouse management.\n#### Lesson: Introduction to Multi-Agent RL\n\nIn this lesson, you’ll also explore frameworks and techniques that can be used to train multiple, interacting agents, through a research area known as multi-agent reinforcement learning.\n\n## Weeks 2-3\n---\nDuring the final two weeks, you will focus on the project.  You will also learn about AlphaZero.  \n\n#### Lesson: Case Study: AlphaZero (_Optional_)\n\nIn this lesson, you will learn all about Monte Carlo Tree Search (MCTS) and master the skills behind DeepMind's AlphaZero.",
+              "instructor_notes": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "_deprecated": [
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    }
+  ]
+}

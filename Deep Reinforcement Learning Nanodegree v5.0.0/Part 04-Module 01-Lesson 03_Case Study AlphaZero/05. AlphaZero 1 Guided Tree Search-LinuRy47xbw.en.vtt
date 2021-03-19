@@ -1,0 +1,277 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.214
+We know that tree searches can become intractable very quickly,
+
+00:00:04.214 --> 00:00:07.310
+even when we utilize Monte Carlo methods.
+
+00:00:07.309 --> 00:00:09.955
+Take the game of Go for example.
+
+00:00:09.955 --> 00:00:13.330
+The game board is a 19 by 19 grid,
+
+00:00:13.330 --> 00:00:17.634
+and that means 361 possible first moves.
+
+00:00:17.635 --> 00:00:23.540
+The number of possible second moves is tiny bit smaller, 360.
+
+00:00:23.539 --> 00:00:27.405
+For the third move, 359.
+
+00:00:27.405 --> 00:00:34.405
+Already, there are around 50 million possibilities just for the first three moves.
+
+00:00:34.405 --> 00:00:37.115
+Now, there are some redundancies,
+
+00:00:37.115 --> 00:00:41.950
+as we can rotate and flip the board without changing the game.
+
+00:00:41.950 --> 00:00:45.530
+But still, a Monte Carlo search would never be able to
+
+00:00:45.530 --> 00:00:49.359
+accumulate enough statistics to be reliable.
+
+00:00:49.359 --> 00:00:54.079
+So, we need to find a better way to improve Monte Carlo tree search.
+
+00:00:54.079 --> 00:00:59.144
+Not surprisingly, this can be done using deep neural networks.
+
+00:00:59.145 --> 00:01:03.770
+Here, we introduce an expert policy, pi theta.
+
+00:01:03.770 --> 00:01:09.465
+That roughly tells us the probability of the next move by an expert player,
+
+00:01:09.465 --> 00:01:12.880
+and an expert critic, v theta,
+
+00:01:12.879 --> 00:01:19.589
+that tells us what the expected score is from the perspective of the current player.
+
+00:01:19.590 --> 00:01:22.793
+The idea is that using the policy,
+
+00:01:22.793 --> 00:01:27.954
+we can focus on exploring moves that an expert is likely to play.
+
+00:01:27.954 --> 00:01:35.009
+The critic will allow us to estimate the outcome of a game without running a simulation.
+
+00:01:35.010 --> 00:01:37.219
+In the AlphaZero paper,
+
+00:01:37.219 --> 00:01:42.015
+both the policy and the critic come from a single neural network,
+
+00:01:42.015 --> 00:01:46.109
+and thus, they share the same weights, theta.
+
+00:01:46.109 --> 00:01:50.075
+Now, we can choose a move using only the policy,
+
+00:01:50.075 --> 00:01:52.530
+but we don't just want to use the policy,
+
+00:01:52.530 --> 00:01:57.320
+we want to find moves that are better than the current policy so that it can improve.
+
+00:01:57.319 --> 00:02:01.334
+To do this, we perform a Monte Carlo tree search,
+
+00:02:01.334 --> 00:02:04.049
+utilizing both the policy and the critic,
+
+00:02:04.049 --> 00:02:09.044
+so that the resulting moves are stronger than the policy alone,
+
+00:02:09.044 --> 00:02:12.869
+then we can use it to update the policy.
+
+00:02:12.969 --> 00:02:17.634
+Let's see how that works in a game of Tic-tac-toe.
+
+00:02:17.634 --> 00:02:22.419
+Given a state, we want to find out what the best move is.
+
+00:02:22.419 --> 00:02:25.379
+Just like the case of Monte-Carlo tree search,
+
+00:02:25.379 --> 00:02:28.229
+we consider all the possible actions,
+
+00:02:28.229 --> 00:02:30.854
+and assign three numbers,
+
+00:02:30.854 --> 00:02:34.280
+U, N, and V to each of them.
+
+00:02:34.419 --> 00:02:40.054
+Just like before, N is the total visit counts for the action,
+
+00:02:40.055 --> 00:02:42.694
+V is the expected score,
+
+00:02:42.694 --> 00:02:47.144
+and U, a value that guides the Monte Carlo tree search.
+
+00:02:47.145 --> 00:02:53.000
+The U function is a bit different from the ones from normal Monte Carlo tree search.
+
+00:02:53.000 --> 00:02:54.949
+We have the same first term,
+
+00:02:54.949 --> 00:02:58.429
+V again, and it controls exploitation.
+
+00:02:58.430 --> 00:03:02.659
+We'll see that this V will largely come from the critic.
+
+00:03:02.659 --> 00:03:06.020
+The second term is the exploration term that
+
+00:03:06.020 --> 00:03:10.070
+encourages visiting nodes with small visit counts.
+
+00:03:10.069 --> 00:03:12.750
+This is proportional to the policy.
+
+00:03:12.750 --> 00:03:18.485
+so that moves that are more likely to be played by an expert will be favored.
+
+00:03:18.485 --> 00:03:23.400
+Notice that we also introduced a hyperparameter C,
+
+00:03:23.400 --> 00:03:26.939
+that controls the level of exploration.
+
+00:03:27.289 --> 00:03:30.405
+Let's see the search in action.
+
+00:03:30.405 --> 00:03:33.245
+In the beginning, all the U's are zero.
+
+00:03:33.245 --> 00:03:35.860
+So we randomly choose an action.
+
+00:03:35.860 --> 00:03:40.455
+Then we can compute an estimated outcome using the critic,
+
+00:03:40.455 --> 00:03:44.815
+V theta, and update all the values in that node.
+
+00:03:44.814 --> 00:03:48.689
+The total number of visits is now one.
+
+00:03:48.689 --> 00:03:55.074
+So, the exploration terms for all the other branches need to be updated like this.
+
+00:03:55.074 --> 00:03:57.454
+To iterate this process,
+
+00:03:57.455 --> 00:03:59.560
+we need to compare all the U's,
+
+00:03:59.560 --> 00:04:03.205
+and visit the branch with the largest U again.
+
+00:04:03.205 --> 00:04:06.525
+The search may lead us to a different branch.
+
+00:04:06.525 --> 00:04:11.510
+Again, we update the expected outcome using the critic,
+
+00:04:11.509 --> 00:04:15.609
+and the U function for the other branches.
+
+00:04:15.610 --> 00:04:18.460
+As this process is repeated,
+
+00:04:18.459 --> 00:04:24.109
+we may revisit the same branch again, what do we do then?
+
+00:04:24.110 --> 00:04:26.835
+In order to get more information,
+
+00:04:26.834 --> 00:04:31.750
+we can expand this node into all the possible subsequent states,
+
+00:04:31.750 --> 00:04:34.584
+each with their own values U,
+
+00:04:34.584 --> 00:04:38.469
+N, and V, all initialized to zero.
+
+00:04:38.470 --> 00:04:42.230
+Then we can choose an action with the maximum U,
+
+00:04:42.230 --> 00:04:46.295
+and compute the expected outcome from the critic.
+
+00:04:46.295 --> 00:04:53.055
+Afterward, we can go back to the original node and update the expected outcome.
+
+00:04:53.055 --> 00:04:59.875
+The V can be computed as the average of the initial estimate through the critic,
+
+00:04:59.875 --> 00:05:05.290
+together with the results of exploring all the children nodes.
+
+00:05:05.290 --> 00:05:09.185
+Notice that when computing the average for V,
+
+00:05:09.185 --> 00:05:14.439
+there's a negative sign in front of the contributions from the children nodes.
+
+00:05:14.439 --> 00:05:17.610
+This is necessary, because by convention,
+
+00:05:17.610 --> 00:05:21.250
+V is an estimate from the perspective of
+
+00:05:21.250 --> 00:05:26.790
+the current player and going to a trial node, changes the player.
+
+00:05:27.649 --> 00:05:33.219
+After many iterations, and as we go deeper into the game tree,
+
+00:05:33.220 --> 00:05:37.325
+we might reach a terminal state where the game ends.
+
+00:05:37.324 --> 00:05:41.870
+Then, instead of using the critic for estimating the expected outcome,
+
+00:05:41.870 --> 00:05:45.185
+we simply use the actual outcome.
+
+00:05:45.185 --> 00:05:50.884
+We can repeat this process for a fixed number of games and total.
+
+00:05:50.884 --> 00:05:53.435
+Just like in Monte Carlo tree search,
+
+00:05:53.435 --> 00:05:55.300
+to choose the best moves,
+
+00:05:55.300 --> 00:05:59.475
+we can simply pick the action with the highest visit counts,
+
+00:05:59.475 --> 00:06:03.085
+or if we want to encourage more exploration,
+
+00:06:03.084 --> 00:06:06.129
+we can choose an action stochastically with
+
+00:06:06.129 --> 00:06:10.550
+a probability proportional to the number of visits for each action,
+
+00:06:10.550 --> 00:06:12.000
+like the equation here.
+

@@ -1,0 +1,130 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.839
+Consider an example of single agent reinforcement learning.
+
+00:00:03.839 --> 00:00:07.734
+We have a drone with the task of grabbing a package.
+
+00:00:07.735 --> 00:00:11.185
+The possible actions are going right,
+
+00:00:11.185 --> 00:00:15.445
+left, up, down, and grasping.
+
+00:00:15.445 --> 00:00:18.765
+The reward is plus 50 for grasping the package,
+
+00:00:18.765 --> 00:00:20.960
+at minus one otherwise.
+
+00:00:20.960 --> 00:00:23.435
+Now, the difference in multi-agent RL,
+
+00:00:23.434 --> 00:00:26.149
+is that we have more than one agent.
+
+00:00:26.149 --> 00:00:28.399
+So, say we have a second drone.
+
+00:00:28.399 --> 00:00:32.128
+Now, both the drones are collaboratively trying to grasp the package.
+
+00:00:32.128 --> 00:00:35.729
+They're both observing the packets from their respective positions.
+
+00:00:35.729 --> 00:00:40.474
+They both have their own policies that returned an action for their observations.
+
+00:00:40.475 --> 00:00:43.554
+Both also have their own set of actions.
+
+00:00:43.554 --> 00:00:46.054
+The main thing about multi-agent RL,
+
+00:00:46.054 --> 00:00:49.210
+is that there is also a joint set of actions.
+
+00:00:49.210 --> 00:00:52.740
+Both the left drone and the right drone must begin action.
+
+00:00:52.740 --> 00:00:56.975
+For example, the bear DL is bended left drone moves down,
+
+00:00:56.975 --> 00:00:59.030
+and the right drone moves to the left.
+
+00:00:59.030 --> 00:01:02.195
+This example illustrates the Markov game framework,
+
+00:01:02.195 --> 00:01:05.349
+which we are now ready to discuss in more detail.
+
+00:01:05.349 --> 00:01:09.989
+A Markov game, is a tuple written as this;
+
+00:01:09.989 --> 00:01:13.379
+your n is the number of agents,
+
+00:01:13.379 --> 00:01:16.799
+S is the set of states of the environment,
+
+00:01:16.799 --> 00:01:20.539
+AI is the set of actions of each agent I,
+
+00:01:20.540 --> 00:01:23.455
+A is the joint action space,
+
+00:01:23.454 --> 00:01:27.355
+OI is the set of observations of agent I,
+
+00:01:27.355 --> 00:01:30.840
+RI is the default function of agent I,
+
+00:01:30.840 --> 00:01:35.060
+which returns a real value for acting in action in a particular state,
+
+00:01:35.060 --> 00:01:38.760
+Pi i is the policy of each agent i,
+
+00:01:38.760 --> 00:01:40.730
+that given its observations,
+
+00:01:40.730 --> 00:01:44.880
+returns a probability distribution over the actions AI,
+
+00:01:44.879 --> 00:01:47.709
+T is the state transition function.
+
+00:01:47.709 --> 00:01:50.284
+Given the current state and the joint action,
+
+00:01:50.284 --> 00:01:55.179
+it provides a probability distribution over the set of possible next states.
+
+00:01:55.180 --> 00:01:59.130
+Note, that even here the state transitions are Markovian,
+
+00:01:59.129 --> 00:02:01.074
+just like in an MDP.
+
+00:02:01.075 --> 00:02:04.579
+Recall, that Markovian means that the next state depends
+
+00:02:04.579 --> 00:02:08.800
+only on the present state and the actions taken in this state.
+
+00:02:08.800 --> 00:02:13.165
+However, the transition function now depends on the joint action.
+
+00:02:13.164 --> 00:02:17.534
+You may find slightly varying definitions at different places.
+
+00:02:17.534 --> 00:02:21.430
+In the next video, we will discuss about two approaches to model.
+
+00:02:21.430 --> 00:02:22.960
+Let's get going.
+

@@ -1,0 +1,175 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.004
+Now that we have an improved Monte-Carlo Tree Search
+
+00:00:04.004 --> 00:00:07.469
+guided by an expert policy and critic,
+
+00:00:07.469 --> 00:00:09.785
+how do we update them?
+
+00:00:09.785 --> 00:00:13.470
+Well, start with an empty board of Tic-Tac-Toe,
+
+00:00:13.470 --> 00:00:18.280
+we perform Monte-Carlo Tree Search using the current policy and critic.
+
+00:00:18.280 --> 00:00:24.755
+The end result is a list of visit counts for each actions N sub a,
+
+00:00:24.754 --> 00:00:31.914
+which can be converted into a list of probabilities for each action at every time step.
+
+00:00:31.914 --> 00:00:34.445
+After choosing the first move,
+
+00:00:34.445 --> 00:00:38.079
+we can perform Monte-Carlo Tree Search again.
+
+00:00:38.079 --> 00:00:44.119
+Now, we don't have to start from scratch because this current state is likely to have
+
+00:00:44.119 --> 00:00:46.849
+a very high visit counts and many of
+
+00:00:46.850 --> 00:00:50.950
+the subsequent states should have been explored already.
+
+00:00:50.950 --> 00:00:57.320
+So, we can iterate the Monte-Carlo Tree Search algorithm fairly efficiently.
+
+00:00:57.320 --> 00:01:03.179
+Eventually, we repeat this process and arrive at the end gain.
+
+00:01:03.179 --> 00:01:09.480
+In this case, the final score is z equals plus one.
+
+00:01:09.480 --> 00:01:12.439
+The final outcome can be compared to
+
+00:01:12.439 --> 00:01:18.064
+the expected outcome computed at each time step using the critic.
+
+00:01:18.064 --> 00:01:22.024
+We also computed the probability of performing
+
+00:01:22.025 --> 00:01:26.570
+an action through the Monte-Carlo Tree Search at each time step,
+
+00:01:26.569 --> 00:01:30.604
+and that can be compared to the expert policy as well.
+
+00:01:30.605 --> 00:01:35.495
+Together, we can compute a loss function, L Theta.
+
+00:01:35.495 --> 00:01:39.180
+This L Theta contains two terms.
+
+00:01:39.180 --> 00:01:43.010
+The first term is the square of the difference between
+
+00:01:43.010 --> 00:01:46.910
+the prediction from the critic and the actual outcome.
+
+00:01:46.909 --> 00:01:52.369
+Notice that I've included a factor of negative one to the t to make sure
+
+00:01:52.370 --> 00:01:58.285
+that the comparison is always from the perspective of the current player.
+
+00:01:58.284 --> 00:02:05.000
+The second term involving the logarithm of the policy can be interpreted as
+
+00:02:05.000 --> 00:02:08.120
+an entropy loss between the current policy
+
+00:02:08.120 --> 00:02:12.295
+and the probabilities computed through Monte-Carlo Tree Search.
+
+00:02:12.294 --> 00:02:15.769
+Minimizing this term, we forced the policy to be
+
+00:02:15.770 --> 00:02:19.225
+closer to the results of Monte-Carlo Tree Search,
+
+00:02:19.224 --> 00:02:24.689
+and thus, strengthening the moves predicted by the policy.
+
+00:02:24.689 --> 00:02:27.079
+Using the loss function,
+
+00:02:27.080 --> 00:02:34.420
+we can perform gradient descent to update both the policy and the critic.
+
+00:02:35.030 --> 00:02:40.574
+Finally, we're able to summarize the AlphaZero algorithm.
+
+00:02:40.574 --> 00:02:46.254
+First, we initialize a neural network that includes both the critic and the policy.
+
+00:02:46.254 --> 00:02:51.474
+Then we play again using Monte-Carlo Tree Search for choosing moves.
+
+00:02:51.474 --> 00:02:56.889
+Afterward, we compute the loss function and perform gradient descent.
+
+00:02:56.889 --> 00:02:59.084
+Repeating step two to three,
+
+00:02:59.085 --> 00:03:02.980
+the agent is able to play better and better.
+
+00:03:02.979 --> 00:03:08.314
+You may ask, how does learning happen intuitively?
+
+00:03:08.314 --> 00:03:11.370
+Starting from random critic and policy,
+
+00:03:11.370 --> 00:03:14.335
+the Monte-Carlo Tree Search in AlphaZero
+
+00:03:14.335 --> 00:03:17.855
+should be no better than a standard Monte-Carlo Tree Search.
+
+00:03:17.854 --> 00:03:19.759
+How does it learn then?
+
+00:03:19.759 --> 00:03:21.879
+Well, in the beginning,
+
+00:03:21.879 --> 00:03:28.259
+the critic is able to improve because whenever we reach end game during the Tree Search,
+
+00:03:28.259 --> 00:03:32.340
+the end game outcome is propagated in the tree
+
+00:03:32.340 --> 00:03:37.745
+and the critic will be able to predict this outcome better and better.
+
+00:03:37.745 --> 00:03:40.634
+After the critic becomes less random,
+
+00:03:40.634 --> 00:03:43.824
+the policy will start to improve as well.
+
+00:03:43.824 --> 00:03:45.699
+As training goes on,
+
+00:03:45.699 --> 00:03:51.164
+the AlphaZero agent will first learn how to play the end game very well.
+
+00:03:51.164 --> 00:03:53.405
+As the end game improves,
+
+00:03:53.405 --> 00:03:56.229
+the mid game will improve as well.
+
+00:03:56.229 --> 00:04:03.379
+Eventually, the algorithm will be able to anticipate long sequences of expert moves,
+
+00:04:03.379 --> 00:04:07.109
+leading to an expert level of gameplay
+

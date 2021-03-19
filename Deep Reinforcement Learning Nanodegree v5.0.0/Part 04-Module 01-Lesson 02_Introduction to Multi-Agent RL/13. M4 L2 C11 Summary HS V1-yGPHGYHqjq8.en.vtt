@@ -1,0 +1,61 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.314
+Hey, everyone. With this,
+
+00:00:03.314 --> 00:00:07.544
+we've reached the end of the exciting module on Multi-agent RL.
+
+00:00:07.544 --> 00:00:13.155
+We began by introducing ourselves to the multi-agent systems present in our surroundings.
+
+00:00:13.154 --> 00:00:18.289
+We reasoned why multi-agent systems are an important puzzle to solving AI,
+
+00:00:18.289 --> 00:00:21.429
+and decided to pursue this complex topic.
+
+00:00:21.429 --> 00:00:24.300
+We also studied the Markov games framework,
+
+00:00:24.300 --> 00:00:28.315
+which is a generalization of MDPs to the multi- agent case.
+
+00:00:28.315 --> 00:00:31.960
+We talked about using single-agent RL algorithms,
+
+00:00:31.960 --> 00:00:34.450
+as they are in the multi-agent case.
+
+00:00:34.450 --> 00:00:36.970
+This either leads to non-stationarity,
+
+00:00:36.969 --> 00:00:39.579
+or a large joint action space.
+
+00:00:39.579 --> 00:00:42.469
+We saw the interesting kinds of environments present in
+
+00:00:42.469 --> 00:00:47.155
+the multi-agent case namely: cooperative, competitive, and mixed.
+
+00:00:47.155 --> 00:00:49.140
+Towards the end, we implemented
+
+00:00:49.140 --> 00:00:53.299
+the multi-agent DDBG algorithm which is a centralized training,
+
+00:00:53.299 --> 00:00:59.104
+and decentralized execution algorithm that can be used in any of the above environments.
+
+00:00:59.104 --> 00:01:01.464
+That was all from my side.
+
+00:01:01.465 --> 00:01:04.655
+I hope it was a great learning experience for you.
+
+00:01:04.655 --> 00:01:09.000
+Thanks a lot for being with me through this journey. Bye-bye.
+

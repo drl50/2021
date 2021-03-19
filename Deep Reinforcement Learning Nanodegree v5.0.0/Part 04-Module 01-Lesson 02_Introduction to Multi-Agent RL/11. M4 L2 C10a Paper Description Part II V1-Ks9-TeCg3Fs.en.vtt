@@ -1,0 +1,40 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:07.089
+Hi everyone. The paper that you've chosen implements a multi-agent version of DDPG.
+
+00:00:07.089 --> 00:00:09.154
+DDPG, as you might remember,
+
+00:00:09.154 --> 00:00:14.959
+is an off policy actor-critic algorithm that uses the concept of target networks.
+
+00:00:14.960 --> 00:00:19.320
+The input of the action network is the current state while the output is
+
+00:00:19.320 --> 00:00:24.769
+a real value or a vector representing an action chosen from a continuous action space.
+
+00:00:24.769 --> 00:00:30.109
+Open AI has created a multi-agent environment called multi-agent particle.
+
+00:00:30.109 --> 00:00:34.984
+It consists of particles that is agents and some landmarks.
+
+00:00:34.984 --> 00:00:39.704
+A lot of interesting experimental scenarios have been laid out in this environment.
+
+00:00:39.704 --> 00:00:44.714
+We've chosen one of the many scenarios called physical deception.
+
+00:00:44.715 --> 00:00:49.955
+Here, any agents cooperate to reach the target landmark out of end landmarks.
+
+00:00:49.954 --> 00:00:53.914
+There is an adversary which is also trying to reach the target landmark,
+
+00:00:53.914 --> 00:00:58.200
+but it doesn't know which out of the end landmarks is the target landmark.
+

@@ -1,0 +1,31 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.830
+The field of multi-agent RL is abuzz with cutting edge research.
+
+00:00:04.830 --> 00:00:09.509
+Recently, Open AI announced that its team of five neural networks,
+
+00:00:09.509 --> 00:00:14.169
+OpenAI 5 has learned to defeat amature DoTA 2 players.
+
+00:00:14.169 --> 00:00:18.780
+OpenAI 5 has been trained using a scaled-up version of BPO.
+
+00:00:18.780 --> 00:00:24.210
+Coordination between agents is controlled using a hyperparameter called team spirit.
+
+00:00:24.210 --> 00:00:26.625
+It ranges from zero to one,
+
+00:00:26.625 --> 00:00:29.460
+where zero means agents only care about
+
+00:00:29.460 --> 00:00:32.174
+the individual reward functions while one
+
+00:00:32.174 --> 00:00:35.959
+means that they completely care about the team's reward function.
+

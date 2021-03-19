@@ -1,0 +1,241 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:01.010 --> 00:00:04.200
+Given a state in a zero sum game,
+
+00:00:04.200 --> 00:00:06.865
+how do we find an optimal policy?
+
+00:00:06.865 --> 00:00:09.190
+In theory, this is simple,
+
+00:00:09.189 --> 00:00:12.504
+because we could just perform a brute force search,
+
+00:00:12.505 --> 00:00:17.839
+and going through all the possible moves and all the possible games that can be played,
+
+00:00:17.839 --> 00:00:22.265
+and then we can choose the ones with the best possible outcomes.
+
+00:00:22.265 --> 00:00:24.480
+The possibilities are numerous,
+
+00:00:24.480 --> 00:00:26.949
+so I'm only showing a few examples here.
+
+00:00:26.949 --> 00:00:29.219
+We already see that in practice,
+
+00:00:29.219 --> 00:00:32.539
+this brute force method can become infeasible.
+
+00:00:32.539 --> 00:00:36.109
+Even for tic-tac-toe, things are complicated,
+
+00:00:36.109 --> 00:00:38.369
+as there are nine possible first moves,
+
+00:00:38.369 --> 00:00:40.109
+eight possible second moves,
+
+00:00:40.109 --> 00:00:42.740
+seven possible third moves and so forth.
+
+00:00:42.740 --> 00:00:45.829
+Can we do better? One possibility is
+
+00:00:45.829 --> 00:00:50.879
+that we can randomly sample a subset of all the possible games.
+
+00:00:50.990 --> 00:00:53.450
+Then for each action,
+
+00:00:53.450 --> 00:00:56.270
+we can compute the expected outcome by taking
+
+00:00:56.270 --> 00:01:00.640
+the average of all the subsequent play outs like this.
+
+00:01:00.640 --> 00:01:04.909
+For convenience we also add an extra negative sign so
+
+00:01:04.909 --> 00:01:09.549
+that the expected outcome is from the perspective of the current player.
+
+00:01:09.549 --> 00:01:14.594
+Then we would choose the action with the largest expected score,
+
+00:01:14.594 --> 00:01:19.025
+in this case who plays across at the bottom corner.
+
+00:01:19.025 --> 00:01:22.234
+This procedure sounds a little bit familiar.
+
+00:01:22.234 --> 00:01:27.635
+Trying to compute the expected outcome is analogous to estimating the Q function,
+
+00:01:27.635 --> 00:01:32.450
+and we know that a completely random search isn't ideal.
+
+00:01:32.450 --> 00:01:34.890
+It would be better to have some guidance.
+
+00:01:34.890 --> 00:01:40.780
+So, we can better balance random explorations with exploitations.
+
+00:01:41.430 --> 00:01:44.080
+Let's get systematic then,
+
+00:01:44.079 --> 00:01:49.280
+and look at all the possible moves player two can take given the current state.
+
+00:01:49.280 --> 00:01:51.534
+There are six possibilities.
+
+00:01:51.534 --> 00:01:55.869
+We can think of all the possibilities as part of a tree structure.
+
+00:01:55.870 --> 00:02:00.770
+The goal is we want to look at each branch of this tree and focus most of
+
+00:02:00.769 --> 00:02:03.920
+the random play outs on the actions that are more
+
+00:02:03.920 --> 00:02:08.390
+promising as opposed to just sample completely randomly.
+
+00:02:08.389 --> 00:02:14.039
+To do this we define three numbers for each branch of this tree: U,
+
+00:02:14.039 --> 00:02:18.584
+N, and V. All the values are initialized to zero.
+
+00:02:18.585 --> 00:02:23.430
+N is the number of times I've played a random game starting from that branch,
+
+00:02:23.430 --> 00:02:27.469
+and V is an estimate of the expected outcome
+
+00:02:27.469 --> 00:02:32.224
+starting from that branch and from the perspective of the current player.
+
+00:02:32.224 --> 00:02:38.909
+The variable U is computed from V and N given by the formula on the right.
+
+00:02:39.050 --> 00:02:42.710
+In each iteration I need to choose to play
+
+00:02:42.710 --> 00:02:46.159
+a random game starting from a selective branch.
+
+00:02:46.159 --> 00:02:48.715
+This is where the variable U comes in.
+
+00:02:48.715 --> 00:02:52.810
+The branch with the highest value of U will be chosen.
+
+00:02:52.810 --> 00:02:55.384
+This U function contains two pieces.
+
+00:02:55.384 --> 00:03:00.875
+The first one is V. So when the current expected outcome is large,
+
+00:03:00.875 --> 00:03:02.400
+U will be large,
+
+00:03:02.400 --> 00:03:04.680
+and this helps exploitation.
+
+00:03:04.680 --> 00:03:10.150
+Meanwhile the second piece is inversely proportional to one plus N. So,
+
+00:03:10.150 --> 00:03:14.295
+it encourages visits to branches with low visit counts,
+
+00:03:14.294 --> 00:03:17.204
+and this helps with exploration.
+
+00:03:17.205 --> 00:03:20.620
+Now that we have defined all the variables,
+
+00:03:20.620 --> 00:03:23.905
+let's see how a search may play out in action.
+
+00:03:23.905 --> 00:03:26.794
+Initially, all the U's are zero,
+
+00:03:26.794 --> 00:03:31.639
+so we just randomly choose one of the six possible actions.
+
+00:03:31.639 --> 00:03:34.459
+Now, we play a random game,
+
+00:03:34.460 --> 00:03:37.230
+and this time player two lost.
+
+00:03:37.229 --> 00:03:41.215
+So, V is updated to be negative one,
+
+00:03:41.215 --> 00:03:44.979
+and the number of visit increased to one.
+
+00:03:44.979 --> 00:03:47.594
+Before we start the next gameplay,
+
+00:03:47.594 --> 00:03:51.044
+notice that the total number of gameplay is now one.
+
+00:03:51.044 --> 00:03:56.059
+So, the exploration part of the U function needs to be updated for
+
+00:03:56.060 --> 00:04:01.439
+all the other branches, like this.
+
+00:04:01.439 --> 00:04:03.634
+The largest U is now one,
+
+00:04:03.634 --> 00:04:06.479
+so going to the next iteration of gameplay,
+
+00:04:06.479 --> 00:04:09.824
+we need to choose one of the other five actions.
+
+00:04:09.824 --> 00:04:15.734
+We can then repeat this procedure until a fixed number of total gameplays,
+
+00:04:15.735 --> 00:04:18.475
+say 100 games is reached,
+
+00:04:18.475 --> 00:04:21.640
+and we might end up with something like this.
+
+00:04:21.639 --> 00:04:25.185
+How do we decide what the next move is then?
+
+00:04:25.185 --> 00:04:29.310
+We could choose the action with the highest U or V,
+
+00:04:29.310 --> 00:04:32.574
+but sometimes they might not be that reliable,
+
+00:04:32.574 --> 00:04:35.000
+especially if the visit counts are low.
+
+00:04:35.000 --> 00:04:39.665
+So instead, we choose an action with the highest visit counts,
+
+00:04:39.665 --> 00:04:43.879
+which is usually associated with good expected outcome anyway,
+
+00:04:43.879 --> 00:04:46.394
+and it's a little bit more reliable.
+
+00:04:46.394 --> 00:04:50.839
+In this case the highest visit count is 21,
+
+00:04:50.839 --> 00:04:56.029
+and this is the move that we will choose according to the tree search.
+
