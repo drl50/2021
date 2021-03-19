@@ -1,0 +1,770 @@
+{
+  "data": {
+    "lesson": {
+      "id": 599090,
+      "key": "cbd125cd-6d16-439c-b902-1956b49ef495",
+      "title": "Welcome to Deep Reinforcement Learning",
+      "semantic_type": "Lesson",
+      "is_public": true,
+      "version": "1.0.0",
+      "locale": "en-us",
+      "summary": "Welcome to the Deep Reinforcement Learning Nanodegree program!",
+      "lesson_type": "Classroom",
+      "display_workspace_project_only": false,
+      "resources": {
+        "files": [
+          {
+            "name": "Videos Zip File",
+            "uri": "https://zips.udacity-data.com/cbd125cd-6d16-439c-b902-1956b49ef495/599090/1544455683405/Welcome+to+Deep+Reinforcement+Learning+Videos.zip"
+          },
+          {
+            "name": "Transcripts Zip File",
+            "uri": "https://zips.udacity-data.com/cbd125cd-6d16-439c-b902-1956b49ef495/599090/1544455680902/Welcome+to+Deep+Reinforcement+Learning+Subtitles.zip"
+          }
+        ],
+        "google_plus_link": null,
+        "career_resource_center_link": null,
+        "coaching_appointments_link": null,
+        "office_hours_link": null,
+        "aws_provisioning_link": null
+      },
+      "project": null,
+      "lab": null,
+      "concepts": [
+        {
+          "id": 599100,
+          "key": "de235144-9e76-4f94-823f-9b6e0f97b69e",
+          "title": "Welcome to the Deep Reinforcement Learning Nanodegree",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "de235144-9e76-4f94-823f-9b6e0f97b69e",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 653358,
+              "key": "090fda1b-1aa2-4c90-a5bf-98aca62d1317",
+              "title": "Welcome To DRLND",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "i1-l0n1ntes",
+                "china_cdn_id": "i1-l0n1ntes.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 599103,
+          "key": "ee870327-2192-41a0-92d9-9fd6ed69c268",
+          "title": "RL in the Real World",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "ee870327-2192-41a0-92d9-9fd6ed69c268",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 653361,
+              "key": "94d2c463-17d7-46e9-b242-ecc6d4df8a7e",
+              "title": "RL In The Real World",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "IGlAyGbOTHo",
+                "china_cdn_id": "IGlAyGbOTHo.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 599102,
+          "key": "b0d69868-85a5-4bee-a0fe-9533a92a3b05",
+          "title": "Overview of the ND Program",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "b0d69868-85a5-4bee-a0fe-9533a92a3b05",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 599127,
+              "key": "87ca36f2-c836-4c3e-96ef-85ef1278124d",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Overview of the ND Program",
+              "instructor_notes": ""
+            },
+            {
+              "id": 614080,
+              "key": "c1e1257c-cd1c-4dc3-960b-12ae6c5b22c4",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "The Deep Reinforcement Learning Nanodegree program is divided into four parts, giving you a thorough understanding of deep reinforcement learning, and covering some of the major topics.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 599128,
+              "key": "5b15664d-a51b-4ebc-b7d6-4df9986807ca",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Part 1: Foundations of Reinforcement Learning\n---\nThe first part begins with a simple introduction to reinforcement learning.  You'll learn how to define real-world problems as **Markov Decision Processes (MDPs)**, so that they can be solved with reinforcement learning.  ",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627055,
+              "key": "4eeeddba-3968-4f8b-8ff5-41e51c74da7b",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af5ba38_mjg2mzcyma/mjg2mzcyma.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/4eeeddba-3968-4f8b-8ff5-41e51c74da7b",
+              "caption": "How might we use [reinforcement learning](https://arxiv.org/pdf/1803.05580.pdf) to teach a robot to walk? ([Source](https://spectrum.ieee.org/automaton/robotics/industrial-robots/agility-robotics-introduces-cassie-a-dynamic-and-talented-robot-delivery-ostrich))",
+              "alt": "How might we use reinforcement learning to teach a robot to walk?",
+              "width": 300,
+              "height": 450,
+              "instructor_notes": null
+            },
+            {
+              "id": 627056,
+              "key": "8408f721-f3cc-457c-ba37-74f9b58590a1",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Then, you'll implement classical methods such as **SARSA** and **Q-learning** to solve several environments in OpenAI Gym.  You'll then explore how to use techniques such as **tile coding** and **coarse coding** to expand the size of the problems that can be solved with traditional reinforcement learning algorithms.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 637872,
+              "key": "5b6260f4-b0cc-4e18-b4f0-1b35ca6fbf3f",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/June/5b1721df_mountain-car-cts/mountain-car-cts.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/5b6260f4-b0cc-4e18-b4f0-1b35ca6fbf3f",
+              "caption": "Train a car to navigate a steep hill using Q-learning.",
+              "alt": "Train a car to navigate a steep hill using Q-learning.",
+              "width": 300,
+              "height": 320,
+              "instructor_notes": null
+            },
+            {
+              "id": 599129,
+              "key": "ab710f3d-e686-4094-81c3-e2757c3a78ed",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Part 2: Value-Based Methods\n---\nIn the second part, you'll learn how to leverage neural networks when solving complex problems using the **Deep Q-Networks (DQN)** algorithm.  You will also learn about modifications such as **double Q-learning**, **prioritized experience replay**, and **dueling networks**. Then, you'll use what you’ve learned to create an artificially intelligent game-playing agent that can navigate a spaceship!",
+              "instructor_notes": ""
+            },
+            {
+              "id": 638003,
+              "key": "7eba9eba-4ccd-47e1-a565-2274be4e8e7e",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/June/5b172a69_lunar-lander/lunar-lander.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/7eba9eba-4ccd-47e1-a565-2274be4e8e7e",
+              "caption": "Use the DQN algorithm to train a spaceship to land safely on a planet.",
+              "alt": "Use the DQN algorithm to train a spaceship to land safely on a planet.",
+              "width": 400,
+              "height": 400,
+              "instructor_notes": null
+            },
+            {
+              "id": 627058,
+              "key": "12a8f131-7a7b-4797-a368-0407be0f8893",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "You'll learn from experts at NVIDIA's Deep Learning Institute how to apply your new skills to robotics applications.  Using a [Gazebo](http://gazebosim.org) simulation, you will train a rover to navigate an environment without running into walls.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 629027,
+              "key": "7fe523db-d9e0-4a22-be0e-f5c9aec5faea",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5b02fa9c_output/output.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/7fe523db-d9e0-4a22-be0e-f5c9aec5faea",
+              "caption": "Learn from experts at NVIDIA how to navigate a rover!",
+              "alt": "Learn from experts at NVIDIA how to navigate a rover!",
+              "width": 400,
+              "height": 400,
+              "instructor_notes": null
+            },
+            {
+              "id": 628143,
+              "key": "7b362813-f85d-4022-aabc-dd92da4719ca",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "You'll also get the **first project**, where you'll write an algorithm that teaches an agent to navigate a large world.  ",
+              "instructor_notes": ""
+            },
+            {
+              "id": 644418,
+              "key": "f9234829-0a8d-4eb0-9b1b-d9c59b44e070",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/June/5b1ab4b0_banana/banana.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/f9234829-0a8d-4eb0-9b1b-d9c59b44e070",
+              "caption": "In Project 1, you will train an agent to collect yellow bananas while avoiding blue bananas.",
+              "alt": "In Project 1, you will train an agent to collect yellow bananas while avoiding blue bananas.",
+              "width": 400,
+              "height": 269,
+              "instructor_notes": null
+            },
+            {
+              "id": 628116,
+              "key": "9d60c744-b158-491b-923f-82fa1d4c5c0c",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "All of the projects in this Nanodegree program use the rich simulation environments from the [Unity Machine Learning Agents (ML-Agents)](https://blogs.unity3d.com/2017/09/19/introducing-unity-machine-learning-agents/) software development kit (SDK).  You will learn more about ML-Agents in the next concept.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 599130,
+              "key": "11a104ec-f85e-4621-99c5-a269bcc652eb",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Part 3: Policy-Based Methods\n---\nIn the third part, you'll learn about policy-based and actor-critic methods such as **Proximal Policy Optimization (PPO)**, **Advantage Actor-Critic (A2C)**, and **Deep Deterministic Policy Gradients (DDPG)**.  You’ll also learn about optimization techniques such as **evolution strategies** and **hill climbing**.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 637874,
+              "key": "5fe0f9bb-6fb0-4a8a-9249-a38d85fd038f",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/June/5b17223a_bipedal-walker/bipedal-walker.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/5fe0f9bb-6fb0-4a8a-9249-a38d85fd038f",
+              "caption": "Use Deep Deterministic Policy Gradients (DDPG) to train a robot to walk.",
+              "alt": "Use Deep Deterministic Policy Gradients (DDPG) to train a robot to walk.",
+              "width": 400,
+              "height": 400,
+              "instructor_notes": null
+            },
+            {
+              "id": 628146,
+              "key": "0302aa51-6e09-40c8-b416-b3528ec3e7b1",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "You'll learn from experts at NVIDIA about the active research that they are doing, to determine how to apply deep reinforcement learning techniques to finance.  In particular, you'll explore an algorithm for optimal execution of portfolio transactions.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627060,
+              "key": "1745dbe7-1705-4edd-b033-62f3e036e13a",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "You'll also get the **second project**, where you'll write an algorithm to train a robotic arm to reach moving target positions.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 644802,
+              "key": "7e45742c-4bdb-42c0-ac6a-6783cf0bc3f5",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/June/5b1ea778_reacher/reacher.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/7e45742c-4bdb-42c0-ac6a-6783cf0bc3f5",
+              "caption": "In Project 2, you will train a robotic arm to reach target locations.",
+              "alt": "In Project 2, you will train a robotic arm to reach target locations.",
+              "width": 400,
+              "height": 251,
+              "instructor_notes": null
+            },
+            {
+              "id": 599131,
+              "key": "f54d17d0-e2d7-4cde-a212-0704f919e47a",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Part 4: Multi-Agent Reinforcement Learning\n---\n\nMost of reinforcement learning is concerned with a single agent that seeks to demonstrate proficiency at a single task.  In this agent's environment, there are no other agents.  However, if we'd like our agents to become truly intelligent, they must be able to communicate with and learn from other agents.  In the final part of this nanodegree, we will extend the traditional framework to include multiple agents.\n\nYou'll also learn all about **Monte Carlo Tree Search (MCTS)** and master the skills behind DeepMind's AlphaZero.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 628141,
+              "key": "fffd761d-9846-441c-9364-97eded3f4c0b",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5afc628c_game-example/game-example.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/fffd761d-9846-441c-9364-97eded3f4c0b",
+              "caption": "Use Monte Carlo Tree Search to play Connect 4. ([Source](https://github.com/Alfo5123/Connect4))",
+              "alt": "Use Monte Carlo Tree Search to play Connect 4. ([Source](https://github.com/Alfo5123/Connect4))",
+              "width": 300,
+              "height": 300,
+              "instructor_notes": null
+            },
+            {
+              "id": 628137,
+              "key": "345bc5e7-6f64-462e-83d8-455cba5878c7",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "You'll also get the **third project**, where you'll write an algorithm to train a pair of agents to play tennis.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627064,
+              "key": "3db35158-d17a-4581-b6d2-8fd59ba0d9dc",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af5c69e_68747470733a2f2f626c6f67732e756e69747933642e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031372f30392f696d616765322d322e676966/68747470733a2f2f626c6f67732e756e69747933642e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031372f30392f696d616765322d322e676966.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/3db35158-d17a-4581-b6d2-8fd59ba0d9dc",
+              "caption": "In Project 3, you will train a pair of agents to play tennis. ([Source](https://blogs.unity3d.com/2017/09/19/introducing-unity-machine-learning-agents/))",
+              "alt": "In Project 3, you will train a pair of agents to play tennis.",
+              "width": 400,
+              "height": 336,
+              "instructor_notes": null
+            }
+          ]
+        },
+        {
+          "id": 599104,
+          "key": "15adf74b-dc60-4148-8c0e-758a16a418cd",
+          "title": "Projects You Will Build",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "15adf74b-dc60-4148-8c0e-758a16a418cd",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 628649,
+              "key": "5e385bd1-0259-4a70-b516-8dcdf5dbf97a",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Projects You Will Build",
+              "instructor_notes": ""
+            },
+            {
+              "id": 652383,
+              "key": "2f704125-b605-47ec-b38e-22b53946bda9",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "The most important part of this program is the hands-on approach to learn.  We've worked closely with the engineers at Unity to ensure that the projects are exciting and allow you to demonstrate mastery of cutting-edge skills.  All of the projects use the [Unity Machine Learning Agents (ML-Agents)](https://github.com/Unity-Technologies/ml-agents) toolkit, which you can learn more about by watching the video below.\n",
+              "instructor_notes": ""
+            },
+            {
+              "id": 652388,
+              "key": "7c5349e5-911a-4e2f-8d40-13de3a09c0eb",
+              "title": "Unity Machine Learning Agents",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "jC12h4UAxqs",
+                "china_cdn_id": "jC12h4UAxqs.mp4"
+              }
+            },
+            {
+              "id": 644788,
+              "key": "16e03bd5-2daf-422f-932b-fdb395dc319d",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Unity ML-Agents\n---\n[Unity ML-Agents](https://github.com/Unity-Technologies/ml-agents) is a toolkit for training intelligent agents in rich and realistic environments.  ",
+              "instructor_notes": ""
+            },
+            {
+              "id": 644793,
+              "key": "2381481f-19e1-4874-998b-d80a6a4c7d58",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/June/5b1e9b31_soccer/soccer.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/2381481f-19e1-4874-998b-d80a6a4c7d58",
+              "caption": "Unity ML-Agents SoccerTwos Environment",
+              "alt": "Unity ML-Agents SoccerTwos Environment",
+              "width": 400,
+              "height": 644,
+              "instructor_notes": null
+            },
+            {
+              "id": 644792,
+              "key": "02bab621-d3a3-4070-8957-fabd77853d66",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "It is a flexible and intuitive framework which enables:\n- Academic and industry researchers to study complex behaviors from visual content and realistic physics\n- Industrial and enterprise researchers to implement large-scale parallel training regimes for robotics, autonomous vehicles, and other industrial applications\n- Game developers to tackle challenges, such as using agents to dynamically adjust the game-difficulty level\n\n## Your Projects\n---\nAs a student in the Deep Reinforcement Learning Nanodegree program, you will complete **three projects**.  These are the major milestones in your journey, where you'll be able to _**train your own** artificially intelligent agents_ to perform complex tasks.  All of the environments are derived from the Unity ML-Agents toolkit.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 644795,
+              "key": "3c12cea9-731c-4c56-96a7-8f3165db8839",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/June/5b1ab4b0_banana/banana.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/3c12cea9-731c-4c56-96a7-8f3165db8839",
+              "caption": "In Project 1, you will train an agent to collect yellow bananas while avoiding blue bananas.",
+              "alt": "In Project 1, you will train an agent to collect yellow bananas while avoiding blue bananas.",
+              "width": 500,
+              "height": 269,
+              "instructor_notes": null
+            },
+            {
+              "id": 644801,
+              "key": "e180b957-a4a2-4179-bd12-9a338fb06643",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/June/5b1ea759_reacher/reacher.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/e180b957-a4a2-4179-bd12-9a338fb06643",
+              "caption": "In Project 2, you will train a robotic arm to reach target locations.",
+              "alt": "In Project 2, you will train a robotic arm to reach target locations.",
+              "width": 500,
+              "height": 251,
+              "instructor_notes": null
+            },
+            {
+              "id": 644797,
+              "key": "54ccc89a-cffc-4ea9-bd82-bf8532bdc775",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af5c69e_68747470733a2f2f626c6f67732e756e69747933642e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031372f30392f696d616765322d322e676966/68747470733a2f2f626c6f67732e756e69747933642e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031372f30392f696d616765322d322e676966.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/54ccc89a-cffc-4ea9-bd82-bf8532bdc775",
+              "caption": "In Project 3, you will train a pair of agents to play tennis.",
+              "alt": "In Project 3, you will train a pair of agents to play tennis.",
+              "width": 500,
+              "height": 336,
+              "instructor_notes": null
+            }
+          ]
+        },
+        {
+          "id": 645679,
+          "key": "cf8a1f6a-e7da-4bb4-9247-7e397a6c92a1",
+          "title": "Play Tennis!",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "cf8a1f6a-e7da-4bb4-9247-7e397a6c92a1",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 646157,
+              "key": "a1ea0fb5-004f-4ed0-bda7-60a5b541143b",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Play Tennis!",
+              "instructor_notes": ""
+            },
+            {
+              "id": 646158,
+              "key": "2c8de0f3-1e7e-4e8f-bf12-8c623bf32591",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In the third project for the Nanodegree program, you will use a Unity environment to train a pair of agents to play tennis.\n\nFor now, so that you have a sense of the difficulty of the problem, you will play the game for yourself!\n\n",
+              "instructor_notes": ""
+            },
+            {
+              "id": 650339,
+              "key": "5086fbf1-2a48-4186-9e52-b5ab6895817f",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af5c69e_68747470733a2f2f626c6f67732e756e69747933642e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031372f30392f696d616765322d322e676966/68747470733a2f2f626c6f67732e756e69747933642e636f6d2f77702d636f6e74656e742f75706c6f6164732f323031372f30392f696d616765322d322e676966.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/5086fbf1-2a48-4186-9e52-b5ab6895817f",
+              "caption": "",
+              "alt": "",
+              "width": 400,
+              "height": 336,
+              "instructor_notes": null
+            },
+            {
+              "id": 650340,
+              "key": "ef769479-07e4-4480-ba47-e020ab2deee9",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In this environment, the goal is to bounce the ball back and forth between the two agents, without letting the ball hit the ground.  **_After completing the project_**, your trained agents will be able to bounce the ball back and forth over 30 times in a single round, without letting the ball drop!  When you play the game, take note of how close you're able to get to that performance :).\n\nThe **available controls** are:\n- `A`\n- `D`\n- `<spacebar>`\n\nWhile we won't tell you what kind of behavior to expect from each command, you should be able to figure this out for yourself quickly!\n\n**Follow the instructions in the Jupyter notebook below to get started!**",
+              "instructor_notes": ""
+            },
+            {
+              "id": 645994,
+              "key": "39124f06-1487-4af4-8256-4be4730457de",
+              "title": null,
+              "semantic_type": "WorkspaceAtom",
+              "is_public": true,
+              "workspace_id": "view18aa4315",
+              "pool_id": "jupyter",
+              "view_id": "18aa4315-c77f-45f4-a57a-f9e93b6293bb",
+              "gpu_capable": false,
+              "configuration": {
+                "id": "reserved",
+                "blueprint": {
+                  "conf": {
+                    "disk": null,
+                    "ports": [],
+                    "allowSubmit": false,
+                    "defaultPath": "/notebooks/tennis.ipynb"
+                  },
+                  "kind": "jupyter"
+                },
+                "workspaceId": "reserved"
+              },
+              "starter_files": null
+            }
+          ]
+        },
+        {
+          "id": 599106,
+          "key": "0c5e8dc7-6d7a-4a9c-a65c-f042785c26a6",
+          "title": "Udacity Support",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "0c5e8dc7-6d7a-4a9c-a65c-f042785c26a6",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 614077,
+              "key": "c4d5c620-ceed-4328-8bb1-974201afa225",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Udacity Support",
+              "instructor_notes": ""
+            },
+            {
+              "id": 599109,
+              "key": "bbbb1a8b-b63c-462d-a31f-9db83a3418da",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "There are several ways in which you will receive support during the program from Udacity's network of Reviewers, as well as your fellow students.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 599111,
+              "key": "a17ef023-9824-447d-b14b-14ed3d39593c",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Project Reviews\n---\nFor any projects you submit, you will receive detailed feedback from a project Reviewer. \n\nThese reviews are meant to give you personalized code feedback and to tell you what can be improved in your code (if anything)! This feedback is very like the feedback you would receive working on a small team of engineers. Sometimes, a reviewer might ask you to resubmit a project to meet specifications. In that case, an indication of needed changes will also be provided. Note that you can submit a project as many times as needed to pass.\n\nThis feedback is especially useful when building artificially intelligent agents.  Sometimes your agents don't always behave as expected -- see the untrained soccer agents below for an example!  Your project Reviewer is available to help you figure out how you can change your code, to help your agents master their tasks!",
+              "instructor_notes": ""
+            },
+            {
+              "id": 644816,
+              "key": "1ee7abde-b6c8-4804-9ad9-a13f15105e3a",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/June/5b1eb545_dumb-soccer/dumb-soccer.gif",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/1ee7abde-b6c8-4804-9ad9-a13f15105e3a",
+              "caption": "These soccer agents still have a lot to learn :)",
+              "alt": "These soccer agents still have a lot to learn :)",
+              "width": 500,
+              "height": 239,
+              "instructor_notes": null
+            },
+            {
+              "id": 644811,
+              "key": "eb4267a4-54e0-4350-a1cb-02e9156ae4b1",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Knowledge\n---\n\nTo ask questions and get answers from Udacity staff and your peers, we have the [Knowledge](https://knowledge.udacity.com/) platform. If you have ever used StackOverflow, this platform is similar. You can post new questions here, add answers or conversational comments, and **upvote** questions and answers. You can also **search** for existing answers and filter by Nanodegree program and project. Knowledge is accessible from the classroom as a lightbulb icon that you'll see at the bottom left of your navigation bar. ",
+              "instructor_notes": ""
+            },
+            {
+              "id": 671910,
+              "key": "c1ada77b-5734-4173-9c70-fbd06e4111ad",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/July/5b3fd959_screen-shot-2018-06-12-at-5.07.10-pm/screen-shot-2018-06-12-at-5.07.10-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/c1ada77b-5734-4173-9c70-fbd06e4111ad",
+              "caption": "",
+              "alt": "",
+              "width": 1594,
+              "height": 1434,
+              "instructor_notes": null
+            },
+            {
+              "id": 671913,
+              "key": "35c2d5a7-64a4-4719-8ae7-b05b43c71cf4",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Study Groups\n---\nAs part of your Nanodegree program, you will join a Study Group with your classmates and several expert mentors in the Udacity classroom. You will meet this group in your Classroom directly, and you will be able to chat with the group throughout your program. You'll unlock different rooms as you Meet Specifications for your projects. \n\nEach room will include mentors who are certified to review that project and available to help you and your peers prior to submitting your projects for review. As you progress through the videos and work on projects, you will find a community of students and mentors online from around the world, helping and pushing each other towards graduation.\n\nTo join Study Groups, click on the blue chat icon in the left hand menu when you are in the classroom. Then, agree to the Terms of Service. Lastly, join the 'My Classmates' channel to introduce yourself and meet your classmates.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 672380,
+              "key": "c7e240bd-41da-4143-8749-46ec035f8847",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/July/5b43c9ac_screen-shot-2018-07-06-at-11.33.53-am/screen-shot-2018-07-06-at-11.33.53-am.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/c7e240bd-41da-4143-8749-46ec035f8847",
+              "caption": "",
+              "alt": "",
+              "width": 2512,
+              "height": 1102,
+              "instructor_notes": null
+            },
+            {
+              "id": 671899,
+              "key": "6d4e381e-a236-45f5-bdf3-f5534365b536",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Feedback\n---\nIn order to keep our content up-to-date and address issues quickly, we've set up a [Waffle board](https://waffle.io/udacity/drlnd-issues-tracker) to track error reports and suggestions. \n\nIf you find an error, check there to see if it has already been filed. If it hasn't, you can file an issue by clicking on the \"Add issue\" button, adding a title, and entering a description in the details (you will need a GitHub account for this).  _Links and screenshots, if available, are always appreciated!_",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 599107,
+          "key": "4bc2e5e9-9a91-4662-acc5-8d0c160da596",
+          "title": "Community Guidelines",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "4bc2e5e9-9a91-4662-acc5-8d0c160da596",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 654085,
+              "key": "03d48479-ea5b-42b1-a6db-25ccc22fc60a",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Community Guidelines",
+              "instructor_notes": ""
+            },
+            {
+              "id": 599116,
+              "key": "98f5f2b3-9d31-4194-9f8c-36af7a0cac9d",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Your experience in the Nanodegree program and community should be an engaging, fulfilling, and positive one. As such, we have outlined the following system for reporting behavior that does not live up to Udacity’s standards, so it can quickly be addressed by our staff. \n\nAll reports of suspected violations to the [TOU](https://www.udacity.com/legal/terms-of-service), [Community Code of Conduct](https://www.udacity.com/legal/community-guidelines) or [Honor Code](https://www.udacity.com/legal/community-guidelines) should be submitted to report@udacity.com  and will be reviewed. If you witness or are experiencing any violations of our policies please get in touch with us. Below prohibited actions as set forth on our [Community Code of Conduct](https://www.udacity.com/legal/community-guidelines):\n\n- **Harassment:** Inappropriate, harassing, abusive, discriminatory, derogatory or violent comments or conduct. \n- **Discrimination:** Offensive comments related to gender or gender identity, sexual orientation, race, ethnicity, religion, national origin, disability or disease\n- **Distributing inappropriate content:** Use of sexual, violent, graphic, or derogatory images\n- **Bullying:** Deliberate intimidation, threats of violence or violent language directed against another person\n- **Sexual harassment:** Unwelcome sexual attention \n- **Defamation:** Obscene, fraudulent, indecent, or libelous acts that defame, abuse, harass, discriminate against or threaten others\n- **Plagiarism:** will not cheat on any homework assignment, projects or exams for the Online Courses and, specifically, will not plagiarize materials created by others\n- **Self-injury or Suicide:** We do not encourage community postings community forums related to self-injury or suicide. If you or someone you know is exhibiting signs of self-injury or suicide, find help at the [Suicide Prevention Lifeline](https://suicidepreventionlifeline.org/) in the U.S. and [Befrienders.org](https://www.befrienders.org/) globally. \n\nWhen a potential violation is brought to our attention, we will make every effort to investigate the case thoroughly and make a decision that is fair to all parties.\n\nThank you, \nThe Udacity Team",
+              "instructor_notes": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "_deprecated": [
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    }
+  ]
+}

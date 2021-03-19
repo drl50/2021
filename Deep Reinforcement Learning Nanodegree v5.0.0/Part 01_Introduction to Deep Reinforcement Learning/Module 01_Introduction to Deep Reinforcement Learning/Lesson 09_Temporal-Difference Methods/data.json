@@ -1,0 +1,1750 @@
+{
+  "data": {
+    "lesson": {
+      "id": 620074,
+      "key": "78acdf66-f45c-418b-bbe1-30fda9e42c8c",
+      "title": "Temporal-Difference Methods",
+      "semantic_type": "Lesson",
+      "is_public": true,
+      "version": "1.0.0",
+      "locale": "en-us",
+      "summary": "Learn about how to apply temporal-difference methods such as SARSA, Q-Learning, and Expected SARSA to solve both episodic and continuing tasks.",
+      "lesson_type": "Classroom",
+      "display_workspace_project_only": false,
+      "resources": {
+        "files": [
+          {
+            "name": "Videos Zip File",
+            "uri": "https://zips.udacity-data.com/78acdf66-f45c-418b-bbe1-30fda9e42c8c/620074/1544455851374/Temporal-Difference+Methods+Videos.zip"
+          },
+          {
+            "name": "Transcripts Zip File",
+            "uri": "https://zips.udacity-data.com/78acdf66-f45c-418b-bbe1-30fda9e42c8c/620074/1544455847808/Temporal-Difference+Methods+Subtitles.zip"
+          }
+        ],
+        "google_plus_link": null,
+        "career_resource_center_link": null,
+        "coaching_appointments_link": null,
+        "office_hours_link": null,
+        "aws_provisioning_link": null
+      },
+      "project": null,
+      "lab": null,
+      "concepts": [
+        {
+          "id": 620075,
+          "key": "8ab5efae-43d4-44b0-a689-32cac6f9488e",
+          "title": "Introduction",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "8ab5efae-43d4-44b0-a689-32cac6f9488e",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 620076,
+              "key": "f12e2cc8-68db-495c-b4b3-07f0f989dd96",
+              "title": "Introduction",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "yXErXQulI_o",
+                "china_cdn_id": "yXErXQulI_o.mp4"
+              }
+            },
+            {
+              "id": 620227,
+              "key": "e0a560b7-6a49-406b-a180-83b495a21771",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "This lesson covers material in **Chapter 6** (especially 6.1-6.6) of the [textbook](http://go.udacity.com/rl-textbook).",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 630393,
+          "key": "156c4a7d-2380-4656-ae2c-4bb095bd0f05",
+          "title": "Review: MC Control Methods",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "156c4a7d-2380-4656-ae2c-4bb095bd0f05",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 630394,
+              "key": "a5869691-1462-40b4-b4c0-cae99b232aed",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Review: MC Control Methods",
+              "instructor_notes": ""
+            },
+            {
+              "id": 630395,
+              "key": "7eb52488-baec-444e-8d23-466cebfec110",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In the previous lesson, you learned about the **control problem** in reinforcement learning and implemented some Monte Carlo (MC) control methods. \n> **Control Problem**: Estimate the optimal policy.\n\nIn this lesson, you will learn several techniques for Temporal-Difference (TD) control.\n\n## Review\n---\nBefore continuing, please review **Constant-alpha MC Control** from the previous lesson.\n\nRemember that the constant-<span class=\"mathquill\">\\alpha</span> MC control algorithm alternates between **policy evaluation** and **policy improvement** steps to recover the optimal policy <span class=\"mathquill\">\\pi_*</span>.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 630398,
+              "key": "70e6613e-6391-4a6d-8efa-f288bc70f8a7",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af4d181_screen-shot-2018-05-10-at-6.10.16-pm/screen-shot-2018-05-10-at-6.10.16-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/70e6613e-6391-4a6d-8efa-f288bc70f8a7",
+              "caption": "Constant-alpha MC Control",
+              "alt": "Constant-alpha MC Control",
+              "width": 500,
+              "height": 1048,
+              "instructor_notes": null
+            },
+            {
+              "id": 630400,
+              "key": "8e750773-2bdf-450a-9d31-a895c240aa0e",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In the **policy evaluation** step, the agent collects an episode <span class=\"mathquill\">S_0, A_0, R_1, \\ldots, S_T</span>  using the most recent policy <span class=\"mathquill\">\\pi</span>.  After the episode finishes, for each time-step <span class=\"mathquill\">t</span>, if the corresponding state-action pair <span class=\"mathquill\">(S_t,A_t)</span> is a first visit, the Q-table is modified using the following **update equation**:\n\n<div class=\"mathquill\">Q(S_t,A_t) \\leftarrow Q(S_t,A_t) + \\alpha(G_t - Q(S_t, A_t))</div> \n\nwhere <span class=\"mathquill\">G_t := \\sum_{s={t+1}}^T\\gamma^{s-t-1}R_s</span> is the return at timestep <span class=\"mathquill\">t</span>, and <span class=\"mathquill\">Q(S_t,A_t)</span> is the entry in the Q-table corresponding to state <span class=\"mathquill\">S_t</span> and action <span class=\"mathquill\">A_t</span>.\n\nThe main idea behind this **update equation** is that <span class=\"mathquill\">Q(S_t,A_t)</span> contains the agent's estimate for the expected return if the environment is in state <span class=\"mathquill\">S_t</span> and the agent selects action <span class=\"mathquill\">A_t</span>.  If the return <span class=\"mathquill\">G_t</span> is **not** equal to <span class=\"mathquill\">Q(S_t,A_t)</span>, then we push the value of <span class=\"mathquill\">Q(S_t,A_t)</span> to make it agree slightly more with the return.  The magnitude of the change that we make to <span class=\"mathquill\">Q(S_t,A_t)</span> is controlled by the hyperparameter <span class=\"mathquill\">\\alpha>0</span>.",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 626930,
+          "key": "f38837b2-9723-4929-801d-879e3d302d90",
+          "title": "Quiz: MC Control Methods",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "f38837b2-9723-4929-801d-879e3d302d90",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 626940,
+              "key": "945f3974-c404-45ef-a3b7-afe33ba16bf8",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Quiz: MC Control Methods",
+              "instructor_notes": ""
+            },
+            {
+              "id": 626934,
+              "key": "6907fd26-76e1-41d4-86e2-e9af1a21d76b",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In this lesson, we'll work with a simple gridworld example to illustrate the main ideas.  The gridworld is identical to the environment that we examined when learning about Monte Carlo (MC) methods.  Please watch the next video to refresh your memory.\n\n## Video\n---",
+              "instructor_notes": ""
+            },
+            {
+              "id": 671531,
+              "key": "f413f9a3-b554-467b-a138-4a75f49b09f8",
+              "title": "L602 Gridworld Example RENDER V2-2",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "Lwibg_IfmrA",
+                "china_cdn_id": "Lwibg_IfmrA.mp4"
+              }
+            },
+            {
+              "id": 668646,
+              "key": "b21fd380-05bf-43e7-9cef-e6a70a6db9c0",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Before learning about Temporal-Difference control methods, check your knowledge of Constant-<span class=\"mathquill\">\\alpha</span> MC control by watching the video below.\n\n## Video\n---\n",
+              "instructor_notes": ""
+            },
+            {
+              "id": 671268,
+              "key": "c1b52f97-3c09-47de-a3ef-d6a8bff87f3d",
+              "title": "Quiz: MC Control Methods",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "ZwIg6LDMyuo",
+                "china_cdn_id": "ZwIg6LDMyuo.mp4"
+              }
+            },
+            {
+              "id": 630385,
+              "key": "b1d8487d-df2c-4ef6-a828-12e1cfd2dcbc",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Quiz\n---\n\nSay that an agent is learning to navigate the gridworld described in the above videos. Suppose the agent is using Constant-<span class=\"mathquill\">\\alpha</span> MC control in its search for the optimal policy, with <span class=\"mathquill\">\\alpha=0.1</span>.  At the end of the 99th episode, the Q-table has the following values:",
+              "instructor_notes": ""
+            },
+            {
+              "id": 630386,
+              "key": "dae551d4-8c17-4027-85bd-218307dd3e64",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af7741f_qtable2/qtable2.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/dae551d4-8c17-4027-85bd-218307dd3e64",
+              "caption": "Q-table",
+              "alt": "Q-table",
+              "width": 300,
+              "height": 300,
+              "instructor_notes": null
+            },
+            {
+              "id": 630388,
+              "key": "e5e2329f-ceb5-483d-a907-47ea9c46a2b5",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Say that the 100th episode is printed below.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 630392,
+              "key": "27719136-dd7b-4dbe-a7bb-bafd9a67babe",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5b06ec52_screen-shot-2018-05-24-at-11.45.52-am/screen-shot-2018-05-24-at-11.45.52-am.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/27719136-dd7b-4dbe-a7bb-bafd9a67babe",
+              "caption": "100th episode",
+              "alt": "100th episode",
+              "width": 600,
+              "height": 600,
+              "instructor_notes": null
+            },
+            {
+              "id": 630403,
+              "key": "0ee24b7a-9fdf-4912-9d9e-39beab82225d",
+              "title": "",
+              "semantic_type": "RadioQuizAtom",
+              "is_public": true,
+              "instructor_notes": null,
+              "user_state": {
+                "node_key": "0ee24b7a-9fdf-4912-9d9e-39beab82225d",
+                "completed_at": null,
+                "last_viewed_at": null,
+                "unstructured": null
+              },
+              "question": {
+                "prompt": "What is the new value for the entry in the Q-table corresponding to **state 1** and **action right**?",
+                "answers": [
+                  {
+                    "id": "a1527180979239",
+                    "text": "6",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1527181006517",
+                    "text": "6.1",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1527181007880",
+                    "text": "6.16",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1527181017239",
+                    "text": "6.2",
+                    "is_correct": true
+                  },
+                  {
+                    "id": "a1527181036648",
+                    "text": "7",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1527181043232",
+                    "text": "9",
+                    "is_correct": false
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": 620162,
+          "key": "b861cc26-d9fc-48f4-97bd-5b5aade565f9",
+          "title": "TD Control: Sarsa",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "b861cc26-d9fc-48f4-97bd-5b5aade565f9",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 620233,
+              "key": "d1c71fb0-9d33-4831-b7f4-cf72c4a641b3",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# TD Control: Sarsa",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620234,
+              "key": "31d3cd3b-ad31-424a-bacd-2ef1c84cac4f",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Monte Carlo (MC) control methods require us to complete an entire episode of interaction before updating the Q-table.  Temporal Difference (TD) methods will instead update the Q-table after every time step.  \n\n## Video\n---",
+              "instructor_notes": ""
+            },
+            {
+              "id": 671269,
+              "key": "cbbd8d62-c22b-49a1-9103-2960cb89ac55",
+              "title": "TD Control Sarsa Part 1",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "HYV0SP9wm7g",
+                "china_cdn_id": "HYV0SP9wm7g.mp4"
+              }
+            },
+            {
+              "id": 630928,
+              "key": "414496c0-5436-48eb-85b1-35123df2ac4c",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Watch the next video to learn about **Sarsa** (or **Sarsa(0)**), one method for TD control.\n\n## Video\n---",
+              "instructor_notes": ""
+            },
+            {
+              "id": 671270,
+              "key": "5dd72e05-905e-4af7-9933-36f6980fc33f",
+              "title": "TD Control Sarsa Part 2",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "U_CV-UC9G2c",
+                "china_cdn_id": "U_CV-UC9G2c.mp4"
+              }
+            },
+            {
+              "id": 620239,
+              "key": "5ac6d283-ffeb-4450-9858-0e2ccc26c8fb",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Pseudocode\n---",
+              "instructor_notes": ""
+            },
+            {
+              "id": 624219,
+              "key": "29526c61-5f6f-4b34-a8eb-cc5a6aeea7ba",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5aece99b_screen-shot-2018-05-04-at-6.14.28-pm/screen-shot-2018-05-04-at-6.14.28-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/29526c61-5f6f-4b34-a8eb-cc5a6aeea7ba",
+              "caption": "",
+              "alt": "",
+              "width": 600,
+              "height": 1184,
+              "instructor_notes": null
+            },
+            {
+              "id": 630936,
+              "key": "f7040b8f-e32a-423f-83fa-a56d057b84d8",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In the algorithm, the number of episodes the agent collects is equal to <span class=\"mathquill\">num\\_episodes</span>.  For every time step <span class=\"mathquill\">t\\geq 0</span>, the agent:\n- **takes** the action <span class=\"mathquill\">A_t</span> (from the current state <span class=\"mathquill\">S_t</span>) that is <span class=\"mathquill\">\\epsilon</span>-greedy with respect to the Q-table,\n- receives the reward <span class=\"mathquill\">R_{t+1}</span> and next state <span class=\"mathquill\">S_{t+1}</span>,\n- **chooses** the next action <span class=\"mathquill\">A_{t+1}</span> (from the next state <span class=\"mathquill\">S_{t+1}</span>) that is <span class=\"mathquill\">\\epsilon</span>-greedy with respect to the Q-table,\n- uses the information in the tuple (<span class=\"mathquill\">S_t</span>, <span class=\"mathquill\">A_t</span>, <span class=\"mathquill\">R_{t+1}</span>, <span class=\"mathquill\">S_{t+1}</span>, <span class=\"mathquill\">A_{t+1}</span>) to update the entry <span class=\"mathquill\">Q(S_t, A_t)</span> in the Q-table corresponding to the current state <span class=\"mathquill\">S_t</span> and the action <span class=\"mathquill\">A_t</span>.",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 626821,
+          "key": "28821c24-ff6d-42ba-abdf-ccd8a99a1ca9",
+          "title": "Quiz: Sarsa",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "28821c24-ff6d-42ba-abdf-ccd8a99a1ca9",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 627000,
+              "key": "baebd2af-4a83-4114-ac9a-9a71e8d93cb9",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Quiz: Sarsa",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627001,
+              "key": "6437d5b6-0dc6-4c62-a98b-1c9e7e961992",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Say that an agent is learning to navigate the gridworld described earlier in the lesson.  ",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627380,
+              "key": "a4d705c0-6e34-4d58-ae48-1469e1b06006",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af768cf_environment/environment.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/a4d705c0-6e34-4d58-ae48-1469e1b06006",
+              "caption": "Gridworld Example",
+              "alt": "Gridworld Example",
+              "width": 300,
+              "height": 300,
+              "instructor_notes": null
+            },
+            {
+              "id": 627004,
+              "key": "4a2a88b7-7694-4479-8d0a-7dcddc61d13d",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Suppose the agent is using **Sarsa** in its search for the optimal policy, with **<span class=\"mathquill\">\\alpha=0.1</span>**.\n\nAt the end of the 99th episode, the Q-table has the following values:",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627400,
+              "key": "7a346ae1-92cc-4b68-ba79-4967bda8ee8a",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af7741f_qtable2/qtable2.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/7a346ae1-92cc-4b68-ba79-4967bda8ee8a",
+              "caption": "Q-table",
+              "alt": "Q-table",
+              "width": 300,
+              "height": 300,
+              "instructor_notes": null
+            },
+            {
+              "id": 627003,
+              "key": "bc226035-d6b7-49e5-9a69-14a41abf9e32",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Say that at the beginning of the 100th episode, the agent starts in **state 1** and selects **action right**.  As a result, it receives **reward -1**, and the next state is **state 2**.  \n\nThen, at the next timestep, the agent selects **action right**.  \n\n",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627388,
+              "key": "fead02cc-2527-40bb-a866-b81d042ded00",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af7705c_episode/episode.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/fead02cc-2527-40bb-a866-b81d042ded00",
+              "caption": "Beginning of the 100th episode",
+              "alt": "Beginning of the 100th episode",
+              "width": 300,
+              "height": 300,
+              "instructor_notes": null
+            },
+            {
+              "id": 627006,
+              "key": "84114ac8-9ab9-4446-98a5-ab943fa06b6c",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In the previous video, you learned that at this point in time, the agent updates the Q-table.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627010,
+              "key": "a21fa4d4-3444-4d3d-a20c-0593392b4b2d",
+              "title": "",
+              "semantic_type": "RadioQuizAtom",
+              "is_public": true,
+              "instructor_notes": null,
+              "user_state": {
+                "node_key": "a21fa4d4-3444-4d3d-a20c-0593392b4b2d",
+                "completed_at": null,
+                "last_viewed_at": null,
+                "unstructured": null
+              },
+              "question": {
+                "prompt": "Which entry in the Q-table is updated?",
+                "answers": [
+                  {
+                    "id": "a1526009750043",
+                    "text": "The entry corresponding to **state 1** and **action left**.",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526009786233",
+                    "text": "The entry corresponding to **state 2** and **action left**.",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526009787076",
+                    "text": "The entry corresponding to **state 1** and **action right**.",
+                    "is_correct": true
+                  },
+                  {
+                    "id": "a1526009787692",
+                    "text": "The entry corresponding to **state 2** and **action right**.",
+                    "is_correct": false
+                  }
+                ]
+              }
+            },
+            {
+              "id": 627011,
+              "key": "4513c709-2ac0-4850-b6ba-c3d715a69770",
+              "title": "",
+              "semantic_type": "RadioQuizAtom",
+              "is_public": true,
+              "instructor_notes": null,
+              "user_state": {
+                "node_key": "4513c709-2ac0-4850-b6ba-c3d715a69770",
+                "completed_at": null,
+                "last_viewed_at": null,
+                "unstructured": null
+              },
+              "question": {
+                "prompt": "What is the new value in the Q-table corresponding to the state-action pair you selected in the answer to the question above?  \n\n(_Suppose that when selecting the actions for the first two timesteps in the 100th episode, the agent was following the epsilon-greedy policy with respect to the Q-table, with epsilon = 0.4._)",
+                "answers": [
+                  {
+                    "id": "a1526009977881",
+                    "text": "6",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526165740094",
+                    "text": "6.1",
+                    "is_correct": true
+                  },
+                  {
+                    "id": "a1526165746012",
+                    "text": "6.16",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526167694258",
+                    "text": "6.2",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526168047528",
+                    "text": "7",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526168050448",
+                    "text": "9",
+                    "is_correct": false
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": 620163,
+          "key": "61ebc767-ddba-4f35-a50a-1e96e498df6a",
+          "title": "TD Control: Q-Learning",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "61ebc767-ddba-4f35-a50a-1e96e498df6a",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 620236,
+              "key": "ce6dc1d4-a8bb-4520-a949-35df21668adf",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# TD Control: Q-Learning",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620235,
+              "key": "fb2a7c09-0366-40ea-8747-4aa13d729e56",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Please watch the video below to learn about **Q-Learning (or Sarsamax)**, a second method for TD control.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620224,
+              "key": "fa17b3d6-4533-4953-a2b0-7c3385e34f21",
+              "title": "TD Control: Sarsamax",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "4DxoYuR7aZ4",
+                "china_cdn_id": "4DxoYuR7aZ4.mp4"
+              }
+            },
+            {
+              "id": 620230,
+              "key": "a791e339-e64a-4957-a6cd-32c730207289",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Check out this (optional) [research paper](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.80.7501&rep=rep1&type=pdf) to read the proof that Q-Learning (or Sarsamax) converges.\n\n## Pseudocode\n---",
+              "instructor_notes": ""
+            },
+            {
+              "id": 624220,
+              "key": "9342744c-a372-4ec2-a451-caee81876470",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5aece9b8_screen-shot-2018-05-04-at-6.14.42-pm/screen-shot-2018-05-04-at-6.14.42-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/9342744c-a372-4ec2-a451-caee81876470",
+              "caption": "",
+              "alt": "",
+              "width": 600,
+              "height": 1122,
+              "instructor_notes": null
+            }
+          ]
+        },
+        {
+          "id": 626822,
+          "key": "6412cb03-55da-40f0-b987-c0ccb5da70e5",
+          "title": "Quiz: Q-Learning",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "6412cb03-55da-40f0-b987-c0ccb5da70e5",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 627017,
+              "key": "75c0d75f-7509-4b63-a358-95188e50c79d",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Quiz: Q-Learning",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627016,
+              "key": "4bd85546-bf97-4919-9828-520c01be3246",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Say that an agent is learning to navigate the gridworld described earlier in the lesson.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627382,
+              "key": "5affd8f1-8a89-45ad-b38f-9cc6d385dc28",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af768cf_environment/environment.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/5affd8f1-8a89-45ad-b38f-9cc6d385dc28",
+              "caption": "Gridworld Example",
+              "alt": "Gridworld Example",
+              "width": 300,
+              "height": 300,
+              "instructor_notes": null
+            },
+            {
+              "id": 627383,
+              "key": "5fc3585e-b3b3-4691-babc-e44cd044cb05",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Suppose the agent is using **Q-Learning**  in its search for the optimal policy, with **<span class=\"mathquill\">\\alpha=0.1</span>**.\n\nAt the end of the 99th episode, the Q-table has the following values:",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627401,
+              "key": "8d3993c0-89d4-40d0-a513-081b785c97b4",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af7741f_qtable2/qtable2.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/8d3993c0-89d4-40d0-a513-081b785c97b4",
+              "caption": "Q-table",
+              "alt": "Q-table",
+              "width": 300,
+              "height": 300,
+              "instructor_notes": null
+            },
+            {
+              "id": 627389,
+              "key": "eb3c3924-ffd5-45b4-bbbb-a527e9103e36",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Say that at the beginning of the 100th episode, the agent starts in **state 1** and selects **action right**. As a result, it receives **reward -1**, and the next state is **state 2**.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627395,
+              "key": "ad65d697-0d8d-4d95-ae35-2b5f6bbb946d",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af7705c_episode/episode.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/ad65d697-0d8d-4d95-ae35-2b5f6bbb946d",
+              "caption": "Beginning of the 100th episode",
+              "alt": "Beginning of the 100th episode",
+              "width": 300,
+              "height": 300,
+              "instructor_notes": null
+            },
+            {
+              "id": 627396,
+              "key": "131e34c3-174a-4e8b-9c59-7eff0b971b35",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In the previous video, you learned that at this point in time, the agent updates the Q-table.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627398,
+              "key": "82819117-dcc0-4218-a2cb-da16b2fe1756",
+              "title": "",
+              "semantic_type": "RadioQuizAtom",
+              "is_public": true,
+              "instructor_notes": null,
+              "user_state": {
+                "node_key": "82819117-dcc0-4218-a2cb-da16b2fe1756",
+                "completed_at": null,
+                "last_viewed_at": null,
+                "unstructured": null
+              },
+              "question": {
+                "prompt": "Which entry in the Q-table is updated?",
+                "answers": [
+                  {
+                    "id": "a1526166059710",
+                    "text": "The entry corresponding to **state 1** and **action left**.",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526166079668",
+                    "text": "The entry corresponding to **state 2** and **action left**.",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526166086514",
+                    "text": "The entry corresponding to **state 1** and **action right**.",
+                    "is_correct": true
+                  },
+                  {
+                    "id": "a1526166092160",
+                    "text": "The entry corresponding to **state 2** and **action right**.",
+                    "is_correct": false
+                  }
+                ]
+              }
+            },
+            {
+              "id": 627404,
+              "key": "bbad9b14-127b-497c-bfa3-54177952b64d",
+              "title": "",
+              "semantic_type": "RadioQuizAtom",
+              "is_public": true,
+              "instructor_notes": null,
+              "user_state": {
+                "node_key": "bbad9b14-127b-497c-bfa3-54177952b64d",
+                "completed_at": null,
+                "last_viewed_at": null,
+                "unstructured": null
+              },
+              "question": {
+                "prompt": "What is the new value in the Q-table corresponding to the state-action pair you selected in the answer to the question above?  \n\n(_Suppose that when selecting the actions for the first two timesteps in the 100th episode, the agent was following the epsilon-greedy policy with respect to the Q-table, with epsilon = 0.4._)",
+                "answers": [
+                  {
+                    "id": "a1526167030926",
+                    "text": "6",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526167033378",
+                    "text": "6.1",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526167036036",
+                    "text": "6.16",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526167749498",
+                    "text": "6.2",
+                    "is_correct": true
+                  },
+                  {
+                    "id": "a1526168081902",
+                    "text": "7",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526168083838",
+                    "text": "9",
+                    "is_correct": false
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": 620164,
+          "key": "ce919f09-f358-4028-aa44-b319a8fa5601",
+          "title": "TD Control: Expected Sarsa",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "ce919f09-f358-4028-aa44-b319a8fa5601",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 620238,
+              "key": "97549abf-0c4a-48dc-ad5d-04bb483107be",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# TD Control: Expected Sarsa",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620237,
+              "key": "0674a07e-a123-46a3-9400-0389549d0d54",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Please watch the video below to learn about **Expected Sarsa**, a third method for TD control.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620225,
+              "key": "88474b96-f075-4ef5-91f7-4185ea0bede0",
+              "title": "TD Control: Expected Sarsa",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "kEKupCyU0P0",
+                "china_cdn_id": "kEKupCyU0P0.mp4"
+              }
+            },
+            {
+              "id": 620231,
+              "key": "472ace0c-f35d-408e-8cee-0c57b7503b10",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Check out this (optional) [research paper](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.216.4144&rep=rep1&type=pdf) to learn more about Expected Sarsa.\n\n## Pseudocode\n---",
+              "instructor_notes": ""
+            },
+            {
+              "id": 624221,
+              "key": "7f93831c-5080-4661-944b-fc8af69098a5",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5aece9d8_screen-shot-2018-05-04-at-6.14.56-pm/screen-shot-2018-05-04-at-6.14.56-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/7f93831c-5080-4661-944b-fc8af69098a5",
+              "caption": "",
+              "alt": "",
+              "width": 600,
+              "height": 1114,
+              "instructor_notes": null
+            }
+          ]
+        },
+        {
+          "id": 626823,
+          "key": "33101432-50a1-49fb-8f7c-e3decc8faf87",
+          "title": "Quiz: Expected Sarsa",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "33101432-50a1-49fb-8f7c-e3decc8faf87",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 627018,
+              "key": "15a489ef-b8cf-408b-9ccd-e37ceaafff4a",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Quiz: Expected Sarsa",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627019,
+              "key": "b6f4e424-66d5-4c9f-a61d-f4d640b7d3f0",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Say that an agent is learning to navigate the gridworld described earlier in the lesson.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627384,
+              "key": "6bc9a8bc-7bc9-44cd-8a5c-0c0c54e37660",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af768cf_environment/environment.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/6bc9a8bc-7bc9-44cd-8a5c-0c0c54e37660",
+              "caption": "Gridworld Example",
+              "alt": "Gridworld Example",
+              "width": 300,
+              "height": 300,
+              "instructor_notes": null
+            },
+            {
+              "id": 627385,
+              "key": "2e9862c2-8bea-4907-89da-4bd7043f5fc7",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Suppose the agent is using **Expected Sarsa** in its search for the optimal policy, with **<span class=\"mathquill\">\\alpha=0.1</span>**.\n\nAt the end of the 99th episode, the Q-table has the following values:\n\n",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627402,
+              "key": "eba29a10-6a37-437a-903d-8c293548389c",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af7741f_qtable2/qtable2.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/eba29a10-6a37-437a-903d-8c293548389c",
+              "caption": "Q-table",
+              "alt": "Q-table",
+              "width": 300,
+              "height": 300,
+              "instructor_notes": null
+            },
+            {
+              "id": 627391,
+              "key": "3fd5f826-ef50-4aaa-9b96-d24edae02b87",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Say that at the beginning of the 100th episode, the agent starts in **state 1** and selects **action right**. As a result, it receives **reward -1**, and the next state is **state 2**.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627394,
+              "key": "2c9a8c75-c606-4f58-af25-292b07095482",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5af7705c_episode/episode.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/2c9a8c75-c606-4f58-af25-292b07095482",
+              "caption": "Beginning of the 100th episode",
+              "alt": "Beginning of the 100th episode",
+              "width": 300,
+              "height": 300,
+              "instructor_notes": null
+            },
+            {
+              "id": 627393,
+              "key": "821b4376-cc81-48cb-bfd4-db947ff42e47",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In the previous video, you learned that at this point in time, the agent updates the Q-table.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 627399,
+              "key": "7c02f7ac-6a85-466c-ba80-50abd8dd9437",
+              "title": "",
+              "semantic_type": "RadioQuizAtom",
+              "is_public": true,
+              "instructor_notes": null,
+              "user_state": {
+                "node_key": "7c02f7ac-6a85-466c-ba80-50abd8dd9437",
+                "completed_at": null,
+                "last_viewed_at": null,
+                "unstructured": null
+              },
+              "question": {
+                "prompt": "Which entry in the Q-table is updated?",
+                "answers": [
+                  {
+                    "id": "a1526166124898",
+                    "text": "The entry corresponding to **state 1** and **action left**.",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526166137562",
+                    "text": "The entry corresponding to **state 2** and **action left**.",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526166138268",
+                    "text": "The entry corresponding to **state 1** and **action right**.",
+                    "is_correct": true
+                  },
+                  {
+                    "id": "a1526166139016",
+                    "text": "The entry corresponding to **state 2** and **action right**.",
+                    "is_correct": false
+                  }
+                ]
+              }
+            },
+            {
+              "id": 627407,
+              "key": "dc49d8b3-231d-456a-89da-530c71f3628a",
+              "title": "",
+              "semantic_type": "RadioQuizAtom",
+              "is_public": true,
+              "instructor_notes": null,
+              "user_state": {
+                "node_key": "dc49d8b3-231d-456a-89da-530c71f3628a",
+                "completed_at": null,
+                "last_viewed_at": null,
+                "unstructured": null
+              },
+              "question": {
+                "prompt": "What is the new value in the Q-table corresponding to the state-action pair you selected in the answer to the question above?  \n\n(_Suppose that when selecting the actions for the first two timesteps in the 100th episode, the agent was following the epsilon-greedy policy with respect to the Q-table, with epsilon = 0.4._)",
+                "answers": [
+                  {
+                    "id": "a1526167929490",
+                    "text": "6",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526167931528",
+                    "text": "6.1",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526167936188",
+                    "text": "6.16",
+                    "is_correct": true
+                  },
+                  {
+                    "id": "a1526167941556",
+                    "text": "6.2",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526167945812",
+                    "text": "7",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1526167954420",
+                    "text": "9",
+                    "is_correct": false
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": 620226,
+          "key": "133c21aa-2285-4687-a7a1-67beef48f0b4",
+          "title": "TD Control: Theory and Practice",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "133c21aa-2285-4687-a7a1-67beef48f0b4",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 624425,
+              "key": "1d19e120-2630-449d-8132-f0c6fd4164aa",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2017/October/59d55ce3_exploration-vs.-exploitation/exploration-vs.-exploitation.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/1d19e120-2630-449d-8132-f0c6fd4164aa",
+              "caption": "Exploration-Exploitation Dilemma ([Source]( http://slides.com/ericmoura/deck-2/embed))",
+              "alt": "Exploration-Exploitation Dilemma",
+              "width": 300,
+              "height": 200,
+              "instructor_notes": null
+            },
+            {
+              "id": 620242,
+              "key": "eeed927f-2b78-4915-b63b-1d8dfb5efd9e",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# TD Control: Theory and Practice",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620229,
+              "key": "c08b4f83-b757-41e8-bcad-10a940ea85be",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Greedy in the Limit with Infinite Exploration (GLIE)\n---\nThe **Greedy in the Limit with Infinite Exploration (GLIE)** conditions were introduced in the previous lesson, when we learned about MC control.  There are many ways to satisfy the GLIE conditions, all of which involve gradually decaying the value of <span class=\"mathquill\">\\epsilon</span> when constructing <span class=\"mathquill\">\\epsilon</span>-greedy policies.\n\nIn particular, let <span class=\"mathquill\">\\epsilon_i</span> correspond to the <span class=\"mathquill\">i</span>-th time step.  Then, to satisfy the GLIE conditions, we need only set <span class=\"mathquill\">\\epsilon_i</span> such that:\n-  <span class=\"mathquill\">\\epsilon_i > 0</span> for all time steps <span class=\"mathquill\">i</span>, and \n- <span class=\"mathquill\">\\epsilon_i</span> decays to zero in the limit as the time step <span class=\"mathquill\">i</span> approaches infinity (that is, <span class=\"mathquill\">\\lim_{i\\to\\infty} \\epsilon_i = 0</span>),\n\n## In Theory\n---\n\nAll of the TD control algorithms we have examined (Sarsa, Sarsamax, Expected Sarsa) are **guaranteed to converge** to the optimal action-value function <span class=\"mathquill\">q_*</span>, as long as the step-size parameter <span class=\"mathquill\">\\alpha</span> is sufficiently small, and the GLIE conditions are met.  \n\nOnce we have a good estimate for <span class=\"mathquill\">q_*</span>, a corresponding optimal policy <span class=\"mathquill\">\\pi_*</span> can then be quickly obtained by setting <span class=\"mathquill\">\\pi_*(s) = \\arg\\max_{a\\in\\mathcal{A}(s)} q_*(s, a)</span> for all <span class=\"mathquill\">s\\in\\mathcal{S}</span>.\n\n## In Practice\n---\nIn practice, it is common to completely ignore the GLIE conditions and still recover an optimal policy.  (_You will see an example of this in the solution notebook._)\n\n## Optimism\n---\nYou have learned that for any TD control method, you must begin by initializing the values in the Q-table.  It has been shown that [initializing the estimates to large values](http://papers.nips.cc/paper/1944-convergence-of-optimistic-and-incremental-q-learning.pdf) can improve performance.  For instance, if all of the possible rewards that can be received by the agent are negative, then initializing every estimate in the Q-table to zeros is a good technique.  In this case, we refer to the initialized Q-table as **optimistic**, since the action-value estimates are guaranteed to be larger than the true action values.",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 620090,
+          "key": "b09b01e8-205c-4899-996d-8c5bdd49c39e",
+          "title": "OpenAI Gym: CliffWalkingEnv",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "b09b01e8-205c-4899-996d-8c5bdd49c39e",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 620213,
+              "key": "4b0d7cd3-3122-4f80-876a-7656053ed88d",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# OpenAI Gym: CliffWalkingEnv",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620091,
+              "key": "cf119c9e-af0b-40f7-8732-148690b524b3",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In order to master the algorithms discussed in this lesson, you will  write your own implementations in Python. While your code will be designed to work with any OpenAI Gym environment, you will test your code with the CliffWalking environment.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620092,
+              "key": "1b7900db-00f6-45b8-b8d1-1eff89fd33d4",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2017/October/59de4705_matengai-of-kuniga-coast-in-oki-island-shimane-pref600/matengai-of-kuniga-coast-in-oki-island-shimane-pref600.jpg",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/1b7900db-00f6-45b8-b8d1-1eff89fd33d4",
+              "caption": "Source: Wikipedia",
+              "alt": "",
+              "width": 630,
+              "height": 420,
+              "instructor_notes": null
+            },
+            {
+              "id": 620093,
+              "key": "cce8504c-0691-4982-a1b0-5106c990899f",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In the CliffWalking environment, the agent navigates a 4x12 gridworld.  Please read about the cliff-walking task in Example 6.6 of the [textbook](http://go.udacity.com/rl-textbook).  When you have finished, you can learn more about the environment in its corresponding [GitHub file](https://github.com/openai/gym/blob/master/gym/envs/toy_text/cliffwalking.py), by reading the commented block in the CliffWalkingEnv class.  For clarity, we have also pasted the description of the environment below (note that the link below to the Sutton and Barto textbook may not work, and you're encouraged to use [this link](http://go.udacity.com/rl-textbook) to access the textbook):\n\n```text\n    \"\"\"\n    This is a simple implementation of the Gridworld Cliff\n    reinforcement learning task.\n    Adapted from Example 6.6 from Reinforcement Learning: An Introduction\n    by Sutton and Barto:\n    http://people.inf.elte.hu/lorincz/Files/RL_2006/SuttonBook.pdf\n    \n    With inspiration from:\n    https://github.com/dennybritz/reinforcement-learning/blob/master/lib/envs/cliff_walking.py\n    The board is a 4x12 matrix, with (using Numpy matrix indexing):\n        [3, 0] as the start at bottom-left\n        [3, 11] as the goal at bottom-right\n        [3, 1..10] as the cliff at bottom-center\n    Each time step incurs -1 reward, and stepping into the cliff incurs -100 reward \n    and a reset to the start. An episode terminates when the agent reaches the goal.\n    \"\"\"\n```",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 620158,
+          "key": "6f5d9853-d99e-43df-a81e-552723067ece",
+          "title": "Workspace - Introduction",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "6f5d9853-d99e-43df-a81e-552723067ece",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 620205,
+              "key": "6d8fd791-b625-4fcb-8532-5f00e5844b15",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Workspace - Introduction",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620206,
+              "key": "06d413b4-c06f-478f-83bc-e7286ac27de0",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "You will write all of your implementations within the classroom, using an interface identical to the one shown below.  Your Workspace contains the following files (among others):\n- **Temporal_Difference.ipynb** - the Jupyter notebook where you will write all of your implementations (_this is the **only** file that you will modify!_)\n- **Temporal_Difference_Solution.ipynb** - the corresponding instructor solutions \n- **plot_utils.py** - contains a plotting function for visualizing state-value functions and policies\n- **check_test.py** - contains unit tests to check the validity of your implementations\n\nThe **Temporal_Difference.ipynb** notebook can be found below.  To peruse the other files, you need only click on \"jupyter\" in the top left corner to return to the Notebook dashboard.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620209,
+              "key": "d4ac0ef0-ba29-4093-a634-7a4e3ec90176",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5ae93a3a_screen-shot-2018-05-01-at-11.10.05-pm/screen-shot-2018-05-01-at-11.10.05-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/d4ac0ef0-ba29-4093-a634-7a4e3ec90176",
+              "caption": "To view the solution notebook, click on \"jupyter\" in the top left corner.",
+              "alt": "To view the solution notebook, click on \"jupyter\" in the top left corner.",
+              "width": 608,
+              "height": 80,
+              "instructor_notes": null
+            },
+            {
+              "id": 620211,
+              "key": "91b8779c-ec57-4321-96de-b277168ef6b9",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## The Workspace\n--- \nPlease do not write or execute any code just yet - for now, you're encouraged to simply explore the file structure.  In particular, make sure you know where to find the solution notebook. We'll get started with coding within the Workspace soon!",
+              "instructor_notes": ""
+            },
+            {
+              "id": 671978,
+              "key": "bf7cd812-dd5f-416a-94c0-16a78e7eb17a",
+              "title": null,
+              "semantic_type": "WorkspaceAtom",
+              "is_public": true,
+              "workspace_id": "viewSyeDytqpMQ",
+              "pool_id": "jupyter",
+              "view_id": "jupyter-Bki9Y96fm",
+              "gpu_capable": false,
+              "configuration": {
+                "id": "reserved",
+                "blueprint": {
+                  "conf": {
+                    "disk": null,
+                    "ports": [],
+                    "allowSubmit": false,
+                    "defaultPath": "/notebooks/Temporal_Difference.ipynb"
+                  },
+                  "kind": "jupyter"
+                },
+                "workspaceId": "reserved"
+              },
+              "starter_files": null
+            }
+          ]
+        },
+        {
+          "id": 620165,
+          "key": "d923e0b3-0923-4ca7-a1d4-ae50188ffb21",
+          "title": "Coding Exercise",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "d923e0b3-0923-4ca7-a1d4-ae50188ffb21",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 620202,
+              "key": "5605875f-7866-4b60-bd01-6fd5b02d2a42",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2017/September/59c73b1b_jupyter/jupyter.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/5605875f-7866-4b60-bd01-6fd5b02d2a42",
+              "caption": "",
+              "alt": "",
+              "width": 100,
+              "height": 100,
+              "instructor_notes": null
+            },
+            {
+              "id": 620203,
+              "key": "52679746-a995-45f1-95a5-0e2b40cef87d",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Please use the next concept to complete the following sections of `Temporal_Difference.ipynb`:\n- Part 0: Explore CliffWalkingEnv\n- Part 1: TD Control: Sarsa\n- Part 2: TD Control: Q-Learning\n- Part 3: TD Control: Expected Sarsa\n\nIf you'd like to reference the pseudocode while working on the notebook, you are encouraged to open [this sheet](https://github.com/udacity/rl-cheatsheet/blob/master/cheatsheet.pdf) in a new window.  \n\n## Check Your Implementation\n---\nFeel free to check your solution by looking at the corresponding sections in `Temporal_Difference_Solution.ipynb`.\n\n## Download the Exercise\n---\nIf you would prefer to work on your own machine, you can download the exercise from the [DRLND GitHub repository](https://github.com/udacity/deep-reinforcement-learning).",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 671976,
+          "key": "5fa2f29a-8bf4-4036-b314-8cd9abb846a0",
+          "title": "Workspace",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "5fa2f29a-8bf4-4036-b314-8cd9abb846a0",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 671977,
+              "key": "76387cca-c6c1-4d83-9a21-681feb076fb7",
+              "title": null,
+              "semantic_type": "WorkspaceAtom",
+              "is_public": true,
+              "workspace_id": "viewSyeDytqpMQ",
+              "pool_id": "jupyter",
+              "view_id": "jupyter-ryv1t9TGX",
+              "gpu_capable": false,
+              "configuration": {
+                "id": "reserved",
+                "blueprint": {
+                  "conf": {
+                    "disk": null,
+                    "ports": [],
+                    "allowSubmit": false,
+                    "defaultPath": "/notebooks/Temporal_Difference.ipynb"
+                  },
+                  "kind": "jupyter"
+                },
+                "workspaceId": "reserved"
+              },
+              "starter_files": null
+            }
+          ]
+        },
+        {
+          "id": 620167,
+          "key": "8ae13ac6-8d81-4789-a6f7-ec0b7ce82012",
+          "title": "Analyzing Performance",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "8ae13ac6-8d81-4789-a6f7-ec0b7ce82012",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 620219,
+              "key": "c73e66c3-8af3-4399-8529-2c4561377f9f",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Analyzing Performance",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620220,
+              "key": "6da3c14f-10bd-43a6-abbe-48cafea203db",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "You've learned about three different TD control methods in this lesson.  _So, what do they have in common, and how are they different?_\n\n## Similarities\n---\nAll of the TD control methods we have examined (Sarsa, Sarsamax, Expected Sarsa) converge to the optimal action-value function <span class=\"mathquill\">q_*</span> (and so yield the optimal policy <span class=\"mathquill\">\\pi_*</span>) if:\n1. the value of <span class=\"mathquill\">\\epsilon</span> decays in accordance with the GLIE conditions, and\n2.  the step-size parameter <span class=\"mathquill\">\\alpha</span> is sufficiently small.\n\n## Differences\n---\nThe differences between these algorithms are summarized below:\n- Sarsa and Expected Sarsa are both **on-policy** TD control algorithms.  In this case, the same (<span class=\"mathquill\">\\epsilon</span>-greedy) policy that is evaluated and improved is also used to select actions.\n- Sarsamax is an **off-policy** method, where the (greedy) policy that is evaluated and improved is different from the (<span class=\"mathquill\">\\epsilon</span>-greedy) policy that is used to select actions.\n- On-policy TD control methods (like Expected Sarsa and Sarsa) have better online performance than off-policy TD control methods (like Sarsamax). \n- Expected Sarsa generally achieves better performance than Sarsa.\n\nIf you would like to learn more, you are encouraged to read Chapter 6 of the [textbook](http://go.udacity.com/rl-textbook) (especially sections 6.4-6.6).\n\nAs an optional exercise to deepen your understanding, you are encouraged to reproduce Figure 6.4.  (Note that this exercise is optional!)",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620222,
+              "key": "1c666285-9c23-40b4-a5c1-a37ded4ab2bf",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5ae93d8e_screen-shot-2017-12-17-at-12.49.34-pm/screen-shot-2017-12-17-at-12.49.34-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/1c666285-9c23-40b4-a5c1-a37ded4ab2bf",
+              "caption": "",
+              "alt": "",
+              "width": 1670,
+              "height": 1088,
+              "instructor_notes": null
+            },
+            {
+              "id": 620221,
+              "key": "42ecdccc-48f5-4d78-812e-a2fdbc324984",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "The figure shows the performance of Sarsa and Q-learning on the cliff walking environment for constant <span class=\"mathquill\">\\epsilon = 0.1</span>.  As described in the textbook, in this case,\n- Q-learning achieves worse online performance (where the agent collects less reward on average in each episode), but learns the optimal policy, and\n- Sarsa achieves better online performance, but learns a sub-optimal \"safe\" policy.\n\nYou should be able to reproduce the figure by making only small modifications to your existing code.  ",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 630941,
+          "key": "786d183c-3e5f-43cd-9744-c31795af4ddb",
+          "title": "Quiz: Check Your Understanding",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "786d183c-3e5f-43cd-9744-c31795af4ddb",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 630942,
+              "key": "f7ea9463-d32f-424a-a934-79ea8a9d3f23",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Quiz: Check Your Understanding",
+              "instructor_notes": ""
+            },
+            {
+              "id": 630943,
+              "key": "8daf6813-decb-4c7c-97fd-920461604532",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In this lesson, you learned about many different algorithms for Temporal-Difference (TD) control.  Later in this nanodegree, you'll learn more about how to adapt the Q-Learning algorithm to produce the Deep Q-Learning algorithm that demonstrated [superhuman performance](https://www.youtube.com/watch?v=V1eYniJ0Rnk) at Atari games.\n\nBefore moving on, you're encouraged to check your understanding by completing this brief quiz on **Q-Learning**.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 630945,
+              "key": "54a05fc8-3505-4b45-8862-85838cdda07f",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/March/5aa05f61_screen-shot-2018-03-07-at-3.53.08-pm/screen-shot-2018-03-07-at-3.53.08-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/54a05fc8-3505-4b45-8862-85838cdda07f",
+              "caption": "The Agent and Environment",
+              "alt": "The Agent and Environment",
+              "width": 717,
+              "height": 383,
+              "instructor_notes": null
+            },
+            {
+              "id": 630944,
+              "key": "0351aab7-0771-4363-8e65-190f25a51e94",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## The Agent and Environment\n---\nImagine an agent that moves along a line with only five discrete positions (0, 1, 2, 3, or 4). The agent can move left, right or stay put. (_If the agent chooses to move left when at position 0 or right at position 4, the agent just remains in place._)\n\nThe Q-table has:\n- five rows, corresponding to the five possible states that may be observed, and\n- three columns, corresponding to three possible actions that the agent can take in response.  \n\nThe goal state is position 3, but the agent doesn't know that and is going to learn the best policy for getting to the goal via the Q-Learning algorithm (with learning rate <span class=\"mathquill\">\\alpha=0.2</span>). The environment will provide a reward of -1 for all locations except the goal state. The episode ends when the goal is reached.\n\n## Episode 0, Time 0\n---\nThe Q-table is initialized.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 630948,
+              "key": "98ba39e1-95ae-43bd-a86c-5886ece785d9",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/March/5aa04cad_screen-shot-2018-03-07-at-2.33.19-pm/screen-shot-2018-03-07-at-2.33.19-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/98ba39e1-95ae-43bd-a86c-5886ece785d9",
+              "caption": "Episode 0, Time 0",
+              "alt": "Episode 0, Time 0",
+              "width": 852,
+              "height": 361,
+              "instructor_notes": null
+            },
+            {
+              "id": 630950,
+              "key": "889182ec-b18d-4085-b910-5059b6005229",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Say the agent observes the initial **state** (position 1) and selects **action** stay. \n\nAs a result, it receives the **next state** (position 1) and a **reward** (-1.0) from the environment.  \n\nLet:\n- <span class=\"mathquill\">s_t</span> denote the state at time step <span class=\"mathquill\">t</span>,\n- <span class=\"mathquill\">a_t</span> denote the action at time step <span class=\"mathquill\">t</span>, and\n- <span class=\"mathquill\">r_t</span> denote the reward at time step <span class=\"mathquill\">t</span>.\n\nThen, the agent now knows <span class=\"mathquill\">s_0, a_0,r_1</span> and <span class=\"mathquill\">s_1</span>.  Namely, <span class=\"mathquill\">s_0 = 1, a_0=\\text{stay},r_1=-1.0,</span> and <span class=\"mathquill\">s_1=1</span>.\n\nUsing this information, it can update the Q-table value for <span class=\"mathquill\">Q(s_0, a_0)</span>. \nRecall the equation for updating the Q-table: \n\n<div class=\"mathquill\">{\\displaystyle Q(s_{t},a_{t})\\leftarrow (1-\\alpha )\\cdot \\underbrace {Q(s_{t},a_{t})} _{\\rm {old~value}}+\\underbrace {\\alpha } _{\\rm {learning~rate}}\\cdot \\overbrace {{\\bigg (}\\underbrace {r_{t+1}} _{\\rm {reward}}+\\underbrace {\\gamma } _{\\rm {discount~factor}}\\cdot \\underbrace {\\max _{a}Q(s_{t+1},a)} _{\\rm {estimate~of~optimal~future~value}}{\\bigg )}} ^{\\rm {learned~value}}}\n</div>\n\nNote that this is equivalent to the equation below (from the video on **Q-Learning**): \n<div class=\"mathquill\">Q(s_t, a_t) \\leftarrow Q(s_t, a_t) + \\alpha(r_{t+1} + \\gamma \\max_a Q(s_{t+1}, a) - Q(s_t, a_t))\n</div>\n\nSo the equation for updating <span class=\"mathquill\">Q(s_0, a_0)</span> is:\n<div class=\"mathquill\"> Q(s_{0},a_{0})\\leftarrow (1-\\alpha )\\cdot Q(s_{0},a_{0}) + \\alpha \\cdot (r_1 + \\gamma \\max_aQ(s_1,a))\n</div>\n\nSubstituting our known values:\n\n<div class=\"mathquill\">{\\displaystyle Q(s_{0},a_{0})\\leftarrow (1-0.2 )\\cdot  {Q(s_{0},a_{0})} +0.2\\cdot  {{\\bigg (} {r_{1}} +{\\max _{a}Q(s_{1},a)} {\\bigg )}} }\n</div>\n\nWe can find the _old value_ for <span class=\"mathquill\">Q(s_{0},a_{0})</span> by looking it up in the table for state <span class=\"mathquill\">s_{0}=1</span> and action <span class=\"mathquill\">a_{0}=stay</span> which is a value of 0.  To find the  _estimate of the optimal future value_ <span class=\"mathquill\">\\max _{a}Q(s_{1},a)</span>, we need to look at the entire row of actions for the _next_ state, <span class=\"mathquill\">s_{1}=1</span> and choose the maximum value across all actions.  They are all 0 right now, so the maximum is 0.  Reducing the equation, we can now update <span class=\"mathquill\">Q(s_{0},a_{0})</span>.\n\n<div class=\"mathquill\">{\\displaystyle Q(s_{0},a_{0})\\leftarrow -0.2 }\n</div>\n\n## Episode 0, Time 1\n---",
+              "instructor_notes": ""
+            },
+            {
+              "id": 630969,
+              "key": "ea1686c1-d797-44a5-90af-e477c27b0625",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/March/5aa04efb_screen-shot-2018-03-07-at-2.43.07-pm/screen-shot-2018-03-07-at-2.43.07-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/ea1686c1-d797-44a5-90af-e477c27b0625",
+              "caption": "",
+              "alt": "",
+              "width": 842,
+              "height": 363,
+              "instructor_notes": null
+            },
+            {
+              "id": 630971,
+              "key": "24ea09ff-8230-489c-982b-2a030746c763",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "At this step, an action must be chosen.  The best action for position 1 could be either \"left\" or \"right\", since their values in the Q-table are equal.  \n\nRemember that in Q-Learning, the agent uses the epsilon-greedy policy to select an action.  Say that in this case, the agent selects **action** right at random.\n\nThen, the agent receives a **new state** (position 2) and **reward** (-1.0) from the environment.\n\nThe agent now knows <span class=\"mathquill\">s_1, a_1,r_2,</span> and <span class=\"mathquill\">s_2</span>.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 630985,
+              "key": "117ca214-e3dd-4f95-a98f-1a762ba5d78d",
+              "title": "",
+              "semantic_type": "ValidatedQuizAtom",
+              "is_public": true,
+              "instructor_notes": null,
+              "user_state": {
+                "node_key": "117ca214-e3dd-4f95-a98f-1a762ba5d78d",
+                "completed_at": null,
+                "last_viewed_at": null,
+                "unstructured": null
+              },
+              "question": {
+                "prompt": "What is the updated value for <span class=\"mathquill\">Q(s_1, a_1)</span>? (round to the nearest 10th)",
+                "matchers": [
+                  {
+                    "expression": "^\\s*-0?\\.20*\\s*$"
+                  }
+                ]
+              }
+            },
+            {
+              "id": 630988,
+              "key": "ece42bbd-ca7b-4c24-b6c5-b261f4509298",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "## Episode n\n---\nNow assume that a number of episodes have been run, and the Q-table includes the values shown below.  \n\nA new episode begins, as before.  The environment gives an initial **state** (position 1), and the agent selects **action** stay.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 630991,
+              "key": "a09bd8b7-61cb-43de-99e3-859b1e3603ae",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/March/5aa056d7_screen-shot-2018-03-07-at-3.16.47-pm/screen-shot-2018-03-07-at-3.16.47-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/a09bd8b7-61cb-43de-99e3-859b1e3603ae",
+              "caption": "Episode n, Time 0",
+              "alt": "Episode n, Time 0",
+              "width": 874,
+              "height": 380,
+              "instructor_notes": null
+            },
+            {
+              "id": 630998,
+              "key": "8f6f9a85-46ed-4bb9-9838-bda2b0a2525d",
+              "title": "",
+              "semantic_type": "ValidatedQuizAtom",
+              "is_public": true,
+              "instructor_notes": null,
+              "user_state": {
+                "node_key": "8f6f9a85-46ed-4bb9-9838-bda2b0a2525d",
+                "completed_at": null,
+                "last_viewed_at": null,
+                "unstructured": null
+              },
+              "question": {
+                "prompt": "What is the new value for Q(1,stay)? (round your answer to the nearest 10th)",
+                "matchers": [
+                  {
+                    "expression": "^\\s*-2\\.9\\s*"
+                  },
+                  {
+                    "expression": "^\\s*-2\\.88\\s*"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": 620168,
+          "key": "b5f852a2-0378-4dbb-afc0-c16da612d66d",
+          "title": "Summary",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "b5f852a2-0378-4dbb-afc0-c16da612d66d",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 620214,
+              "key": "aee2e3f6-2742-4c6d-90e6-03f570e6a2aa",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Summary",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620215,
+              "key": "1a8f1245-7d70-4a22-b692-6408d46dabea",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5ae93c67_screen-shot-2017-10-17-at-11.02.44-am/screen-shot-2017-10-17-at-11.02.44-am.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/1a8f1245-7d70-4a22-b692-6408d46dabea",
+              "caption": "The cliff-walking task (Sutton and Barto, 2017)",
+              "alt": "The cliff-walking task (Sutton and Barto, 2017)",
+              "width": 1489,
+              "height": 594,
+              "instructor_notes": null
+            },
+            {
+              "id": 620216,
+              "key": "2c167b74-c3a7-466e-965b-13d769c3f36a",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "### Temporal-Difference Methods\n---\n- Whereas Monte Carlo (MC) prediction methods must wait until the end of an episode to update the value function estimate, temporal-difference (TD) methods update the value function after every time step.\n\n### TD Control\n--- \n- **Sarsa(0)** (or **Sarsa**) is an on-policy TD control method.  It is guaranteed to converge to the optimal action-value function <span class=\"mathquill\">q_*</span>, as long as the step-size parameter <span class=\"mathquill\">\\alpha</span> is sufficiently small and <span class=\"mathquill\">\\epsilon</span> is chosen to satisfy the __Greedy in the Limit with Infinite Exploration (GLIE)__ conditions.\n- **Sarsamax** (or **Q-Learning**) is an off-policy TD control method.  It is guaranteed to converge to the optimal action value function <span class=\"mathquill\">q_*</span>, under the same conditions that guarantee convergence of the Sarsa control algorithm.\n- **Expected Sarsa** is an on-policy TD control method.  It is guaranteed to converge to the optimal action value function <span class=\"mathquill\">q_*</span>, under the same conditions that guarantee convergence of Sarsa and Sarsamax.\n\n### Analyzing Performance\n---\n- On-policy TD control methods (like Expected Sarsa and Sarsa) have better online performance than off-policy TD control methods (like Q-learning). \n- Expected Sarsa generally achieves better performance than Sarsa.\n",
+              "instructor_notes": ""
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "_deprecated": [
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    }
+  ]
+}

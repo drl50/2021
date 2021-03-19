@@ -1,0 +1,109 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.930
+Welcome to the Deep Reinforcement Learning Nanodegree program.
+
+00:00:03.930 --> 00:00:06.509
+We're so excited that you've joined us.
+
+00:00:06.509 --> 00:00:09.960
+I'm Alexis Cook, the curriculum lead for this program.
+
+00:00:09.960 --> 00:00:12.405
+I'll be your guide through the Nanodegree.
+
+00:00:12.404 --> 00:00:15.195
+Your journey through the fascinating world of
+
+00:00:15.195 --> 00:00:18.615
+deep reinforcement learning will start at the very beginning.
+
+00:00:18.614 --> 00:00:21.154
+So we'll begin by answering the question,
+
+00:00:21.155 --> 00:00:24.185
+what is deep reinforcement learning exactly?
+
+00:00:24.184 --> 00:00:27.929
+Well, reinforcement learning is ultimately about
+
+00:00:27.929 --> 00:00:32.149
+building code that can learn to perform complex tasks by itself,
+
+00:00:32.149 --> 00:00:35.445
+and deep reinforcement learning refers to approaches
+
+00:00:35.445 --> 00:00:38.945
+where the knowledge is represented with a deep neural network.
+
+00:00:38.945 --> 00:00:42.200
+For example, maybe you've heard about AlphaGo Zero,
+
+00:00:42.200 --> 00:00:44.240
+the computer program that's able to beat
+
+00:00:44.240 --> 00:00:47.170
+world champions at the ancient Chinese game of Go.
+
+00:00:47.170 --> 00:00:53.000
+AlphaGo Zero learned for itself how to play without being told any rules of the game.
+
+00:00:53.000 --> 00:00:57.740
+It just starts playing and then based on whether it has won or lost,
+
+00:00:57.740 --> 00:00:59.960
+it can assess how good it's strategy is.
+
+00:00:59.960 --> 00:01:03.170
+Reinforcement learning helps AlphaGo Zero to learn from
+
+00:01:03.170 --> 00:01:07.849
+this gameplay experience so that it's able to learn from those wins and losses,
+
+00:01:07.849 --> 00:01:12.689
+to propose gradually better strategies and eventually master the game.
+
+00:01:12.689 --> 00:01:17.064
+This trial and error approach can also be extended to other domains.
+
+00:01:17.064 --> 00:01:18.890
+For instance, to teach a robot to
+
+00:01:18.890 --> 00:01:22.670
+walk or train a chatbot how to have better conversations.
+
+00:01:22.670 --> 00:01:26.329
+Companies such as Uber and Google are actively
+
+00:01:26.329 --> 00:01:30.125
+testing reinforcement learning algorithms and their self-driving cars,
+
+00:01:30.125 --> 00:01:35.784
+and Amazon currently uses reinforcement learning to make their warehouses more efficient.
+
+00:01:35.784 --> 00:01:40.534
+The possibilities are truly endless and It's widely considered
+
+00:01:40.534 --> 00:01:45.545
+the technology that brings us closer than never to artificial general intelligence.
+
+00:01:45.545 --> 00:01:48.049
+While we're still quite far from developing
+
+00:01:48.049 --> 00:01:51.105
+a super-human computer that matches human intelligence,
+
+00:01:51.105 --> 00:01:53.859
+the algorithms you'll learn in this course are
+
+00:01:53.859 --> 00:01:59.319
+logical first step in this direction and that's why we built this program,
+
+00:01:59.319 --> 00:02:04.654
+so that you're able to master this fascinating and potentially world changing technology.
+
+00:02:04.655 --> 00:02:07.489
+We can't wait to see where this journey takes you.
+

@@ -1,0 +1,145 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.860
+I'm interested in how learning,
+
+00:00:04.860 --> 00:00:06.950
+thinking, understanding, reasoning happens.
+
+00:00:06.950 --> 00:00:08.970
+Machine learning is a place where people are
+
+00:00:08.970 --> 00:00:11.745
+trying to figure out how to get it to happen in computers,
+
+00:00:11.744 --> 00:00:15.219
+which was kind of inherently interesting to me.
+
+00:00:15.949 --> 00:00:19.175
+So, in the case of something like a self-driving car,
+
+00:00:19.175 --> 00:00:21.210
+what you need is
+
+00:00:21.210 --> 00:00:26.315
+complex environments where there are lots of realistic physical interactions,
+
+00:00:26.315 --> 00:00:29.320
+and that's why we need richer training environments.
+
+00:00:29.320 --> 00:00:31.710
+Games are becoming more and more realistic,
+
+00:00:31.710 --> 00:00:33.945
+so Unity as a game engine is kind of perfectly
+
+00:00:33.945 --> 00:00:37.549
+positioned to provide what people in the research field need.
+
+00:00:37.549 --> 00:00:41.184
+There's a lot that machine learning can offer to games themselves,
+
+00:00:41.185 --> 00:00:45.109
+if you start to think about personalizing an experience.
+
+00:00:45.109 --> 00:00:49.100
+Again, this is something that machine learning could make possible.
+
+00:00:49.719 --> 00:00:54.304
+Now, kind of with all of these more-and-more complex algorithms,
+
+00:00:54.304 --> 00:00:56.600
+we're starting to think about ways in which these algorithms can
+
+00:00:56.600 --> 00:00:59.880
+then be applied back to the games themselves.
+
+00:01:01.159 --> 00:01:05.899
+So, the two problems that game developers face when they're trying to design
+
+00:01:05.900 --> 00:01:08.060
+a game is that the game either becomes
+
+00:01:08.060 --> 00:01:10.590
+too easy and players get bored with it and stop playing,
+
+00:01:10.590 --> 00:01:12.469
+or that in later levels,
+
+00:01:12.469 --> 00:01:13.730
+or even from the beginning perhaps,
+
+00:01:13.730 --> 00:01:18.969
+the game is too difficult and players simply quit because of that.
+
+00:01:18.969 --> 00:01:20.469
+Praneet is an intern that we had work with
+
+00:01:20.469 --> 00:01:22.474
+us in the Machine Learning team over the summer.
+
+00:01:22.474 --> 00:01:25.969
+What he's been working on is taking the platform that we're developing,
+
+00:01:25.969 --> 00:01:28.370
+and trying to use it in more specific ways that can
+
+00:01:28.370 --> 00:01:31.765
+actually help provide more interesting games for players.
+
+00:01:31.765 --> 00:01:34.284
+So, when I started my internship here,
+
+00:01:34.284 --> 00:01:37.259
+Arthur and me discussed what game we could actually work on,
+
+00:01:37.260 --> 00:01:39.859
+and we both came to the conclusion that TANKS,
+
+00:01:39.859 --> 00:01:41.090
+which is a unity environment,
+
+00:01:41.090 --> 00:01:44.034
+would be suitable for our task to test out the algorithms.
+
+00:01:44.034 --> 00:01:46.780
+What if we have a superhuman AI agent,
+
+00:01:46.780 --> 00:01:48.920
+and actually allow him to adaptively
+
+00:01:48.920 --> 00:01:52.540
+change his level of skill based on the way that you play?
+
+00:01:52.540 --> 00:01:55.380
+It's a much more personalized experience for them,
+
+00:01:55.379 --> 00:01:58.609
+that you keep on matching their difficulty at every point of time,
+
+00:01:58.609 --> 00:02:00.935
+so you can get a more personalized experience.
+
+00:02:00.935 --> 00:02:03.000
+I feel that's really cool.
+
+00:02:06.709 --> 00:02:10.894
+Unlike perhaps older fields from a few decades ago,
+
+00:02:10.895 --> 00:02:15.105
+the machine learning community is very open in terms of sharing ideas, sharing code,
+
+00:02:15.104 --> 00:02:18.169
+sharing work, so we think it's a natural fit to continue
+
+00:02:18.169 --> 00:02:21.500
+this trend of releasing tools that are open,
+
+00:02:21.500 --> 00:02:24.719
+that anyone can use and inviting open collaboration.
+
+00:02:24.719 --> 00:02:29.099
+That's why we're so excited to be releasing an initial preview of this product.
+

@@ -1,0 +1,734 @@
+{
+  "data": {
+    "lesson": {
+      "id": 599098,
+      "key": "d09af343-a93a-4146-b6ed-b4d5fe762480",
+      "title": "RL in Continuous Spaces",
+      "semantic_type": "Lesson",
+      "is_public": true,
+      "version": "1.0.0",
+      "locale": "en-us",
+      "summary": "Learn how to adapt traditional algorithms to work with continuous spaces.",
+      "lesson_type": "Classroom",
+      "display_workspace_project_only": false,
+      "resources": {
+        "files": [
+          {
+            "name": "Videos Zip File",
+            "uri": "https://zips.udacity-data.com/d09af343-a93a-4146-b6ed-b4d5fe762480/599098/1544455979147/RL+in+Continuous+Spaces+Videos.zip"
+          },
+          {
+            "name": "Transcripts Zip File",
+            "uri": "https://zips.udacity-data.com/d09af343-a93a-4146-b6ed-b4d5fe762480/599098/1544455975313/RL+in+Continuous+Spaces+Subtitles.zip"
+          }
+        ],
+        "google_plus_link": null,
+        "career_resource_center_link": null,
+        "coaching_appointments_link": null,
+        "office_hours_link": null,
+        "aws_provisioning_link": null
+      },
+      "project": null,
+      "lab": null,
+      "concepts": [
+        {
+          "id": 614070,
+          "key": "c77e580e-4a8a-4ea9-9236-b1935fe16f69",
+          "title": "Introducing Arpan",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "c77e580e-4a8a-4ea9-9236-b1935fe16f69",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 614236,
+              "key": "99100d8b-de2a-4a8c-b40a-083057c02b3f",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Introducing Arpan",
+              "instructor_notes": ""
+            },
+            {
+              "id": 631357,
+              "key": "c40d50d3-a023-4a1a-9d75-9afea2848255",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In this lesson, Arpan will teach you how to adapt traditional reinforcement learning methods to solve a larger class of problems.\n\n_Arpan is a computer scientist with a PhD from North Carolina State University.  He teaches at Georgia Tech (within the Masters in Computer Science program), and is a coauthor of the book Practical Graph Mining with R._",
+              "instructor_notes": ""
+            },
+            {
+              "id": 614237,
+              "key": "9a49dc97-b829-4627-93ea-91865a2a9c66",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/April/5ada599d_arpan-headshot/arpan-headshot.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/9a49dc97-b829-4627-93ea-91865a2a9c66",
+              "caption": "Hi, I'm Arpan!",
+              "alt": "",
+              "width": 334,
+              "height": 331,
+              "instructor_notes": null
+            },
+            {
+              "id": 614235,
+              "key": "0e1de67b-6147-4264-8f6c-ffe55fe820f5",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "So far in this nanodegree, you have worked with reinforcement learning environments where the number of states and actions is limited.  With small, finite **Markov Decision Processes (MDPs)**, it is possible to represent the action-value function with a table, dictionary, or other finite structure.\n\nFor instance, consider the very small gridworld below.  Say the world has four possible states, and the agent has four possible actions at its disposal (up, down, left, right).  You learned in the previous lessons that we can represent the estimated optimal action-value function in a table, with a row for each state and a column for each action.  We refer to this table as a **Q-table**.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 614572,
+              "key": "42d03421-11ef-4c78-a925-52096e003642",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/April/5addf95c_qtable/qtable.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/42d03421-11ef-4c78-a925-52096e003642",
+              "caption": "Q-Table ([Source](https://qiita.com/icoxfog417/items/242439ecd1a477ece312))",
+              "alt": "Q-Table ([Source](https://qiita.com/icoxfog417/items/242439ecd1a477ece312))",
+              "width": 360,
+              "height": 170,
+              "instructor_notes": null
+            },
+            {
+              "id": 614570,
+              "key": "c730b3b4-74ee-478d-b47e-cb7bc67434dc",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "But what about MDPs with much larger spaces?  Consider that the Q-table must have a **row for each state**.  So, for instance, if there are 10 million possible states, the Q-table must have 10 million rows.  Furthermore, if the state space is the set of continuous [real-valued numbers](https://en.wikipedia.org/wiki/Real_number) (an **_infinite_** set!), it becomes impossible to represent the action values in a **_finite_** structure! \n\nIn this lesson, I'll teach you how to generalize the tabular solution methods from the previous lessons to work with large and continuous spaces.  This will lay the foundation for developing the deep reinforcement learning algorithms that you will explore later in the nanodegree.\n\nThese algorithms can be hard to understand, so don’t worry if you find them challenging at first.  Make sure you practice implementing the core components of these algorithms, and apply them to various environments, to observe how they perform – that is the only way to master deep reinforcement learning!",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 631349,
+          "key": "dae3e419-7c9e-4cae-a731-ee8bb1400a98",
+          "title": "Lesson Overview",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "dae3e419-7c9e-4cae-a731-ee8bb1400a98",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 631351,
+              "key": "b4655c48-26c0-4d44-932f-bfb18e349c7c",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Lesson Overview",
+              "instructor_notes": ""
+            },
+            {
+              "id": 631355,
+              "key": "9d991fb9-dae7-4bcf-ae16-0f24f284a679",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "In the video below, Arpan will give you a brief review of the reinforcement learning framework, and you will hear more about the topics that this lesson will cover.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 631350,
+              "key": "c889b76c-d4c6-43b6-b8d1-33f009ccebdf",
+              "title": "Introduction",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "GPjK124RU5g",
+                "china_cdn_id": "GPjK124RU5g.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 350718,
+          "key": "f59522e8-09d6-48c3-b2f4-747a8ddc4e4f",
+          "title": "Discrete vs. Continuous Spaces",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "f59522e8-09d6-48c3-b2f4-747a8ddc4e4f",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 501570,
+              "key": "b13f1bc0-6429-4e37-b6eb-c014337db589",
+              "title": "Discrete vs. Continuous Spaces",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "uHstLeRzaE8",
+                "china_cdn_id": "uHstLeRzaE8.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 501641,
+          "key": "8f5b01de-12dd-4a2b-8b3f-feda943af07e",
+          "title": "Quiz: Space Representations",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "8f5b01de-12dd-4a2b-8b3f-feda943af07e",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 501646,
+              "key": "8aed53aa-2e3f-4496-9140-4ad7207a7e3e",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/January/5a554674_poker-hand-3-of-a-kind/poker-hand-3-of-a-kind.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/8aed53aa-2e3f-4496-9140-4ad7207a7e3e",
+              "caption": "",
+              "alt": "",
+              "width": 400,
+              "height": 300,
+              "instructor_notes": null
+            },
+            {
+              "id": 501645,
+              "key": "ff660a92-7624-4941-b0e5-3b6521f68e1c",
+              "title": "Space Representations",
+              "semantic_type": "CheckboxQuizAtom",
+              "is_public": true,
+              "instructor_notes": null,
+              "user_state": {
+                "node_key": "ff660a92-7624-4941-b0e5-3b6521f68e1c",
+                "completed_at": null,
+                "last_viewed_at": null,
+                "unstructured": null
+              },
+              "question": {
+                "prompt": "Which of the following state or action spaces can be encoded using **discrete** representations?",
+                "answers": [
+                  {
+                    "id": "a1515533988287",
+                    "text": "A hand of cards when playing Poker",
+                    "is_correct": true
+                  },
+                  {
+                    "id": "a1515534071720",
+                    "text": "Force applied when grasping with a robotic arm",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1515534347156",
+                    "text": "GPS coordinates for autonomous driving",
+                    "is_correct": false
+                  },
+                  {
+                    "id": "a1515534474729",
+                    "text": "Board positions for a 9x9 Go game",
+                    "is_correct": true
+                  },
+                  {
+                    "id": "a1515534637936",
+                    "text": "Keys to play on a musical keyboard",
+                    "is_correct": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": 355453,
+          "key": "a07fda6d-c75a-4e8f-9c5c-36c2a43d0be7",
+          "title": "Discretization",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "a07fda6d-c75a-4e8f-9c5c-36c2a43d0be7",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 501571,
+              "key": "f699a410-9312-4412-b040-086512ca23b4",
+              "title": "Discretization",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "j2eZyUpy--E",
+                "china_cdn_id": "j2eZyUpy--E.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 614071,
+          "key": "ea7635d4-04d6-4ee2-9b23-ed890e0057c6",
+          "title": "Exercise: Discretization",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "ea7635d4-04d6-4ee2-9b23-ed890e0057c6",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 620243,
+              "key": "d4b9d876-a305-41fe-8b87-45488e41c69a",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2017/September/59c73b1b_jupyter/jupyter.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/d4b9d876-a305-41fe-8b87-45488e41c69a",
+              "caption": "",
+              "alt": "",
+              "width": 100,
+              "height": 100,
+              "instructor_notes": null
+            },
+            {
+              "id": 620244,
+              "key": "4bdd12f5-0b31-433b-868f-8b7de1f1feb4",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Please use the next concept to complete `Discretization.ipynb`.\n\n## Check Your Implementation\n---\nTo find the corresponding solution notebook (`Discretization_Solution.ipynb`), you need only click on \"jupyter\" in the top left corner to return to the Notebook dashboard.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 620248,
+              "key": "447e4e42-6893-4005-8a2f-9d7dd652a92d",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5ae94f20_screen-shot-2018-05-02-at-12.24.35-am/screen-shot-2018-05-02-at-12.24.35-am.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/447e4e42-6893-4005-8a2f-9d7dd652a92d",
+              "caption": "To view the solution notebook, click on \"jupyter\" in the top left corner.",
+              "alt": "To view the solution notebook, click on \"jupyter\" in the top left corner.",
+              "width": 557,
+              "height": 80,
+              "instructor_notes": null
+            },
+            {
+              "id": 620249,
+              "key": "4900fec9-e51d-432b-870f-1f0cafe110c6",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Feel free to check your solution by looking at the implementation in the solution notebook!\n\n## Download the Exercise\n---\nIf you would prefer to work on your own machine, you can download the exercise from the [DRLND GitHub repository](https://github.com/udacity/deep-reinforcement-learning).",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 671979,
+          "key": "fe263343-c140-4670-bbe7-ed15332422a6",
+          "title": "Workspace: Discretization",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "fe263343-c140-4670-bbe7-ed15332422a6",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 671980,
+              "key": "02b05076-a46e-4b06-b69c-128c1ca0a68f",
+              "title": null,
+              "semantic_type": "WorkspaceAtom",
+              "is_public": true,
+              "workspace_id": "viewSyggvccpz7",
+              "pool_id": "jupyter",
+              "view_id": "jupyter-B1xw55pGX",
+              "gpu_capable": false,
+              "configuration": {
+                "id": "reserved",
+                "blueprint": {
+                  "conf": {
+                    "disk": null,
+                    "ports": [],
+                    "allowSubmit": false,
+                    "defaultPath": "/notebooks/Discretization.ipynb"
+                  },
+                  "kind": "jupyter"
+                },
+                "workspaceId": "reserved"
+              },
+              "starter_files": null
+            }
+          ]
+        },
+        {
+          "id": 355457,
+          "key": "3df727fc-03e8-412a-ad35-37fe0549db26",
+          "title": "Tile Coding",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "3df727fc-03e8-412a-ad35-37fe0549db26",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 501573,
+              "key": "4762b3e1-3360-423a-af5f-69da1a333352",
+              "title": "Tile Coding",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "BRs7AnTZ_8k",
+                "china_cdn_id": "BRs7AnTZ_8k.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 614073,
+          "key": "69805287-b3fd-40a5-8f80-701a38eb0e49",
+          "title": "Exercise: Tile Coding",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "69805287-b3fd-40a5-8f80-701a38eb0e49",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 621708,
+              "key": "048f8d04-5308-4c02-8ac4-d57737117fd0",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2017/September/59c73b1b_jupyter/jupyter.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/048f8d04-5308-4c02-8ac4-d57737117fd0",
+              "caption": "",
+              "alt": "",
+              "width": 100,
+              "height": 100,
+              "instructor_notes": null
+            },
+            {
+              "id": 621709,
+              "key": "1ee192cc-59a9-49de-aaa3-6b7292fb37f7",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Please use the next concept to complete `Tile_Coding.ipynb`.\n\n## Check Your Implementation\n---\nTo find the corresponding solution notebook (`Tile_Coding_Solution.ipynb`), you need only click on \"jupyter\" in the top left corner to return to the Notebook dashboard.",
+              "instructor_notes": ""
+            },
+            {
+              "id": 621712,
+              "key": "289d2b05-a710-42b9-b76d-1001641d71fb",
+              "title": null,
+              "semantic_type": "ImageAtom",
+              "is_public": true,
+              "url": "https://video.udacity-data.com/topher/2018/May/5aebe1ec_screen-shot-2018-05-03-at-11.30.05-pm/screen-shot-2018-05-03-at-11.30.05-pm.png",
+              "non_google_url": "https://s3.cn-north-1.amazonaws.com.cn/u-img/289d2b05-a710-42b9-b76d-1001641d71fb",
+              "caption": "To view the solution notebook, click on \"jupyter\" in the top left corner.",
+              "alt": "To view the solution notebook, click on \"jupyter\" in the top left corner.",
+              "width": 550,
+              "height": 79,
+              "instructor_notes": null
+            },
+            {
+              "id": 621710,
+              "key": "f16af775-9574-4541-b7fb-ff57bc347ee0",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "Feel free to check your solution by looking at the implementation in the solution notebook!\n\n## Download the Exercise\n---\nIf you would prefer to work on your own machine, you can download the exercise from the [DRLND GitHub repository](https://github.com/udacity/deep-reinforcement-learning).",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 614074,
+          "key": "74f15fd3-531a-49be-b76b-63179f9ec5fa",
+          "title": "Workspace: Tile Coding",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "74f15fd3-531a-49be-b76b-63179f9ec5fa",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 671981,
+              "key": "d02726ad-1c98-4261-87c7-9c20ff618492",
+              "title": null,
+              "semantic_type": "WorkspaceAtom",
+              "is_public": true,
+              "workspace_id": "viewSyggvccpz7",
+              "pool_id": "jupyter",
+              "view_id": "jupyter-SyH3q5pM7",
+              "gpu_capable": false,
+              "configuration": {
+                "id": "reserved",
+                "blueprint": {
+                  "conf": {
+                    "disk": null,
+                    "ports": [],
+                    "allowSubmit": false,
+                    "defaultPath": "/notebooks/Tile_Coding.ipynb"
+                  },
+                  "kind": "jupyter"
+                },
+                "workspaceId": "reserved"
+              },
+              "starter_files": null
+            }
+          ]
+        },
+        {
+          "id": 355458,
+          "key": "5586a1ba-f3ce-4344-a74e-8776645cc626",
+          "title": "Coarse Coding",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "5586a1ba-f3ce-4344-a74e-8776645cc626",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 501574,
+              "key": "a6a0e133-b556-4d8d-a3da-34cf57efa038",
+              "title": "Coarse Coding",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "Uu1J5KLAfTU",
+                "china_cdn_id": "Uu1J5KLAfTU.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 355454,
+          "key": "71f0d234-98fc-4a0f-8416-58f3090feec2",
+          "title": "Function Approximation",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "71f0d234-98fc-4a0f-8416-58f3090feec2",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 501576,
+              "key": "b8ec00ff-7b4d-472f-b1cf-091688db91d5",
+              "title": "Function Approximation",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "UTGWVY6jEdg",
+                "china_cdn_id": "UTGWVY6jEdg.mp4"
+              }
+            },
+            {
+              "id": 355463,
+              "key": "0400c99c-ae0f-4e62-847a-2232e1a2f686",
+              "title": null,
+              "semantic_type": "TextAtom",
+              "is_public": true,
+              "text": "# Function Approximation\n\nGiven a problem domain with continuous states <span class=\"mathquill\">s \\in \\mathcal{S} = {\\mathbb{R}^{n}}</span>, we wish to find a way to represent the value function <span class=\"mathquill\">v_{\\pi}(s)</span> (for prediction) or <span class=\"mathquill\">q_{\\pi}(s, a)</span> (for control).\n\nWe can do this by choosing a parameterized function that _approximates_ the true value function:\n\n<span class=\"mathquill\">\\hat{v}(s, \\mathbf{w}) \\approx v_{\\pi}(s)</span><br />\n<span class=\"mathquill\">\\hat{q}(s, a, \\mathbf{w}) \\approx q_{\\pi}(s, a)</span>\n\nOur goal then reduces to finding a set of parameters <span class=\"mathquill\">\\mathbf{w}</span> that yield an optimal value function. We can use the general reinforcement learning framework, with a Monte-Carlo or Temporal-Difference approach, and modify the update mechanism according to the chosen function.\n\n## Feature Vectors\n\nA common intermediate step is to compute a feature vector that is representative of the state:\n<span class=\"mathquill\">\\mathbf{x}(s)</span>\n",
+              "instructor_notes": ""
+            }
+          ]
+        },
+        {
+          "id": 355455,
+          "key": "9e591e2b-11dc-4c7f-a276-e6f41f6815dc",
+          "title": "Linear Function Approximation",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "9e591e2b-11dc-4c7f-a276-e6f41f6815dc",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 501579,
+              "key": "2490f8d3-412a-4075-8652-7d648bf65e8d",
+              "title": "Linear Function Approximation",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "OJ5wrB7o-pI",
+                "china_cdn_id": "OJ5wrB7o-pI.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 372895,
+          "key": "b98da586-2e59-484d-a0f7-783953890f6d",
+          "title": "Kernel Functions",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "b98da586-2e59-484d-a0f7-783953890f6d",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 501580,
+              "key": "0ec548c1-cca5-46c6-a9c4-abeb4d141a48",
+              "title": "Kernel Functions",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "RdkPVYyVOvU",
+                "china_cdn_id": "RdkPVYyVOvU.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 355456,
+          "key": "59ebf823-3ef5-4531-a36e-696974845424",
+          "title": "Non-Linear Function Approximation",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "59ebf823-3ef5-4531-a36e-696974845424",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 501583,
+              "key": "8056db9b-57f5-4987-98a3-b2122ecd1569",
+              "title": "Non-Linear Function Approximation",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "rITnmpD2mN8",
+                "china_cdn_id": "rITnmpD2mN8.mp4"
+              }
+            }
+          ]
+        },
+        {
+          "id": 501585,
+          "key": "6191b372-9ea0-4edf-9116-e562b4257fc6",
+          "title": "Summary",
+          "semantic_type": "Concept",
+          "is_public": true,
+          "user_state": {
+            "node_key": "6191b372-9ea0-4edf-9116-e562b4257fc6",
+            "completed_at": null,
+            "last_viewed_at": null,
+            "unstructured": null
+          },
+          "resources": null,
+          "atoms": [
+            {
+              "id": 501592,
+              "key": "d7dd3a7a-d782-42c1-8f52-9637adb2faf3",
+              "title": "Summary",
+              "semantic_type": "VideoAtom",
+              "is_public": true,
+              "instructor_notes": "",
+              "video": {
+                "youtube_id": "MTEBk43oByU",
+                "china_cdn_id": "MTEBk43oByU.mp4"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "_deprecated": [
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    },
+    {
+      "name": "non_google_url",
+      "reason": "(2016/8/18) Not sure, ask i18n team for reason"
+    }
+  ]
+}
