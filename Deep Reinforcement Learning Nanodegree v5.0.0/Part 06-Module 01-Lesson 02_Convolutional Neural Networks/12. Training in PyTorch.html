@@ -1,0 +1,390 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Training in PyTorch
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Convolutional Neural Networks
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. Introducing Cezanne.html">
+       01. Introducing Cezanne
+      </a>
+     </li>
+     <li class="">
+      <a href="02. Lesson Outline and Data.html">
+       02. Lesson Outline and Data
+      </a>
+     </li>
+     <li class="">
+      <a href="03. CNN Architecture, VGG-16.html">
+       03. CNN Architecture, VGG-16
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Convolutional Layers.html">
+       04. Convolutional Layers
+      </a>
+     </li>
+     <li class="">
+      <a href="05. Defining Layers in PyTorch.html">
+       05. Defining Layers in PyTorch
+      </a>
+     </li>
+     <li class="">
+      <a href="06. Notebook Visualizing a Convolutional Layer.html">
+       06. Notebook: Visualizing a Convolutional Layer
+      </a>
+     </li>
+     <li class="">
+      <a href="07. Pooling, VGG-16 Architecture.html">
+       07. Pooling, VGG-16 Architecture
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Pooling Layers.html">
+       08. Pooling Layers
+      </a>
+     </li>
+     <li class="">
+      <a href="09. Notebook Visualizing a Pooling Layer.html">
+       09. Notebook: Visualizing a Pooling Layer
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Fully-Connected Layers, VGG-16.html">
+       10. Fully-Connected Layers, VGG-16
+      </a>
+     </li>
+     <li class="">
+      <a href="11. Notebook Visualizing FashionMNIST.html">
+       11. Notebook: Visualizing FashionMNIST
+      </a>
+     </li>
+     <li class="">
+      <a href="12. Training in PyTorch.html">
+       12. Training in PyTorch
+      </a>
+     </li>
+     <li class="">
+      <a href="13. Notebook Fashion MNIST Training Exercise.html">
+       13. Notebook: Fashion MNIST Training Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="14. Notebook FashionMNIST, Solution 1.html">
+       14. Notebook: FashionMNIST, Solution 1
+      </a>
+     </li>
+     <li class="">
+      <a href="15. Review Dropout.html">
+       15. Review: Dropout
+      </a>
+     </li>
+     <li class="">
+      <a href="16. Notebook FashionMNIST, Solution 2.html">
+       16. Notebook: FashionMNIST, Solution 2
+      </a>
+     </li>
+     <li class="">
+      <a href="17. Feature Visualization.html">
+       17. Feature Visualization
+      </a>
+     </li>
+     <li class="">
+      <a href="18. Feature Maps.html">
+       18. Feature Maps
+      </a>
+     </li>
+     <li class="">
+      <a href="19. First Convolutional Layer.html">
+       19. First Convolutional Layer
+      </a>
+     </li>
+     <li class="">
+      <a href="20. Visualizing CNNs (Part 2).html">
+       20. Visualizing CNNs (Part 2)
+      </a>
+     </li>
+     <li class="">
+      <a href="21. Visualizing Activations.html">
+       21. Visualizing Activations
+      </a>
+     </li>
+     <li class="">
+      <a href="22. Notebook Feature Viz for FashionMNIST.html">
+       22. Notebook: Feature Viz for FashionMNIST
+      </a>
+     </li>
+     <li class="">
+      <a href="23. Last Feature Vector and t-SNE.html">
+       23. Last Feature Vector and t-SNE
+      </a>
+     </li>
+     <li class="">
+      <a href="24. Occlusion, Saliency, and Guided Backpropagation.html">
+       24. Occlusion, Saliency, and Guided Backpropagation
+      </a>
+     </li>
+     <li class="">
+      <a href="25. Summary of Feature Viz.html">
+       25. Summary of Feature Viz
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          12. Training in PyTorch
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="training-in-pytorch">
+          Training in PyTorch
+         </h1>
+         <p>
+          Once you've loaded a training dataset, next your job will be to define a CNN and train it to classify that set of images.
+         </p>
+         <h3 id="loss-and-optimizer">
+          Loss and Optimizer
+         </h3>
+         <p>
+          To train a model, you'll need to define
+          <em>
+           how
+          </em>
+          it trains by selecting a loss function and optimizer. These functions decide how the model updates its parameters as it trains and can affect how quickly the model converges, as well.
+         </p>
+         <p>
+          Learn more about
+          <a href="http://pytorch.org/docs/master/nn.html#loss-functions" rel="noopener noreferrer" target="_blank">
+           loss functions
+          </a>
+          and
+          <a href="http://pytorch.org/docs/master/optim.html" rel="noopener noreferrer" target="_blank">
+           optimizers
+          </a>
+          in the online documentation.
+         </p>
+         <p>
+          For a classification problem like this, one typically uses cross entropy loss, which can be defined in code like:
+          <code>
+           criterion = nn.CrossEntropyLoss()
+          </code>
+          . PyTorch also includes some standard stochastic optimizers like stochastic gradient descent and Adam. You're encouraged to try different optimizers and see how your model responds to these choices as it trains.
+         </p>
+         <h4 id="clasisification-vs-regression">
+          Clasisification vs. Regression
+         </h4>
+         <p>
+          The loss function you should choose depends on the kind of CNN you are trying to create; cross entropy is generally good for classification tasks, but you might choose a different loss function for, say, a regression problem that tried to predict (x,y) locations for the center or edges of clothing items instead of class scores.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h3 id="training-the-network">
+          Training the Network
+         </h3>
+         <p>
+          Typically, we train any network for a number of epochs or cycles through the training dataset
+         </p>
+         <p>
+          Here are the steps that a training function performs as it iterates over the training dataset:
+         </p>
+         <ol>
+          <li>
+           Prepares all input images and label data for training
+          </li>
+          <li>
+           Passes the input through the network (forward pass)
+          </li>
+          <li>
+           Computes the loss (how far is the predicted classes are from the correct labels)
+          </li>
+          <li>
+           Propagates gradients back into the network’s parameters (backward pass)
+          </li>
+          <li>
+           Updates the weights (parameter update)
+          </li>
+         </ol>
+         <p>
+          It repeats this process until the average loss has sufficiently decreased.
+         </p>
+         <p>
+          And in the next notebook, you'll see how to train and test a CNN for clothing classification, in detail.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h3 id="please-also-checkout-the-linked-exercise-repohttpsgithubcomudacitycvnd_exercisestreemaster1_5_cnn_layers-for-multiple-solutions-to-the-following-training-challenge">
+          Please also checkout the
+          <a href="https://github.com/udacity/CVND_Exercises/tree/master/1_5_CNN_Layers" rel="noopener noreferrer" target="_blank">
+           linked, exercise repo
+          </a>
+          for multiple solutions to the following training challenge!
+         </h3>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="13. Notebook Fashion MNIST Training Exercise.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('12. Training in PyTorch')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

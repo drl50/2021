@@ -1,0 +1,103 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.339
+Let's look at the architecture of
+
+00:00:02.339 --> 00:00:07.514
+a classification CNN that takes in an image and outputs a predicted class for that image.
+
+00:00:07.514 --> 00:00:11.879
+You've seen how to train CNN's like this on sets of labeled image data,
+
+00:00:11.880 --> 00:00:14.429
+and you've learned about the layers that make up a CNN.
+
+00:00:14.429 --> 00:00:16.800
+Things like convolutional layers that learned to filter
+
+00:00:16.800 --> 00:00:20.225
+images and pooling layers that reduced the size of your input.
+
+00:00:20.225 --> 00:00:23.135
+We know in theory what's happening in these layers,
+
+00:00:23.135 --> 00:00:27.380
+but after a network has been trained and especially in networks with many layers,
+
+00:00:27.379 --> 00:00:32.409
+how can we know exactly what each layer has learned and why is this important?
+
+00:00:32.409 --> 00:00:34.939
+Take this classifier as an example.
+
+00:00:34.939 --> 00:00:37.750
+Say it's only been training for a little while and it's learning to
+
+00:00:37.750 --> 00:00:40.515
+distinguish images of dogs from images of wolves,
+
+00:00:40.515 --> 00:00:42.414
+but it's making some mistakes.
+
+00:00:42.414 --> 00:00:45.879
+Here are a few images from the training set for comparison.
+
+00:00:45.880 --> 00:00:48.840
+Well can you see that distinguishes these images?
+
+00:00:48.840 --> 00:00:50.790
+You may look at the mouth of the wolf,
+
+00:00:50.789 --> 00:00:54.254
+and the dog, the amount of fur or overall shape.
+
+00:00:54.255 --> 00:00:56.344
+But what does the network see?
+
+00:00:56.344 --> 00:01:00.379
+It turns out that since this model was training on a set of images,
+
+00:01:00.380 --> 00:01:03.959
+in which wolves were primarily pictured on a snowy landscape,
+
+00:01:03.959 --> 00:01:07.775
+it actually learned that snow was an important feature to extract.
+
+00:01:07.775 --> 00:01:11.700
+If there was snow, then an image was most likely classified as a wolf,
+
+00:01:11.700 --> 00:01:14.255
+even if it was really an image of a dog.
+
+00:01:14.254 --> 00:01:16.469
+So because of the limited training data,
+
+00:01:16.469 --> 00:01:18.390
+the model learned to identify snow,
+
+00:01:18.390 --> 00:01:22.920
+rather than really identifying the different features of a dog and a wolf and if we had
+
+00:01:22.920 --> 00:01:24.780
+some insight into what features as model was
+
+00:01:24.780 --> 00:01:27.868
+extracting we could actually visualize this shortcoming.
+
+00:01:27.868 --> 00:01:31.825
+So how can we see what kind of features and network has learned to recognize?
+
+00:01:31.825 --> 00:01:35.745
+This area of study is called feature visualization and it's
+
+00:01:35.745 --> 00:01:39.550
+all about techniques that allow you to see at each layer of the model.
+
+00:01:39.549 --> 00:01:42.810
+What kinds of image features and network has learned to extract?
+
+00:01:42.810 --> 00:01:46.439
+And we'll cover a variety of these techniques in the next few videos.
+

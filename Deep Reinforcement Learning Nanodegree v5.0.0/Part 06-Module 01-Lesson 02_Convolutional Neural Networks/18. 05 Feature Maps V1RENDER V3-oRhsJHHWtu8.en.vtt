@@ -1,0 +1,70 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.835
+Let's start near the beginning of this CNN.
+
+00:00:02.835 --> 00:00:07.500
+We've talked about how the first convolutional layer in a CNN consists of a number of
+
+00:00:07.500 --> 00:00:09.689
+filtered images that are produced as
+
+00:00:09.689 --> 00:00:12.879
+the input image is convolved with a set of image filters.
+
+00:00:12.880 --> 00:00:15.410
+These filters are just grids of weights.
+
+00:00:15.410 --> 00:00:17.795
+For a convolutional layer with four filters,
+
+00:00:17.795 --> 00:00:20.250
+four filtered outputs will be produced.
+
+00:00:20.250 --> 00:00:22.740
+Each of these filtered output images is also
+
+00:00:22.739 --> 00:00:25.634
+called a feature map or activation map because
+
+00:00:25.635 --> 00:00:28.185
+each filtered image should extract certain features
+
+00:00:28.184 --> 00:00:31.339
+from an original image and ignore other information.
+
+00:00:31.339 --> 00:00:35.390
+For a given image, each of these maps will activate in some way,
+
+00:00:35.390 --> 00:00:39.005
+displaying activated bright pixels or not in each map.
+
+00:00:39.005 --> 00:00:42.050
+A good example of a filter is a high-pass filter,
+
+00:00:42.049 --> 00:00:44.089
+which when applied to an input image creates
+
+00:00:44.090 --> 00:00:48.769
+an activation map that activates the most when it sees high frequency features.
+
+00:00:48.768 --> 00:00:51.289
+You've programmed your own high-pass filters.
+
+00:00:51.289 --> 00:00:55.519
+One interesting thing about most CNN's is that as the network trains,
+
+00:00:55.520 --> 00:00:58.729
+and the weights that make up each convolutional kernel are updated,
+
+00:00:58.728 --> 00:01:03.375
+the first convolutional layer often learns to create high-pass filters just like these.
+
+00:01:03.375 --> 00:01:05.810
+Next, let's learn more about how to visualize
+
+00:01:05.810 --> 00:01:09.079
+the filters and feature maps in this first convolutional layer.
+

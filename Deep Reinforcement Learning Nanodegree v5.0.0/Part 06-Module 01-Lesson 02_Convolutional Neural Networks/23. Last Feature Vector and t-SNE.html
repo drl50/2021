@@ -1,0 +1,490 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Last Feature Vector and t-SNE
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Convolutional Neural Networks
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. Introducing Cezanne.html">
+       01. Introducing Cezanne
+      </a>
+     </li>
+     <li class="">
+      <a href="02. Lesson Outline and Data.html">
+       02. Lesson Outline and Data
+      </a>
+     </li>
+     <li class="">
+      <a href="03. CNN Architecture, VGG-16.html">
+       03. CNN Architecture, VGG-16
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Convolutional Layers.html">
+       04. Convolutional Layers
+      </a>
+     </li>
+     <li class="">
+      <a href="05. Defining Layers in PyTorch.html">
+       05. Defining Layers in PyTorch
+      </a>
+     </li>
+     <li class="">
+      <a href="06. Notebook Visualizing a Convolutional Layer.html">
+       06. Notebook: Visualizing a Convolutional Layer
+      </a>
+     </li>
+     <li class="">
+      <a href="07. Pooling, VGG-16 Architecture.html">
+       07. Pooling, VGG-16 Architecture
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Pooling Layers.html">
+       08. Pooling Layers
+      </a>
+     </li>
+     <li class="">
+      <a href="09. Notebook Visualizing a Pooling Layer.html">
+       09. Notebook: Visualizing a Pooling Layer
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Fully-Connected Layers, VGG-16.html">
+       10. Fully-Connected Layers, VGG-16
+      </a>
+     </li>
+     <li class="">
+      <a href="11. Notebook Visualizing FashionMNIST.html">
+       11. Notebook: Visualizing FashionMNIST
+      </a>
+     </li>
+     <li class="">
+      <a href="12. Training in PyTorch.html">
+       12. Training in PyTorch
+      </a>
+     </li>
+     <li class="">
+      <a href="13. Notebook Fashion MNIST Training Exercise.html">
+       13. Notebook: Fashion MNIST Training Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="14. Notebook FashionMNIST, Solution 1.html">
+       14. Notebook: FashionMNIST, Solution 1
+      </a>
+     </li>
+     <li class="">
+      <a href="15. Review Dropout.html">
+       15. Review: Dropout
+      </a>
+     </li>
+     <li class="">
+      <a href="16. Notebook FashionMNIST, Solution 2.html">
+       16. Notebook: FashionMNIST, Solution 2
+      </a>
+     </li>
+     <li class="">
+      <a href="17. Feature Visualization.html">
+       17. Feature Visualization
+      </a>
+     </li>
+     <li class="">
+      <a href="18. Feature Maps.html">
+       18. Feature Maps
+      </a>
+     </li>
+     <li class="">
+      <a href="19. First Convolutional Layer.html">
+       19. First Convolutional Layer
+      </a>
+     </li>
+     <li class="">
+      <a href="20. Visualizing CNNs (Part 2).html">
+       20. Visualizing CNNs (Part 2)
+      </a>
+     </li>
+     <li class="">
+      <a href="21. Visualizing Activations.html">
+       21. Visualizing Activations
+      </a>
+     </li>
+     <li class="">
+      <a href="22. Notebook Feature Viz for FashionMNIST.html">
+       22. Notebook: Feature Viz for FashionMNIST
+      </a>
+     </li>
+     <li class="">
+      <a href="23. Last Feature Vector and t-SNE.html">
+       23. Last Feature Vector and t-SNE
+      </a>
+     </li>
+     <li class="">
+      <a href="24. Occlusion, Saliency, and Guided Backpropagation.html">
+       24. Occlusion, Saliency, and Guided Backpropagation
+      </a>
+     </li>
+     <li class="">
+      <a href="25. Summary of Feature Viz.html">
+       25. Summary of Feature Viz
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          23. Last Feature Vector and t-SNE
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="last-layer">
+          Last Layer
+         </h2>
+         <p>
+          In addition to looking at the first layer(s) of a CNN, we can take the opposite approach, and look at the last linear layer in a model.
+         </p>
+         <p>
+          We know that the output of a classification CNN, is a fully-connected class score layer, and one layer before that is a
+          <strong>
+           feature vector that represents the content of the input image in some way
+          </strong>
+          . This feature vector is produced after an input image has gone through all the layers in the CNN, and it contains enough distinguishing information to classify the image.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="An input image going through some conv/pool layers and reaching a fully-connected layer. In between the feature maps and this fully-connected layer is a flattening step that creates a feature vector from the feature maps." class="img img-fluid" src="img/screen-shot-2018-04-24-at-5.47.43-pm.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            An input image going through some conv/pool layers and reaching a fully-connected layer. In between the feature maps and this fully-connected layer is a flattening step that creates a feature vector from the feature maps.
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          ** Final Feature Vector**
+         </p>
+         <p>
+          So, how can we understand what’s going on in this final feature vector? What kind of information has it distilled from an image?
+         </p>
+         <p>
+          To visualize what a vector represents about an image, we can compare it to other feature vectors, produced by the same CNN as it sees different input images. We can run a bunch of different images through a CNN and record the last feature vector for each image. This creates a feature space, where we can compare how similar these vectors are to one another.
+         </p>
+         <p>
+          We can measure vector-closeness by looking at the
+          <strong>
+           nearest neighbors
+          </strong>
+          in feature space. Nearest neighbors for an image is just an image that is near to it; that matches its pixels values as closely as possible. So, an image of an orange basketball will closely match other orange basketballs or even other orange, round shapes like an orange fruit, as seen below.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="A basketball (left) and an orange (right) that are nearest neighbors in pixel space; these images have very similar colors and round shapes in the same x-y area." class="img img-fluid" src="img/screen-shot-2018-04-24-at-5.08.30-pm.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            A basketball (left) and an orange (right) that are nearest neighbors in pixel space; these images have very similar colors and round shapes in the same x-y area.
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h3 id="nearest-neighbors-in-feature-space">
+          Nearest neighbors in feature space
+         </h3>
+         <p>
+          In feature space, the nearest neighbors for a given feature vector are the vectors that most closely match that one; we typically compare these with a metric like MSE or L1 distance. And
+          <em>
+           these
+          </em>
+          images may or may not have similar pixels, which the nearest-neighbor pixel images do; instead they have very similar content, which the feature vector has distilled.
+         </p>
+         <p>
+          In short, to visualize the last layer in a CNN, we ask: which feature vectors are closest to one another and which images do those correspond to?
+         </p>
+         <p>
+          And you can see an example of nearest neighbors in feature space, below; an image of a basketball that matches with other images of basketballs despite being a different color.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="Nearest neighbors in feature space should represent the same kind of object." class="img img-fluid" src="img/screen-shot-2018-04-24-at-5.08.36-pm.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            Nearest neighbors in feature space should represent the same kind of object.
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h3 id="dimensionality-reduction">
+          Dimensionality reduction
+         </h3>
+         <p>
+          Another method for visualizing this last layer in a CNN is to reduce the dimensionality of the final feature vector so that we can display it in 2D or 3D space.
+         </p>
+         <p>
+          For example, say we have a CNN that produces a 256-dimension vector (a list of 256 values). In this case, our task would be to reduce this 256-dimension vector into 2 dimensions that can then be plotted on an x-y axis. There are a few techniques that have been developed for compressing data like this.
+         </p>
+         <p>
+          <strong>
+           Principal Component Analysis
+          </strong>
+         </p>
+         <p>
+          One is PCA, principal component analysis, which takes a high dimensional vector and compresses it down to two dimensions. It does this by looking at the feature space and creating two variables (x, y) that are functions of these features; these two variables want to be as different as possible, which means that the produced x and y end up separating the original feature data distribution by as large a margin as possible.
+         </p>
+         <p>
+          <strong>
+           t-SNE
+          </strong>
+         </p>
+         <p>
+          Another really powerful method for visualization is called t-SNE (pronounced, tea-SNEE), which stands for t-distributed stochastic neighbor embeddings. It’s a non-linear dimensionality reduction that, again, aims to separate data in a way that clusters similar data close together and separates differing data.
+         </p>
+         <p>
+          As an example, below is a t-SNE reduction done on the MNIST dataset, which is a dataset of thousands of 28x28 images, similar to FashionMNIST, where each image is one of 10 hand-written digits 0-9.
+         </p>
+         <p>
+          The 28x28 pixel space of each digit is compressed to 2 dimensions by t-SNE and you can see that this produces ten clusters, one for each type of digits in the dataset!
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="t-SNE run on MNIST handwritten digit dataset. 10 clusters for 10 digits. You can see the [generation code on Github](https://github.com/alexisbcook/tsne)." class="img img-fluid" src="img/t-sne-mnist.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            t-SNE run on MNIST handwritten digit dataset. 10 clusters for 10 digits. You can see the
+            <a href="https://github.com/alexisbcook/tsne" rel="noopener noreferrer" target="_blank">
+             generation code on Github
+            </a>
+            .
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h3 id="t-sne-and-practice-with-neural-networks">
+          t-SNE and practice with neural networks
+         </h3>
+         <p>
+          If you are interested in learning more about neural networks, take a look at the
+          <strong>
+           Elective Section: Text Sentiment Analysis
+          </strong>
+          . Though this section is about text classification and not images or visual data, the instructor, Andrew Trask, goes through the creation of a neural network step-by-step, including setting training parameters and changing his model when he sees unexpected loss results.
+         </p>
+         <p>
+          He also provides an example of t-SNE visualization for the sentiment of different words, so you can actually see whether certain words are typically negative or positive, which is really interesting!
+         </p>
+         <p>
+          <strong>
+           This elective section will be especially good practice for the upcoming section Advanced Computer Vision and Deep Learning
+          </strong>
+          , which covers RNN's for analyzing sequences of data (like sequences of text). So, if you don't want to visit this section now, you're encouraged to look at it later on.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="24. Occlusion, Saliency, and Guided Backpropagation.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('23. Last Feature Vector and t-SNE')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

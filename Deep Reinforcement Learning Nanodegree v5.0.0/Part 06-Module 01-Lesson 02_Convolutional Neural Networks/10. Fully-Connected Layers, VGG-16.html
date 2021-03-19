@@ -1,0 +1,388 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Fully-Connected Layers, VGG-16
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Convolutional Neural Networks
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. Introducing Cezanne.html">
+       01. Introducing Cezanne
+      </a>
+     </li>
+     <li class="">
+      <a href="02. Lesson Outline and Data.html">
+       02. Lesson Outline and Data
+      </a>
+     </li>
+     <li class="">
+      <a href="03. CNN Architecture, VGG-16.html">
+       03. CNN Architecture, VGG-16
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Convolutional Layers.html">
+       04. Convolutional Layers
+      </a>
+     </li>
+     <li class="">
+      <a href="05. Defining Layers in PyTorch.html">
+       05. Defining Layers in PyTorch
+      </a>
+     </li>
+     <li class="">
+      <a href="06. Notebook Visualizing a Convolutional Layer.html">
+       06. Notebook: Visualizing a Convolutional Layer
+      </a>
+     </li>
+     <li class="">
+      <a href="07. Pooling, VGG-16 Architecture.html">
+       07. Pooling, VGG-16 Architecture
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Pooling Layers.html">
+       08. Pooling Layers
+      </a>
+     </li>
+     <li class="">
+      <a href="09. Notebook Visualizing a Pooling Layer.html">
+       09. Notebook: Visualizing a Pooling Layer
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Fully-Connected Layers, VGG-16.html">
+       10. Fully-Connected Layers, VGG-16
+      </a>
+     </li>
+     <li class="">
+      <a href="11. Notebook Visualizing FashionMNIST.html">
+       11. Notebook: Visualizing FashionMNIST
+      </a>
+     </li>
+     <li class="">
+      <a href="12. Training in PyTorch.html">
+       12. Training in PyTorch
+      </a>
+     </li>
+     <li class="">
+      <a href="13. Notebook Fashion MNIST Training Exercise.html">
+       13. Notebook: Fashion MNIST Training Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="14. Notebook FashionMNIST, Solution 1.html">
+       14. Notebook: FashionMNIST, Solution 1
+      </a>
+     </li>
+     <li class="">
+      <a href="15. Review Dropout.html">
+       15. Review: Dropout
+      </a>
+     </li>
+     <li class="">
+      <a href="16. Notebook FashionMNIST, Solution 2.html">
+       16. Notebook: FashionMNIST, Solution 2
+      </a>
+     </li>
+     <li class="">
+      <a href="17. Feature Visualization.html">
+       17. Feature Visualization
+      </a>
+     </li>
+     <li class="">
+      <a href="18. Feature Maps.html">
+       18. Feature Maps
+      </a>
+     </li>
+     <li class="">
+      <a href="19. First Convolutional Layer.html">
+       19. First Convolutional Layer
+      </a>
+     </li>
+     <li class="">
+      <a href="20. Visualizing CNNs (Part 2).html">
+       20. Visualizing CNNs (Part 2)
+      </a>
+     </li>
+     <li class="">
+      <a href="21. Visualizing Activations.html">
+       21. Visualizing Activations
+      </a>
+     </li>
+     <li class="">
+      <a href="22. Notebook Feature Viz for FashionMNIST.html">
+       22. Notebook: Feature Viz for FashionMNIST
+      </a>
+     </li>
+     <li class="">
+      <a href="23. Last Feature Vector and t-SNE.html">
+       23. Last Feature Vector and t-SNE
+      </a>
+     </li>
+     <li class="">
+      <a href="24. Occlusion, Saliency, and Guided Backpropagation.html">
+       24. Occlusion, Saliency, and Guided Backpropagation
+      </a>
+     </li>
+     <li class="">
+      <a href="25. Summary of Feature Viz.html">
+       25. Summary of Feature Viz
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          10. Fully-Connected Layers, VGG-16
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h3 id="vgg-16-architecture">
+          VGG-16 Architecture
+         </h3>
+         <p>
+          Take a look at the layers near the end of this model; the fully-connected layers that come after a series of convolutional and pooling layers. Take note of their flattened shape.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="VGG-16 architecture" class="img img-fluid" src="img/vgg-16.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            VGG-16 architecture
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h3 id="fully-connected-layer">
+          Fully-Connected Layer
+         </h3>
+         <p>
+          A fully-connected layer's job is to connect the input it sees to a desired form of output. Typically, this means converting a matrix of image features into a feature vector whose dimensions are 1xC, where C is the number of classes. As an example, say we are sorting images into ten classes, you could give a fully-connected layer a set of [pooled, activated] feature maps as input and tell it to use a combination of these features (multiplying them, adding them, combining them, etc.) to output a 10-item long feature vector. This vector compresses the information from the feature maps into a single feature vector.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h3 id="softmax">
+          Softmax
+         </h3>
+         <p>
+          The
+          <em>
+           very
+          </em>
+          last layer you see in this network is a softmax function. The softmax function, can take any vector of values as input and returns a vector of the same length whose values are all in the range (0, 1) and, together, these values will add up to 1. This function is often seen in classification models that have to turn a feature vector into a probability distribution.
+         </p>
+         <p>
+          Consider the same example again; a network that groups images into one of 10 classes. The fully-connected layer can turn feature maps into a single feature vector that has dimensions 1x10. Then the softmax function turns that vector into a 10-item long probability distribution in which each number in the resulting vector represents the probability that a given input image falls in class 1, class 2, class 3, … class 10. This output is sometimes called the
+          <strong>
+           class scores
+          </strong>
+          and from these scores, you can extract the most likely class for the given image!
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h3 id="overfitting">
+          Overfitting
+         </h3>
+         <p>
+          Convolutional, pooling, and fully-connected layers are all you need to construct a complete CNN, but there are additional layers that you can add to avoid overfitting, too. One of the most common layers to add to prevent overfitting is a
+          <a href="http://pytorch.org/docs/stable/nn.html#dropout-layers" rel="noopener noreferrer" target="_blank">
+           dropout layer
+          </a>
+          .
+         </p>
+         <p>
+          Dropout layers essentially turn off certain nodes in a layer with some probability, p. This ensures that all nodes get an equal chance to try and classify different images during training, and it reduces the likelihood that only a few, heavily-weighted nodes will dominate the process.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          Now, you're familiar with all the major components of a complete convolutional neural network, and given some examples of PyTorch code, you should be well equipped to build and train your own CNN's! Next, it'll be up to you to define and train a CNN for clothing recognition!
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="11. Notebook Visualizing FashionMNIST.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('10. Fully-Connected Layers, VGG-16')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

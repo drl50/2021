@@ -1,0 +1,64 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.089
+Several approaches for understanding and visualizing
+
+00:00:03.089 --> 00:00:06.240
+convolutional networks have been developed in the literature.
+
+00:00:06.240 --> 00:00:08.970
+Partly, as a response to the common criticism that
+
+00:00:08.970 --> 00:00:12.225
+the learned features in a neural network are not interpretable.
+
+00:00:12.224 --> 00:00:13.589
+Now, you've seen a view of
+
+00:00:13.589 --> 00:00:16.800
+the most commonly used feature visualization techniques
+
+00:00:16.800 --> 00:00:19.990
+from looking at filter weights to looking at layer activations.
+
+00:00:19.989 --> 00:00:22.604
+In addition to giving you insight into what features
+
+00:00:22.605 --> 00:00:25.199
+a CNN has learned to extract from an image,
+
+00:00:25.199 --> 00:00:29.039
+these techniques should give you a greater understanding of how CNNs work.
+
+00:00:29.039 --> 00:00:32.939
+For classification CNN, you can actually see as you look at
+
+00:00:32.939 --> 00:00:37.759
+deeper layers in a model that the CNN transforms an input image into a smaller,
+
+00:00:37.759 --> 00:00:41.119
+more distilled representation of the content of that image.
+
+00:00:41.119 --> 00:00:43.104
+By the last layer of a CNN,
+
+00:00:43.104 --> 00:00:46.009
+it has learned to extract high-level features that still
+
+00:00:46.009 --> 00:00:49.640
+contain enough information about an image to classify it.
+
+00:00:49.640 --> 00:00:53.210
+These techniques are actually the basis for applications like Style Transfer and
+
+00:00:53.210 --> 00:00:58.524
+DeepDream that compose images based on layer activations and extracted features.
+
+00:00:58.524 --> 00:01:02.089
+Perhaps most importantly, feature visualization gives you a way to
+
+00:01:02.090 --> 00:01:06.040
+show and communicate to other people what your networks have learned.
+

@@ -1,0 +1,121 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:03.930
+The first convolutional layer in a CNN applies a set of
+
+00:00:03.930 --> 00:00:08.130
+image filters to an input image and outputs a stack of feature maps.
+
+00:00:08.130 --> 00:00:09.990
+After such a network is trained,
+
+00:00:09.990 --> 00:00:13.380
+we can get a sense of what kinds of features this first layer has learned to
+
+00:00:13.380 --> 00:00:17.355
+extract by visualizing the learned weights for each of these filters.
+
+00:00:17.355 --> 00:00:20.460
+We know that filters are grids of weight values and so
+
+00:00:20.460 --> 00:00:23.655
+we can visualize them by treating them like a small image.
+
+00:00:23.655 --> 00:00:26.890
+1 3 by three filter for a grayscale image can be
+
+00:00:26.890 --> 00:00:29.945
+pictured as a three-by-three grayscale pixel image,
+
+00:00:29.945 --> 00:00:32.759
+where each pixel contains a learned weight value.
+
+00:00:32.759 --> 00:00:36.795
+The bright pixels can be thought of as positive or high values for weights.
+
+00:00:36.795 --> 00:00:40.010
+The darker pixels correspond to small or negative weights.
+
+00:00:40.009 --> 00:00:42.399
+So, a kernel that looks like this with
+
+00:00:42.399 --> 00:00:45.234
+bright values on the top and dark values on the bottom,
+
+00:00:45.234 --> 00:00:49.490
+we might think that it subtracts bottom pixels from top pixels in a patch and so,
+
+00:00:49.490 --> 00:00:52.260
+it can detect horizontal edges in an image.
+
+00:00:52.259 --> 00:00:55.094
+For a CNN that analyzes color images,
+
+00:00:55.094 --> 00:00:57.820
+the filters just have another dimension for color,
+
+00:00:57.820 --> 00:01:00.490
+and can be displayed as small color images.
+
+00:01:00.490 --> 00:01:02.579
+Here are some examples of filters from
+
+00:01:02.579 --> 00:01:07.109
+the first convolutional layer of a CNN with 11 by 11 color filters.
+
+00:01:07.109 --> 00:01:09.390
+You can see that a lot of these filters are
+
+00:01:09.390 --> 00:01:12.215
+looking for specific kinds of geometric patterns,
+
+00:01:12.215 --> 00:01:14.275
+vertical or horizontal edges,
+
+00:01:14.275 --> 00:01:18.960
+which are represented by alternating bars of light and dark at different angles.
+
+00:01:18.959 --> 00:01:23.189
+You can also see corner detectors and filters that appear to detect areas of
+
+00:01:23.189 --> 00:01:28.370
+opposing colors with magenta and green bunches or blue and orange lines.
+
+00:01:28.370 --> 00:01:30.290
+Now you might be thinking great,
+
+00:01:30.290 --> 00:01:31.575
+this is really simple.
+
+00:01:31.575 --> 00:01:36.025
+I can just look at the filter weights of a trans CNN to see what my network is learning.
+
+00:01:36.025 --> 00:01:38.940
+But this becomes tricky as soon as you move further into
+
+00:01:38.939 --> 00:01:43.304
+the network and try to look at the second or even third convolutional layer.
+
+00:01:43.305 --> 00:01:48.030
+This is because these later layers are no longer directly connected to the input image.
+
+00:01:48.030 --> 00:01:50.460
+They're connected to some output that has likely been
+
+00:01:50.459 --> 00:01:52.919
+pooled and processed by an activation function.
+
+00:01:52.920 --> 00:01:56.545
+So, visualizing the filters in these deeper layers doesn't
+
+00:01:56.545 --> 00:02:00.585
+clearly tell us what these layers are actually seen in the original input image.
+
+00:02:00.584 --> 00:02:02.969
+So we'll need to develop a different technique to
+
+00:02:02.969 --> 00:02:05.599
+really see what's going on in these intermediate layers.
+

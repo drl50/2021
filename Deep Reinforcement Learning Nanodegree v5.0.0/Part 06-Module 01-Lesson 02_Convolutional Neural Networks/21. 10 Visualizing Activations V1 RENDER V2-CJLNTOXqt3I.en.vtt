@@ -1,0 +1,49 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:04.424
+For intermediate layers, like the second convolutional layer in a CNN,
+
+00:00:04.424 --> 00:00:09.219
+visualizing the learned weights in each filter doesn't give us easy to read information.
+
+00:00:09.220 --> 00:00:12.865
+So, how can we visualize what these deeper layers are seeing?
+
+00:00:12.865 --> 00:00:16.484
+Well, what can give us useful Information is to look at the feature maps
+
+00:00:16.484 --> 00:00:20.094
+of these layers as the network looks at specific images.
+
+00:00:20.094 --> 00:00:22.195
+This is called layer activation,
+
+00:00:22.195 --> 00:00:25.765
+and it means looking at how a certain layer of feature maps activates
+
+00:00:25.765 --> 00:00:29.880
+when it sees a specific input image such as an image of a face.
+
+00:00:29.879 --> 00:00:32.949
+The filters in deeper convolutional layers will often show
+
+00:00:32.950 --> 00:00:37.255
+high levels or bright spots of activation in localized areas.
+
+00:00:37.255 --> 00:00:39.760
+The important thing is to see that these maps aren't just
+
+00:00:39.759 --> 00:00:42.179
+producing blobby, noisy outputs.
+
+00:00:42.179 --> 00:00:46.564
+They should produce a noticeably different response for different classes of images.
+
+00:00:46.564 --> 00:00:49.909
+You've already seen a few examples of activations like these.
+
+00:00:49.909 --> 00:00:54.879
+But next, let's take a look at how we can extract activation maps from a trained CNN.
+

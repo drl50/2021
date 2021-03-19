@@ -1,0 +1,440 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   Occlusion, Saliency, and Guided Backpropagation
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Convolutional Neural Networks
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. Introducing Cezanne.html">
+       01. Introducing Cezanne
+      </a>
+     </li>
+     <li class="">
+      <a href="02. Lesson Outline and Data.html">
+       02. Lesson Outline and Data
+      </a>
+     </li>
+     <li class="">
+      <a href="03. CNN Architecture, VGG-16.html">
+       03. CNN Architecture, VGG-16
+      </a>
+     </li>
+     <li class="">
+      <a href="04. Convolutional Layers.html">
+       04. Convolutional Layers
+      </a>
+     </li>
+     <li class="">
+      <a href="05. Defining Layers in PyTorch.html">
+       05. Defining Layers in PyTorch
+      </a>
+     </li>
+     <li class="">
+      <a href="06. Notebook Visualizing a Convolutional Layer.html">
+       06. Notebook: Visualizing a Convolutional Layer
+      </a>
+     </li>
+     <li class="">
+      <a href="07. Pooling, VGG-16 Architecture.html">
+       07. Pooling, VGG-16 Architecture
+      </a>
+     </li>
+     <li class="">
+      <a href="08. Pooling Layers.html">
+       08. Pooling Layers
+      </a>
+     </li>
+     <li class="">
+      <a href="09. Notebook Visualizing a Pooling Layer.html">
+       09. Notebook: Visualizing a Pooling Layer
+      </a>
+     </li>
+     <li class="">
+      <a href="10. Fully-Connected Layers, VGG-16.html">
+       10. Fully-Connected Layers, VGG-16
+      </a>
+     </li>
+     <li class="">
+      <a href="11. Notebook Visualizing FashionMNIST.html">
+       11. Notebook: Visualizing FashionMNIST
+      </a>
+     </li>
+     <li class="">
+      <a href="12. Training in PyTorch.html">
+       12. Training in PyTorch
+      </a>
+     </li>
+     <li class="">
+      <a href="13. Notebook Fashion MNIST Training Exercise.html">
+       13. Notebook: Fashion MNIST Training Exercise
+      </a>
+     </li>
+     <li class="">
+      <a href="14. Notebook FashionMNIST, Solution 1.html">
+       14. Notebook: FashionMNIST, Solution 1
+      </a>
+     </li>
+     <li class="">
+      <a href="15. Review Dropout.html">
+       15. Review: Dropout
+      </a>
+     </li>
+     <li class="">
+      <a href="16. Notebook FashionMNIST, Solution 2.html">
+       16. Notebook: FashionMNIST, Solution 2
+      </a>
+     </li>
+     <li class="">
+      <a href="17. Feature Visualization.html">
+       17. Feature Visualization
+      </a>
+     </li>
+     <li class="">
+      <a href="18. Feature Maps.html">
+       18. Feature Maps
+      </a>
+     </li>
+     <li class="">
+      <a href="19. First Convolutional Layer.html">
+       19. First Convolutional Layer
+      </a>
+     </li>
+     <li class="">
+      <a href="20. Visualizing CNNs (Part 2).html">
+       20. Visualizing CNNs (Part 2)
+      </a>
+     </li>
+     <li class="">
+      <a href="21. Visualizing Activations.html">
+       21. Visualizing Activations
+      </a>
+     </li>
+     <li class="">
+      <a href="22. Notebook Feature Viz for FashionMNIST.html">
+       22. Notebook: Feature Viz for FashionMNIST
+      </a>
+     </li>
+     <li class="">
+      <a href="23. Last Feature Vector and t-SNE.html">
+       23. Last Feature Vector and t-SNE
+      </a>
+     </li>
+     <li class="">
+      <a href="24. Occlusion, Saliency, and Guided Backpropagation.html">
+       24. Occlusion, Saliency, and Guided Backpropagation
+      </a>
+     </li>
+     <li class="">
+      <a href="25. Summary of Feature Viz.html">
+       25. Summary of Feature Viz
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          24. Occlusion, Saliency, and Guided Backpropagation
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="other-feature-visualization-techniques">
+          Other Feature Visualization Techniques
+         </h2>
+         <p>
+          Feature visualization is an active area of research and before we move on, I'd like like to give you an overview of some of the techniques that you might see in research or try to implement on your own!
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h3 id="occlusion-experiments">
+          Occlusion Experiments
+         </h3>
+         <p>
+          Occlusion means to block out or mask part of an image or object. For example, if you are looking at a person but their face is behind a book; this person's face is hidden (occluded). Occlusion can be used in feature visualization by blocking out selective parts of an image and seeing how a network responds.
+         </p>
+         <p>
+          The process for an occlusion experiment is as follows:
+         </p>
+         <ol>
+          <li>
+           Mask part of an image before feeding it into a trained CNN,
+          </li>
+          <li>
+           Draw a heatmap of class scores for each masked image,
+          </li>
+          <li>
+           Slide the masked area to a different spot and repeat steps 1 and 2.
+          </li>
+         </ol>
+         <p>
+          The result should be a heatmap that shows the predicted class of an image as a function of which part of an image was occluded. The reasoning is that
+          <strong>
+           if the class score for a partially occluded image is different than the true class, then the occluded area was likely very important
+          </strong>
+          !
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="Occlusion experiment with an image of an elephant." class="img img-fluid" src="img/screen-shot-2018-04-24-at-12.35.07-pm.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            Occlusion experiment with an image of an elephant.
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h3 id="saliency-maps">
+          Saliency Maps
+         </h3>
+         <p>
+          Salience can be thought of as the importance of something, and for a given image, a saliency map asks: Which pixels are most important in classifying this image?
+         </p>
+         <p>
+          Not all pixels in an image are needed or relevant for classification. In the image of the elephant above, you don't need all the information in the image about the background and you may not even need all the detail about an elephant's skin texture; only the pixels that distinguish the elephant from any other animal are important.
+         </p>
+         <p>
+          Saliency maps aim to show these important pictures by computing the gradient of the class score with respect to the image pixels. A gradient is a measure of change, and so, the gradient of the class score with respect to the image pixels is a measure of how much a class score for an image changes if a pixel changes a little bit.
+         </p>
+         <p>
+          <strong>
+           Measuring change
+          </strong>
+         </p>
+         <p>
+          A saliency map tells us, for each pixel in an input image, if we change it's value slightly (by
+          <em>
+           dp
+          </em>
+          ), how the class output will change. If the class scores change a lot, then the pixel that experienced a change, dp, is important in the classification task.
+         </p>
+         <p>
+          Looking at the saliency map below, you can see that it identifies the most important pixels in classifying an image of a flower. These kinds of maps have even been used to perform image segmentation (imagine the map overlay acting as an image mask)!
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="Graph-based saliency map for a flower; the most salient (important) pixels have been identified as the flower-center and petals." class="img img-fluid" src="img/screen-shot-2018-04-24-at-12.47.51-pm.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            Graph-based saliency map for a flower; the most salient (important) pixels have been identified as the flower-center and petals.
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h3 id="guided-backpropagation">
+          Guided Backpropagation
+         </h3>
+         <p>
+          Similar to the process for constructing a saliency map, you can compute the gradients for mid level neurons in a network with respect to the input pixels. Guided backpropagation looks at each pixel in an input image, and asks: if we change it's pixel value slightly, how will the output of a particular neuron or layer in the network change. If the expected output change a lot, then the pixel that experienced a change, is important to that particular layer.
+         </p>
+         <p>
+          This is very similar to the backpropagation steps for measuring the error between an input and output and propagating it back through a network. Guided backpropagation tells us exactly which parts of the image patches, that we’ve looked at, activate a specific neuron/layer.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="Examples of guided backpropagation, from [this paper](https://arxiv.org/pdf/1412.6806.pdf)." class="img img-fluid" src="img/screen-shot-2018-04-24-at-12.58.16-pm.png"/>
+          <figcaption class="figure-caption">
+           <p>
+            Examples of guided backpropagation, from
+            <a href="https://arxiv.org/pdf/1412.6806.pdf" rel="noopener noreferrer" target="_blank">
+             this paper
+            </a>
+            .
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="25. Summary of Feature Viz.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('24. Occlusion, Saliency, and Guided Backpropagation')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>

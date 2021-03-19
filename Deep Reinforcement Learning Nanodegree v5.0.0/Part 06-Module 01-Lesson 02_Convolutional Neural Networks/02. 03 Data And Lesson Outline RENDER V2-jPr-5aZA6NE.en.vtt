@@ -1,0 +1,64 @@
+WEBVTT
+Kind: captions
+Language: en
+
+00:00:00.000 --> 00:00:02.439
+In this lesson, to learn about CNNs,
+
+00:00:02.439 --> 00:00:06.529
+we'll first talk about the layers that make up an image classification CNN.
+
+00:00:06.530 --> 00:00:08.519
+You'll learn how to define these layers,
+
+00:00:08.519 --> 00:00:12.605
+and what role each plays in extracting information from an input image.
+
+00:00:12.605 --> 00:00:14.325
+After learning about these layers,
+
+00:00:14.324 --> 00:00:16.829
+you'll see how to define a CNN that aims to
+
+00:00:16.829 --> 00:00:19.809
+classify images from the FashionMNIST data set.
+
+00:00:19.809 --> 00:00:21.945
+This is a clothing data set that is made of
+
+00:00:21.945 --> 00:00:25.050
+thousands of images of clothing types like T-shirts,
+
+00:00:25.050 --> 00:00:26.980
+coats, sandals, and sneakers.
+
+00:00:26.980 --> 00:00:32.159
+The images in this data set are small in size and preprocessed for ease of training.
+
+00:00:32.159 --> 00:00:35.364
+We will work with this data set so that you can really focus
+
+00:00:35.365 --> 00:00:39.020
+on defining a CNN as opposed to data preprocessing,
+
+00:00:39.020 --> 00:00:42.000
+and so that you can test your neural network without
+
+00:00:42.000 --> 00:00:45.335
+needing to use a GPU as you might with larger images.
+
+00:00:45.335 --> 00:00:50.125
+Finally, after defining and training a CNN for classifying items of clothing,
+
+00:00:50.125 --> 00:00:53.850
+you'll learn and implement some feature visualization techniques that
+
+00:00:53.850 --> 00:00:57.439
+allow you to see what kind of features your model learns to look for,
+
+00:00:57.439 --> 00:01:01.184
+and what it sees as an image moves through the layers of a CNN.
+
+00:01:01.185 --> 00:01:04.920
+Let's begin by learning about all the layers that make up a CNN.
+
