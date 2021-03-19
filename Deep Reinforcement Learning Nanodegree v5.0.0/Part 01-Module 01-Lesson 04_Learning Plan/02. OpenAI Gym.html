@@ -1,0 +1,440 @@
+<!-- udacimak v1.4.4 -->
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="ie=edge" http-equiv="X-UA-Compatible"/>
+  <title>
+   OpenAI Gym
+  </title>
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="../assets/css/plyr.css" rel="stylesheet"/>
+  <link href="../assets/css/katex.min.css" rel="stylesheet"/>
+  <link href="../assets/css/jquery.mCustomScrollbar.min.css" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/>
+  <link href="../assets/img/udacimak.png" rel="shortcut icon" type="image/png">
+  </link>
+ </head>
+ <body>
+  <div class="wrapper">
+   <nav id="sidebar">
+    <div class="sidebar-header">
+     <h3>
+      Learning Plan
+     </h3>
+    </div>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled components">
+     <li class="">
+      <a href="01. Reference Guide.html">
+       01. Reference Guide
+      </a>
+     </li>
+     <li class="">
+      <a href="02. OpenAI Gym.html">
+       02. OpenAI Gym
+      </a>
+     </li>
+     <li class="">
+      <a href="03. GitHub Repository.html">
+       03. GitHub Repository
+      </a>
+     </li>
+     <li class="">
+      <a href="04. AWS Credits.html">
+       04. AWS Credits
+      </a>
+     </li>
+     <li class="">
+      <a href="05. Student Resources.html">
+       05. Student Resources
+      </a>
+     </li>
+    </ul>
+    <ul class="sidebar-list list-unstyled CTAs">
+     <li>
+      <a class="article" href="../index.html">
+       Back to Home
+      </a>
+     </li>
+    </ul>
+   </nav>
+   <div id="content">
+    <header class="container-fluild header">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <div class="align-items-middle">
+         <button class="btn btn-toggle-sidebar" id="sidebarCollapse" type="button">
+          <div>
+          </div>
+          <div>
+          </div>
+          <div>
+          </div>
+         </button>
+         <h1 style="display: inline-block">
+          02. OpenAI Gym
+         </h1>
+        </div>
+       </div>
+      </div>
+     </div>
+    </header>
+    <main class="container">
+     <div class="row">
+      <div class="col-12">
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="" class="img img-fluid" src="img/unknown.png"/>
+          <figcaption class="figure-caption">
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h1 id="openai-gym">
+          OpenAI Gym
+         </h1>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          In this course, we’ll make extensive use of
+          <a href="https://gym.openai.com" rel="noopener noreferrer" target="_blank">
+           OpenAI Gym
+          </a>
+          , an open-source toolkit created by
+          <a href="https://openai.com" rel="noopener noreferrer" target="_blank">
+           OpenAI
+          </a>
+          for developing and comparing reinforcement learning (RL) algorithms.   Using this toolkit, you will teach your own agents to accomplish a variety of complex tasks.
+         </p>
+         <p>
+          We'll use it to build practical, hands-on skills with many of the algorithms that we'll learn about during the nanodegree.  Then, once you build your confidence with these environments, you'll be more than ready to tackle the projects!
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <h2 id="-take-a-look">
+          ## Take a Look
+         </h2>
+         <p>
+          You can take a look at some of the environments that OpenAI Gym offers from the link
+          <a href="https://gym.openai.com/envs/" rel="noopener noreferrer" target="_blank">
+           here
+          </a>
+          .
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="" class="img img-fluid" src="img/openaigym-gif.gif"/>
+          <figcaption class="figure-caption">
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          If you'd like to learn more about OpenAI Gym, please peruse the
+          <a href="https://github.com/openai/gym.git" rel="noopener noreferrer" target="_blank">
+           GitHub repository
+          </a>
+          .  Check out this
+          <a href="https://blog.openai.com/openai-gym-beta/" rel="noopener noreferrer" target="_blank">
+           blog post
+          </a>
+          to read more about how OpenAI Gym is used to accelerate reinforcement learning (RL) research.
+         </p>
+         <h2 id="-learning-by-doing">
+          ## Learning by Doing
+         </h2>
+         <p>
+          In the first part of the nanodegree, we’ll be using many of the environments that are available as part of this toolkit:
+         </p>
+         <ul>
+          <li>
+           You will deepen your understanding of
+           <strong>
+            Dynamic Programming
+           </strong>
+           with the frozen lake environment.  As part of this environment, you'll teach an agent to navigate a world without falling into pits of frozen water.
+          </li>
+          <li>
+           When learning about
+           <strong>
+            Monte Carlo
+           </strong>
+           methods, you'll write an agent to play blackjack.
+          </li>
+          <li>
+           As part of the lesson on
+           <strong>
+            Temporal-Difference
+           </strong>
+           methods, you will teach an agent to navigate a world with a large cliff, where your goal is to avoid falling in!
+          </li>
+          <li>
+           In the
+           <strong>
+            Solve OpenAI Gym's Taxi-v2 Task
+           </strong>
+           lesson, you will train a taxi to pick up and drop off passengers as quickly as possible.
+          </li>
+          <li>
+           In
+           <strong>
+            RL in Continuous Spaces
+           </strong>
+           , you will train an under-powered car to manage a large hill.
+          </li>
+         </ul>
+         <p>
+          One of the really cool things about OpenAI Gym is that you can watch your performance.  So, your agent might start off just behaving randomly, but as it learns from interaction, you’ll be able to see it choose actions in a much more calculated, intelligent way.
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <figure class="figure">
+          <img alt="A well-trained OpenAI Gym agent ([Source](https://blog.openai.com/roboschool/))" class="img img-fluid" src="img/image4.gif"/>
+          <figcaption class="figure-caption">
+           <p>
+            A well-trained OpenAI Gym agent (
+            <a href="https://blog.openai.com/roboschool/" rel="noopener noreferrer" target="_blank">
+             Source
+            </a>
+            )
+           </p>
+          </figcaption>
+         </figure>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <p>
+          What’s also really cool is that if you’re happy with how smart you’ve made your agents, or how quickly you’ve made your agents learn, you can upload your implementations to share knowledge with the world!  Check out the
+          <a href="https://github.com/openai/gym/wiki/Leaderboard" rel="noopener noreferrer" target="_blank">
+           leaderboard
+          </a>
+          , which contains the best solutions to each task.
+         </p>
+         <h2 id="-installation-instructions">
+          ## Installation Instructions
+         </h2>
+         <p>
+          You are
+          <strong>
+           not
+          </strong>
+          required to install OpenAI Gym on your computer, and you will have the option to do all of your coding implementations within the classroom.
+         </p>
+         <p>
+          If you'd like to install OpenAI Gym on your machine, you are encouraged to follow the instructions in the
+          <a href="https://github.com/openai/gym#installation" rel="noopener noreferrer" target="_blank">
+           GitHub repository
+          </a>
+          .
+         </p>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+       <div class="ud-atom">
+        <h3>
+        </h3>
+        <div>
+         <form>
+          <fieldset>
+           <legend>
+            <p>
+             Which of the following are true about OpenAI Gym? Check all that are true.
+            </p>
+           </legend>
+          </fieldset>
+          <div>
+           <input id="a1527268643126" name="631084" type="checkbox" value="a1527268643126"/>
+           <label for="a1527268643126">
+            <p>
+             It includes dozens of different environments for testing reinforcement learning agents.
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1527268686176" name="631084" type="checkbox" value="a1527268686176"/>
+           <label for="a1527268686176">
+            <p>
+             It was designed as a toolkit for developing and comparing reinforcement learning algorithms.
+            </p>
+           </label>
+          </div>
+          <div>
+           <input id="a1527268702137" name="631084" type="checkbox" value="a1527268702137"/>
+           <label for="a1527268702137">
+            <p>
+             It was developed to address the lack of benchmarks and standardization in RL research.
+            </p>
+           </label>
+          </div>
+         </form>
+         <details>
+          <summary>
+           <strong>
+            SOLUTION:
+           </strong>
+          </summary>
+          <ul>
+           <li>
+            It includes dozens of different environments for testing reinforcement learning agents.
+           </li>
+           <li>
+            It was designed as a toolkit for developing and comparing reinforcement learning algorithms.
+           </li>
+           <li>
+            It was developed to address the lack of benchmarks and standardization in RL research.
+           </li>
+          </ul>
+         </details>
+        </div>
+       </div>
+       <div class="divider">
+       </div>
+      </div>
+      <div class="col-12">
+       <p class="text-right">
+        <a class="btn btn-outline-primary mt-4" href="03. GitHub Repository.html" role="button">
+         Next Concept
+        </a>
+       </p>
+      </div>
+     </div>
+    </main>
+    <footer class="footer">
+     <div class="container">
+      <div class="row">
+       <div class="col-12">
+        <p class="text-center">
+         udacity2.0 If you need the newest courses Plase add me wechat: udacity6
+        </p>
+       </div>
+      </div>
+     </div>
+    </footer>
+   </div>
+  </div>
+  <script src="../assets/js/jquery-3.3.1.min.js">
+  </script>
+  <script src="../assets/js/plyr.polyfilled.min.js">
+  </script>
+  <script src="../assets/js/bootstrap.min.js">
+  </script>
+  <script src="../assets/js/jquery.mCustomScrollbar.concat.min.js">
+  </script>
+  <script src="../assets/js/katex.min.js">
+  </script>
+  <script>
+   // Initialize Plyr video players
+    const players = Array.from(document.querySelectorAll('video')).map(p => new Plyr(p));
+
+    // render math equations
+    let elMath = document.getElementsByClassName('mathquill');
+    for (let i = 0, len = elMath.length; i < len; i += 1) {
+      const el = elMath[i];
+
+      katex.render(el.textContent, el, {
+        throwOnError: false
+      });
+    }
+
+    // this hack will make sure Bootstrap tabs work when using Handlebars
+    if ($('#question-tabs').length && $('#user-answer-tabs').length) {
+      $("#question-tabs a.nav-link").on('click', function () {
+        $("#question-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+      $("#user-answer-tabs a.nav-link").on('click', function () {
+        $("#user-answer-tab-contents .tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    } else {
+      $("a.nav-link").on('click', function () {
+        $(".tab-pane").hide();
+        $($(this).attr("href")).show();
+      });
+    }
+
+    // side bar events
+    $(document).ready(function () {
+      $("#sidebar").mCustomScrollbar({
+        theme: "minimal"
+      });
+
+      $('#sidebarCollapse').on('click', function () {
+        $('#sidebar, #content').toggleClass('active');
+        $('.collapse.in').toggleClass('in');
+        $('a[aria-expanded=true]').attr('aria-expanded', 'false');
+      });
+
+      // scroll to first video on page loading
+      if ($('video').length) {
+        $('html,body').animate({ scrollTop: $('div.plyr').prev().offset().top});
+      }
+
+      // auto play first video: this may not work with chrome/safari due to autoplay policy
+      if (players && players.length > 0) {
+        players[0].play();
+      }
+
+      // scroll sidebar to current concept
+      const currentInSideBar = $( "ul.sidebar-list.components li a:contains('02. OpenAI Gym')" )
+      currentInSideBar.css( "text-decoration", "underline" );
+      $("#sidebar").mCustomScrollbar('scrollTo', currentInSideBar);
+    });
+  </script>
+ </body>
+</html>
